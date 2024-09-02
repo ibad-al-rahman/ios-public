@@ -36,6 +36,7 @@
 		D9A70E192C859EE8002F6583 /* PrayerTimesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A70E182C859EE8002F6583 /* PrayerTimesView.swift */; };
 		D9A70E1B2C859F1F002F6583 /* AppFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A70E1A2C859F1F002F6583 /* AppFeature.swift */; };
 		D9A70E1D2C859F31002F6583 /* AppView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A70E1C2C859F31002F6583 /* AppView.swift */; };
+		D9A70E1F2C85A261002F6583 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = D9A70E1E2C85A261002F6583 /* Localizable.xcstrings */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -87,6 +88,7 @@
 		D9A70E182C859EE8002F6583 /* PrayerTimesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrayerTimesView.swift; sourceTree = "<group>"; };
 		D9A70E1A2C859F1F002F6583 /* AppFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppFeature.swift; sourceTree = "<group>"; };
 		D9A70E1C2C859F31002F6583 /* AppView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppView.swift; sourceTree = "<group>"; };
+		D9A70E1E2C85A261002F6583 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -205,6 +207,7 @@
 			isa = PBXGroup;
 			children = (
 				D9A70DBD2C850B79002F6583 /* Assets.xcassets */,
+				D9A70E1E2C85A261002F6583 /* Localizable.xcstrings */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -416,6 +419,7 @@
 			files = (
 				D9A70DC12C850B79002F6583 /* Preview Assets.xcassets in Resources */,
 				D9A70DBE2C850B79002F6583 /* Assets.xcassets in Resources */,
+				D9A70E1F2C85A261002F6583 /* Localizable.xcstrings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
