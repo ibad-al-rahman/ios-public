@@ -1,0 +1,81 @@
+//
+//  WeeklyPrayerTimesView.swift
+//  PublicSector
+//
+//  Created by Hamza Jadid on 24/08/2024.
+//
+
+import ComposableArchitecture
+import SwiftUI
+
+struct WeeklyPrayerTimesView: View {
+    let store: StoreOf<WeeklyPrayerTimesFeature>
+
+    var body: some View {
+        Form {
+            Section {
+                ScrollView(.horizontal) {
+                    Grid {
+                        GridRow {
+                            Text("Week")
+                            Text("Fajer")
+                            Text("Sunrise")
+                            Text("Dhuhr")
+                            Text("Asr")
+                            Text("Maghrib")
+                            Text("Ishaa")
+                        }
+                        .bold()
+
+                        ForEach(store.week) { day in
+                            Divider()
+
+                            GridRow {
+                                Text(day.date, format: .dateTime.weekday())
+                                dateText(date: day.fajerTime)
+                                dateText(date: day.sunriseTime)
+                                dateText(date: day.dhuhrTime)
+                                dateText(date: day.asrTime)
+                                dateText(date: day.maghribTime)
+                                dateText(date: day.ishaaTime)
+                            }
+                        }
+                    }
+                }
+                .scrollIndicators(.hidden)
+            } header: {
+                HStack {
+                    Text("Timings")
+                    Spacer()
+                    Button(action: {}) {
+                        Label("Share", systemImage: "square.and.arrow.up")
+                    }
+                    .textCase(nil)
+                }
+            }
+        }
+    }
+
+    private func dateText(date: Date?) -> some View {
+        if let date {
+            Text(date, format: .dateTime.hour().minute())
+        } else {
+            Text(verbatim: "-")
+        }
+    }
+}
+
+#Preview {
+    WeeklyPrayerTimesView(store: .init(
+        initialState: WeeklyPrayerTimesFeature.State(),
+        reducer: WeeklyPrayerTimesFeature.init
+    ))
+}
+
+#Preview {
+    WeeklyPrayerTimesView(store: .init(
+        initialState: WeeklyPrayerTimesFeature.State(),
+        reducer: WeeklyPrayerTimesFeature.init
+    ))
+    .arabicEnvironment()
+}
