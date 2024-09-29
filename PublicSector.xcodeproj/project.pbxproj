@@ -7,8 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		D98D2BC82CA986E50050F2A8 /* UserDefaultsDependency.swift in Sources */ = {isa = PBXBuildFile; fileRef = D98D2BC72CA986E50050F2A8 /* UserDefaultsDependency.swift */; };
-		D98D2BCA2CA987A00050F2A8 /* AppMetadata.swift in Sources */ = {isa = PBXBuildFile; fileRef = D98D2BC92CA987A00050F2A8 /* AppMetadata.swift */; };
+		D98D2BD72CA9ACD20050F2A8 /* SharedState+Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = D98D2BD62CA9ACD20050F2A8 /* SharedState+Keys.swift */; };
+		D98D2BDA2CA9B14A0050F2A8 /* View+ControlFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = D98D2BD92CA9B14A0050F2A8 /* View+ControlFlow.swift */; };
+		D98D2BDD2CA9B50D0050F2A8 /* AppearanceFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = D98D2BDC2CA9B50D0050F2A8 /* AppearanceFeature.swift */; };
+		D98D2BDF2CA9B5140050F2A8 /* AppearanceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D98D2BDE2CA9B5140050F2A8 /* AppearanceView.swift */; };
+		D98D2BE12CA9B7260050F2A8 /* SettingsFeature+Destination.swift in Sources */ = {isa = PBXBuildFile; fileRef = D98D2BE02CA9B7260050F2A8 /* SettingsFeature+Destination.swift */; };
+		D98D2BE32CA9B9310050F2A8 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = D98D2BE22CA9B9310050F2A8 /* Settings.swift */; };
 		D9A70DBA2C850B78002F6583 /* PublicSectorApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A70DB92C850B78002F6583 /* PublicSectorApp.swift */; };
 		D9A70DBC2C850B78002F6583 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A70DBB2C850B78002F6583 /* ContentView.swift */; };
 		D9A70DBE2C850B79002F6583 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D9A70DBD2C850B79002F6583 /* Assets.xcassets */; };
@@ -59,8 +63,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		D98D2BC72CA986E50050F2A8 /* UserDefaultsDependency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsDependency.swift; sourceTree = "<group>"; };
-		D98D2BC92CA987A00050F2A8 /* AppMetadata.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppMetadata.swift; sourceTree = "<group>"; };
+		D98D2BD62CA9ACD20050F2A8 /* SharedState+Keys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SharedState+Keys.swift"; sourceTree = "<group>"; };
+		D98D2BD92CA9B14A0050F2A8 /* View+ControlFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+ControlFlow.swift"; sourceTree = "<group>"; };
+		D98D2BDC2CA9B50D0050F2A8 /* AppearanceFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppearanceFeature.swift; sourceTree = "<group>"; };
+		D98D2BDE2CA9B5140050F2A8 /* AppearanceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppearanceView.swift; sourceTree = "<group>"; };
+		D98D2BE02CA9B7260050F2A8 /* SettingsFeature+Destination.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SettingsFeature+Destination.swift"; sourceTree = "<group>"; };
+		D98D2BE22CA9B9310050F2A8 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		D9A70DB62C850B78002F6583 /* PublicSector.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PublicSector.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D9A70DB92C850B78002F6583 /* PublicSectorApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublicSectorApp.swift; sourceTree = "<group>"; };
 		D9A70DBB2C850B78002F6583 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -121,13 +129,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		D98D2BC62CA986BA0050F2A8 /* Dependencies */ = {
+		D98D2BD52CA9ACA90050F2A8 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				D98D2BC72CA986E50050F2A8 /* UserDefaultsDependency.swift */,
-				D98D2BC92CA987A00050F2A8 /* AppMetadata.swift */,
+				D98D2BD62CA9ACD20050F2A8 /* SharedState+Keys.swift */,
+				D98D2BD92CA9B14A0050F2A8 /* View+ControlFlow.swift */,
 			);
-			path = Dependencies;
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		D98D2BDB2CA9B5000050F2A8 /* Appearance */ = {
+			isa = PBXGroup;
+			children = (
+				D98D2BDC2CA9B50D0050F2A8 /* AppearanceFeature.swift */,
+				D98D2BDE2CA9B5140050F2A8 /* AppearanceView.swift */,
+			);
+			path = Appearance;
 			sourceTree = "<group>";
 		};
 		D9A70DAD2C850B78002F6583 = {
@@ -153,7 +170,7 @@
 		D9A70DB82C850B78002F6583 /* PublicSector */ = {
 			isa = PBXGroup;
 			children = (
-				D98D2BC62CA986BA0050F2A8 /* Dependencies */,
+				D98D2BD52CA9ACA90050F2A8 /* Extensions */,
 				D9A70DEA2C8595D6002F6583 /* Features */,
 				D9A70DE92C8595CD002F6583 /* Resources */,
 				D9A70DE82C8595C7002F6583 /* Helpers */,
@@ -249,8 +266,11 @@
 		D9A70DF62C8596C4002F6583 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
+				D98D2BDB2CA9B5000050F2A8 /* Appearance */,
 				D9A70E052C859977002F6583 /* SettingsFeature.swift */,
 				D9A70E072C859D3F002F6583 /* SettingsView.swift */,
+				D98D2BE02CA9B7260050F2A8 /* SettingsFeature+Destination.swift */,
+				D98D2BE22CA9B9310050F2A8 /* Settings.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -461,26 +481,30 @@
 				D9A70DF22C859639002F6583 /* ViewStore+BaseFeature.swift in Sources */,
 				D9A70E042C85975D002F6583 /* DeveloperButtonView.swift in Sources */,
 				D9A70E1B2C859F1F002F6583 /* AppFeature.swift in Sources */,
+				D98D2BDF2CA9B5140050F2A8 /* AppearanceView.swift in Sources */,
 				D9A70DBC2C850B78002F6583 /* ContentView.swift in Sources */,
 				D9A70E1D2C859F31002F6583 /* AppView.swift in Sources */,
 				D9A70DBA2C850B78002F6583 /* PublicSectorApp.swift in Sources */,
 				D9A70DEC2C8595E5002F6583 /* Spacing.swift in Sources */,
+				D98D2BDA2CA9B14A0050F2A8 /* View+ControlFlow.swift in Sources */,
 				D9A70E152C859EA9002F6583 /* DailyPrayerTimesView.swift in Sources */,
 				D9A70E062C859977002F6583 /* SettingsFeature.swift in Sources */,
 				D9A70DFC2C8596FF002F6583 /* DeveloperMenuFeature.swift in Sources */,
 				D9A70E082C859D3F002F6583 /* SettingsView.swift in Sources */,
+				D98D2BDD2CA9B50D0050F2A8 /* AppearanceFeature.swift in Sources */,
 				D9A70E022C859748002F6583 /* DeveloperButton+Destination.swift in Sources */,
+				D98D2BD72CA9ACD20050F2A8 /* SharedState+Keys.swift in Sources */,
 				D9A70DEE2C85960B002F6583 /* BaseFeature.swift in Sources */,
 				D9A70DF42C859684002F6583 /* Preview+Arabic.swift in Sources */,
 				D9A70E172C859ED5002F6583 /* PrayerTimesFeature.swift in Sources */,
-				D98D2BCA2CA987A00050F2A8 /* AppMetadata.swift in Sources */,
 				D9A70E0F2C859E57002F6583 /* WeeklyPrayerTimesFeature.swift in Sources */,
 				D9A70E132C859E83002F6583 /* DailyPrayerTimesFeature.swift in Sources */,
 				D9A70E112C859E65002F6583 /* WeeklyPrayerTimesView.swift in Sources */,
 				D9A70DF02C859627002F6583 /* Store+BaseFeature.swift in Sources */,
 				D9A70DFE2C859717002F6583 /* DeveloperMenuView.swift in Sources */,
+				D98D2BE32CA9B9310050F2A8 /* Settings.swift in Sources */,
 				D9A70E192C859EE8002F6583 /* PrayerTimesView.swift in Sources */,
-				D98D2BC82CA986E50050F2A8 /* UserDefaultsDependency.swift in Sources */,
+				D98D2BE12CA9B7260050F2A8 /* SettingsFeature+Destination.swift in Sources */,
 				D9A70E002C85972D002F6583 /* DeveloperButtonFeature.swift in Sources */,
 				D9A70E0D2C859E1E002F6583 /* DayPrayerTimes.swift in Sources */,
 			);

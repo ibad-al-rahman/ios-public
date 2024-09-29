@@ -9,34 +9,16 @@ import ComposableArchitecture
 import SwiftUI
 
 struct SettingsView: View {
-    let store: StoreOf<SettingsFeature>
+    @Bindable var store: StoreOf<SettingsFeature>
 
     var body: some View {
         NavigationStack {
             List {
-                Section("Display") {
-                    NavigationLink(
-                        destination: { Text(verbatim: "Hello World") }
-                    ) {
-                        Label("Appearance", systemImage: "circle.lefthalf.filled")
-                            .foregroundStyle(.primary, .primary)
-                    }
-
-                    NavigationLink(
-                        destination: { Text(verbatim: "Hello World") }
-                    ) {
-                        Label("Language", systemImage: "a.square")
-                            .foregroundStyle(.primary, .primary)
-                    }
-                }
+                displaySection
 
                 Section {
-                    NavigationLink(
-                        destination: { Text(verbatim: "Hello World") }
-                    ) {
-                        Label("Notifications", systemImage: "app.badge")
-                            .foregroundStyle(.primary, .primary)
-                    }
+                    Label("Notifications", systemImage: "app.badge")
+                        .foregroundStyle(.primary, .primary)
                 }
 
                 Section("App Info") {
@@ -44,6 +26,28 @@ struct SettingsView: View {
                 }
             }
             .navigationTitle("Settings")
+        }
+    }
+
+    private var displaySection: some View {
+        Section("Display") {
+            HStack {
+                Label("Appearance", systemImage: "circle.lefthalf.filled")
+                    .foregroundStyle(.primary, .primary)
+                    .onTapGesture { store.send(.onTapAppearance) }
+                Spacer()
+                Image(systemName: "chevron.forward")
+            }
+            .navigationDestination(
+                item: $store.scope(
+                    state: \.destination?.appearance,
+                    action: \.dependent.destination.appearance
+                ),
+                destination: { AppearanceView(store: $0) }
+            )
+
+            Label("Language", systemImage: "a.square")
+                .foregroundStyle(.primary, .primary)
         }
     }
 }
