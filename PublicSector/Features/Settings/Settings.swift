@@ -39,7 +39,7 @@ extension Settings {
         var locale: Locale? {
             switch self {
             case .system: nil
-            case .arabic: Locale(identifier: "ar")
+            case .arabic: Locale(identifier: "ar-LB")
             case .english: Locale(identifier: "en")
             }
         }
