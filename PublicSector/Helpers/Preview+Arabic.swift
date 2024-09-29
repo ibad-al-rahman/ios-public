@@ -10,7 +10,7 @@ import SwiftUI
 struct ArabicPreview: ViewModifier {
     func body(content: Content) -> some View {
         content
-            .environment(\.locale, .init(identifier: "ar"))
+            .environment(\.locale, Locale(identifier: "ar"))
             .environment(\.layoutDirection, .rightToLeft)
     }
 }

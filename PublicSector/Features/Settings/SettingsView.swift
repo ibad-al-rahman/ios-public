@@ -46,8 +46,20 @@ struct SettingsView: View {
                 destination: { AppearanceView(store: $0) }
             )
 
-            Label("Language", systemImage: "a.square")
-                .foregroundStyle(.primary, .primary)
+            HStack {
+                Label("Language", systemImage: "a.square")
+                    .foregroundStyle(.primary, .primary)
+                    .onTapGesture { store.send(.onTapLanguage) }
+                Spacer()
+                Image(systemName: "chevron.forward")
+            }
+            .navigationDestination(
+                item: $store.scope(
+                    state: \.destination?.language,
+                    action: \.dependent.destination.language
+                ),
+                destination: { LanguageView(store: $0) }
+            )
         }
     }
 }

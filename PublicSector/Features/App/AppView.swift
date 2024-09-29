@@ -19,6 +19,12 @@ struct AppView: View {
         .ifLet(store.appearance.colorScheme) { colorScheme, view in
             view.environment(\.colorScheme, colorScheme)
         }
+        .ifLet(store.language.locale) { locale, view in
+            view.environment(\.locale, locale)
+        }
+        .ifLet(store.language.layoutDirection) { direction, view in
+            view.environment(\.layoutDirection, direction)
+        }
     }
 
     var prayerTimesScreen: some View {
