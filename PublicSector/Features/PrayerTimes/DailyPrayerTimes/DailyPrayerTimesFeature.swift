@@ -14,6 +14,15 @@ struct DailyPrayerTimesFeature {
     struct State: Equatable {
         var date: Date = .now
         var currentDatePrayerTimes: DayPrayerTimes = .init(date: .now)
+
+        var hijriFormatedDate: String {
+            let islamicCalendar = Calendar(identifier: .islamicUmmAlQura)
+            let formatter = DateFormatter()
+            formatter.locale = Locale(identifier: "ar")
+            formatter.calendar = islamicCalendar
+            formatter.dateFormat = "d MMMM yyyy"
+            return formatter.string(from: date)
+        }
     }
 
     enum Action: BaseAction, BindableAction {
