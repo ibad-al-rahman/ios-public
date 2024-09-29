@@ -27,6 +27,8 @@ struct DailyPrayerTimesView: View {
                 displayedComponents: [.date]
             )
             .datePickerStyle(.compact)
+        } footer: {
+            Text(store.hijriFormatedDate)
         }
     }
 

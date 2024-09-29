@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D98D2BC82CA986E50050F2A8 /* UserDefaultsDependency.swift in Sources */ = {isa = PBXBuildFile; fileRef = D98D2BC72CA986E50050F2A8 /* UserDefaultsDependency.swift */; };
+		D98D2BCA2CA987A00050F2A8 /* AppMetadata.swift in Sources */ = {isa = PBXBuildFile; fileRef = D98D2BC92CA987A00050F2A8 /* AppMetadata.swift */; };
 		D9A70DBA2C850B78002F6583 /* PublicSectorApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A70DB92C850B78002F6583 /* PublicSectorApp.swift */; };
 		D9A70DBC2C850B78002F6583 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A70DBB2C850B78002F6583 /* ContentView.swift */; };
 		D9A70DBE2C850B79002F6583 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D9A70DBD2C850B79002F6583 /* Assets.xcassets */; };
@@ -57,6 +59,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D98D2BC72CA986E50050F2A8 /* UserDefaultsDependency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsDependency.swift; sourceTree = "<group>"; };
+		D98D2BC92CA987A00050F2A8 /* AppMetadata.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppMetadata.swift; sourceTree = "<group>"; };
 		D9A70DB62C850B78002F6583 /* PublicSector.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PublicSector.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D9A70DB92C850B78002F6583 /* PublicSectorApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublicSectorApp.swift; sourceTree = "<group>"; };
 		D9A70DBB2C850B78002F6583 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -117,6 +121,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D98D2BC62CA986BA0050F2A8 /* Dependencies */ = {
+			isa = PBXGroup;
+			children = (
+				D98D2BC72CA986E50050F2A8 /* UserDefaultsDependency.swift */,
+				D98D2BC92CA987A00050F2A8 /* AppMetadata.swift */,
+			);
+			path = Dependencies;
+			sourceTree = "<group>";
+		};
 		D9A70DAD2C850B78002F6583 = {
 			isa = PBXGroup;
 			children = (
@@ -140,6 +153,7 @@
 		D9A70DB82C850B78002F6583 /* PublicSector */ = {
 			isa = PBXGroup;
 			children = (
+				D98D2BC62CA986BA0050F2A8 /* Dependencies */,
 				D9A70DEA2C8595D6002F6583 /* Features */,
 				D9A70DE92C8595CD002F6583 /* Resources */,
 				D9A70DE82C8595C7002F6583 /* Helpers */,
@@ -459,12 +473,14 @@
 				D9A70DEE2C85960B002F6583 /* BaseFeature.swift in Sources */,
 				D9A70DF42C859684002F6583 /* Preview+Arabic.swift in Sources */,
 				D9A70E172C859ED5002F6583 /* PrayerTimesFeature.swift in Sources */,
+				D98D2BCA2CA987A00050F2A8 /* AppMetadata.swift in Sources */,
 				D9A70E0F2C859E57002F6583 /* WeeklyPrayerTimesFeature.swift in Sources */,
 				D9A70E132C859E83002F6583 /* DailyPrayerTimesFeature.swift in Sources */,
 				D9A70E112C859E65002F6583 /* WeeklyPrayerTimesView.swift in Sources */,
 				D9A70DF02C859627002F6583 /* Store+BaseFeature.swift in Sources */,
 				D9A70DFE2C859717002F6583 /* DeveloperMenuView.swift in Sources */,
 				D9A70E192C859EE8002F6583 /* PrayerTimesView.swift in Sources */,
+				D98D2BC82CA986E50050F2A8 /* UserDefaultsDependency.swift in Sources */,
 				D9A70E002C85972D002F6583 /* DeveloperButtonFeature.swift in Sources */,
 				D9A70E0D2C859E1E002F6583 /* DayPrayerTimes.swift in Sources */,
 			);
