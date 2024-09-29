@@ -24,6 +24,7 @@ struct SettingsFeature {
 
         enum ViewAction {
             case onTapAppearance
+            case onTapLanguage
         }
 
         @CasePathable
@@ -44,6 +45,10 @@ struct SettingsFeature {
             switch action {
             case .view(.onTapAppearance):
                 state.destination = .appearance(AppearanceFeature.State())
+                return .none
+
+            case .view(.onTapLanguage):
+                state.destination = .language(LanguageFeature.State())
                 return .none
 
             default: return .none

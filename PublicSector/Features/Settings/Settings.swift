@@ -27,3 +27,29 @@ extension Settings {
         }
     }
 }
+
+extension Settings {
+    enum Language: String, CaseIterable, Identifiable {
+        case system = "system"
+        case arabic = "arabic"
+        case english = "english"
+
+        var id: String { self.rawValue }
+
+        var locale: Locale? {
+            switch self {
+            case .system: nil
+            case .arabic: Locale(identifier: "ar")
+            case .english: Locale(identifier: "en")
+            }
+        }
+
+        var layoutDirection: LayoutDirection? {
+            switch self {
+            case .system: nil
+            case .arabic: .rightToLeft
+            case .english: .leftToRight
+            }
+        }
+    }
+}

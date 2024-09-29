@@ -1,5 +1,5 @@
 //
-//  AppearanceFeature.swift
+//  LanguageFeature.swift
 //  PublicSector
 //
 //  Created by Hamza Jadid on 29/09/2024.
@@ -8,10 +8,10 @@
 import ComposableArchitecture
 
 @Reducer
-struct AppearanceFeature {
+struct LanguageFeature {
     @ObservableState
     struct State: Equatable {
-        @Shared(.appearance) var appearance = .system
+        @Shared(.language) var language = .system
     }
 
     enum Action: BaseAction, BindableAction {
