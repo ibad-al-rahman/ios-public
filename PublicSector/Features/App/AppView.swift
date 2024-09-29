@@ -16,6 +16,9 @@ struct AppView: View {
             prayerTimesScreen
             settingsScreen
         }
+        .ifLet(store.appearance.colorScheme) { colorScheme, view in
+            view.environment(\.colorScheme, colorScheme)
+        }
     }
 
     var prayerTimesScreen: some View {
