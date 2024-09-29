@@ -31,24 +31,24 @@ extension Settings {
 extension Settings {
     enum Language: String, CaseIterable, Identifiable {
         case system = "system"
-        case arabic = "arabic"
         case english = "english"
+        case arabic = "arabic"
 
         var id: String { self.rawValue }
 
-        var locale: Locale? {
+        var locale: Locale {
             switch self {
-            case .system: nil
-            case .arabic: Locale(identifier: "ar-LB")
+            case .system: Locale.current
             case .english: Locale(identifier: "en")
+            case .arabic: Locale(identifier: "ar-LB")
             }
         }
 
         var layoutDirection: LayoutDirection? {
             switch self {
             case .system: nil
-            case .arabic: .rightToLeft
             case .english: .leftToRight
+            case .arabic: .rightToLeft
             }
         }
     }

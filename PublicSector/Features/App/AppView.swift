@@ -12,18 +12,20 @@ struct AppView: View {
     @Bindable var store: StoreOf<AppFeature>
 
     var body: some View {
+        content
+            .environment(\.locale, store.language.locale)
+            .ifLet(store.appearance.colorScheme) { colorScheme, view in
+                view.environment(\.colorScheme, colorScheme)
+            }
+            .ifLet(store.language.layoutDirection) { direction, view in
+                view.environment(\.layoutDirection, direction)
+            }
+    }
+
+    var content: some View {
         TabView(selection: $store.selectedTab) {
             prayerTimesScreen
             settingsScreen
-        }
-        .ifLet(store.appearance.colorScheme) { colorScheme, view in
-            view.environment(\.colorScheme, colorScheme)
-        }
-        .ifLet(store.language.locale) { locale, view in
-            view.environment(\.locale, locale)
-        }
-        .ifLet(store.language.layoutDirection) { direction, view in
-            view.environment(\.layoutDirection, direction)
         }
     }
 

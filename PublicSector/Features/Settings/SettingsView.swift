@@ -31,36 +31,38 @@ struct SettingsView: View {
 
     private var displaySection: some View {
         Section("Display") {
-            HStack {
-                Label("Appearance", systemImage: "circle.lefthalf.filled")
-                    .foregroundStyle(.primary, .primary)
-                    .onTapGesture { store.send(.onTapAppearance) }
-                Spacer()
-                Image(systemName: "chevron.forward")
-            }
-            .navigationDestination(
-                item: $store.scope(
-                    state: \.destination?.appearance,
-                    action: \.dependent.destination.appearance
-                ),
-                destination: { AppearanceView(store: $0) }
-            )
+            navigationRow("Appearance", systemName: "circle.lefthalf.filled")
+                .onTapGesture { store.send(.onTapAppearance) }
+                .navigationDestination(
+                    item: $store.scope(
+                        state: \.destination?.appearance,
+                        action: \.dependent.destination.appearance
+                    ),
+                    destination: { AppearanceView(store: $0) }
+                )
 
-            HStack {
-                Label("Language", systemImage: "a.square")
-                    .foregroundStyle(.primary, .primary)
-                    .onTapGesture { store.send(.onTapLanguage) }
-                Spacer()
-                Image(systemName: "chevron.forward")
-            }
-            .navigationDestination(
-                item: $store.scope(
-                    state: \.destination?.language,
-                    action: \.dependent.destination.language
-                ),
-                destination: { LanguageView(store: $0) }
-            )
+            navigationRow("Language", systemName: "a.square")
+                .onTapGesture { store.send(.onTapLanguage) }
+                .navigationDestination(
+                    item: $store.scope(
+                        state: \.destination?.language,
+                        action: \.dependent.destination.language
+                    ),
+                    destination: { LanguageView(store: $0) }
+                )
         }
+    }
+
+    private func navigationRow(
+        _ label: LocalizedStringKey, systemName: String
+    ) -> some View {
+        HStack {
+            Label(label, systemImage: systemName)
+                .foregroundStyle(.primary, .primary)
+            Spacer()
+            Image(systemName: "chevron.forward")
+        }
+        .contentShape(Rectangle())
     }
 }
 

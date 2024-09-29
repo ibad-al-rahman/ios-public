@@ -17,6 +17,7 @@ struct DailyPrayerTimesView: View {
             dayPrayerTime
             todaysEvents
         }
+        .onAppear { store.send(.onAppear) }
     }
 
     private var datePicker: some View {
@@ -28,7 +29,9 @@ struct DailyPrayerTimesView: View {
             )
             .datePickerStyle(.compact)
         } footer: {
-            Text(store.hijriFormatedDate)
+            if let hijriDate = store.hijriFormattedDate {
+                Text(hijriDate)
+            }
         }
     }
 

@@ -12,17 +12,10 @@ import Foundation
 struct DailyPrayerTimesFeature {
     @ObservableState
     struct State: Equatable {
+        @SharedReader(.language) var language = .system
         var date: Date = .now
         var currentDatePrayerTimes: DayPrayerTimes = .init(date: .now)
-
-        var hijriFormatedDate: String {
-            let islamicCalendar = Calendar(identifier: .islamicUmmAlQura)
-            let formatter = DateFormatter()
-            formatter.locale = Locale(identifier: "ar")
-            formatter.calendar = islamicCalendar
-            formatter.dateFormat = "d MMMM yyyy"
-            return formatter.string(from: date)
-        }
+        var hijriFormattedDate: String?
     }
 
     enum Action: BaseAction, BindableAction {
@@ -33,6 +26,7 @@ struct DailyPrayerTimesFeature {
         case binding(BindingAction<State>)
 
         enum ViewAction {
+            case onAppear
             case onTapShare
         }
 
@@ -48,7 +42,20 @@ struct DailyPrayerTimesFeature {
 
     var body: some ReducerOf<Self> {
         BindingReducer()
-        EmptyReducer()
+        Reduce { state, action in
+            switch action {
+            case .view(.onAppear):
+                let islamicCalendar = Calendar(identifier: .islamicUmmAlQura)
+                let formatter = DateFormatter()
+                formatter.calendar = islamicCalendar
+                formatter.locale = state.language.locale
+                formatter.dateFormat = "d MMMM yyyy"
+                state.hijriFormattedDate = formatter.string(from: state.date)
+                return .none
+
+            default: return .none
+            }
+        }
     }
 }
 
