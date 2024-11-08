@@ -17,7 +17,6 @@ struct AppFeature {
     @ObservableState
     struct State: Equatable {
         @SharedReader(.appearance) var appearance = .system
-        @SharedReader(.language) var language = .system
 
         var selectedTab: Tab = .prayerTimes
         var prayerTimes = PrayerTimesFeature.State()

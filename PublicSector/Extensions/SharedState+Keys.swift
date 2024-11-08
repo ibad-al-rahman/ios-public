@@ -12,9 +12,3 @@ extension PersistenceReaderKey where Self == AppStorageKey<Settings.Appearance> 
     appStorage("appearance")
   }
 }
-
-extension PersistenceReaderKey where Self == AppStorageKey<Settings.Language> {
-  static var language: Self {
-    appStorage("language")
-  }
-}
