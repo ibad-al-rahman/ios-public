@@ -5,6 +5,7 @@
 //  Created by Hamza Jadid on 24/08/2024.
 //
 
+import ComposableArchitecture
 import SwiftUI
 
 struct ContentView: View {
@@ -16,19 +17,17 @@ struct ContentView: View {
     }
 
     private var app: some View {
-        AppView(store: .init(
+        AppView(store: Store(
             initialState: AppFeature.State(),
             reducer: AppFeature.init
         ))
     }
 
     private var debugButton: some View {
-        DeveloperButtonView(
-            store: .init(
-                initialState: DeveloperButtonFeature.State(),
-                reducer: DeveloperButtonFeature.init
-            )
-        )
+        DeveloperButtonView(store: Store(
+            initialState: DeveloperButtonFeature.State(),
+            reducer: DeveloperButtonFeature.init
+        ))
     }
 }
 

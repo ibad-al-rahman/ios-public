@@ -58,7 +58,7 @@ struct DeveloperButtonView: View {
 }
 
 #Preview {
-    DeveloperButtonView(store: .init(
+    DeveloperButtonView(store: Store(
         initialState: DeveloperButtonFeature.State(),
         reducer: DeveloperButtonFeature.init
     ))
