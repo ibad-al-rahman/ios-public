@@ -43,13 +43,6 @@ struct SettingsView: View {
 
             navigationRow("Language", systemName: "a.square")
                 .onTapGesture { store.send(.onTapLanguage) }
-                .navigationDestination(
-                    item: $store.scope(
-                        state: \.destination?.language,
-                        action: \.dependent.destination.language
-                    ),
-                    destination: { LanguageView(store: $0) }
-                )
         }
     }
 

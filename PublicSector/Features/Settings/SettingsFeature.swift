@@ -9,6 +9,8 @@ import ComposableArchitecture
 
 @Reducer
 struct SettingsFeature {
+    @Dependency(\.externalDeepLinks) private var externalDeepLinks
+
     @ObservableState
     struct State: Equatable {
         @Presents var destination: Destination.State?
@@ -47,8 +49,9 @@ struct SettingsFeature {
                 return .none
 
             case .view(.onTapLanguage):
-                state.destination = .language(LanguageFeature.State())
-                return .none
+                return .run { _ in
+                    await externalDeepLinks.appSettings()
+                }
 
             default: return .none
             }

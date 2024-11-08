@@ -12,7 +12,6 @@ import Foundation
 struct DailyPrayerTimesFeature {
     @ObservableState
     struct State: Equatable {
-        @SharedReader(.language) var language = .system
         var date: Date = .now
         var currentDatePrayerTimes: DayPrayerTimes = .init(date: .now)
         var hijriFormattedDate: String?
@@ -48,7 +47,6 @@ struct DailyPrayerTimesFeature {
                 let islamicCalendar = Calendar(identifier: .islamicUmmAlQura)
                 let formatter = DateFormatter()
                 formatter.calendar = islamicCalendar
-                formatter.locale = state.language.locale
                 formatter.dateFormat = "d MMMM yyyy"
                 state.hijriFormattedDate = formatter.string(from: state.date)
                 return .none

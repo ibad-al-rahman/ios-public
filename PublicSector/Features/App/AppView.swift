@@ -13,12 +13,8 @@ struct AppView: View {
 
     var body: some View {
         content
-            .environment(\.locale, store.language.locale)
             .ifLet(store.appearance.colorScheme) { colorScheme, view in
                 view.environment(\.colorScheme, colorScheme)
-            }
-            .ifLet(store.language.layoutDirection) { direction, view in
-                view.environment(\.layoutDirection, direction)
             }
     }
 
