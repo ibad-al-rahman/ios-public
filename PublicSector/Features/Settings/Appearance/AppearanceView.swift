@@ -24,14 +24,14 @@ struct AppearanceView: View {
 }
 
 #Preview {
-    AppearanceView(store: .init(
+    AppearanceView(store: Store(
         initialState: AppearanceFeature.State(),
         reducer: AppearanceFeature.init
     ))
 }
 
 #Preview {
-    AppearanceView(store: .init(
+    AppearanceView(store: Store(
         initialState: AppearanceFeature.State(),
         reducer: AppearanceFeature.init
     ))

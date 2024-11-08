@@ -68,14 +68,14 @@ extension AppFeature.Tab {
 }
 
 #Preview {
-    AppView(store: .init(
+    AppView(store: Store(
         initialState: AppFeature.State(),
         reducer: AppFeature.init
     ))
 }
 
 #Preview {
-    AppView(store: .init(
+    AppView(store: Store(
         initialState: AppFeature.State(),
         reducer: AppFeature.init
     ))

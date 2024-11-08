@@ -24,14 +24,14 @@ struct LanguageView: View {
 }
 
 #Preview {
-    LanguageView(store: .init(
+    LanguageView(store: Store(
         initialState: LanguageFeature.State(),
         reducer: LanguageFeature.init
     ))
 }
 
 #Preview {
-    LanguageView(store: .init(
+    LanguageView(store: Store(
         initialState: LanguageFeature.State(),
         reducer: LanguageFeature.init
     ))

@@ -67,14 +67,14 @@ struct SettingsView: View {
 }
 
 #Preview {
-    SettingsView(store: .init(
+    SettingsView(store: Store(
         initialState: SettingsFeature.State(),
         reducer: SettingsFeature.init
     ))
 }
 
 #Preview {
-    SettingsView(store: .init(
+    SettingsView(store: Store(
         initialState: SettingsFeature.State(),
         reducer: SettingsFeature.init
     ))

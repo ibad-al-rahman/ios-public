@@ -48,7 +48,7 @@ struct DeveloperMenuView: View {
 }
 
 #Preview {
-    DeveloperMenuView(store: .init(
+    DeveloperMenuView(store: Store(
         initialState: DeveloperMenuFeature.State(),
         reducer: DeveloperMenuFeature.init
     ))

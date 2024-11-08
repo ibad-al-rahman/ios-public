@@ -70,14 +70,14 @@ extension PrayerTimesFeature.PrayerTimesPicker {
 }
 
 #Preview {
-    PrayerTimesView(store: .init(
+    PrayerTimesView(store: Store(
         initialState: PrayerTimesFeature.State(),
         reducer: PrayerTimesFeature.init
     ))
 }
 
 #Preview {
-    PrayerTimesView(store: .init(
+    PrayerTimesView(store: Store(
         initialState: PrayerTimesFeature.State(),
         reducer: PrayerTimesFeature.init
     ))

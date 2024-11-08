@@ -87,14 +87,14 @@ struct DailyPrayerTimesView: View {
 }
 
 #Preview {
-    DailyPrayerTimesView(store: .init(
+    DailyPrayerTimesView(store: Store(
         initialState: DailyPrayerTimesFeature.State(),
         reducer: DailyPrayerTimesFeature.init
     ))
 }
 
 #Preview {
-    DailyPrayerTimesView(store: .init(
+    DailyPrayerTimesView(store: Store(
         initialState: DailyPrayerTimesFeature.State(),
         reducer: DailyPrayerTimesFeature.init
     ))
