@@ -367,6 +367,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D9A70DDA2C850B79002F6583 /* Build configuration list for PBXNativeTarget "PublicSector" */;
 			buildPhases = (
+				D9B34CDF2CDFB6FC00C07BA7 /* Generate Acknowledgments */,
 				D9B34CDD2CDFA4BB00C07BA7 /* Settings Bundle Selection */,
 				D9A70DB22C850B78002F6583 /* Sources */,
 				D9A70DB32C850B78002F6583 /* Frameworks */,
@@ -512,6 +513,24 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "cp -r \"${SETTINGS_BUNDLE}/\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app/Settings.bundle\"\n";
+		};
+		D9B34CDF2CDFB6FC00C07BA7 /* Generate Acknowledgments */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Generate Acknowledgments";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/bin/sh ./Scripts/GenerateAcks.sh\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
