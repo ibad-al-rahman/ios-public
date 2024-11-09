@@ -248,6 +248,7 @@
 		D9A70DE92C8595CD002F6583 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				D9B34CDE2CDFA52400C07BA7 /* SettingsBundle */,
 				D9A70DBD2C850B79002F6583 /* Assets.xcassets */,
 				D9A70E1E2C85A261002F6583 /* Localizable.xcstrings */,
 			);
@@ -352,6 +353,13 @@
 			path = Entities;
 			sourceTree = "<group>";
 		};
+		D9B34CDE2CDFA52400C07BA7 /* SettingsBundle */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = SettingsBundle;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -359,6 +367,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D9A70DDA2C850B79002F6583 /* Build configuration list for PBXNativeTarget "PublicSector" */;
 			buildPhases = (
+				D9B34CDD2CDFA4BB00C07BA7 /* Settings Bundle Selection */,
 				D9A70DB22C850B78002F6583 /* Sources */,
 				D9A70DB32C850B78002F6583 /* Frameworks */,
 				D9A70DB42C850B78002F6583 /* Resources */,
@@ -484,6 +493,27 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		D9B34CDD2CDFA4BB00C07BA7 /* Settings Bundle Selection */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Settings Bundle Selection";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "cp -r \"${SETTINGS_BUNDLE}/\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app/Settings.bundle\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		D9A70DB22C850B78002F6583 /* Sources */ = {
@@ -699,6 +729,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = org.ibadalrahman.PublicSector;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SETTINGS_BUNDLE = "${PROJECT_DIR}/PublicSector/Resources/SettingsBundle/DebugSettings.bundle";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
@@ -733,6 +764,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = org.ibadalrahman.PublicSector;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SETTINGS_BUNDLE = "${PROJECT_DIR}/PublicSector/Resources/SettingsBundle/ReleaseSettings.bundle";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
