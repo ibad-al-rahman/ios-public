@@ -44,6 +44,8 @@
 		D9A70E1B2C859F1F002F6583 /* AppFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A70E1A2C859F1F002F6583 /* AppFeature.swift */; };
 		D9A70E1D2C859F31002F6583 /* AppView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A70E1C2C859F31002F6583 /* AppView.swift */; };
 		D9A70E1F2C85A261002F6583 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = D9A70E1E2C85A261002F6583 /* Localizable.xcstrings */; };
+		D9B34CE22CDFBA1B00C07BA7 /* DebugSettings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D9B34CE02CDFBA1B00C07BA7 /* DebugSettings.bundle */; };
+		D9B34CE32CDFBA1B00C07BA7 /* ReleaseSettings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D9B34CE12CDFBA1B00C07BA7 /* ReleaseSettings.bundle */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -103,6 +105,8 @@
 		D9A70E1A2C859F1F002F6583 /* AppFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppFeature.swift; sourceTree = "<group>"; };
 		D9A70E1C2C859F31002F6583 /* AppView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppView.swift; sourceTree = "<group>"; };
 		D9A70E1E2C85A261002F6583 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
+		D9B34CE02CDFBA1B00C07BA7 /* DebugSettings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = DebugSettings.bundle; sourceTree = "<group>"; };
+		D9B34CE12CDFBA1B00C07BA7 /* ReleaseSettings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = ReleaseSettings.bundle; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -356,6 +360,8 @@
 		D9B34CDE2CDFA52400C07BA7 /* SettingsBundle */ = {
 			isa = PBXGroup;
 			children = (
+				D9B34CE02CDFBA1B00C07BA7 /* DebugSettings.bundle */,
+				D9B34CE12CDFBA1B00C07BA7 /* ReleaseSettings.bundle */,
 			);
 			path = SettingsBundle;
 			sourceTree = "<group>";
@@ -473,6 +479,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D9B34CE22CDFBA1B00C07BA7 /* DebugSettings.bundle in Resources */,
+				D9B34CE32CDFBA1B00C07BA7 /* ReleaseSettings.bundle in Resources */,
 				D9A70DC12C850B79002F6583 /* Preview Assets.xcassets in Resources */,
 				D9A70DBE2C850B79002F6583 /* Assets.xcassets in Resources */,
 				D9A70E1F2C85A261002F6583 /* Localizable.xcstrings in Resources */,
