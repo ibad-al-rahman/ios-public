@@ -6,7 +6,7 @@ function release_acks {
             --custom-file-name ReleaseSettings \
             --output-type settings-bundle \
             --output-path PublicSector/Resources/SettingsBundle
-    
+
     cd PublicSector/Resources/SettingsBundle/ReleaseSettings.bundle
     mv en.lproj temp_en
     mv ar.lproj temp_ar
