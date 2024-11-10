@@ -46,6 +46,7 @@
 		D9A70E1F2C85A261002F6583 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = D9A70E1E2C85A261002F6583 /* Localizable.xcstrings */; };
 		D9B34CE22CDFBA1B00C07BA7 /* DebugSettings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D9B34CE02CDFBA1B00C07BA7 /* DebugSettings.bundle */; };
 		D9B34CE32CDFBA1B00C07BA7 /* ReleaseSettings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D9B34CE12CDFBA1B00C07BA7 /* ReleaseSettings.bundle */; };
+		D9EE4FD92CE10E6000C5AEE4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D9EE4FD82CE10E6000C5AEE4 /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -107,6 +108,8 @@
 		D9A70E1E2C85A261002F6583 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		D9B34CE02CDFBA1B00C07BA7 /* DebugSettings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = DebugSettings.bundle; sourceTree = "<group>"; };
 		D9B34CE12CDFBA1B00C07BA7 /* ReleaseSettings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = ReleaseSettings.bundle; sourceTree = "<group>"; };
+		D9EE4FD82CE10E6000C5AEE4 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		D9EE4FDA2CE1144500C5AEE4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -184,6 +187,7 @@
 		D9A70DB82C850B78002F6583 /* PublicSector */ = {
 			isa = PBXGroup;
 			children = (
+				D9EE4FDA2CE1144500C5AEE4 /* Info.plist */,
 				D98903A92CDE346C00717646 /* Dependencies */,
 				D98D2BD52CA9ACA90050F2A8 /* Extensions */,
 				D9A70DEA2C8595D6002F6583 /* Features */,
@@ -255,6 +259,7 @@
 				D9B34CDE2CDFA52400C07BA7 /* SettingsBundle */,
 				D9A70DBD2C850B79002F6583 /* Assets.xcassets */,
 				D9A70E1E2C85A261002F6583 /* Localizable.xcstrings */,
+				D9EE4FD82CE10E6000C5AEE4 /* LaunchScreen.storyboard */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -482,6 +487,7 @@
 				D9B34CE22CDFBA1B00C07BA7 /* DebugSettings.bundle in Resources */,
 				D9B34CE32CDFBA1B00C07BA7 /* ReleaseSettings.bundle in Resources */,
 				D9A70DC12C850B79002F6583 /* Preview Assets.xcassets in Resources */,
+				D9EE4FD92CE10E6000C5AEE4 /* LaunchScreen.storyboard in Resources */,
 				D9A70DBE2C850B79002F6583 /* Assets.xcassets in Resources */,
 				D9A70E1F2C85A261002F6583 /* Localizable.xcstrings in Resources */,
 			);
@@ -506,6 +512,7 @@
 /* Begin PBXShellScriptBuildPhase section */
 		D9B34CDD2CDFA4BB00C07BA7 /* Settings Bundle Selection */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -524,6 +531,7 @@
 		};
 		D9B34CDF2CDFB6FC00C07BA7 /* Generate Acknowledgments */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -737,6 +745,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"PublicSector/Preview Content\"";
@@ -744,9 +753,10 @@
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = PublicSector/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
@@ -773,6 +783,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"PublicSector/Preview Content\"";
@@ -780,9 +791,10 @@
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = PublicSector/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
