@@ -187,7 +187,6 @@
 		D9A70DB82C850B78002F6583 /* PublicSector */ = {
 			isa = PBXGroup;
 			children = (
-				D9EE4FDA2CE1144500C5AEE4 /* Info.plist */,
 				D98903A92CDE346C00717646 /* Dependencies */,
 				D98D2BD52CA9ACA90050F2A8 /* Extensions */,
 				D9A70DEA2C8595D6002F6583 /* Features */,
@@ -260,6 +259,7 @@
 				D9A70DBD2C850B79002F6583 /* Assets.xcassets */,
 				D9A70E1E2C85A261002F6583 /* Localizable.xcstrings */,
 				D9EE4FD82CE10E6000C5AEE4 /* LaunchScreen.storyboard */,
+				D9EE4FDA2CE1144500C5AEE4 /* Info.plist */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -753,7 +753,7 @@
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = PublicSector/Info.plist;
+				INFOPLIST_FILE = PublicSector/Resources/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
