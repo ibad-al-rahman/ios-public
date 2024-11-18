@@ -25,30 +25,12 @@ extension Settings {
             case .light: ColorScheme.light
             }
         }
-    }
-}
 
-extension Settings {
-    enum Language: String, CaseIterable, Identifiable {
-        case system = "system"
-        case english = "english"
-        case arabic = "arabic"
-
-        var id: String { self.rawValue }
-
-        var locale: Locale {
+        var localizedStringKey: LocalizedStringKey {
             switch self {
-            case .system: Locale.current
-            case .english: Locale(identifier: "en")
-            case .arabic: Locale(identifier: "ar-LB")
-            }
-        }
-
-        var layoutDirection: LayoutDirection? {
-            switch self {
-            case .system: nil
-            case .english: .leftToRight
-            case .arabic: .rightToLeft
+            case .system: "System"
+            case .dark: "Dark theme"
+            case .light: "Light theme"
             }
         }
     }

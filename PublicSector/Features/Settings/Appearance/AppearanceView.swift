@@ -13,9 +13,9 @@ struct AppearanceView: View {
 
     var body: some View {
         Form {
-            Picker("Appearance", selection: $store.appearance) {
+            Picker("Theme", selection: $store.appearance) {
                 ForEach(Settings.Appearance.allCases) {
-                    Text(verbatim: $0.rawValue).tag($0)
+                    Text($0.localizedStringKey).tag($0)
                 }
             }
             .pickerStyle(.inline)
