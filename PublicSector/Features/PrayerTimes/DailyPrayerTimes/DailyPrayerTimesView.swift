@@ -62,7 +62,7 @@ struct DailyPrayerTimesView: View {
 
     private var todaysEvents: some View {
         Section {
-            Text(verbatim: "ذكرى معركة بدر")
+            Text(verbatim: "The memory of the Battle of Badr")
         } header: {
             Text("Holidays and Events")
         }

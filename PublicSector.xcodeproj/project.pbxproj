@@ -14,6 +14,7 @@
 		D98D2BDF2CA9B5140050F2A8 /* AppearanceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D98D2BDE2CA9B5140050F2A8 /* AppearanceView.swift */; };
 		D98D2BE12CA9B7260050F2A8 /* SettingsFeature+Destination.swift in Sources */ = {isa = PBXBuildFile; fileRef = D98D2BE02CA9B7260050F2A8 /* SettingsFeature+Destination.swift */; };
 		D98D2BE32CA9B9310050F2A8 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = D98D2BE22CA9B9310050F2A8 /* Settings.swift */; };
+		D9A6E1BD2CEC71FE006123D1 /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = D9A6E1BC2CEC71FE006123D1 /* ComposableArchitecture */; };
 		D9A70DBA2C850B78002F6583 /* PublicSectorApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A70DB92C850B78002F6583 /* PublicSectorApp.swift */; };
 		D9A70DBC2C850B78002F6583 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A70DBB2C850B78002F6583 /* ContentView.swift */; };
 		D9A70DBE2C850B79002F6583 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D9A70DBD2C850B79002F6583 /* Assets.xcassets */; };
@@ -21,7 +22,6 @@
 		D9A70DCB2C850B79002F6583 /* PublicSectorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A70DCA2C850B79002F6583 /* PublicSectorTests.swift */; };
 		D9A70DD52C850B79002F6583 /* PublicSectorUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A70DD42C850B79002F6583 /* PublicSectorUITests.swift */; };
 		D9A70DD72C850B79002F6583 /* PublicSectorUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A70DD62C850B79002F6583 /* PublicSectorUITestsLaunchTests.swift */; };
-		D9A70DE52C859579002F6583 /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = D9A70DE42C859579002F6583 /* ComposableArchitecture */; };
 		D9A70DEC2C8595E5002F6583 /* Spacing.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A70DEB2C8595E5002F6583 /* Spacing.swift */; };
 		D9A70DEE2C85960B002F6583 /* BaseFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A70DED2C85960B002F6583 /* BaseFeature.swift */; };
 		D9A70DF02C859627002F6583 /* Store+BaseFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A70DEF2C859627002F6583 /* Store+BaseFeature.swift */; };
@@ -117,7 +117,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D9A70DE52C859579002F6583 /* ComposableArchitecture in Frameworks */,
+				D9A6E1BD2CEC71FE006123D1 /* ComposableArchitecture in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -390,7 +390,7 @@
 			);
 			name = PublicSector;
 			packageProductDependencies = (
-				D9A70DE42C859579002F6583 /* ComposableArchitecture */,
+				D9A6E1BC2CEC71FE006123D1 /* ComposableArchitecture */,
 			);
 			productName = PublicSector;
 			productReference = D9A70DB62C850B78002F6583 /* PublicSector.app */;
@@ -440,7 +440,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1540;
-				LastUpgradeCheck = 1600;
+				LastUpgradeCheck = 1610;
 				TargetAttributes = {
 					D9A70DB52C850B78002F6583 = {
 						CreatedOnToolsVersion = 15.4;
@@ -466,7 +466,7 @@
 			);
 			mainGroup = D9A70DAD2C850B78002F6583;
 			packageReferences = (
-				D9A70DE32C859579002F6583 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */,
+				D9A6E1BB2CEC71FE006123D1 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */,
 			);
 			productRefGroup = D9A70DB72C850B78002F6583 /* Products */;
 			projectDirPath = "";
@@ -626,6 +626,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -689,6 +690,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -926,20 +928,20 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		D9A70DE32C859579002F6583 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */ = {
+		D9A6E1BB2CEC71FE006123D1 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/pointfreeco/swift-composable-architecture";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 1.14.0;
+				minimumVersion = 1.16.1;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		D9A70DE42C859579002F6583 /* ComposableArchitecture */ = {
+		D9A6E1BC2CEC71FE006123D1 /* ComposableArchitecture */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = D9A70DE32C859579002F6583 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */;
+			package = D9A6E1BB2CEC71FE006123D1 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */;
 			productName = ComposableArchitecture;
 		};
 /* End XCSwiftPackageProductDependency section */
