@@ -51,6 +51,16 @@
         }
       }
     },
+    "Contact us" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "تواصل معنا"
+          }
+        }
+      }
+    },
     "Daily" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -150,6 +160,16 @@
         }
       }
     },
+    "Donate" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "تبرع"
+          }
+        }
+      }
+    },
     "Done" : {
       "localizations" : {
         "ar" : {
@@ -183,6 +203,16 @@
         }
       }
     },
+    "Help" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "المساعدة"
+          }
+        }
+      }
+    },
     "Holidays and Events" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -196,6 +226,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Holidays and Events"
+          }
+        }
+      }
+    },
+    "Invite your friends" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "أدع أصدقائك"
           }
         }
       }
@@ -267,22 +307,6 @@
         }
       }
     },
-    "Notifications" : {
-      "localizations" : {
-        "ar" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "إشعارات"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Notifications"
-          }
-        }
-      }
-    },
     "Prayer Times" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -296,6 +320,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Prayer Times"
+          }
+        }
+      }
+    },
+    "Rate us" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "قيمنا"
           }
         }
       }

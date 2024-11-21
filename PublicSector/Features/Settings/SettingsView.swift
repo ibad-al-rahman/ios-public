@@ -14,17 +14,40 @@ struct SettingsView: View {
     var body: some View {
         NavigationStack {
             List {
+                Section {
+                    navigationRow("Donate", systemName: "heart")
+                        .onTapGesture { store.send(.onTapDonate) }
+                } header: {
+                    Spacer(minLength: Spacing.small)
+                }
+
                 displaySection
 
                 Section {
-                    Label("Notifications", systemImage: "app.badge")
+                    navigationRow("Help", systemName: "questionmark.circle")
+                        .onTapGesture { store.send(.onTapHelp) }
+
+                    Label("Rate us", systemImage: "star")
+                        .foregroundStyle(.primary, .primary)
+
+                    Label("Invite your friends", systemImage: "paperplane")
                         .foregroundStyle(.primary, .primary)
                 }
-
-                Section("App Info") {
-                    Text("Version").badge(Text(verbatim: "0.1.0"))
-                }
             }
+            .navigationDestination(
+                item: $store.scope(
+                    state: \.destination?.appearance,
+                    action: \.dependent.destination.appearance
+                ),
+                destination: { AppearanceView(store: $0) }
+            )
+            .sheet(
+                item: $store.scope(
+                    state: \.destination?.help,
+                    action: \.dependent.destination.help
+                ),
+                content: { HelpView(store: $0) }
+            )
             .navigationTitle("Settings")
         }
     }
@@ -33,13 +56,6 @@ struct SettingsView: View {
         Section("Display") {
             navigationRow("Appearance", systemName: "circle.lefthalf.filled")
                 .onTapGesture { store.send(.onTapAppearance) }
-                .navigationDestination(
-                    item: $store.scope(
-                        state: \.destination?.appearance,
-                        action: \.dependent.destination.appearance
-                    ),
-                    destination: { AppearanceView(store: $0) }
-                )
 
             navigationRow("Language", systemName: "a.square")
                 .onTapGesture { store.send(.onTapLanguage) }

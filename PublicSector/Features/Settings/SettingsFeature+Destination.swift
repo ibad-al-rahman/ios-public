@@ -11,20 +11,27 @@ extension SettingsFeature {
     @Reducer
     struct Destination {
         enum State: Identifiable, Equatable {
+            case help(HelpFeature.State)
             case appearance(AppearanceFeature.State)
 
             var id: AnyHashable {
                 switch self {
+                case .help: "help"
                 case .appearance: "appearance"
                 }
             }
         }
 
         enum Action {
+            case help(HelpFeature.Action)
             case appearance(AppearanceFeature.Action)
         }
 
         var body: some ReducerOf<Self> {
+            Scope(state: \.help, action: \.help) {
+                HelpFeature()
+            }
+
             Scope(state: \.appearance, action: \.appearance) {
                 AppearanceFeature()
             }
