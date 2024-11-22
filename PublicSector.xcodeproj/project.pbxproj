@@ -58,7 +58,6 @@
 		D9A70E1F2C85A261002F6583 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = D9A70E1E2C85A261002F6583 /* Localizable.xcstrings */; };
 		D9B34CE22CDFBA1B00C07BA7 /* DebugSettings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D9B34CE02CDFBA1B00C07BA7 /* DebugSettings.bundle */; };
 		D9B34CE32CDFBA1B00C07BA7 /* ReleaseSettings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D9B34CE12CDFBA1B00C07BA7 /* ReleaseSettings.bundle */; };
-		D9EE386E2CF1027F00ABA859 /* swiftlint in Frameworks */ = {isa = PBXBuildFile; productRef = D9EE386D2CF1027F00ABA859 /* swiftlint */; };
 		D9EE4FD92CE10E6000C5AEE4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D9EE4FD82CE10E6000C5AEE4 /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
@@ -143,7 +142,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				D9A6E1BD2CEC71FE006123D1 /* ComposableArchitecture in Frameworks */,
-				D9EE386E2CF1027F00ABA859 /* swiftlint in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -457,12 +455,11 @@
 			buildRules = (
 			);
 			dependencies = (
-				D9EE38702CF1028B00ABA859 /* PBXTargetDependency */,
+				D90B59952CF1062D00AC1FA3 /* PBXTargetDependency */,
 			);
 			name = PublicSector;
 			packageProductDependencies = (
 				D9A6E1BC2CEC71FE006123D1 /* ComposableArchitecture */,
-				D9EE386D2CF1027F00ABA859 /* swiftlint */,
 			);
 			productName = PublicSector;
 			productReference = D9A70DB62C850B78002F6583 /* PublicSector.app */;
@@ -539,7 +536,7 @@
 			mainGroup = D9A70DAD2C850B78002F6583;
 			packageReferences = (
 				D9A6E1BB2CEC71FE006123D1 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */,
-				D9EE386C2CF1027F00ABA859 /* XCRemoteSwiftPackageReference "SwiftLint" */,
+				D90B59932CF1062200AC1FA3 /* XCRemoteSwiftPackageReference "SwiftLint" */,
 			);
 			productRefGroup = D9A70DB72C850B78002F6583 /* Products */;
 			projectDirPath = "";
@@ -693,6 +690,10 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		D90B59952CF1062D00AC1FA3 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			productRef = D90B59942CF1062D00AC1FA3 /* SwiftLintBuildToolPlugin */;
+		};
 		D9A70DC82C850B79002F6583 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = D9A70DB52C850B78002F6583 /* PublicSector */;
@@ -702,10 +703,6 @@
 			isa = PBXTargetDependency;
 			target = D9A70DB52C850B78002F6583 /* PublicSector */;
 			targetProxy = D9A70DD12C850B79002F6583 /* PBXContainerItemProxy */;
-		};
-		D9EE38702CF1028B00ABA859 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			productRef = D9EE386F2CF1028B00ABA859 /* SwiftLintBuildToolPlugin */;
 		};
 /* End PBXTargetDependency section */
 
@@ -1017,6 +1014,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		D90B59932CF1062200AC1FA3 /* XCRemoteSwiftPackageReference "SwiftLint" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/realm/SwiftLint";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.57.0;
+			};
+		};
 		D9A6E1BB2CEC71FE006123D1 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/pointfreeco/swift-composable-architecture";
@@ -1025,31 +1030,18 @@
 				minimumVersion = 1.16.1;
 			};
 		};
-		D9EE386C2CF1027F00ABA859 /* XCRemoteSwiftPackageReference "SwiftLint" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/realm/SwiftLint";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 0.57.0;
-			};
-		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		D90B59942CF1062D00AC1FA3 /* SwiftLintBuildToolPlugin */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D90B59932CF1062200AC1FA3 /* XCRemoteSwiftPackageReference "SwiftLint" */;
+			productName = "plugin:SwiftLintBuildToolPlugin";
+		};
 		D9A6E1BC2CEC71FE006123D1 /* ComposableArchitecture */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = D9A6E1BB2CEC71FE006123D1 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */;
 			productName = ComposableArchitecture;
-		};
-		D9EE386D2CF1027F00ABA859 /* swiftlint */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = D9EE386C2CF1027F00ABA859 /* XCRemoteSwiftPackageReference "SwiftLint" */;
-			productName = swiftlint;
-		};
-		D9EE386F2CF1028B00ABA859 /* SwiftLintBuildToolPlugin */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = D9EE386C2CF1027F00ABA859 /* XCRemoteSwiftPackageReference "SwiftLint" */;
-			productName = "plugin:SwiftLintBuildToolPlugin";
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
