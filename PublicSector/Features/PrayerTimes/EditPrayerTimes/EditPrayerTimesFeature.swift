@@ -11,12 +11,12 @@ import ComposableArchitecture
 struct EditPrayerTimesFeature {
     @ObservableState
     struct State: Equatable {
-        var fajerState = EditSinglePrayerTimeFeature.State()
-        var sunriseState = EditSinglePrayerTimeFeature.State()
-        var dhuhrState = EditSinglePrayerTimeFeature.State()
-        var asrState = EditSinglePrayerTimeFeature.State()
-        var maghribState = EditSinglePrayerTimeFeature.State()
-        var ishaaState = EditSinglePrayerTimeFeature.State()
+        var fajerState = EditSinglePrayerTimeFeature.State(prayer: .fajer)
+        var sunriseState = EditSinglePrayerTimeFeature.State(prayer: .sunrise)
+        var dhuhrState = EditSinglePrayerTimeFeature.State(prayer: .dhuhr)
+        var asrState = EditSinglePrayerTimeFeature.State(prayer: .asr)
+        var maghribState = EditSinglePrayerTimeFeature.State(prayer: .maghrib)
+        var ishaaState = EditSinglePrayerTimeFeature.State(prayer: .ishaa)
     }
 
     enum Action: BaseAction {

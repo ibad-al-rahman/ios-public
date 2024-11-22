@@ -9,18 +9,17 @@ import ComposableArchitecture
 import SwiftUI
 
 struct EditSinglePrayerTimeView: View {
-    var label: LocalizedStringKey
     @Bindable var store: StoreOf<EditSinglePrayerTimeFeature>
 
     var body: some View {
-        Section(label) {
+        Section(store.prayer.localizedStringKey) {
             HStack {
                 Button(action: { store.send(.onTapDec) }) {
                     Text(verbatim: "-")
                 }
                 .buttonStyle(.plain)
                 Spacer()
-                Text("\(store.offset)")
+                Text("\(store.prayerOffset)")
                 Spacer()
                 Button(action: { store.send(.onTapInc) }) {
                     Text(verbatim: "+")

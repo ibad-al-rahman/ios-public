@@ -11,7 +11,13 @@ import ComposableArchitecture
 struct EditSinglePrayerTimeFeature {
     @ObservableState
     struct State: Equatable {
-        var offset = 0
+        let prayer: Prayer
+
+        @Shared(.prayerTimesOffset) var offset: PrayerTimesOffset = .default
+
+        var prayerOffset: Int {
+            offset.val(prayer)
+        }
     }
 
     enum Action: BaseAction {
@@ -39,11 +45,11 @@ struct EditSinglePrayerTimeFeature {
         Reduce { state, action in
             switch action {
             case .view(.onTapInc):
-                state.offset += 1
+                state.offset.inc(state.prayer)
                 return .none
 
             case .view(.onTapDec):
-                state.offset -= 1
+                state.offset.dec(state.prayer)
                 return .none
 
             default: return .none

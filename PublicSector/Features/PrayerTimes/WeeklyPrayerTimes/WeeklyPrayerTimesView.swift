@@ -18,12 +18,12 @@ struct WeeklyPrayerTimesView: View {
                     Grid {
                         GridRow {
                             Text("Week")
-                            Text("Fajer")
-                            Text("Sunrise")
-                            Text("Dhuhr")
-                            Text("Asr")
-                            Text("Maghrib")
-                            Text("Ishaa")
+                            Text(Prayer.fajer.localizedStringKey)
+                            Text(Prayer.sunrise.localizedStringKey)
+                            Text(Prayer.dhuhr.localizedStringKey)
+                            Text(Prayer.asr.localizedStringKey)
+                            Text(Prayer.maghrib.localizedStringKey)
+                            Text(Prayer.ishaa.localizedStringKey)
                         }
                         .bold()
 
