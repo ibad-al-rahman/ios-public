@@ -12,9 +12,9 @@ struct Settings { }
 
 extension Settings {
     enum Appearance: String, CaseIterable, Identifiable {
-        case system = "system"
-        case light = "light"
-        case dark = "dark"
+        case system
+        case light
+        case dark
 
         var id: String { self.rawValue }
 

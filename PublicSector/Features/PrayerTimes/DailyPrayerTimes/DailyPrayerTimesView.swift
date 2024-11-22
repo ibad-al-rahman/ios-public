@@ -74,9 +74,7 @@ struct DailyPrayerTimesView: View {
             HStack {
                 Text("Timings")
                 Spacer()
-                Button(action: {
-                    store.send(.onTapShare)
-                }) {
+                Button(action: { store.send(.onTapShare) }) {
                     Label("Share", systemImage: "square.and.arrow.up")
                 }
                 .textCase(nil)
