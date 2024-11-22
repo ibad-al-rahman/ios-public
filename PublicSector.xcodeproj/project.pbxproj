@@ -10,6 +10,8 @@
 		D9170D522CEFDE41006E45D5 /* WebLinks.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9170D512CEFDE15006E45D5 /* WebLinks.swift */; };
 		D9170D552CEFE554006E45D5 /* HelpFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9170D542CEFE552006E45D5 /* HelpFeature.swift */; };
 		D9170D572CEFE558006E45D5 /* HelpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9170D562CEFE557006E45D5 /* HelpView.swift */; };
+		D9170D5A2CF0974E006E45D5 /* AdhkarFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9170D592CF0974B006E45D5 /* AdhkarFeature.swift */; };
+		D9170D5C2CF09754006E45D5 /* AdhkarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9170D5B2CF09751006E45D5 /* AdhkarView.swift */; };
 		D98903AB2CDE348C00717646 /* ExternalDeepLinks.swift in Sources */ = {isa = PBXBuildFile; fileRef = D98903AA2CDE347800717646 /* ExternalDeepLinks.swift */; };
 		D98D2BD72CA9ACD20050F2A8 /* SharedState+Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = D98D2BD62CA9ACD20050F2A8 /* SharedState+Keys.swift */; };
 		D98D2BDA2CA9B14A0050F2A8 /* View+ControlFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = D98D2BD92CA9B14A0050F2A8 /* View+ControlFlow.swift */; };
@@ -73,6 +75,8 @@
 		D9170D512CEFDE15006E45D5 /* WebLinks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebLinks.swift; sourceTree = "<group>"; };
 		D9170D542CEFE552006E45D5 /* HelpFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpFeature.swift; sourceTree = "<group>"; };
 		D9170D562CEFE557006E45D5 /* HelpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpView.swift; sourceTree = "<group>"; };
+		D9170D592CF0974B006E45D5 /* AdhkarFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdhkarFeature.swift; sourceTree = "<group>"; };
+		D9170D5B2CF09751006E45D5 /* AdhkarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdhkarView.swift; sourceTree = "<group>"; };
 		D98903AA2CDE347800717646 /* ExternalDeepLinks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExternalDeepLinks.swift; sourceTree = "<group>"; };
 		D98D2BD62CA9ACD20050F2A8 /* SharedState+Keys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SharedState+Keys.swift"; sourceTree = "<group>"; };
 		D98D2BD92CA9B14A0050F2A8 /* View+ControlFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+ControlFlow.swift"; sourceTree = "<group>"; };
@@ -151,6 +155,15 @@
 				D9170D542CEFE552006E45D5 /* HelpFeature.swift */,
 			);
 			path = Help;
+			sourceTree = "<group>";
+		};
+		D9170D582CF09745006E45D5 /* Adhkar */ = {
+			isa = PBXGroup;
+			children = (
+				D9170D5B2CF09751006E45D5 /* AdhkarView.swift */,
+				D9170D592CF0974B006E45D5 /* AdhkarFeature.swift */,
+			);
+			path = Adhkar;
 			sourceTree = "<group>";
 		};
 		D98903A92CDE346C00717646 /* Dependencies */ = {
@@ -283,6 +296,7 @@
 		D9A70DEA2C8595D6002F6583 /* Features */ = {
 			isa = PBXGroup;
 			children = (
+				D9170D582CF09745006E45D5 /* Adhkar */,
 				D9A70DF82C8596D0002F6583 /* Developer */,
 				D9A70DF72C8596CA002F6583 /* PrayerTimes */,
 				D9A70DF62C8596C4002F6583 /* Settings */,
@@ -583,6 +597,7 @@
 				D9A70DEC2C8595E5002F6583 /* Spacing.swift in Sources */,
 				D98D2BDA2CA9B14A0050F2A8 /* View+ControlFlow.swift in Sources */,
 				D9A70E152C859EA9002F6583 /* DailyPrayerTimesView.swift in Sources */,
+				D9170D5A2CF0974E006E45D5 /* AdhkarFeature.swift in Sources */,
 				D9A70E062C859977002F6583 /* SettingsFeature.swift in Sources */,
 				D9170D522CEFDE41006E45D5 /* WebLinks.swift in Sources */,
 				D9A70DFC2C8596FF002F6583 /* DeveloperMenuFeature.swift in Sources */,
@@ -595,6 +610,7 @@
 				D9A70DF42C859684002F6583 /* Preview+Arabic.swift in Sources */,
 				D98903AB2CDE348C00717646 /* ExternalDeepLinks.swift in Sources */,
 				D9A70E172C859ED5002F6583 /* PrayerTimesFeature.swift in Sources */,
+				D9170D5C2CF09754006E45D5 /* AdhkarView.swift in Sources */,
 				D9A70E0F2C859E57002F6583 /* WeeklyPrayerTimesFeature.swift in Sources */,
 				D9A70E132C859E83002F6583 /* DailyPrayerTimesFeature.swift in Sources */,
 				D9A70E112C859E65002F6583 /* WeeklyPrayerTimesView.swift in Sources */,

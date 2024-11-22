@@ -21,6 +21,7 @@ struct AppView: View {
     var content: some View {
         TabView(selection: $store.selectedTab) {
             prayerTimesScreen
+            adhkarScreen
             settingsScreen
         }
     }
@@ -37,6 +38,20 @@ struct AppView: View {
             )
         }
         .tag(AppFeature.Tab.prayerTimes)
+    }
+
+    var adhkarScreen: some View {
+        AdhkarView(store: store.scope(
+            state: \.adhkar,
+            action: \.dependent.adhkar
+        ))
+        .tabItem {
+            Label(
+                AppFeature.Tab.adhkar.localizedStringKey,
+                systemImage: "book.pages"
+            )
+        }
+        .tag(AppFeature.Tab.adhkar)
     }
 
     var settingsScreen: some View {
@@ -59,6 +74,7 @@ extension AppFeature.Tab {
         switch self {
         case .prayerTimes: "Prayer Times"
         case .settings: "Settings"
+        case .adhkar: "Adhkar"
         }
     }
 }

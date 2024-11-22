@@ -12,6 +12,7 @@ struct AppFeature {
     enum Tab {
         case prayerTimes
         case settings
+        case adhkar
     }
 
     @ObservableState
@@ -21,6 +22,7 @@ struct AppFeature {
         var selectedTab: Tab = .prayerTimes
         var prayerTimes = PrayerTimesFeature.State()
         var settings = SettingsFeature.State()
+        var adhkar = AdhkarFeature.State()
     }
 
     enum Action: BaseAction, BindableAction {
@@ -40,6 +42,7 @@ struct AppFeature {
         enum DependentAction {
             case prayerTimes(PrayerTimesFeature.Action)
             case settings(SettingsFeature.Action)
+            case adhkar(AdhkarFeature.Action)
         }
     }
 
@@ -50,6 +53,9 @@ struct AppFeature {
         }
         Scope(state: \.settings, action: \.dependent.settings) {
             SettingsFeature()
+        }
+        Scope(state: \.adhkar, action: \.dependent.adhkar) {
+            AdhkarFeature()
         }
     }
 }

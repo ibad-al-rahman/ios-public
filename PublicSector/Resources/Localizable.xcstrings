@@ -1,6 +1,16 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "Adhkar" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "أذكار"
+          }
+        }
+      }
+    },
     "App Info" : {
       "extractionState" : "manual",
       "localizations" : {
