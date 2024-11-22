@@ -35,7 +35,7 @@ struct HelpFeature {
     }
 
     var body: some ReducerOf<Self> {
-        Reduce { state, action in
+        Reduce { _, action in
             switch action {
             case .view(.onTapContactUs):
                 return .run { _ in await webLinks.openContactUs() }

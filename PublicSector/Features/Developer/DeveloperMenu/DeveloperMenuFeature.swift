@@ -36,7 +36,7 @@ struct DeveloperMenuFeature {
     }
 
     var body: some ReducerOf<Self> {
-        Reduce { state, action in
+        Reduce { _, action in
             switch action {
             case .view(.onTapDone):
                 return .run { _ in await dismiss() }
