@@ -27,6 +27,7 @@ struct PrayerTimesFeature {
         var prayerTimesPicker: PrayerTimesPicker = .daily
         var dailyPrayerState = DailyPrayerTimesFeature.State()
         var weeklyPrayerState = WeeklyPrayerTimesFeature.State()
+        @Presents var destination: Destination.State?
     }
 
     enum Action: BaseAction, BindableAction {
@@ -36,7 +37,9 @@ struct PrayerTimesFeature {
         case delegate(DelegateAction)
         case binding(BindingAction<State>)
 
-        enum ViewAction { }
+        enum ViewAction {
+            case onTapEdit
+        }
 
         @CasePathable
         enum ReducerAction { }
@@ -48,14 +51,31 @@ struct PrayerTimesFeature {
         enum DependentAction {
             case dailyPrayer(DailyPrayerTimesFeature.Action)
             case weeklyPrayer(WeeklyPrayerTimesFeature.Action)
+            case destination(PresentationAction<Destination.Action>)
         }
     }
 
     var body: some ReducerOf<Self> {
         BindingReducer()
+
+        Reduce { state, action in
+            switch action {
+            case .view(.onTapEdit):
+                state.destination = .edit(EditPrayerTimesFeature.State())
+                return .none
+
+            default:
+                return .none
+            }
+        }
+        .ifLet(\.$destination, action: \.dependent.destination) {
+            Destination()
+        }
+
         Scope(state: \.dailyPrayerState, action: \.dependent.dailyPrayer) {
             DailyPrayerTimesFeature()
         }
+
         Scope(state: \.weeklyPrayerState, action: \.dependent.weeklyPrayer) {
             WeeklyPrayerTimesFeature()
         }

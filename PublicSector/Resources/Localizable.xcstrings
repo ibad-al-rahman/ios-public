@@ -196,6 +196,16 @@
         }
       }
     },
+    "Edit" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "تعديل"
+          }
+        }
+      }
+    },
     "Fajer" : {
       "extractionState" : "manual",
       "localizations" : {
