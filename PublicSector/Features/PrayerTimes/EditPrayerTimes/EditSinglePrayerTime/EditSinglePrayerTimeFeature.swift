@@ -12,9 +12,7 @@ struct EditSinglePrayerTimeFeature {
     @ObservableState
     struct State: Equatable {
         let prayer: Prayer
-
-        @Shared(.prayerTimesOffset) var offset: PrayerTimesOffset = .default
-
+        @Shared(.prayerTimesOffset) var offset = .default
         var prayerOffset: Int {
             offset.val(prayer)
         }
