@@ -14,27 +14,27 @@ struct EditPrayerTimesView: View {
     var body: some View {
         NavigationView {
             List {
-                EditSinglePrayerTimeView(label: "Fajer", store: store.scope(
+                EditSinglePrayerTimeView(store: store.scope(
                     state: \.fajerState,
                     action: \.dependent.fajer
                 ))
-                EditSinglePrayerTimeView(label: "Sunrise", store: store.scope(
+                EditSinglePrayerTimeView(store: store.scope(
                     state: \.sunriseState,
                     action: \.dependent.sunrise
                 ))
-                EditSinglePrayerTimeView(label: "Dhuhr", store: store.scope(
+                EditSinglePrayerTimeView(store: store.scope(
                     state: \.dhuhrState,
                     action: \.dependent.dhuhr
                 ))
-                EditSinglePrayerTimeView(label: "Asr", store: store.scope(
+                EditSinglePrayerTimeView(store: store.scope(
                     state: \.asrState,
                     action: \.dependent.asr
                 ))
-                EditSinglePrayerTimeView(label: "Maghrib", store: store.scope(
+                EditSinglePrayerTimeView(store: store.scope(
                     state: \.maghribState,
                     action: \.dependent.maghrib
                 ))
-                EditSinglePrayerTimeView(label: "Ishaa", store: store.scope(
+                EditSinglePrayerTimeView(store: store.scope(
                     state: \.ishaaState,
                     action: \.dependent.ishaa
                 ))

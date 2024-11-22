@@ -38,12 +38,36 @@ struct DailyPrayerTimesView: View {
     private var dayPrayerTime: some View {
         Section {
             Group {
-                prayerTime("Fajer", time: store.currentDatePrayerTimes.fajerTime, systemImage: "moon.stars")
-                prayerTime("Sunrise", time: store.currentDatePrayerTimes.sunriseTime, systemImage: "sunrise")
-                prayerTime("Dhuhr", time: store.currentDatePrayerTimes.dhuhrTime, systemImage: "sun.max")
-                prayerTime("Asr", time: store.currentDatePrayerTimes.asrTime, systemImage: "sun.min")
-                prayerTime("Maghrib", time: store.currentDatePrayerTimes.maghribTime, systemImage: "sunset")
-                prayerTime("Ishaa", time: store.currentDatePrayerTimes.ishaaTime, systemImage: "moon")
+                prayerTime(
+                    .fajer,
+                    time: store.currentDatePrayerTimes.fajerTime,
+                    systemImage: "moon.stars"
+                )
+                prayerTime(
+                    .sunrise,
+                    time: store.currentDatePrayerTimes.sunriseTime,
+                    systemImage: "sunrise"
+                )
+                prayerTime(
+                    .dhuhr,
+                    time: store.currentDatePrayerTimes.dhuhrTime,
+                    systemImage: "sun.max"
+                )
+                prayerTime(
+                    .asr,
+                    time: store.currentDatePrayerTimes.asrTime,
+                    systemImage: "sun.min"
+                )
+                prayerTime(
+                    .maghrib,
+                    time: store.currentDatePrayerTimes.maghribTime,
+                    systemImage: "sunset"
+                )
+                prayerTime(
+                    .ishaa,
+                    time: store.currentDatePrayerTimes.ishaaTime,
+                    systemImage: "moon"
+                )
             }
             .foregroundStyle(.primary)
         } header: {
@@ -70,17 +94,17 @@ struct DailyPrayerTimesView: View {
 
     @ViewBuilder
     private func prayerTime(
-        _ label: LocalizedStringKey,
+        _ prayer: Prayer,
         time: Date?,
         systemImage: String
     ) -> some View {
         if let time {
-            Label(label, systemImage: systemImage)
+            Label(prayer.localizedStringKey, systemImage: systemImage)
                 .badge(
                     Text(time, format: .dateTime.hour().minute())
                 )
         } else {
-            Label(label, systemImage: systemImage)
+            Label(prayer.localizedStringKey, systemImage: systemImage)
                 .badge(Text(verbatim: "-"))
         }
     }

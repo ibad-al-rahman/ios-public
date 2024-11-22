@@ -17,6 +17,8 @@
 		D9170D632CF0A64D006E45D5 /* PrayerTimesFeature+Destination.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9170D622CF0A648006E45D5 /* PrayerTimesFeature+Destination.swift */; };
 		D9170D692CF0B1EF006E45D5 /* EditSinglePrayerTimeFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9170D682CF0B1E9006E45D5 /* EditSinglePrayerTimeFeature.swift */; };
 		D9170D6B2CF0B1F7006E45D5 /* EditSinglePrayerTimeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9170D6A2CF0B1F3006E45D5 /* EditSinglePrayerTimeView.swift */; };
+		D9170D6D2CF0D1E1006E45D5 /* PrayerTimesOffset.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9170D6C2CF0D1DA006E45D5 /* PrayerTimesOffset.swift */; };
+		D9170D6F2CF0D5F7006E45D5 /* Prayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9170D6E2CF0D5F1006E45D5 /* Prayer.swift */; };
 		D98903AB2CDE348C00717646 /* ExternalDeepLinks.swift in Sources */ = {isa = PBXBuildFile; fileRef = D98903AA2CDE347800717646 /* ExternalDeepLinks.swift */; };
 		D98D2BD72CA9ACD20050F2A8 /* SharedState+Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = D98D2BD62CA9ACD20050F2A8 /* SharedState+Keys.swift */; };
 		D98D2BDA2CA9B14A0050F2A8 /* View+ControlFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = D98D2BD92CA9B14A0050F2A8 /* View+ControlFlow.swift */; };
@@ -87,6 +89,8 @@
 		D9170D622CF0A648006E45D5 /* PrayerTimesFeature+Destination.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PrayerTimesFeature+Destination.swift"; sourceTree = "<group>"; };
 		D9170D682CF0B1E9006E45D5 /* EditSinglePrayerTimeFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditSinglePrayerTimeFeature.swift; sourceTree = "<group>"; };
 		D9170D6A2CF0B1F3006E45D5 /* EditSinglePrayerTimeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditSinglePrayerTimeView.swift; sourceTree = "<group>"; };
+		D9170D6C2CF0D1DA006E45D5 /* PrayerTimesOffset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrayerTimesOffset.swift; sourceTree = "<group>"; };
+		D9170D6E2CF0D5F1006E45D5 /* Prayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Prayer.swift; sourceTree = "<group>"; };
 		D98903AA2CDE347800717646 /* ExternalDeepLinks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExternalDeepLinks.swift; sourceTree = "<group>"; };
 		D98D2BD62CA9ACD20050F2A8 /* SharedState+Keys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SharedState+Keys.swift"; sourceTree = "<group>"; };
 		D98D2BD92CA9B14A0050F2A8 /* View+ControlFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+ControlFlow.swift"; sourceTree = "<group>"; };
@@ -419,6 +423,8 @@
 		D9A70E0B2C859E0C002F6583 /* Entities */ = {
 			isa = PBXGroup;
 			children = (
+				D9170D6E2CF0D5F1006E45D5 /* Prayer.swift */,
+				D9170D6C2CF0D1DA006E45D5 /* PrayerTimesOffset.swift */,
 				D9A70E0C2C859E1E002F6583 /* DayPrayerTimes.swift */,
 			);
 			path = Entities;
@@ -623,6 +629,7 @@
 				D9A70E1B2C859F1F002F6583 /* AppFeature.swift in Sources */,
 				D98D2BDF2CA9B5140050F2A8 /* AppearanceView.swift in Sources */,
 				D9A70DBC2C850B78002F6583 /* ContentView.swift in Sources */,
+				D9170D6F2CF0D5F7006E45D5 /* Prayer.swift in Sources */,
 				D9A70E1D2C859F31002F6583 /* AppView.swift in Sources */,
 				D9A70DBA2C850B78002F6583 /* PublicSectorApp.swift in Sources */,
 				D9A70DEC2C8595E5002F6583 /* Spacing.swift in Sources */,
@@ -636,6 +643,7 @@
 				D9A70DFC2C8596FF002F6583 /* DeveloperMenuFeature.swift in Sources */,
 				D9A70E082C859D3F002F6583 /* SettingsView.swift in Sources */,
 				D98D2BDD2CA9B50D0050F2A8 /* AppearanceFeature.swift in Sources */,
+				D9170D6D2CF0D1E1006E45D5 /* PrayerTimesOffset.swift in Sources */,
 				D9170D572CEFE558006E45D5 /* HelpView.swift in Sources */,
 				D9A70E022C859748002F6583 /* DeveloperButton+Destination.swift in Sources */,
 				D98D2BD72CA9ACD20050F2A8 /* SharedState+Keys.swift in Sources */,

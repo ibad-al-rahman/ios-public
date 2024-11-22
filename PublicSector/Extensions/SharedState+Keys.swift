@@ -12,3 +12,9 @@ extension PersistenceReaderKey where Self == AppStorageKey<Settings.Appearance> 
     appStorage("appearance")
   }
 }
+
+extension PersistenceReaderKey where Self == FileStorageKey<PrayerTimesOffset> {
+  static var prayerTimesOffset: Self {
+      fileStorage(.documentsDirectory.appending(component: "prayerTimesOffset.json"))
+  }
+}
