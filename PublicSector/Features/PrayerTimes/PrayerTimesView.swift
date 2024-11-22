@@ -19,6 +19,23 @@ struct PrayerTimesView: View {
             }
             .navigationTitle("Prayer Times")
             .navigationBarTitleDisplayMode(.inline)
+            .toolbar { toolbarItems }
+            .sheet(
+                item: $store.scope(
+                    state: \.destination?.edit,
+                    action: \.dependent.destination.edit
+                ),
+                content: { EditPrayerTimesView(store: $0) }
+            )
+        }
+    }
+
+    @ToolbarContentBuilder
+    private var toolbarItems: some ToolbarContent {
+        ToolbarItem(placement: .topBarTrailing) {
+            Button(action: { store.send(.onTapEdit) }) {
+                Text("Edit")
+            }
         }
     }
 
