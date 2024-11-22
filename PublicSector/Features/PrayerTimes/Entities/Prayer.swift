@@ -20,7 +20,7 @@ enum Prayer: Equatable {
         case .fajer: "Fajer"
         case .sunrise: "Sunrise"
         case .dhuhr: "Dhuhr"
-        case .asr: "Aser"
+        case .asr: "Asr"
         case .maghrib: "Maghrib"
         case .ishaa: "Ishaa"
         }
