@@ -40,32 +40,32 @@ struct DailyPrayerTimesView: View {
             Group {
                 prayerTime(
                     .fajer,
-                    time: store.currentDatePrayerTimes.fajerTime,
+                    time: store.todaysPrayerTime.fajerTime,
                     systemImage: "moon.stars"
                 )
                 prayerTime(
                     .sunrise,
-                    time: store.currentDatePrayerTimes.sunriseTime,
+                    time: store.todaysPrayerTime.sunriseTime,
                     systemImage: "sunrise"
                 )
                 prayerTime(
                     .dhuhr,
-                    time: store.currentDatePrayerTimes.dhuhrTime,
+                    time: store.todaysPrayerTime.dhuhrTime,
                     systemImage: "sun.max"
                 )
                 prayerTime(
                     .asr,
-                    time: store.currentDatePrayerTimes.asrTime,
+                    time: store.todaysPrayerTime.asrTime,
                     systemImage: "sun.min"
                 )
                 prayerTime(
                     .maghrib,
-                    time: store.currentDatePrayerTimes.maghribTime,
+                    time: store.todaysPrayerTime.maghribTime,
                     systemImage: "sunset"
                 )
                 prayerTime(
                     .ishaa,
-                    time: store.currentDatePrayerTimes.ishaaTime,
+                    time: store.todaysPrayerTime.ishaaTime,
                     systemImage: "moon"
                 )
             }
