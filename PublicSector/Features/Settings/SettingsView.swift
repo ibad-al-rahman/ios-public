@@ -15,7 +15,7 @@ struct SettingsView: View {
         NavigationStack {
             List {
                 Section {
-                    navigationRow("Donate", systemName: "heart")
+                    NavigationRowView("Donate", systemName: "heart")
                         .onTapGesture { store.send(.onTapDonate) }
                 } header: {
                     Spacer(minLength: Spacing.small)
@@ -24,7 +24,7 @@ struct SettingsView: View {
                 displaySection
 
                 Section {
-                    navigationRow("Help", systemName: "questionmark.circle")
+                    NavigationRowView("Help", systemName: "questionmark.circle")
                         .onTapGesture { store.send(.onTapHelp) }
 
                     Label("Rate us", systemImage: "star")
@@ -54,24 +54,12 @@ struct SettingsView: View {
 
     private var displaySection: some View {
         Section("Display") {
-            navigationRow("Appearance", systemName: "circle.lefthalf.filled")
+            NavigationRowView("Appearance", systemName: "circle.lefthalf.filled")
                 .onTapGesture { store.send(.onTapAppearance) }
 
-            navigationRow("Language", systemName: "a.square")
+            NavigationRowView("Language", systemName: "a.square")
                 .onTapGesture { store.send(.onTapLanguage) }
         }
-    }
-
-    private func navigationRow(
-        _ label: LocalizedStringKey, systemName: String
-    ) -> some View {
-        HStack {
-            Label(label, systemImage: systemName)
-                .foregroundStyle(.primary, .primary)
-            Spacer()
-            Image(systemName: "chevron.forward")
-        }
-        .contentShape(Rectangle())
     }
 }
 

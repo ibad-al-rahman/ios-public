@@ -216,6 +216,16 @@
         }
       }
     },
+    "Evening adhkar" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "أذكار المساء"
+          }
+        }
+      }
+    },
     "Fajer" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -333,6 +343,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Maghrib"
+          }
+        }
+      }
+    },
+    "Morning adhkar" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "أذكار الصباح"
           }
         }
       }

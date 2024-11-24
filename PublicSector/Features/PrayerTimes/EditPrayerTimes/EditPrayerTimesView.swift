@@ -41,6 +41,16 @@ struct EditPrayerTimesView: View {
             }
             .navigationTitle("Edit")
             .navigationBarTitleDisplayMode(.inline)
+            .toolbar { toolbarItems }
+        }
+    }
+
+    @ToolbarContentBuilder
+    private var toolbarItems: some ToolbarContent {
+        ToolbarItem(placement: .topBarTrailing) {
+            Button(action: { store.send(.onTapDone) }) {
+                Text("Done")
+            }
         }
     }
 }

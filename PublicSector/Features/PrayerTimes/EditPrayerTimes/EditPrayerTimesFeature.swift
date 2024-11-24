@@ -9,6 +9,8 @@ import ComposableArchitecture
 
 @Reducer
 struct EditPrayerTimesFeature {
+    @Dependency(\.dismiss) private var dismiss
+
     @ObservableState
     struct State: Equatable {
         var fajerState = EditSinglePrayerTimeFeature.State(prayer: .fajer)
@@ -25,7 +27,9 @@ struct EditPrayerTimesFeature {
         case delegate(DelegateAction)
         case dependent(DependentAction)
 
-        enum ViewAction { }
+        enum ViewAction {
+            case onTapDone
+        }
 
         @CasePathable
         enum ReducerAction { }
@@ -45,7 +49,15 @@ struct EditPrayerTimesFeature {
     }
 
     var body: some ReducerOf<Self> {
-        EmptyReducer()
+        Reduce { state, action in
+            switch action {
+            case .view(.onTapDone):
+                return .run { _ in await dismiss() }
+
+            default: return .none
+            }
+        }
+
         Scope(state: \.fajerState, action: \.dependent.fajer) {
             EditSinglePrayerTimeFeature()
         }

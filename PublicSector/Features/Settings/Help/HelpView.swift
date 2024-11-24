@@ -15,7 +15,7 @@ struct HelpView: View {
         NavigationView {
             List {
                 Section {
-                    navigationRow("Contact us", systemName: "text.bubble")
+                    NavigationRowView("Contact us", systemName: "text.bubble")
                         .onTapGesture { store.send(.onTapContactUs) }
                 }
 
@@ -26,18 +26,6 @@ struct HelpView: View {
             .navigationTitle("Help")
             .navigationBarTitleDisplayMode(.inline)
         }
-    }
-
-    private func navigationRow(
-        _ label: LocalizedStringKey, systemName: String
-    ) -> some View {
-        HStack {
-            Label(label, systemImage: systemName)
-                .foregroundStyle(.primary, .primary)
-            Spacer()
-            Image(systemName: "chevron.forward")
-        }
-        .contentShape(Rectangle())
     }
 }
 
