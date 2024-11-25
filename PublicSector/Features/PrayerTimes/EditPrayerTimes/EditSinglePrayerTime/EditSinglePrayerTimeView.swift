@@ -15,16 +15,22 @@ struct EditSinglePrayerTimeView: View {
         Section(store.prayer.localizedStringKey) {
             HStack {
                 Button(action: { store.send(.onTapDec) }) {
-                    Text(verbatim: "-")
+                    Image(systemName: "minus")
                 }
                 .buttonStyle(.plain)
+                .foregroundStyle(.blue, .blue)
+
                 Spacer()
+
                 Text("\(store.prayerOffset)")
+
                 Spacer()
+
                 Button(action: { store.send(.onTapInc) }) {
-                    Text(verbatim: "+")
+                    Image(systemName: "plus")
                 }
                 .buttonStyle(.plain)
+                .foregroundStyle(.blue, .blue)
             }
         }
     }
