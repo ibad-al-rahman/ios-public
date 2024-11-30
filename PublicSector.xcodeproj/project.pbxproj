@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 60;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -19,6 +19,7 @@
 		D9170D6B2CF0B1F7006E45D5 /* EditSinglePrayerTimeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9170D6A2CF0B1F3006E45D5 /* EditSinglePrayerTimeView.swift */; };
 		D9170D6D2CF0D1E1006E45D5 /* PrayerTimesOffset.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9170D6C2CF0D1DA006E45D5 /* PrayerTimesOffset.swift */; };
 		D9170D6F2CF0D5F7006E45D5 /* Prayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9170D6E2CF0D5F1006E45D5 /* Prayer.swift */; };
+		D9468B352CFBD87000330E7A /* Repositories in Frameworks */ = {isa = PBXBuildFile; productRef = D9468B342CFBD87000330E7A /* Repositories */; };
 		D98903AB2CDE348C00717646 /* ExternalDeepLinks.swift in Sources */ = {isa = PBXBuildFile; fileRef = D98903AA2CDE347800717646 /* ExternalDeepLinks.swift */; };
 		D98D2BD72CA9ACD20050F2A8 /* SharedState+Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = D98D2BD62CA9ACD20050F2A8 /* SharedState+Keys.swift */; };
 		D98D2BDA2CA9B14A0050F2A8 /* View+ControlFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = D98D2BD92CA9B14A0050F2A8 /* View+ControlFlow.swift */; };
@@ -92,6 +93,7 @@
 		D9170D6A2CF0B1F3006E45D5 /* EditSinglePrayerTimeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditSinglePrayerTimeView.swift; sourceTree = "<group>"; };
 		D9170D6C2CF0D1DA006E45D5 /* PrayerTimesOffset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrayerTimesOffset.swift; sourceTree = "<group>"; };
 		D9170D6E2CF0D5F1006E45D5 /* Prayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Prayer.swift; sourceTree = "<group>"; };
+		D9468B322CFBD3A200330E7A /* Repositories */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Repositories; sourceTree = "<group>"; };
 		D98903AA2CDE347800717646 /* ExternalDeepLinks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExternalDeepLinks.swift; sourceTree = "<group>"; };
 		D98D2BD62CA9ACD20050F2A8 /* SharedState+Keys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SharedState+Keys.swift"; sourceTree = "<group>"; };
 		D98D2BD92CA9B14A0050F2A8 /* View+ControlFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+ControlFlow.swift"; sourceTree = "<group>"; };
@@ -143,6 +145,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D9468B352CFBD87000330E7A /* Repositories in Frameworks */,
 				D9A6E1BD2CEC71FE006123D1 /* ComposableArchitecture in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -201,6 +204,14 @@
 			path = EditSinglePrayerTime;
 			sourceTree = "<group>";
 		};
+		D9468B312CFBD37700330E7A /* Modules */ = {
+			isa = PBXGroup;
+			children = (
+				D9468B322CFBD3A200330E7A /* Repositories */,
+			);
+			path = Modules;
+			sourceTree = "<group>";
+		};
 		D98903A92CDE346C00717646 /* Dependencies */ = {
 			isa = PBXGroup;
 			children = (
@@ -231,6 +242,7 @@
 		D9A70DAD2C850B78002F6583 = {
 			isa = PBXGroup;
 			children = (
+				D9468B312CFBD37700330E7A /* Modules */,
 				D9A70DB82C850B78002F6583 /* PublicSector */,
 				D9A70DC92C850B79002F6583 /* PublicSectorTests */,
 				D9A70DD32C850B79002F6583 /* PublicSectorUITests */,
@@ -470,6 +482,7 @@
 			name = PublicSector;
 			packageProductDependencies = (
 				D9A6E1BC2CEC71FE006123D1 /* ComposableArchitecture */,
+				D9468B342CFBD87000330E7A /* Repositories */,
 			);
 			productName = PublicSector;
 			productReference = D9A70DB62C850B78002F6583 /* PublicSector.app */;
@@ -546,6 +559,7 @@
 			mainGroup = D9A70DAD2C850B78002F6583;
 			packageReferences = (
 				D9A6E1BB2CEC71FE006123D1 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */,
+				D9468B332CFBD87000330E7A /* XCLocalSwiftPackageReference "Modules/Repositories" */,
 			);
 			productRefGroup = D9A70DB72C850B78002F6583 /* Products */;
 			projectDirPath = "";
@@ -1019,6 +1033,13 @@
 		};
 /* End XCConfigurationList section */
 
+/* Begin XCLocalSwiftPackageReference section */
+		D9468B332CFBD87000330E7A /* XCLocalSwiftPackageReference "Modules/Repositories" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = Modules/Repositories;
+		};
+/* End XCLocalSwiftPackageReference section */
+
 /* Begin XCRemoteSwiftPackageReference section */
 		D9A6E1BB2CEC71FE006123D1 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */ = {
 			isa = XCRemoteSwiftPackageReference;
@@ -1031,6 +1052,10 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		D9468B342CFBD87000330E7A /* Repositories */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Repositories;
+		};
 		D9A6E1BC2CEC71FE006123D1 /* ComposableArchitecture */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = D9A6E1BB2CEC71FE006123D1 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */;
