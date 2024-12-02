@@ -11,7 +11,7 @@ struct PrayerTimesService {
     func getDayPrayerTimes(
         year: Int, month: Int, day: Int
     ) async -> DayPrayerTimesResponse? {
-        let endpoint = PrayerTimesEndpoint.getDailyPrayerTimes(
+        let endpoint = PrayerTimesEndpoint.getDayPrayerTimes(
             year: String(format: "%04d", year),
             month: String(format: "%02d", month),
             day: String(format: "%02d", day)
