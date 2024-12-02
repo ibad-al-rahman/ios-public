@@ -23,12 +23,12 @@ struct PrayerTimesService {
     }
 }
 
-struct DayPrayerTimesResponse: Decodable {
-    let hijri: String
-    let prayerTimes: PrayerTimesResponse
+public struct DayPrayerTimesResponse: Decodable, Sendable {
+    public let hijri: String
+    public let prayerTimes: PrayerTimesResponse
 }
 
-struct PrayerTimesResponse: Decodable {
-    let fajer: String
-    let sunrise: String
+public struct PrayerTimesResponse: Decodable, Sendable {
+    public let fajer: String
+    public let sunrise: String
 }

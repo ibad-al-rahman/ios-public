@@ -3,10 +3,11 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 60;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D9089CE42CFDC16D00881BB6 /* IbadRepositories in Frameworks */ = {isa = PBXBuildFile; productRef = D9089CE32CFDC16D00881BB6 /* IbadRepositories */; };
 		D9170D522CEFDE41006E45D5 /* WebLinks.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9170D512CEFDE15006E45D5 /* WebLinks.swift */; };
 		D9170D552CEFE554006E45D5 /* HelpFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9170D542CEFE552006E45D5 /* HelpFeature.swift */; };
 		D9170D572CEFE558006E45D5 /* HelpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9170D562CEFE557006E45D5 /* HelpView.swift */; };
@@ -144,6 +145,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D9089CE42CFDC16D00881BB6 /* IbadRepositories in Frameworks */,
 				D9A6E1BD2CEC71FE006123D1 /* ComposableArchitecture in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -480,6 +482,7 @@
 			name = PublicSector;
 			packageProductDependencies = (
 				D9A6E1BC2CEC71FE006123D1 /* ComposableArchitecture */,
+				D9089CE32CFDC16D00881BB6 /* IbadRepositories */,
 			);
 			productName = PublicSector;
 			productReference = D9A70DB62C850B78002F6583 /* PublicSector.app */;
@@ -556,6 +559,7 @@
 			mainGroup = D9A70DAD2C850B78002F6583;
 			packageReferences = (
 				D9A6E1BB2CEC71FE006123D1 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */,
+				D9089CE22CFDC16D00881BB6 /* XCLocalSwiftPackageReference "Modules/IbadRepositories" */,
 			);
 			productRefGroup = D9A70DB72C850B78002F6583 /* Products */;
 			projectDirPath = "";
@@ -1029,6 +1033,13 @@
 		};
 /* End XCConfigurationList section */
 
+/* Begin XCLocalSwiftPackageReference section */
+		D9089CE22CFDC16D00881BB6 /* XCLocalSwiftPackageReference "Modules/IbadRepositories" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = Modules/IbadRepositories;
+		};
+/* End XCLocalSwiftPackageReference section */
+
 /* Begin XCRemoteSwiftPackageReference section */
 		D9A6E1BB2CEC71FE006123D1 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */ = {
 			isa = XCRemoteSwiftPackageReference;
@@ -1041,6 +1052,10 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		D9089CE32CFDC16D00881BB6 /* IbadRepositories */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = IbadRepositories;
+		};
 		D9A6E1BC2CEC71FE006123D1 /* ComposableArchitecture */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = D9A6E1BB2CEC71FE006123D1 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */;

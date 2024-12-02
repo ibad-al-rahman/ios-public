@@ -8,7 +8,7 @@
 import Dependencies
 
 public struct PrayerTimesRepository: Sendable {
-    var getDayPrayerTimes: @Sendable (
+    public var getDayPrayerTimes: @Sendable (
         _ year: Int, _ month: Int, _ day: Int
     ) async -> DayPrayerTimesResponse?
 }
@@ -22,5 +22,12 @@ extension PrayerTimesRepository: DependencyKey {
                 await service.getDayPrayerTimes(year: year, month: month, day: day)
             }
         )
+    }
+}
+
+public extension DependencyValues {
+    var prayerTimesRepository: PrayerTimesRepository {
+        get { self[PrayerTimesRepository.self] }
+        set { self[PrayerTimesRepository.self] = newValue }
     }
 }
