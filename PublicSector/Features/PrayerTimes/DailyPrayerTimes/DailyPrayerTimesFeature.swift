@@ -62,7 +62,7 @@ struct DailyPrayerTimesFeature {
                 state.hijriFormattedDate = formatter.string(from: state.date)
                 state.todaysPrayerTime.offset(state.offset)
                 return .run { [offset = state.$offset] send in
-                    let response = await prayerTimesRepository.getDayPrayerTimes(2024, 12, 1)
+                    let response = await prayerTimesRepository.getDayPrayerTimes(2024, 12, 30)
                     print(response)
                     for await _ in offset.publisher.values {
                         await send(.reducer(.updatePrayerOffset))

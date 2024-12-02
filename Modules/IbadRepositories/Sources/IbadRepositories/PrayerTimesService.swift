@@ -12,7 +12,9 @@ struct PrayerTimesService {
         year: Int, month: Int, day: Int
     ) async -> DayPrayerTimesResponse? {
         let endpoint = PrayerTimesEndpoint.getDailyPrayerTimes(
-            year: "2024", month: "12", day: "01"
+            year: String(format: "%04d", year),
+            month: String(format: "%02d", month),
+            day: String(format: "%02d", day)
         )
         let response = await AF.request(endpoint.url, interceptor: .retryPolicy)
             .cacheResponse(using: .cache)
@@ -31,4 +33,8 @@ public struct DayPrayerTimesResponse: Decodable, Sendable {
 public struct PrayerTimesResponse: Decodable, Sendable {
     public let fajer: String
     public let sunrise: String
+    public let dhuhr: String
+    public let asr: String
+    public let maghrib: String
+    public let ishaa: String
 }
