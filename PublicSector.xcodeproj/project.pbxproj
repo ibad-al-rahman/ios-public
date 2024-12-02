@@ -80,6 +80,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D9089CE12CFDAD4500881BB6 /* IbadRepositories */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = IbadRepositories; sourceTree = "<group>"; };
 		D9170D512CEFDE15006E45D5 /* WebLinks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebLinks.swift; sourceTree = "<group>"; };
 		D9170D542CEFE552006E45D5 /* HelpFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpFeature.swift; sourceTree = "<group>"; };
 		D9170D562CEFE557006E45D5 /* HelpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpView.swift; sourceTree = "<group>"; };
@@ -164,6 +165,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D9089CE02CFDAC0200881BB6 /* Modules */ = {
+			isa = PBXGroup;
+			children = (
+				D9089CE12CFDAD4500881BB6 /* IbadRepositories */,
+			);
+			path = Modules;
+			sourceTree = "<group>";
+		};
 		D9170D532CEFE54A006E45D5 /* Help */ = {
 			isa = PBXGroup;
 			children = (
@@ -231,6 +240,7 @@
 		D9A70DAD2C850B78002F6583 = {
 			isa = PBXGroup;
 			children = (
+				D9089CE02CFDAC0200881BB6 /* Modules */,
 				D9A70DB82C850B78002F6583 /* PublicSector */,
 				D9A70DC92C850B79002F6583 /* PublicSectorTests */,
 				D9A70DD32C850B79002F6583 /* PublicSectorUITests */,
