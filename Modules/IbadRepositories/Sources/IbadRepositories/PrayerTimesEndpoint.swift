@@ -9,13 +9,13 @@ import Alamofire
 import Foundation
 
 enum PrayerTimesEndpoint: EndpointProtocol {
-    case getDailyPrayerTimes(year: String, month: String, day: String)
+    case getDayPrayerTimes(year: String, month: String, day: String)
 
     var baseUrl: String { "https://ibad-al-rahman.github.io/prayer-times/v1" }
 
     var path: String {
         switch self {
-        case let .getDailyPrayerTimes(year, month, day):
+        case let .getDayPrayerTimes(year, month, day):
             "/day/\(year)/\(month)/\(day).json"
         }
     }
@@ -24,7 +24,8 @@ enum PrayerTimesEndpoint: EndpointProtocol {
 
     var method: HTTPMethod {
         switch self {
-        case .getDailyPrayerTimes: .get
+        case .getDayPrayerTimes:
+            .get
         }
     }
 }
