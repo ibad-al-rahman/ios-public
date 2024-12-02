@@ -7,9 +7,12 @@
 
 import ComposableArchitecture
 import Foundation
+import IbadRepositories
 
 @Reducer
 struct DailyPrayerTimesFeature {
+    @Dependency(PrayerTimesRepository.self) private var prayerTimesRepository
+
     @ObservableState
     struct State: Equatable {
         @SharedReader(.prayerTimesOffset) var offset = .default
@@ -59,6 +62,8 @@ struct DailyPrayerTimesFeature {
                 state.hijriFormattedDate = formatter.string(from: state.date)
                 state.todaysPrayerTime.offset(state.offset)
                 return .run { [offset = state.$offset] send in
+                    let response = await prayerTimesRepository.getDayPrayerTimes(2024, 12, 1)
+                    print(response)
                     for await _ in offset.publisher.values {
                         await send(.reducer(.updatePrayerOffset))
                     }

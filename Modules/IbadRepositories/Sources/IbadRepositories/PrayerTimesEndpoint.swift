@@ -11,9 +11,7 @@ import Foundation
 enum PrayerTimesEndpoint: EndpointProtocol {
     case getDailyPrayerTimes(year: String, month: String, day: String)
 
-    var baseUrl: String {
-        "https://ibad-al-rahman.github.io/v1"
-    }
+    var baseUrl: String { "https://ibad-al-rahman.github.io/prayer-times/v1" }
 
     var path: String {
         switch self {
@@ -22,14 +20,11 @@ enum PrayerTimesEndpoint: EndpointProtocol {
         }
     }
 
-    var queryItems: [URLQueryItem] {
-        []
-    }
+    var queryItems: [URLQueryItem] { [] }
 
     var method: HTTPMethod {
         switch self {
-        case .getDailyPrayerTimes:
-            .get
+        case .getDailyPrayerTimes: .get
         }
     }
 }
