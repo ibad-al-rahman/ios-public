@@ -20,6 +20,8 @@
 		D9170D6B2CF0B1F7006E45D5 /* EditSinglePrayerTimeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9170D6A2CF0B1F3006E45D5 /* EditSinglePrayerTimeView.swift */; };
 		D9170D6D2CF0D1E1006E45D5 /* PrayerTimesOffset.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9170D6C2CF0D1DA006E45D5 /* PrayerTimesOffset.swift */; };
 		D9170D6F2CF0D5F7006E45D5 /* Prayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9170D6E2CF0D5F1006E45D5 /* Prayer.swift */; };
+		D97A9FE52D03ACC0000F3070 /* StartupFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = D97A9FE42D03ACBD000F3070 /* StartupFeature.swift */; };
+		D97A9FE72D03ACC6000F3070 /* StartupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D97A9FE62D03ACC4000F3070 /* StartupView.swift */; };
 		D98903AB2CDE348C00717646 /* ExternalDeepLinks.swift in Sources */ = {isa = PBXBuildFile; fileRef = D98903AA2CDE347800717646 /* ExternalDeepLinks.swift */; };
 		D98D2BD72CA9ACD20050F2A8 /* SharedState+Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = D98D2BD62CA9ACD20050F2A8 /* SharedState+Keys.swift */; };
 		D98D2BDA2CA9B14A0050F2A8 /* View+ControlFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = D98D2BD92CA9B14A0050F2A8 /* View+ControlFlow.swift */; };
@@ -94,6 +96,8 @@
 		D9170D6A2CF0B1F3006E45D5 /* EditSinglePrayerTimeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditSinglePrayerTimeView.swift; sourceTree = "<group>"; };
 		D9170D6C2CF0D1DA006E45D5 /* PrayerTimesOffset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrayerTimesOffset.swift; sourceTree = "<group>"; };
 		D9170D6E2CF0D5F1006E45D5 /* Prayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Prayer.swift; sourceTree = "<group>"; };
+		D97A9FE42D03ACBD000F3070 /* StartupFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartupFeature.swift; sourceTree = "<group>"; };
+		D97A9FE62D03ACC4000F3070 /* StartupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartupView.swift; sourceTree = "<group>"; };
 		D98903AA2CDE347800717646 /* ExternalDeepLinks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExternalDeepLinks.swift; sourceTree = "<group>"; };
 		D98D2BD62CA9ACD20050F2A8 /* SharedState+Keys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SharedState+Keys.swift"; sourceTree = "<group>"; };
 		D98D2BD92CA9B14A0050F2A8 /* View+ControlFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+ControlFlow.swift"; sourceTree = "<group>"; };
@@ -210,6 +214,15 @@
 				D9170D682CF0B1E9006E45D5 /* EditSinglePrayerTimeFeature.swift */,
 			);
 			path = EditSinglePrayerTime;
+			sourceTree = "<group>";
+		};
+		D97A9FE32D03AC98000F3070 /* Startup */ = {
+			isa = PBXGroup;
+			children = (
+				D97A9FE62D03ACC4000F3070 /* StartupView.swift */,
+				D97A9FE42D03ACBD000F3070 /* StartupFeature.swift */,
+			);
+			path = Startup;
 			sourceTree = "<group>";
 		};
 		D98903A92CDE346C00717646 /* Dependencies */ = {
@@ -344,6 +357,7 @@
 		D9A70DEA2C8595D6002F6583 /* Features */ = {
 			isa = PBXGroup;
 			children = (
+				D97A9FE32D03AC98000F3070 /* Startup */,
 				D9170D582CF09745006E45D5 /* Adhkar */,
 				D9A70DF82C8596D0002F6583 /* Developer */,
 				D9A70DF72C8596CA002F6583 /* PrayerTimes */,
@@ -664,6 +678,7 @@
 				D9170D5A2CF0974E006E45D5 /* AdhkarFeature.swift in Sources */,
 				D9A70E062C859977002F6583 /* SettingsFeature.swift in Sources */,
 				D9170D6B2CF0B1F7006E45D5 /* EditSinglePrayerTimeView.swift in Sources */,
+				D97A9FE72D03ACC6000F3070 /* StartupView.swift in Sources */,
 				D9170D522CEFDE41006E45D5 /* WebLinks.swift in Sources */,
 				D9A70DFC2C8596FF002F6583 /* DeveloperMenuFeature.swift in Sources */,
 				D9A70E082C859D3F002F6583 /* SettingsView.swift in Sources */,
@@ -685,6 +700,7 @@
 				D9A70DFE2C859717002F6583 /* DeveloperMenuView.swift in Sources */,
 				D9C85AC62CF38EEC00730F12 /* NavigationRowView.swift in Sources */,
 				D98D2BE32CA9B9310050F2A8 /* Settings.swift in Sources */,
+				D97A9FE52D03ACC0000F3070 /* StartupFeature.swift in Sources */,
 				D9A70E192C859EE8002F6583 /* PrayerTimesView.swift in Sources */,
 				D98D2BE12CA9B7260050F2A8 /* SettingsFeature+Destination.swift in Sources */,
 				D9A70E002C85972D002F6583 /* DeveloperButtonFeature.swift in Sources */,
