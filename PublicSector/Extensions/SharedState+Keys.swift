@@ -18,3 +18,9 @@ extension PersistenceReaderKey where Self == FileStorageKey<PrayerTimesOffset> {
       fileStorage(.documentsDirectory.appending(component: "prayerTimesOffset.json"))
   }
 }
+
+extension PersistenceReaderKey where Self == AppStorageKey<String?> {
+  static var sha1: Self {
+    appStorage("sha1")
+  }
+}

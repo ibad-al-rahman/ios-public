@@ -12,7 +12,9 @@ struct StartupFeature {
     @Dependency(\.prayerTimesRepository) private var prayerTimesRepository
 
     @ObservableState
-    struct State: Equatable { }
+    struct State: Equatable {
+        @Shared(.sha1) var sha1 = nil
+    }
 
     enum Action: BaseAction {
         case view(ViewAction)
@@ -31,6 +33,7 @@ struct StartupFeature {
 
         @CasePathable
         enum DelegateAction { }
+
         @CasePathable
         enum DependentAction { }
     }
@@ -43,6 +46,10 @@ struct StartupFeature {
                     let sha1 = await prayerTimesRepository.getSha1()
                     await send(.reducer(.getSha1(sha1)))
                 }
+
+            case .reducer(.getSha1(let sha1)):
+                state.sha1 = sha1
+                return .none
 
             default:
                 return .none

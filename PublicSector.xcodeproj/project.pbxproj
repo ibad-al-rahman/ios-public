@@ -20,6 +20,8 @@
 		D9170D6B2CF0B1F7006E45D5 /* EditSinglePrayerTimeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9170D6A2CF0B1F3006E45D5 /* EditSinglePrayerTimeView.swift */; };
 		D9170D6D2CF0D1E1006E45D5 /* PrayerTimesOffset.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9170D6C2CF0D1DA006E45D5 /* PrayerTimesOffset.swift */; };
 		D9170D6F2CF0D5F7006E45D5 /* Prayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9170D6E2CF0D5F1006E45D5 /* Prayer.swift */; };
+		D970CD7C2D03B888004D8E66 /* AppEntryFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = D970CD7B2D03B885004D8E66 /* AppEntryFeature.swift */; };
+		D970CD7E2D03B890004D8E66 /* AppEntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D970CD7D2D03B88D004D8E66 /* AppEntryView.swift */; };
 		D97A9FE52D03ACC0000F3070 /* StartupFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = D97A9FE42D03ACBD000F3070 /* StartupFeature.swift */; };
 		D97A9FE72D03ACC6000F3070 /* StartupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D97A9FE62D03ACC4000F3070 /* StartupView.swift */; };
 		D98903AB2CDE348C00717646 /* ExternalDeepLinks.swift in Sources */ = {isa = PBXBuildFile; fileRef = D98903AA2CDE347800717646 /* ExternalDeepLinks.swift */; };
@@ -96,6 +98,8 @@
 		D9170D6A2CF0B1F3006E45D5 /* EditSinglePrayerTimeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditSinglePrayerTimeView.swift; sourceTree = "<group>"; };
 		D9170D6C2CF0D1DA006E45D5 /* PrayerTimesOffset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrayerTimesOffset.swift; sourceTree = "<group>"; };
 		D9170D6E2CF0D5F1006E45D5 /* Prayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Prayer.swift; sourceTree = "<group>"; };
+		D970CD7B2D03B885004D8E66 /* AppEntryFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppEntryFeature.swift; sourceTree = "<group>"; };
+		D970CD7D2D03B88D004D8E66 /* AppEntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppEntryView.swift; sourceTree = "<group>"; };
 		D97A9FE42D03ACBD000F3070 /* StartupFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartupFeature.swift; sourceTree = "<group>"; };
 		D97A9FE62D03ACC4000F3070 /* StartupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartupView.swift; sourceTree = "<group>"; };
 		D98903AA2CDE347800717646 /* ExternalDeepLinks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExternalDeepLinks.swift; sourceTree = "<group>"; };
@@ -214,6 +218,15 @@
 				D9170D682CF0B1E9006E45D5 /* EditSinglePrayerTimeFeature.swift */,
 			);
 			path = EditSinglePrayerTime;
+			sourceTree = "<group>";
+		};
+		D970CD7A2D03B873004D8E66 /* AppEntry */ = {
+			isa = PBXGroup;
+			children = (
+				D970CD7D2D03B88D004D8E66 /* AppEntryView.swift */,
+				D970CD7B2D03B885004D8E66 /* AppEntryFeature.swift */,
+			);
+			path = AppEntry;
 			sourceTree = "<group>";
 		};
 		D97A9FE32D03AC98000F3070 /* Startup */ = {
@@ -357,6 +370,7 @@
 		D9A70DEA2C8595D6002F6583 /* Features */ = {
 			isa = PBXGroup;
 			children = (
+				D970CD7A2D03B873004D8E66 /* AppEntry */,
 				D97A9FE32D03AC98000F3070 /* Startup */,
 				D9170D582CF09745006E45D5 /* Adhkar */,
 				D9A70DF82C8596D0002F6583 /* Developer */,
@@ -672,7 +686,9 @@
 				D9A70E1D2C859F31002F6583 /* AppView.swift in Sources */,
 				D9A70DBA2C850B78002F6583 /* PublicSectorApp.swift in Sources */,
 				D9A70DEC2C8595E5002F6583 /* Spacing.swift in Sources */,
+				D970CD7E2D03B890004D8E66 /* AppEntryView.swift in Sources */,
 				D98D2BDA2CA9B14A0050F2A8 /* View+ControlFlow.swift in Sources */,
+				D970CD7C2D03B888004D8E66 /* AppEntryFeature.swift in Sources */,
 				D9A70E152C859EA9002F6583 /* DailyPrayerTimesView.swift in Sources */,
 				D9170D632CF0A64D006E45D5 /* PrayerTimesFeature+Destination.swift in Sources */,
 				D9170D5A2CF0974E006E45D5 /* AdhkarFeature.swift in Sources */,
