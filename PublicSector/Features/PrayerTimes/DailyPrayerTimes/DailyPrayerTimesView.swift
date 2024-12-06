@@ -105,9 +105,7 @@ struct DailyPrayerTimesView: View {
         systemImage: String
     ) -> some View {
         Label(prayer.localizedStringKey, systemImage: systemImage)
-            .badge(
-                Text(time, format: .dateTime.hour().minute())
-            )
+            .badge(Text(time, format: .dateTime.hour().minute()))
     }
 }
 
