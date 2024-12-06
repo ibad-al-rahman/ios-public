@@ -27,19 +27,19 @@ struct WeeklyPrayerTimesView: View {
                         }
                         .bold()
 
-                        ForEach(store.week) { day in
-                            Divider()
-
-                            GridRow {
-                                Text(day.date, format: .dateTime.weekday())
-                                dateText(date: day.fajerTime)
-                                dateText(date: day.sunriseTime)
-                                dateText(date: day.dhuhrTime)
-                                dateText(date: day.asrTime)
-                                dateText(date: day.maghribTime)
-                                dateText(date: day.ishaaTime)
-                            }
-                        }
+//                        ForEach(store.week) { day in
+//                            Divider()
+//
+//                            GridRow {
+//                                Text(day.date, format: .dateTime.weekday())
+//                                dateText(date: day.fajerTime)
+//                                dateText(date: day.sunriseTime)
+//                                dateText(date: day.dhuhrTime)
+//                                dateText(date: day.asrTime)
+//                                dateText(date: day.maghribTime)
+//                                dateText(date: day.ishaaTime)
+//                            }
+//                        }
                     }
                 }
                 .scrollIndicators(.hidden)

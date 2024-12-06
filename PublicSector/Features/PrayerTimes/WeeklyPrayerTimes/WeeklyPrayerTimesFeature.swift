@@ -15,15 +15,7 @@ struct WeeklyPrayerTimesFeature {
         var week: [DayPrayerTimes] = []
 
         init() {
-            self.week = [
-                DayPrayerTimes(date: .now),
-                DayPrayerTimes(date: Calendar.current.date(byAdding: .day, value: 1, to: .now)!),
-                DayPrayerTimes(date: Calendar.current.date(byAdding: .day, value: 2, to: .now)!),
-                DayPrayerTimes(date: Calendar.current.date(byAdding: .day, value: 3, to: .now)!),
-                DayPrayerTimes(date: Calendar.current.date(byAdding: .day, value: 4, to: .now)!),
-                DayPrayerTimes(date: Calendar.current.date(byAdding: .day, value: 5, to: .now)!),
-                DayPrayerTimes(date: Calendar.current.date(byAdding: .day, value: 6, to: .now)!)
-            ]
+            self.week = []
         }
     }
 

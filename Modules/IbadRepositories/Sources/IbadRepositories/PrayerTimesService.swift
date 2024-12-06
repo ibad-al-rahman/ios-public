@@ -8,6 +8,16 @@
 import Alamofire
 
 struct PrayerTimesService {
+    func getSha1() async -> String? {
+        let endpoint = PrayerTimesEndpoint.getSha1
+        let response = await AF.request(endpoint.url, interceptor: .retryPolicy)
+            .cacheResponse(using: .cache)
+            .validate()
+            .serializingDecodable(Sha1Response.self)
+            .response
+        return response.value?.sha1
+    }
+
     func getDayPrayerTimes(
         year: Int, month: Int, day: Int
     ) async -> DayPrayerTimesResponse? {
@@ -25,7 +35,13 @@ struct PrayerTimesService {
     }
 }
 
+struct Sha1Response: Decodable, Sendable {
+    let sha1: String
+}
+
 public struct DayPrayerTimesResponse: Decodable, Sendable {
+    public let id: Int
+    public let gregorian: String
     public let hijri: String
     public let prayerTimes: PrayerTimesResponse
 }
