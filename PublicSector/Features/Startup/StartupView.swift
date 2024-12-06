@@ -19,6 +19,7 @@ struct StartupView: View {
                 .scaledToFit()
         }
         .ignoresSafeArea()
+        .onAppear { store.send(.onAppear) }
     }
 }
 
