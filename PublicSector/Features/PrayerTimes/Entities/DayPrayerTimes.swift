@@ -5,89 +5,109 @@
 //  Created by Hamza Jadid on 25/08/2024.
 //
 
+import IbadRepositories
 import Foundation
 
 struct DayPrayerTimes: Equatable, Identifiable {
-    let id: String
-    let date: Date
-    var fajerTime: Date?
-    var sunriseTime: Date?
-    var dhuhrTime: Date?
-    var asrTime: Date?
-    var maghribTime: Date?
-    var ishaaTime: Date?
-
-    init(date: Date = .now) {
-        self.id = UUID().uuidString
-        self.date = date
-
-        var fajerComponents = DateComponents()
-        fajerComponents.hour = 4
-        fajerComponents.minute = 28
-        fajerTime = Calendar.current.date(from: fajerComponents)
-
-        var sunriseComponents = DateComponents()
-        sunriseComponents.hour = 6
-        sunriseComponents.minute = 6
-        sunriseTime = Calendar.current.date(from: sunriseComponents)
-
-        var dhuhrComponents = DateComponents()
-        dhuhrComponents.hour = 12
-        dhuhrComponents.minute = 40
-        dhuhrTime = Calendar.current.date(from: dhuhrComponents)
-
-        var asrComponents = DateComponents()
-        asrComponents.hour = 16
-        asrComponents.minute = 20
-        asrTime = Calendar.current.date(from: asrComponents)
-
-        var maghribComponents = DateComponents()
-        maghribComponents.hour = 19
-        maghribComponents.minute = 18
-        maghribTime = Calendar.current.date(from: maghribComponents)
-
-        var ishaaComponents = DateComponents()
-        ishaaComponents.hour = 20
-        ishaaComponents.minute = 40
-        ishaaTime = Calendar.current.date(from: ishaaComponents)
-    }
+    let id: Int
+    let gregorian: Date
+    let hijri: String
+    var fajer: Date
+    var sunrise: Date
+    var dhuhr: Date
+    var asr: Date
+    var maghrib: Date
+    var ishaa: Date
 
     mutating func offset(_ offset: PrayerTimesOffset) {
         let calendar = Calendar.current
-        if let fajerTime {
-            self.fajerTime = calendar.date(
-                byAdding: .minute, value: offset.fajer, to: fajerTime
-            )
-        }
+        self.fajer = calendar.date(
+            byAdding: .minute, value: offset.fajer, to: fajer
+        )!
 
-        if let sunriseTime {
-            self.sunriseTime = calendar.date(
-                byAdding: .minute, value: offset.sunrise, to: sunriseTime
-            )
-        }
+        self.sunrise = calendar.date(
+            byAdding: .minute, value: offset.sunrise, to: sunrise
+        )!
 
-        if let dhuhrTime {
-            self.dhuhrTime = calendar.date(
-                byAdding: .minute, value: offset.dhuhr, to: dhuhrTime
-            )
-        }
+        self.dhuhr = calendar.date(
+            byAdding: .minute, value: offset.dhuhr, to: dhuhr
+        )!
 
-        if let asrTime {
-            self.asrTime = calendar.date(
-                byAdding: .minute, value: offset.asr, to: asrTime
-            )
-        }
+        self.asr = calendar.date(
+            byAdding: .minute, value: offset.asr, to: asr
+        )!
 
-        if let maghribTime {
-            self.maghribTime = calendar.date(
-                byAdding: .minute, value: offset.maghrib, to: maghribTime
-            )
-        }
+        self.maghrib = calendar.date(
+            byAdding: .minute, value: offset.maghrib, to: maghrib
+        )!
 
-        if let ishaaTime {
-            self.ishaaTime = calendar.date(
-                byAdding: .minute, value: offset.ishaa, to: ishaaTime
-            )
-        }
+        self.ishaa = calendar.date(
+            byAdding: .minute, value: offset.ishaa, to: ishaa
+        )!
+    }
+}
+
+extension DayPrayerTimes {
+    init?(from response: DayPrayerTimesResponse) {
+        let gregorianFormatter = DateFormatter()
+        let hijriFormatter = DateFormatter()
+        let timeFormatter = DateFormatter()
+
+        gregorianFormatter.dateFormat = "dd/mm/yyyy"
+        hijriFormatter.calendar = Calendar(identifier: .islamicUmmAlQura)
+        hijriFormatter.dateFormat = "dd/mm/yyyy"
+        timeFormatter.dateFormat = "h:mm a"
+        timeFormatter.amSymbol = "am"
+        timeFormatter.pmSymbol = "pm"
+
+        self.id = response.id
+
+        guard let gregorian = gregorianFormatter.date(from: response.gregorian)
+        else { return nil }
+        self.gregorian = gregorian
+
+        guard let hijriDate = hijriFormatter.date(from: response.hijri)
+        else { return nil }
+        hijriFormatter.dateFormat = "d MMMM yyyy"
+        let hijri = hijriFormatter.string(from: hijriDate)
+        self.hijri = hijri
+
+        guard let fajer = timeFormatter.date(from: response.prayerTimes.fajer)
+        else { return nil }
+        self.fajer = fajer
+
+        guard let sunrise = timeFormatter.date(from: response.prayerTimes.sunrise)
+        else { return nil }
+        self.sunrise = sunrise
+
+        guard let dhuhr = timeFormatter.date(from: response.prayerTimes.dhuhr)
+        else { return nil }
+        self.dhuhr = dhuhr
+
+        guard let asr = timeFormatter.date(from: response.prayerTimes.asr)
+        else { return nil }
+        self.asr = asr
+
+        guard let maghrib = timeFormatter.date(from: response.prayerTimes.maghrib)
+        else { return nil }
+        self.maghrib = maghrib
+
+        guard let ishaa = timeFormatter.date(from: response.prayerTimes.ishaa)
+        else { return nil }
+        self.ishaa = ishaa
+    }
+
+    static func placeholder() -> DayPrayerTimes {
+        DayPrayerTimes(
+            id: 0,
+            gregorian: .now,
+            hijri: "1/1/1444",
+            fajer: .now,
+            sunrise: .now,
+            dhuhr: .now,
+            asr: .now,
+            maghrib: .now,
+            ishaa: .now
+        )
     }
 }

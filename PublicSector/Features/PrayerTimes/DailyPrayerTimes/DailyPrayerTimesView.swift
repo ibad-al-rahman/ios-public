@@ -14,7 +14,12 @@ struct DailyPrayerTimesView: View {
     var body: some View {
         List {
             datePicker
-            dayPrayerTime
+            if let prayerTimes = store.todaysPrayerTimes {
+                dayPrayerTimes(prayerTimes)
+            } else {
+                dayPrayerTimes(.placeholder())
+                    .redacted(reason: .placeholder)
+            }
             todaysEvents
         }
         .onAppear { store.send(.onAppear) }
@@ -29,43 +34,46 @@ struct DailyPrayerTimesView: View {
             )
             .datePickerStyle(.compact)
         } footer: {
-            if let hijriDate = store.hijriFormattedDate {
+            if let hijriDate = store.todaysPrayerTimes?.hijri {
                 Text(hijriDate)
+            } else {
+                Text(verbatim: "Placeholder")
+                    .redacted(reason: .placeholder)
             }
         }
     }
 
-    private var dayPrayerTime: some View {
+    private func dayPrayerTimes(_ prayerTimes: DayPrayerTimes) -> some View {
         Section {
             Group {
                 prayerTime(
                     .fajer,
-                    time: store.todaysPrayerTime.fajerTime,
+                    time: prayerTimes.fajer,
                     systemImage: "moon.stars"
                 )
                 prayerTime(
                     .sunrise,
-                    time: store.todaysPrayerTime.sunriseTime,
+                    time: prayerTimes.sunrise,
                     systemImage: "sunrise"
                 )
                 prayerTime(
                     .dhuhr,
-                    time: store.todaysPrayerTime.dhuhrTime,
+                    time: prayerTimes.dhuhr,
                     systemImage: "sun.max"
                 )
                 prayerTime(
                     .asr,
-                    time: store.todaysPrayerTime.asrTime,
+                    time: prayerTimes.asr,
                     systemImage: "sun.min"
                 )
                 prayerTime(
                     .maghrib,
-                    time: store.todaysPrayerTime.maghribTime,
+                    time: prayerTimes.maghrib,
                     systemImage: "sunset"
                 )
                 prayerTime(
                     .ishaa,
-                    time: store.todaysPrayerTime.ishaaTime,
+                    time: prayerTimes.ishaa,
                     systemImage: "moon"
                 )
             }
@@ -93,18 +101,13 @@ struct DailyPrayerTimesView: View {
     @ViewBuilder
     private func prayerTime(
         _ prayer: Prayer,
-        time: Date?,
+        time: Date,
         systemImage: String
     ) -> some View {
-        if let time {
-            Label(prayer.localizedStringKey, systemImage: systemImage)
-                .badge(
-                    Text(time, format: .dateTime.hour().minute())
-                )
-        } else {
-            Label(prayer.localizedStringKey, systemImage: systemImage)
-                .badge(Text(verbatim: "-"))
-        }
+        Label(prayer.localizedStringKey, systemImage: systemImage)
+            .badge(
+                Text(time, format: .dateTime.hour().minute())
+            )
     }
 }
 

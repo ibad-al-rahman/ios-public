@@ -5,7 +5,7 @@ import PackageDescription
 
 let package = Package(
     name: "IbadRepositories",
-    platforms: [.iOS(.v13)],
+    platforms: [.iOS(.v17)],
     products: [
         .library(name: "IbadRepositories", targets: ["IbadRepositories"]),
     ],
@@ -22,7 +22,8 @@ let package = Package(
     targets: [
         .target(name: "IbadRepositories", dependencies: [
             .product(name: "Alamofire", package: "Alamofire"),
-            .product(name: "Dependencies", package: "swift-dependencies")
+            .product(name: "Dependencies", package: "swift-dependencies"),
+            .product(name: "DependenciesMacros", package: "swift-dependencies")
         ]),
         .testTarget(name: "IbadRepositoriesTests", dependencies: ["IbadRepositories"]),
     ]

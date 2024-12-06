@@ -15,10 +15,8 @@ struct DailyPrayerTimesFeature {
 
     @ObservableState
     struct State: Equatable {
-        @SharedReader(.prayerTimesOffset) var offset = .default
         var date: Date = .now
-        var hijriFormattedDate: String?
-        var todaysPrayerTime = DayPrayerTimes(date: .now)
+        var todaysPrayerTimes: DayPrayerTimes?
     }
 
     enum Action: BaseAction, BindableAction {
@@ -35,7 +33,7 @@ struct DailyPrayerTimesFeature {
 
         @CasePathable
         enum ReducerAction {
-            case updatePrayerOffset
+            case getDayPrayerTimes(DayPrayerTimes?)
         }
 
         @CasePathable
@@ -45,38 +43,44 @@ struct DailyPrayerTimesFeature {
         enum DependentAction { }
     }
 
-    enum CancelId {
-        case offsetTask
-    }
-
     var body: some ReducerOf<Self> {
         BindingReducer()
         Reduce { state, action in
             switch action {
             case .view(.onAppear):
-                state.todaysPrayerTime = DayPrayerTimes(date: .now)
-                let islamicCalendar = Calendar(identifier: .islamicUmmAlQura)
-                let formatter = DateFormatter()
-                formatter.calendar = islamicCalendar
-                formatter.dateFormat = "d MMMM yyyy"
-                state.hijriFormattedDate = formatter.string(from: state.date)
-                state.todaysPrayerTime.offset(state.offset)
-                return .run { [offset = state.$offset] send in
-                    let response = await prayerTimesRepository.getDayPrayerTimes(2024, 12, 30)
-                    print(response)
-                    for await _ in offset.publisher.values {
-                        await send(.reducer(.updatePrayerOffset))
-                    }
-                }
-                .cancellable(id: CancelId.offsetTask, cancelInFlight: true)
+                return getDayPrayerTimes(date: state.date)
 
-            case .reducer(.updatePrayerOffset):
-                state.todaysPrayerTime = DayPrayerTimes(date: .now)
-                state.todaysPrayerTime.offset(state.offset)
+            case .reducer(.getDayPrayerTimes(.some(let prayerTimes))):
+                state.todaysPrayerTimes = prayerTimes
                 return .none
+
+            case .binding(\.date):
+                return getDayPrayerTimes(date: state.date)
 
             default: return .none
             }
+        }
+    }
+
+    private func getDayPrayerTimes(date: Date) -> EffectOf<Self> {
+        .run { send in
+            let components = Calendar.current.dateComponents(
+                [.year, .month, .day],
+                from: date
+            )
+            guard let year = components.year,
+                  let month = components.month,
+                  let day = components.day
+            else { return }
+            let response = await prayerTimesRepository
+                .getDayPrayerTimes(
+                    year: year, month: month, day: day
+                )
+
+            guard let response else { return }
+            await send(
+                .reducer(.getDayPrayerTimes(DayPrayerTimes(from: response)))
+            )
         }
     }
 }
