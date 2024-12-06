@@ -9,6 +9,8 @@ import ComposableArchitecture
 
 @Reducer
 struct StartupFeature {
+    @Dependency(\.prayerTimesRepository) private var prayerTimesRepository
+
     @ObservableState
     struct State: Equatable { }
 
@@ -18,17 +20,33 @@ struct StartupFeature {
         case dependent(DependentAction)
         case delegate(DelegateAction)
 
-        enum ViewAction { }
+        enum ViewAction {
+            case onAppear
+        }
+
         @CasePathable
-        enum ReducerAction { }
+        enum ReducerAction {
+            case getSha1(String?)
+        }
+
         @CasePathable
         enum DelegateAction { }
-
         @CasePathable
         enum DependentAction { }
     }
 
     var body: some ReducerOf<Self> {
-        EmptyReducer()
+        Reduce { state, action in
+            switch action {
+            case .view(.onAppear):
+                return .run { send in
+                    let sha1 = await prayerTimesRepository.getSha1()
+                    await send(.reducer(.getSha1(sha1)))
+                }
+
+            default:
+                return .none
+            }
+        }
     }
 }
