@@ -11,15 +11,15 @@ import SwiftUI
 struct ContentView: View {
     var body: some View {
         ZStack {
-            app
+            appEntry
 //            debugButton
         }
     }
 
-    private var app: some View {
-        AppView(store: Store(
-            initialState: AppFeature.State(),
-            reducer: AppFeature.init
+    private var appEntry: some View {
+        AppEntryView(store: Store(
+            initialState: .startup(StartupFeature.State()),
+            reducer: AppEntryFeature.init
         ))
     }
 

@@ -15,7 +15,7 @@ struct StartupView: View {
         ZStack {
             Image("Logo")
                 .resizable()
-                .frame(maxWidth: 1080, maxHeight: 1080)
+                .frame(maxWidth: 250, maxHeight: 250)
                 .scaledToFit()
         }
         .ignoresSafeArea()
