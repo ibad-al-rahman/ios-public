@@ -33,6 +33,18 @@ struct PrayerTimesService {
             .response
         return response.value
     }
+
+    func getYearPrayerTimes(year: Int) async -> [DayPrayerTimesResponse]? {
+        let endpoint = PrayerTimesEndpoint.getYearPrayerTimes(
+            year: String(format: "%04d", year)
+        )
+        let response = await AF.request(endpoint.url, interceptor: .retryPolicy)
+            .cacheResponse(using: .cache)
+            .validate()
+            .serializingDecodable([DayPrayerTimesResponse].self)
+            .response
+        return response.value
+    }
 }
 
 struct Sha1Response: Decodable, Sendable {
@@ -53,4 +65,22 @@ public struct PrayerTimesResponse: Decodable, Sendable {
     public let asr: String
     public let maghrib: String
     public let ishaa: String
+}
+
+extension DayPrayerTimesResponse {
+    public var intoModel: DayPrayerTimesModel {
+        DayPrayerTimesModel(
+            id: self.id,
+            gregorian: self.gregorian,
+            hijri: self.hijri,
+            prayerTimes: PrayerTimesModel(
+                fajer: self.prayerTimes.fajer,
+                sunrise: self.prayerTimes.sunrise,
+                dhuhr: self.prayerTimes.dhuhr,
+                asr: self.prayerTimes.asr,
+                maghrib: self.prayerTimes.maghrib,
+                ishaa: self.prayerTimes.ishaa
+            )
+        )
+    }
 }
