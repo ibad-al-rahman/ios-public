@@ -51,34 +51,35 @@ struct DailyPrayerTimesFeature {
         Reduce { state, action in
             switch action {
             case .view(.onAppear):
-                return getDayPrayerTimes(state: state)
+                return .concatenate(
+                    fillYearData(date: state.date, sha1: state.sha1),
+                    getDayPrayerTimes(date: state.date)
+                )
 
             case .reducer(.getDayPrayerTimes(.some(let prayerTimes))):
                 state.todaysPrayerTimes = prayerTimes
                 return .none
 
             case .binding(\.date):
-                return getDayPrayerTimes(state: state)
+                return getDayPrayerTimes(date: state.date)
 
             default: return .none
             }
         }
     }
 
-    private func getDayPrayerTimes(state: State) -> EffectOf<Self> {
+    private func fillYearData(date: Date, sha1: String?) -> EffectOf<Self> {
         .run { send in
             let components = Calendar.current.dateComponents(
-                [.year, .month, .day], from: state.date
+                [.year, .month, .day], from: date
             )
-            guard let year = components.year,
-                  let month = components.month,
-                  let day = components.day
+            guard let year = components.year
             else { return }
 
-            let sha1 = await prayerTimesRemoteRepo.getSha1()
-            if let sha1, sha1 != state.sha1 {
-                await send(.reducer(.setSha1(sha1)))
-            } else {
+            let responseSha = await prayerTimesRemoteRepo.getSha1()
+            if let responseSha, sha1 != responseSha {
+                await send(.reducer(.setSha1(responseSha)))
+
                 guard let daysOfYear = await prayerTimesRemoteRepo
                     .getYearPrayerTimes(year: year)
                 else { return }
@@ -86,6 +87,18 @@ struct DailyPrayerTimesFeature {
                     daysOfYear.map { $0.intoModel }
                 )
             }
+        }
+    }
+
+    private func getDayPrayerTimes(date: Date) -> EffectOf<Self> {
+        .run { send in
+            let components = Calendar.current.dateComponents(
+                [.year, .month, .day], from: date
+            )
+            guard let year = components.year,
+                  let month = components.month,
+                  let day = components.day
+            else { return }
 
             guard let day = prayerTimesLocalRepo.getDayPrayerTimes(
                 year: year, month: month, day: day

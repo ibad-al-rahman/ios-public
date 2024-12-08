@@ -6,6 +6,7 @@
 //
 
 import Alamofire
+import OSLog
 
 struct PrayerTimesService {
     func getSha1() async -> String? {
@@ -15,7 +16,9 @@ struct PrayerTimesService {
             .validate()
             .serializingDecodable(Sha1Response.self)
             .response
-        return response.value?.sha1
+        guard let sha1 = response.value?.sha1 else { return nil }
+        Logger.remote.info("Fetched prayer times sha1: \(sha1)")
+        return sha1
     }
 
     func getDayPrayerTimes(
@@ -43,6 +46,7 @@ struct PrayerTimesService {
             .validate()
             .serializingDecodable([DayPrayerTimesResponse].self)
             .response
+        Logger.remote.info("Fetched \(year) year prayer times")
         return response.value
     }
 }
