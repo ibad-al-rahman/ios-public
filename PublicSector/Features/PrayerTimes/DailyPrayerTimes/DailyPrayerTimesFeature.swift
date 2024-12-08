@@ -67,10 +67,6 @@ struct DailyPrayerTimesFeature {
 
     private func getDayPrayerTimes(state: State) -> EffectOf<Self> {
         .run { send in
-            let sha1 = await prayerTimesRemoteRepo.getSha1()
-            if let sha1, sha1 != state.sha1 {
-                await send(.reducer(.setSha1(sha1)))
-            }
             let components = Calendar.current.dateComponents(
                 [.year, .month, .day], from: state.date
             )
@@ -78,10 +74,19 @@ struct DailyPrayerTimesFeature {
                   let month = components.month,
                   let day = components.day
             else { return }
-            guard let daysOfYear = await prayerTimesRemoteRepo.getYearPrayerTimes(
-                year: year
-            ) else { return }
-            prayerTimesLocalRepo.createYearPrayerTimes(daysOfYear.map { $0.intoModel })
+
+            let sha1 = await prayerTimesRemoteRepo.getSha1()
+            if let sha1, sha1 != state.sha1 {
+                await send(.reducer(.setSha1(sha1)))
+            } else {
+                guard let daysOfYear = await prayerTimesRemoteRepo
+                    .getYearPrayerTimes(year: year)
+                else { return }
+                prayerTimesLocalRepo.createYearPrayerTimes(
+                    daysOfYear.map { $0.intoModel }
+                )
+            }
+
             guard let day = prayerTimesLocalRepo.getDayPrayerTimes(
                 year: year, month: month, day: day
             ) else { return }
