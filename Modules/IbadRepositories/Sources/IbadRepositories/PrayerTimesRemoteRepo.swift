@@ -1,5 +1,5 @@
 //
-//  PrayerTimesRepository.swift
+//  PrayerTimesRemoteRepo.swift
 //  IbadRepositories
 //
 //  Created by Hamza Jadid on 02/12/2024.
@@ -10,29 +10,35 @@ import DependenciesMacros
 import Foundation
 
 @DependencyClient
-public struct PrayerTimesRepository: Sendable {
+public struct PrayerTimesRemoteRepo: Sendable {
     public var getSha1: @Sendable () async -> String?
     public var getDayPrayerTimes: @Sendable (
         _ year: Int, _ month: Int, _ day: Int
     ) async -> DayPrayerTimesResponse?
+    public var getYearPrayerTimes: @Sendable (
+        _ year: Int
+    ) async -> [DayPrayerTimesResponse]?
 }
 
-extension PrayerTimesRepository: DependencyKey {
-    public static var liveValue: PrayerTimesRepository {
+extension PrayerTimesRemoteRepo: DependencyKey {
+    public static var liveValue: PrayerTimesRemoteRepo {
         let service = PrayerTimesService()
 
-        return PrayerTimesRepository(
+        return PrayerTimesRemoteRepo(
             getSha1: { await service.getSha1() },
             getDayPrayerTimes: { year, month, day in
                 await service.getDayPrayerTimes(year: year, month: month, day: day)
+            },
+            getYearPrayerTimes: { year in
+                await service.getYearPrayerTimes(year: year)
             }
         )
     }
 }
 
-extension PrayerTimesRepository: TestDependencyKey {
-    public static var previewValue: PrayerTimesRepository {
-        PrayerTimesRepository(
+extension PrayerTimesRemoteRepo: TestDependencyKey {
+    public static var previewValue: PrayerTimesRemoteRepo {
+        PrayerTimesRemoteRepo(
             getSha1: { "sha1" },
             getDayPrayerTimes: { _, _, _ in
                 DayPrayerTimesResponse(
@@ -48,18 +54,19 @@ extension PrayerTimesRepository: TestDependencyKey {
                         ishaa: "5:56 pm"
                     )
                 )
-            }
+            },
+            getYearPrayerTimes: { _ in [] }
         )
     }
 
-    public static var testValue: PrayerTimesRepository {
-        PrayerTimesRepository()
+    public static var testValue: PrayerTimesRemoteRepo {
+        PrayerTimesRemoteRepo()
     }
 }
 
 public extension DependencyValues {
-    var prayerTimesRepository: PrayerTimesRepository {
-        get { self[PrayerTimesRepository.self] }
-        set { self[PrayerTimesRepository.self] = newValue }
+    var prayerTimesRemoteRepo: PrayerTimesRemoteRepo {
+        get { self[PrayerTimesRemoteRepo.self] }
+        set { self[PrayerTimesRemoteRepo.self] = newValue }
     }
 }

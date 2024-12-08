@@ -11,16 +11,35 @@ import SwiftData
 struct PrayerTimesDao {
     let container: ModelContainer
 
-    init() throws {
-        container = try ModelContainer(for: PrayerTimesModel.self)
+    init() {
+        container = try! ModelContainer(for: DayPrayerTimesModel.self)
+    }
+
+    func create(_ days: [DayPrayerTimesModel]) throws {
+        let context = ModelContext(container)
+        for day in days {
+            context.insert(day)
+        }
+        try context.save()
+    }
+
+    func readPrayerTime(year: Int, month: Int, day: Int) -> DayPrayerTimesModel? {
+        let context = ModelContext(container)
+        let idStr = String(format: "%04d%02d%02d", year, month, day)
+        guard let id = Int(idStr) else { return nil }
+        let fetchDescriptor = FetchDescriptor<DayPrayerTimesModel>(
+            predicate: #Predicate { model in model.id == id }
+        )
+        guard let days = try? context.fetch(fetchDescriptor) else { return nil }
+        return days.first
     }
 
     func read(
-        predicate: Predicate<PrayerTimesModel>?,
-        sortDescriptors: SortDescriptor<PrayerTimesModel>...
-    ) throws -> [PrayerTimesModel] {
+        predicate: Predicate<DayPrayerTimesModel>?,
+        sortDescriptors: SortDescriptor<DayPrayerTimesModel>...
+    ) throws -> [DayPrayerTimesModel] {
         let context = ModelContext(container)
-        let fetchDescriptor = FetchDescriptor<PrayerTimesModel>(
+        let fetchDescriptor = FetchDescriptor<DayPrayerTimesModel>(
             predicate: predicate,
             sortBy: sortDescriptors
         )
@@ -29,12 +48,48 @@ struct PrayerTimesDao {
 }
 
 @Model
-public final class PrayerTimesModel {
-    @Attribute(.unique) var date: String
-    var hijri: String
+public final class DayPrayerTimesModel {
+    @Attribute(.unique) public var id: Int
+    public var gregorian: String
+    public var hijri: String
+    public var prayerTimes: PrayerTimesModel
 
-    init(date: String, hijri: String) {
-        self.date = date
+    init(
+        id: Int,
+        gregorian: String,
+        hijri: String,
+        prayerTimes: PrayerTimesModel
+    ) {
+        self.id = id
+        self.gregorian = gregorian
         self.hijri = hijri
+        self.prayerTimes = prayerTimes
+    }
+}
+
+public struct PrayerTimesModel: Codable {
+    public var fajer: String
+    public var sunrise: String
+    public var dhuhr: String
+    public var asr: String
+    public var maghrib: String
+    public var ishaa: String
+}
+
+extension DayPrayerTimesModel {
+    public convenience init(from response: DayPrayerTimesResponse) {
+        self.init(
+            id: response.id,
+            gregorian: response.gregorian,
+            hijri: response.hijri,
+            prayerTimes: PrayerTimesModel(
+                fajer: response.prayerTimes.fajer,
+                sunrise: response.prayerTimes.sunrise,
+                dhuhr: response.prayerTimes.dhuhr,
+                asr: response.prayerTimes.asr,
+                maghrib: response.prayerTimes.maghrib,
+                ishaa: response.prayerTimes.ishaa
+            )
+        )
     }
 }
