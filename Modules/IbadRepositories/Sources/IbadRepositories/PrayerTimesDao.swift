@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import OSLog
 import SwiftData
 
 struct PrayerTimesDao {
@@ -20,12 +21,14 @@ struct PrayerTimesDao {
         for day in days {
             context.insert(day)
         }
+        Logger.local.info("Saving prayer times")
         try context.save()
     }
 
     func readPrayerTime(year: Int, month: Int, day: Int) -> DayPrayerTimesModel? {
         let context = ModelContext(container)
         let idStr = String(format: "%04d%02d%02d", year, month, day)
+        Logger.local.info("Querying \(idStr) prayer time")
         guard let id = Int(idStr) else { return nil }
         let fetchDescriptor = FetchDescriptor<DayPrayerTimesModel>(
             predicate: #Predicate { model in model.id == id }
