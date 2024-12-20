@@ -29,6 +29,17 @@ struct FeatureFlagView: View {
                 }
             }
         }
+        .toolbar { toolbarItems }
         .onAppear { store.send(.onAppear) }
+    }
+
+    @ToolbarContentBuilder
+    private var toolbarItems: some ToolbarContent {
+        ToolbarItem(placement: .topBarTrailing) {
+            Button(role: .destructive, action: { store.send(.onTapReset) }) {
+                Text(verbatim: "Reset")
+                    .foregroundStyle(.red, .red)
+            }
+        }
     }
 }

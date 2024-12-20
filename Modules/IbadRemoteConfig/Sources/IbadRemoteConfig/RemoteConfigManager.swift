@@ -19,6 +19,10 @@ struct RemoteConfigManager {
         $featureFlags.withLock { $0[key] = newValue }
     }
 
+    func resetFlags() {
+        $featureFlags.withLock { $0 = .default }
+    }
+
     func allFeatureFlags() -> [FeatureFlag] {
         featureFlags.map { FeatureFlag(key: $0.key, value: $0.value) }
     }
