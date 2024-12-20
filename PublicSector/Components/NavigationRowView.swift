@@ -26,3 +26,26 @@ struct NavigationRowView: View {
         self.systemName = systemName
     }
 }
+
+struct DeveloperNavigationRowView: View {
+    let verbatim: String
+    let systemName: String
+
+    var body: some View {
+        HStack {
+            Label(
+                title: { Text(verbatim: verbatim) },
+                icon: { Image(systemName: systemName) }
+            )
+            .foregroundStyle(.primary, .primary)
+            Spacer()
+            Image(systemName: "chevron.forward")
+        }
+        .contentShape(Rectangle())
+    }
+
+    init(verbatim: String, systemName: String) {
+        self.verbatim = verbatim
+        self.systemName = systemName
+    }
+}

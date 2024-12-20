@@ -12,7 +12,9 @@ struct DeveloperMenuFeature {
     @Dependency(\.dismiss) private var dismiss
 
     @ObservableState
-    struct State: Equatable { }
+    struct State: Equatable {
+        @Presents var destination: Destination.State?
+    }
 
     enum Action: BaseAction {
         case view(ViewAction)
@@ -23,6 +25,7 @@ struct DeveloperMenuFeature {
         enum ViewAction {
             case onTapDone
             case onTapSimulateCrash
+            case onTapFeatureFlag
         }
 
         @CasePathable
@@ -32,11 +35,13 @@ struct DeveloperMenuFeature {
         enum DelegateAction { }
 
         @CasePathable
-        enum DependentAction { }
+        enum DependentAction {
+            case destination(PresentationAction<Destination.Action>)
+        }
     }
 
     var body: some ReducerOf<Self> {
-        Reduce { _, action in
+        Reduce { state, action in
             switch action {
             case .view(.onTapDone):
                 return .run { _ in await dismiss() }
@@ -44,9 +49,16 @@ struct DeveloperMenuFeature {
             case .view(.onTapSimulateCrash):
                 return .run { _ in fatalError("This is a simulated crash!") }
 
+            case .view(.onTapFeatureFlag):
+                state.destination = .featureFlag(FeatureFlagFeature.State())
+                return .none
+
             case .reducer, .delegate, .dependent:
                 return .none
             }
+        }
+        .ifLet(\.$destination, action: \.dependent.destination) {
+            Destination()
         }
     }
 }
