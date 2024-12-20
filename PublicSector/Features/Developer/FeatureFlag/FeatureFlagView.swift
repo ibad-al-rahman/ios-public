@@ -6,12 +6,29 @@
 //
 
 import ComposableArchitecture
+import IbadRemoteConfig
 import SwiftUI
 
 struct FeatureFlagView: View {
     let store: StoreOf<FeatureFlagFeature>
 
     var body: some View {
-        Text(verbatim: "Feature Flags")
+        List {
+            ForEach(store.flags, id: \.key.rawValue) { flag in
+                Toggle(isOn: Binding(
+                    get: { flag.value },
+                    set: { newValue in
+                        store.send(.onToggle(key: flag.key, newValue: newValue))
+                    }
+                )) {
+                    VStack(alignment: .leading) {
+                        Text(verbatim: flag.key.display)
+                        Text(verbatim: flag.key.description)
+                            .font(.caption2)
+                    }
+                }
+            }
+        }
+        .onAppear { store.send(.onAppear) }
     }
 }
