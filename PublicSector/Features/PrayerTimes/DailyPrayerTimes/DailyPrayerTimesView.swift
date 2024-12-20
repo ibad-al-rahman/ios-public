@@ -6,6 +6,7 @@
 //
 
 import ComposableArchitecture
+import IbadRepositories
 import SwiftUI
 
 struct DailyPrayerTimesView: View {
@@ -21,6 +22,7 @@ struct DailyPrayerTimesView: View {
                     .redacted(reason: .placeholder)
             }
             todaysEvents
+                .featureFlagged(.prayerTimesEvents)
         }
         .onAppear { store.send(.onAppear) }
     }
@@ -86,6 +88,7 @@ struct DailyPrayerTimesView: View {
                     Label("Share", systemImage: "square.and.arrow.up")
                 }
                 .textCase(nil)
+                .featureFlagged(.prayerTimesShare)
             }
         }
     }

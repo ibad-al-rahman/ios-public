@@ -6,6 +6,7 @@
 //
 
 import ComposableArchitecture
+import IbadRemoteConfig
 import SwiftUI
 
 struct AppView: View {
@@ -22,6 +23,7 @@ struct AppView: View {
         TabView(selection: $store.selectedTab) {
             prayerTimesScreen
             adhkarScreen
+                .featureFlagged(.adhkarScreen)
             settingsScreen
         }
     }

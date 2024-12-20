@@ -6,6 +6,7 @@
 //
 
 import ComposableArchitecture
+import IbadRemoteConfig
 import SwiftUI
 
 struct PrayerTimesView: View {
@@ -15,6 +16,7 @@ struct PrayerTimesView: View {
         NavigationStack {
             VStack {
                 picker
+                    .featureFlagged(.prayerTimesWeeklyView)
                 content
             }
             .navigationTitle("Prayer Times")
@@ -36,6 +38,7 @@ struct PrayerTimesView: View {
             Button(action: { store.send(.onTapEdit) }) {
                 Text("Edit")
             }
+            .featureFlagged(.prayerTimesOffset)
         }
     }
 

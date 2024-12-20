@@ -1,5 +1,5 @@
 {
-  "originHash" : "876208b8cfe2c218db17facf9de1d1d25d85d605f314d69a7dff719e02d03a10",
+  "originHash" : "c92f8076387893ccc98b182b7610bb4c2fc6f0371528f5be7d26451f8c9ad7dd",
   "pins" : [
     {
       "identity" : "alamofire",
@@ -105,8 +105,17 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/pointfreeco/swift-perception",
       "state" : {
-        "revision" : "dccdf5aed1db969afa11d6fbd36b96a4932ebe8c",
-        "version" : "1.4.0"
+        "revision" : "8d52279b9809ef27eabe7d5420f03734528f19da",
+        "version" : "1.4.1"
+      }
+    },
+    {
+      "identity" : "swift-sharing",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/pointfreeco/swift-sharing",
+      "state" : {
+        "revision" : "974e51b3612317ba5883a73dc9fd9e2409a11f2d",
+        "version" : "1.1.1"
       }
     },
     {
