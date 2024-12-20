@@ -9,7 +9,7 @@ import Alamofire
 import Foundation
 
 enum PrayerTimesEndpoint: EndpointProtocol {
-    case getSha1
+    case getSha1(year: String)
     case getDayPrayerTimes(year: String, month: String, day: String)
     case getYearPrayerTimes(year: String)
 
@@ -17,8 +17,8 @@ enum PrayerTimesEndpoint: EndpointProtocol {
 
     var path: String {
         switch self {
-        case .getSha1:
-            "/sha1.json"
+        case .getSha1(let year):
+            "/sha1/\(year).json"
 
         case let .getDayPrayerTimes(year, month, day):
             "/day/\(year)/\(month)/\(day).json"

@@ -9,8 +9,9 @@ import Alamofire
 import OSLog
 
 struct PrayerTimesService {
-    func getSha1() async -> String? {
-        let endpoint = PrayerTimesEndpoint.getSha1
+    func getSha1(year: Int) async -> String? {
+        let year = String(format: "%04d", year)
+        let endpoint = PrayerTimesEndpoint.getSha1(year: year)
         let response = await AF.request(endpoint.url, interceptor: .retryPolicy)
             .cacheResponse(using: .cache)
             .validate()

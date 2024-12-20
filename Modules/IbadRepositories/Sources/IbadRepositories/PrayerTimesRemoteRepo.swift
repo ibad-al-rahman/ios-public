@@ -11,7 +11,7 @@ import Foundation
 
 @DependencyClient
 public struct PrayerTimesRemoteRepo: Sendable {
-    public var getSha1: @Sendable () async -> String?
+    public var getSha1: @Sendable (_ year: Int) async -> String?
     public var getDayPrayerTimes: @Sendable (
         _ year: Int, _ month: Int, _ day: Int
     ) async -> DayPrayerTimesResponse?
@@ -25,7 +25,7 @@ extension PrayerTimesRemoteRepo: DependencyKey {
         let service = PrayerTimesService()
 
         return PrayerTimesRemoteRepo(
-            getSha1: { await service.getSha1() },
+            getSha1: { year in await service.getSha1(year: year) },
             getDayPrayerTimes: { year, month, day in
                 await service.getDayPrayerTimes(year: year, month: month, day: day)
             },
@@ -39,7 +39,7 @@ extension PrayerTimesRemoteRepo: DependencyKey {
 extension PrayerTimesRemoteRepo: TestDependencyKey {
     public static var previewValue: PrayerTimesRemoteRepo {
         PrayerTimesRemoteRepo(
-            getSha1: { "sha1" },
+            getSha1: { _ in "sha1" },
             getDayPrayerTimes: { _, _, _ in
                 DayPrayerTimesResponse(
                     id: 0,

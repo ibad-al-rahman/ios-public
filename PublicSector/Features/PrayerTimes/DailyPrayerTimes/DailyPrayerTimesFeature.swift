@@ -76,7 +76,7 @@ struct DailyPrayerTimesFeature {
             guard let year = components.year
             else { return }
 
-            let responseSha = await prayerTimesRemoteRepo.getSha1()
+            let responseSha = await prayerTimesRemoteRepo.getSha1(year: year)
             if let responseSha, sha1 != responseSha {
                 await send(.reducer(.setSha1(responseSha)))
 
