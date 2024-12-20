@@ -64,6 +64,8 @@
 		D9B34CE22CDFBA1B00C07BA7 /* DebugSettings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D9B34CE02CDFBA1B00C07BA7 /* DebugSettings.bundle */; };
 		D9B34CE32CDFBA1B00C07BA7 /* ReleaseSettings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D9B34CE12CDFBA1B00C07BA7 /* ReleaseSettings.bundle */; };
 		D9C85AC62CF38EEC00730F12 /* NavigationRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9C85AC52CF38EE000730F12 /* NavigationRowView.swift */; };
+		D9DA3AA82D16097A001AB599 /* FeatureFlagKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9DA3AA72D160976001AB599 /* FeatureFlagKey.swift */; };
+		D9DA3AAA2D160A9A001AB599 /* FeatureFlag.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9DA3AA92D160A97001AB599 /* FeatureFlag.swift */; };
 		D9EE4FD92CE10E6000C5AEE4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D9EE4FD82CE10E6000C5AEE4 /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
@@ -145,6 +147,8 @@
 		D9B34CE12CDFBA1B00C07BA7 /* ReleaseSettings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = ReleaseSettings.bundle; sourceTree = "<group>"; };
 		D9C85AC52CF38EE000730F12 /* NavigationRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationRowView.swift; sourceTree = "<group>"; };
 		D9DA3AA52D15FC88001AB599 /* ci_post_clone.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = ci_post_clone.sh; sourceTree = "<group>"; };
+		D9DA3AA72D160976001AB599 /* FeatureFlagKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeatureFlagKey.swift; sourceTree = "<group>"; };
+		D9DA3AA92D160A97001AB599 /* FeatureFlag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeatureFlag.swift; sourceTree = "<group>"; };
 		D9EE4FD82CE10E6000C5AEE4 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D9EE4FDA2CE1144500C5AEE4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -291,6 +295,7 @@
 		D9A70DB82C850B78002F6583 /* PublicSector */ = {
 			isa = PBXGroup;
 			children = (
+				D9DA3AA62D16095A001AB599 /* RemoteConfig */,
 				D9C85AC42CF38ED800730F12 /* Components */,
 				D98903A92CDE346C00717646 /* Dependencies */,
 				D98D2BD52CA9ACA90050F2A8 /* Extensions */,
@@ -500,6 +505,15 @@
 			path = ci_scripts;
 			sourceTree = "<group>";
 		};
+		D9DA3AA62D16095A001AB599 /* RemoteConfig */ = {
+			isa = PBXGroup;
+			children = (
+				D9DA3AA92D160A97001AB599 /* FeatureFlag.swift */,
+				D9DA3AA72D160976001AB599 /* FeatureFlagKey.swift */,
+			);
+			path = RemoteConfig;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -696,6 +710,7 @@
 				D9A70E1D2C859F31002F6583 /* AppView.swift in Sources */,
 				D9A70DBA2C850B78002F6583 /* PublicSectorApp.swift in Sources */,
 				D9A70DEC2C8595E5002F6583 /* Spacing.swift in Sources */,
+				D9DA3AAA2D160A9A001AB599 /* FeatureFlag.swift in Sources */,
 				D970CD7E2D03B890004D8E66 /* AppEntryView.swift in Sources */,
 				D98D2BDA2CA9B14A0050F2A8 /* View+ControlFlow.swift in Sources */,
 				D970CD7C2D03B888004D8E66 /* AppEntryFeature.swift in Sources */,
@@ -716,6 +731,7 @@
 				D9A70DEE2C85960B002F6583 /* BaseFeature.swift in Sources */,
 				D9170D692CF0B1EF006E45D5 /* EditSinglePrayerTimeFeature.swift in Sources */,
 				D9A70DF42C859684002F6583 /* Preview+Arabic.swift in Sources */,
+				D9DA3AA82D16097A001AB599 /* FeatureFlagKey.swift in Sources */,
 				D98903AB2CDE348C00717646 /* ExternalDeepLinks.swift in Sources */,
 				D9A70E172C859ED5002F6583 /* PrayerTimesFeature.swift in Sources */,
 				D9170D5C2CF09754006E45D5 /* AdhkarView.swift in Sources */,
