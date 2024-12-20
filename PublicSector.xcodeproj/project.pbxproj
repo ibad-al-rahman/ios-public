@@ -144,6 +144,7 @@
 		D9B34CE02CDFBA1B00C07BA7 /* DebugSettings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = DebugSettings.bundle; sourceTree = "<group>"; };
 		D9B34CE12CDFBA1B00C07BA7 /* ReleaseSettings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = ReleaseSettings.bundle; sourceTree = "<group>"; };
 		D9C85AC52CF38EE000730F12 /* NavigationRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationRowView.swift; sourceTree = "<group>"; };
+		D9DA3AA52D15FC88001AB599 /* ci_post_clone.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = ci_post_clone.sh; sourceTree = "<group>"; };
 		D9EE4FD82CE10E6000C5AEE4 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D9EE4FDA2CE1144500C5AEE4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -268,6 +269,7 @@
 		D9A70DAD2C850B78002F6583 = {
 			isa = PBXGroup;
 			children = (
+				D9DA3AA22D15FB72001AB599 /* ci_scripts */,
 				D9089CE02CFDAC0200881BB6 /* Modules */,
 				D9A70DB82C850B78002F6583 /* PublicSector */,
 				D9A70DC92C850B79002F6583 /* PublicSectorTests */,
@@ -488,6 +490,14 @@
 				D9C85AC52CF38EE000730F12 /* NavigationRowView.swift */,
 			);
 			path = Components;
+			sourceTree = "<group>";
+		};
+		D9DA3AA22D15FB72001AB599 /* ci_scripts */ = {
+			isa = PBXGroup;
+			children = (
+				D9DA3AA52D15FC88001AB599 /* ci_post_clone.sh */,
+			);
+			path = ci_scripts;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
