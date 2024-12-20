@@ -9,16 +9,24 @@ import ComposableArchitecture
 import SwiftUI
 
 struct DeveloperMenuView: View {
-    let store: StoreOf<DeveloperMenuFeature>
+    @Bindable var store: StoreOf<DeveloperMenuFeature>
 
     var body: some View {
         NavigationStack {
             List {
+                configurationSection
                 actionsSection
             }
             .navigationTitle("Developer Menu")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar { toolBarItem }
+            .navigationDestination(
+                item: $store.scope(
+                    state: \.destination?.featureFlag,
+                    action: \.dependent.destination.featureFlag
+                ),
+                destination: { FeatureFlagView(store: $0) }
+            )
         }
     }
 
@@ -30,6 +38,18 @@ struct DeveloperMenuView: View {
             } label: {
                 Text("Done")
             }
+        }
+    }
+
+    private var configurationSection: some View {
+        Section {
+            DeveloperNavigationRowView(
+                verbatim: "Feature Flags",
+                systemName: "flag.and.flag.filled.crossed"
+            )
+            .onTapGesture { store.send(.onTapFeatureFlag) }
+        } header: {
+            Text(verbatim: "Config")
         }
     }
 
