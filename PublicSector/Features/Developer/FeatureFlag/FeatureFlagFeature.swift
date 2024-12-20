@@ -27,6 +27,7 @@ struct FeatureFlagFeature {
         enum ViewAction {
             case onAppear
             case onToggle(key: FeatureFlagKey, newValue: Bool)
+            case onTapReset
         }
 
         @CasePathable
@@ -48,6 +49,11 @@ struct FeatureFlagFeature {
 
             case let .view(.onToggle(key, newValue)):
                 remoteConfig.setFlag(key: key, newValue: newValue)
+                state.flags = remoteConfig.allFeatureFlags()
+                return .none
+
+            case .view(.onTapReset):
+                remoteConfig.resetFlags()
                 state.flags = remoteConfig.allFeatureFlags()
                 return .none
 

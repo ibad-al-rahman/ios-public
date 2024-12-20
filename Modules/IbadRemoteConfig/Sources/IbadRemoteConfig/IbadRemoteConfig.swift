@@ -15,6 +15,8 @@ public struct RemoteConfig: Sendable {
         _ key: FeatureFlagKey, _ newValue: Bool
     ) -> Void
 
+    public var resetFlags: @Sendable () -> Void
+
     public var allFeatureFlags: @Sendable () -> [FeatureFlag] = { [] }
 }
 
@@ -25,6 +27,7 @@ extension RemoteConfig: DependencyKey {
         return RemoteConfig(
             isFlagEnabled: { manager.isFlagEnabled(key: $0) },
             setFlag: { manager.setFlag(key: $0, newValue: $1) },
+            resetFlags: { manager.resetFlags() },
             allFeatureFlags: { manager.allFeatureFlags() }
         )
     }
