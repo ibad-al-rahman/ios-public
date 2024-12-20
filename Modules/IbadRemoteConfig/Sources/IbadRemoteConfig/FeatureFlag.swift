@@ -5,7 +5,9 @@
 //  Created by Hamza Jadid on 20/12/2024.
 //
 
-struct FeatureFlag: Equatable {
-    let key: FeatureFlagKey
-    let value: Bool
+public struct FeatureFlag: Equatable, Identifiable {
+    public let key: FeatureFlagKey
+    public let value: Bool
+
+    public var id: String { key.rawValue }
 }

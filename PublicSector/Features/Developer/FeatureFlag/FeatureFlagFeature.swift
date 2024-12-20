@@ -6,12 +6,17 @@
 //
 
 import ComposableArchitecture
+import IbadRemoteConfig
 import Foundation
 
 @Reducer
 struct FeatureFlagFeature {
+    @Dependency(\.remoteConfig) private var remoteConfig
+
     @ObservableState
-    struct State: Equatable { }
+    struct State: Equatable {
+        var flags: [FeatureFlag] = []
+    }
 
     enum Action: BaseAction {
         case view(ViewAction)
@@ -19,7 +24,10 @@ struct FeatureFlagFeature {
         case delegate(DelegateAction)
         case dependent(DependentAction)
 
-        enum ViewAction { }
+        enum ViewAction {
+            case onAppear
+            case onToggle(key: FeatureFlagKey, newValue: Bool)
+        }
 
         @CasePathable
         enum ReducerAction { }
@@ -32,6 +40,20 @@ struct FeatureFlagFeature {
     }
 
     var body: some ReducerOf<Self> {
-        EmptyReducer()
+        Reduce { state, action in
+            switch action {
+            case .view(.onAppear):
+                state.flags = remoteConfig.allFeatureFlags()
+                return .none
+
+            case let .view(.onToggle(key, newValue)):
+                remoteConfig.setFlag(key: key, newValue: newValue)
+                state.flags = remoteConfig.allFeatureFlags()
+                return .none
+
+            default:
+                return .none
+            }
+        }
     }
 }
