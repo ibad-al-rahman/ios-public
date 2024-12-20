@@ -66,6 +66,7 @@
 		D9C85AC62CF38EEC00730F12 /* NavigationRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9C85AC52CF38EE000730F12 /* NavigationRowView.swift */; };
 		D9DA3AA82D16097A001AB599 /* FeatureFlagKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9DA3AA72D160976001AB599 /* FeatureFlagKey.swift */; };
 		D9DA3AAA2D160A9A001AB599 /* FeatureFlag.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9DA3AA92D160A97001AB599 /* FeatureFlag.swift */; };
+		D9DA3AAE2D161431001AB599 /* IbadRemoteConfig in Frameworks */ = {isa = PBXBuildFile; productRef = D9DA3AAD2D161431001AB599 /* IbadRemoteConfig */; };
 		D9EE4FD92CE10E6000C5AEE4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D9EE4FD82CE10E6000C5AEE4 /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
@@ -149,6 +150,7 @@
 		D9DA3AA52D15FC88001AB599 /* ci_post_clone.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = ci_post_clone.sh; sourceTree = "<group>"; };
 		D9DA3AA72D160976001AB599 /* FeatureFlagKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeatureFlagKey.swift; sourceTree = "<group>"; };
 		D9DA3AA92D160A97001AB599 /* FeatureFlag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeatureFlag.swift; sourceTree = "<group>"; };
+		D9DA3AAB2D160B89001AB599 /* IbadRemoteConfig */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = IbadRemoteConfig; sourceTree = "<group>"; };
 		D9EE4FD82CE10E6000C5AEE4 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D9EE4FDA2CE1144500C5AEE4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -158,6 +160,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D9DA3AAE2D161431001AB599 /* IbadRemoteConfig in Frameworks */,
 				D9089CE42CFDC16D00881BB6 /* IbadRepositories in Frameworks */,
 				D9A6E1BD2CEC71FE006123D1 /* ComposableArchitecture in Frameworks */,
 			);
@@ -183,6 +186,7 @@
 		D9089CE02CFDAC0200881BB6 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				D9DA3AAB2D160B89001AB599 /* IbadRemoteConfig */,
 				D9089CE12CFDAD4500881BB6 /* IbadRepositories */,
 			);
 			path = Modules;
@@ -535,6 +539,7 @@
 			packageProductDependencies = (
 				D9A6E1BC2CEC71FE006123D1 /* ComposableArchitecture */,
 				D9089CE32CFDC16D00881BB6 /* IbadRepositories */,
+				D9DA3AAD2D161431001AB599 /* IbadRemoteConfig */,
 			);
 			productName = PublicSector;
 			productReference = D9A70DB62C850B78002F6583 /* PublicSector.app */;
@@ -612,6 +617,7 @@
 			packageReferences = (
 				D9A6E1BB2CEC71FE006123D1 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */,
 				D9089CE22CFDC16D00881BB6 /* XCLocalSwiftPackageReference "Modules/IbadRepositories" */,
+				D9DA3AAC2D161431001AB599 /* XCLocalSwiftPackageReference "Modules/IbadRemoteConfig" */,
 			);
 			productRefGroup = D9A70DB72C850B78002F6583 /* Products */;
 			projectDirPath = "";
@@ -1096,6 +1102,10 @@
 			isa = XCLocalSwiftPackageReference;
 			relativePath = Modules/IbadRepositories;
 		};
+		D9DA3AAC2D161431001AB599 /* XCLocalSwiftPackageReference "Modules/IbadRemoteConfig" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = Modules/IbadRemoteConfig;
+		};
 /* End XCLocalSwiftPackageReference section */
 
 /* Begin XCRemoteSwiftPackageReference section */
@@ -1118,6 +1128,10 @@
 			isa = XCSwiftPackageProductDependency;
 			package = D9A6E1BB2CEC71FE006123D1 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */;
 			productName = ComposableArchitecture;
+		};
+		D9DA3AAD2D161431001AB599 /* IbadRemoteConfig */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = IbadRemoteConfig;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

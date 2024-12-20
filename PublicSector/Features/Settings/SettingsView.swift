@@ -6,6 +6,7 @@
 //
 
 import ComposableArchitecture
+import IbadRemoteConfig
 import SwiftUI
 
 struct SettingsView: View {
@@ -29,9 +30,11 @@ struct SettingsView: View {
 
                     Label("Rate us", systemImage: "star")
                         .foregroundStyle(.primary, .primary)
+                        .featureFlagged(.settingsRateUs)
 
                     Label("Invite your friends", systemImage: "paperplane")
                         .foregroundStyle(.primary, .primary)
+                        .featureFlagged(.settingsInviteFriends)
                 }
             }
             .navigationDestination(
