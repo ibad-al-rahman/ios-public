@@ -8,19 +8,23 @@
 import ComposableArchitecture
 
 extension PersistenceReaderKey where Self == AppStorageKey<Settings.Appearance> {
-  static var appearance: Self {
-    appStorage("appearance")
-  }
+    static var appearance: Self {
+        appStorage("appearance")
+    }
 }
 
 extension PersistenceReaderKey where Self == FileStorageKey<PrayerTimesOffset> {
-  static var prayerTimesOffset: Self {
-      fileStorage(.documentsDirectory.appending(component: "prayerTimesOffset.json"))
-  }
+    static var prayerTimesOffset: Self {
+        fileStorage(
+            .documentsDirectory.appending(component: "prayerTimesOffset.json")
+        )
+    }
 }
 
-extension PersistenceReaderKey where Self == AppStorageKey<String?> {
-  static var sha1: Self {
-    appStorage("sha1")
-  }
+extension PersistenceReaderKey where Self == FileStorageKey<PrayerTimesSha1> {
+    static var prayerTimesSha1: Self {
+        fileStorage(
+            .documentsDirectory.appending(component: "prayerTimesSha1.json")
+        )
+    }
 }

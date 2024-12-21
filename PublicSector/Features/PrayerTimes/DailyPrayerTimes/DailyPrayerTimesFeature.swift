@@ -16,7 +16,7 @@ struct DailyPrayerTimesFeature {
 
     @ObservableState
     struct State: Equatable {
-        @Shared(.sha1) var sha1 = nil
+        @Shared(.prayerTimesSha1) var prayerTimesSha1 = [:]
         var date: Date = .now
         var todaysPrayerTimes: DayPrayerTimes?
     }
@@ -35,7 +35,7 @@ struct DailyPrayerTimesFeature {
 
         @CasePathable
         enum ReducerAction {
-            case setSha1(String)
+            case setSha1(sha1: String, year: Int)
             case getDayPrayerTimes(DayPrayerTimes?)
         }
 
@@ -52,12 +52,16 @@ struct DailyPrayerTimesFeature {
             switch action {
             case .view(.onAppear):
                 return .concatenate(
-                    fillYearData(date: state.date, sha1: state.sha1),
+                    fillYearData(date: state.date, sha1: state.prayerTimesSha1),
                     getDayPrayerTimes(date: state.date)
                 )
 
             case .reducer(.getDayPrayerTimes(.some(let prayerTimes))):
                 state.todaysPrayerTimes = prayerTimes
+                return .none
+
+            case let .reducer(.setSha1(sha1, year)):
+                state.prayerTimesSha1.setSha1(sha1: sha1, for: year)
                 return .none
 
             case .binding(\.date):
@@ -68,7 +72,7 @@ struct DailyPrayerTimesFeature {
         }
     }
 
-    private func fillYearData(date: Date, sha1: String?) -> EffectOf<Self> {
+    private func fillYearData(date: Date, sha1: PrayerTimesSha1) -> EffectOf<Self> {
         .run { send in
             let components = Calendar.current.dateComponents(
                 [.year, .month, .day], from: date
@@ -76,9 +80,11 @@ struct DailyPrayerTimesFeature {
             guard let year = components.year
             else { return }
 
+            let yearSha1 = sha1.getSha1(year: year)
+
             let responseSha = await prayerTimesRemoteRepo.getSha1(year: year)
-            if let responseSha, sha1 != responseSha {
-                await send(.reducer(.setSha1(responseSha)))
+            if let responseSha, yearSha1 != responseSha {
+                await send(.reducer(.setSha1(sha1: responseSha, year: year)))
 
                 guard let daysOfYear = await prayerTimesRemoteRepo
                     .getYearPrayerTimes(year: year)

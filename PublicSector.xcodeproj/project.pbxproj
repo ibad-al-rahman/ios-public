@@ -20,6 +20,7 @@
 		D9170D6B2CF0B1F7006E45D5 /* EditSinglePrayerTimeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9170D6A2CF0B1F3006E45D5 /* EditSinglePrayerTimeView.swift */; };
 		D9170D6D2CF0D1E1006E45D5 /* PrayerTimesOffset.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9170D6C2CF0D1DA006E45D5 /* PrayerTimesOffset.swift */; };
 		D9170D6F2CF0D5F7006E45D5 /* Prayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9170D6E2CF0D5F1006E45D5 /* Prayer.swift */; };
+		D941B4242D16D87F004FFF5C /* PrayerTimesSha1.swift in Sources */ = {isa = PBXBuildFile; fileRef = D941B4232D16D876004FFF5C /* PrayerTimesSha1.swift */; };
 		D970CD7C2D03B888004D8E66 /* AppEntryFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = D970CD7B2D03B885004D8E66 /* AppEntryFeature.swift */; };
 		D970CD7E2D03B890004D8E66 /* AppEntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D970CD7D2D03B88D004D8E66 /* AppEntryView.swift */; };
 		D97A9FE52D03ACC0000F3070 /* StartupFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = D97A9FE42D03ACBD000F3070 /* StartupFeature.swift */; };
@@ -102,6 +103,7 @@
 		D9170D6A2CF0B1F3006E45D5 /* EditSinglePrayerTimeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditSinglePrayerTimeView.swift; sourceTree = "<group>"; };
 		D9170D6C2CF0D1DA006E45D5 /* PrayerTimesOffset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrayerTimesOffset.swift; sourceTree = "<group>"; };
 		D9170D6E2CF0D5F1006E45D5 /* Prayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Prayer.swift; sourceTree = "<group>"; };
+		D941B4232D16D876004FFF5C /* PrayerTimesSha1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrayerTimesSha1.swift; sourceTree = "<group>"; };
 		D970CD7B2D03B885004D8E66 /* AppEntryFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppEntryFeature.swift; sourceTree = "<group>"; };
 		D970CD7D2D03B88D004D8E66 /* AppEntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppEntryView.swift; sourceTree = "<group>"; };
 		D97A9FE42D03ACBD000F3070 /* StartupFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartupFeature.swift; sourceTree = "<group>"; };
@@ -480,6 +482,7 @@
 		D9A70E0B2C859E0C002F6583 /* Entities */ = {
 			isa = PBXGroup;
 			children = (
+				D941B4232D16D876004FFF5C /* PrayerTimesSha1.swift */,
 				D9170D6E2CF0D5F1006E45D5 /* Prayer.swift */,
 				D9170D6C2CF0D1DA006E45D5 /* PrayerTimesOffset.swift */,
 				D9A70E0C2C859E1E002F6583 /* DayPrayerTimes.swift */,
@@ -732,6 +735,7 @@
 				D97A9FE72D03ACC6000F3070 /* StartupView.swift in Sources */,
 				D9170D522CEFDE41006E45D5 /* WebLinks.swift in Sources */,
 				D9DA3AB32D1618B6001AB599 /* FeatureFlagFeature.swift in Sources */,
+				D941B4242D16D87F004FFF5C /* PrayerTimesSha1.swift in Sources */,
 				D9A70DFC2C8596FF002F6583 /* DeveloperMenuFeature.swift in Sources */,
 				D9A70E082C859D3F002F6583 /* SettingsView.swift in Sources */,
 				D98D2BDD2CA9B50D0050F2A8 /* AppearanceFeature.swift in Sources */,
