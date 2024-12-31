@@ -18,8 +18,9 @@ struct DailyPrayerTimesFeature {
     struct State: Equatable {
         @Shared(.prayerTimesSha1) var prayerTimesSha1 = [:]
         var date: Date = .now
+        var checkedYears = Set<Int>()
         var todaysPrayerTimes: DayPrayerTimes?
-        var checkedYears: [Int] = []
+        var error: Error?
 
         var canResetDate: Bool {
             Calendar.current.isDateInToday(date) == false
@@ -49,6 +50,7 @@ struct DailyPrayerTimesFeature {
         enum ViewAction {
             case onAppear
             case onTapShare
+            case onTapRetry
         }
 
         @CasePathable
@@ -56,6 +58,7 @@ struct DailyPrayerTimesFeature {
             case setSha1(sha1: String, year: Int)
             case getDayPrayerTimes(DayPrayerTimes?)
             case appendCheckedYear(year: Int)
+            case setError(Error)
         }
 
         @CasePathable
@@ -65,15 +68,22 @@ struct DailyPrayerTimesFeature {
         enum DependentAction { }
     }
 
+    enum Error {
+        case unreachable
+        case unknown
+    }
+
     var body: some ReducerOf<Self> {
         BindingReducer()
         Reduce { state, action in
             switch action {
             case .view(.onAppear):
-                return .concatenate(
-                    fillYearData(state: state),
-                    getDayPrayerTimes(date: state.date)
-                )
+                state.error = nil
+                return getDayPrayerTimes(state: state)
+
+            case .view(.onTapRetry):
+                state.error = nil
+                return getDayPrayerTimes(state: state)
 
             case .reducer(.getDayPrayerTimes(.some(let prayerTimes))):
                 state.todaysPrayerTimes = prayerTimes
@@ -84,60 +94,91 @@ struct DailyPrayerTimesFeature {
                 return .none
 
             case .reducer(.appendCheckedYear(let year)):
-                state.checkedYears.append(year)
+                state.checkedYears.insert(year)
+                return .none
+
+            case .reducer(.setError(let error)):
+                state.error = error
                 return .none
 
             case .binding(\.date):
-                return .concatenate(
-                    fillYearData(state: state),
-                    getDayPrayerTimes(date: state.date)
-                )
+                state.error = nil
+                return getDayPrayerTimes(state: state)
 
             default: return .none
             }
         }
     }
 
-    private func fillYearData(state: State) -> EffectOf<Self> {
+    private func getDayPrayerTimes(state: State) -> EffectOf<Self> {
         .run { send in
             let components = Calendar.current.dateComponents(
                 [.year, .month, .day], from: state.date
             )
             guard let year = components.year,
+                  let month = components.month,
+                  let day = components.day,
                   state.checkedYears.contains(year) == false
             else { return }
 
             let yearSha1 = state.prayerTimesSha1.getSha1(year: year)
-
             let responseSha = await prayerTimesRemoteRepo.getSha1(year: year)
-            if let responseSha, yearSha1 != responseSha {
-                await send(.reducer(.setSha1(sha1: responseSha, year: year)))
 
-                guard let daysOfYear = await prayerTimesRemoteRepo
-                    .getYearPrayerTimes(year: year)
-                else { return }
-                prayerTimesLocalRepo.createYearPrayerTimes(
-                    daysOfYear.map { $0.intoModel }
-                )
+            var isDirty = false
+            var newSha = yearSha1
+
+            switch (yearSha1, responseSha) {
+            case let (.some(currentSha), .success(remoteSha)):
+                if currentSha == remoteSha { break }
+                isDirty = true
+                newSha = remoteSha
+
+            case (.none, .success(let remoteSha)):
+                isDirty = true
+                newSha = remoteSha
+
+            case (.some, .failure):
+                break
+
+            case (.none, .failure(.unreachable)):
+                await send(.reducer(.setError(.unreachable)))
+                return
+
+            case (.none, .failure(.unknown)):
+                await send(.reducer(.setError(.unknown)))
+                return
             }
-            await send(.reducer(.appendCheckedYear(year: year)))
-        }
-    }
 
-    private func getDayPrayerTimes(date: Date) -> EffectOf<Self> {
-        .run { send in
-            let components = Calendar.current.dateComponents(
-                [.year, .month, .day], from: date
-            )
-            guard let year = components.year,
-                  let month = components.month,
-                  let day = components.day
-            else { return }
+            if let newSha, isDirty {
+                switch await persistPrayerTimes(year: year) {
+                case .success: break
+                case .failure(.unreachable): return
+                case .failure(.unknown): return
+                }
+                await send(.reducer(.setSha1(sha1: newSha, year: year)))
+                await send(.reducer(.appendCheckedYear(year: year)))
+            }
 
             guard let day = prayerTimesLocalRepo.getDayPrayerTimes(
                 year: year, month: month, day: day
             ) else { return }
-            await send(.reducer(.getDayPrayerTimes(DayPrayerTimes(from: day))))
+            await send(
+                .reducer(.getDayPrayerTimes(DayPrayerTimes(from: day))),
+                animation: .default
+            )
+        }
+    }
+
+    private func persistPrayerTimes(year: Int) async -> Result<(), ServiceError> {
+        switch await prayerTimesRemoteRepo.getYearPrayerTimes(year: year) {
+        case .success(let daysOfYear):
+            prayerTimesLocalRepo.createYearPrayerTimes(
+                daysOfYear.map { $0.intoModel }
+            )
+            return .success(())
+
+        case .failure(let why):
+            return .failure(why)
         }
     }
 }

@@ -15,6 +15,17 @@ struct DailyPrayerTimesView: View {
     var body: some View {
         List {
             datePicker
+            if let error = store.error {
+                errorContent(error: error)
+            } else {
+                content
+            }
+        }
+        .onAppear { store.send(.onAppear) }
+    }
+
+    var content: some View {
+        Group {
             if let prayerTimes = store.todaysPrayerTimes {
                 dayPrayerTimes(prayerTimes)
             } else {
@@ -22,9 +33,7 @@ struct DailyPrayerTimesView: View {
                     .redacted(reason: .placeholder)
             }
             todaysEvents
-//                .featureFlagged(.prayerTimesEvents)
         }
-        .onAppear { store.send(.onAppear) }
     }
 
     private var datePicker: some View {
@@ -128,6 +137,30 @@ struct DailyPrayerTimesView: View {
     ) -> some View {
         Label(prayer.localizedStringKey, systemImage: systemImage)
             .badge(Text(time, format: .dateTime.hour().minute()))
+    }
+
+    private func errorContent(error: DailyPrayerTimesFeature.Error) -> some View {
+        Section {
+            Group {
+                HStack {
+                    Text(verbatim: "⚠️")
+                        .font(.title)
+                    Text(error.localizedStringKey)
+                }
+                Button(action: { store.send(.onTapRetry) }) {
+                    Text("Retry")
+                }
+            }
+        }
+    }
+}
+
+extension DailyPrayerTimesFeature.Error {
+    var localizedStringKey: LocalizedStringKey {
+        switch self {
+        case .unknown: "Something went wrong"
+        case .unreachable: "We couldn’t reach the server. Please check your internet connection and try again."
+        }
     }
 }
 
