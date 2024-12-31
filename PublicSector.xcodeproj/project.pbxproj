@@ -66,6 +66,7 @@
 		D9B34CE22CDFBA1B00C07BA7 /* DebugSettings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D9B34CE02CDFBA1B00C07BA7 /* DebugSettings.bundle */; };
 		D9B34CE32CDFBA1B00C07BA7 /* ReleaseSettings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D9B34CE12CDFBA1B00C07BA7 /* ReleaseSettings.bundle */; };
 		D9B4AB502D24B1E300E201CA /* InfoPlist.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = D9B4AB4F2D24B1E300E201CA /* InfoPlist.xcstrings */; };
+		D9B4AB562D24B8B500E201CA /* AppInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9B4AB552D24B8B100E201CA /* AppInfo.swift */; };
 		D9C85AC62CF38EEC00730F12 /* NavigationRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9C85AC52CF38EE000730F12 /* NavigationRowView.swift */; };
 		D9DA3AAE2D161431001AB599 /* IbadRemoteConfig in Frameworks */ = {isa = PBXBuildFile; productRef = D9DA3AAD2D161431001AB599 /* IbadRemoteConfig */; };
 		D9DA3AB12D1618AF001AB599 /* FeatureFlagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9DA3AB02D1618A6001AB599 /* FeatureFlagView.swift */; };
@@ -153,6 +154,7 @@
 		D9B34CE02CDFBA1B00C07BA7 /* DebugSettings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = DebugSettings.bundle; sourceTree = "<group>"; };
 		D9B34CE12CDFBA1B00C07BA7 /* ReleaseSettings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = ReleaseSettings.bundle; sourceTree = "<group>"; };
 		D9B4AB4F2D24B1E300E201CA /* InfoPlist.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = InfoPlist.xcstrings; sourceTree = "<group>"; };
+		D9B4AB552D24B8B100E201CA /* AppInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppInfo.swift; sourceTree = "<group>"; };
 		D9C85AC52CF38EE000730F12 /* NavigationRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationRowView.swift; sourceTree = "<group>"; };
 		D9DA3AA52D15FC88001AB599 /* ci_post_clone.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = ci_post_clone.sh; sourceTree = "<group>"; };
 		D9DA3AAB2D160B89001AB599 /* IbadRemoteConfig */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = IbadRemoteConfig; sourceTree = "<group>"; };
@@ -258,6 +260,7 @@
 		D98903A92CDE346C00717646 /* Dependencies */ = {
 			isa = PBXGroup;
 			children = (
+				D9B4AB552D24B8B100E201CA /* AppInfo.swift */,
 				D9170D512CEFDE15006E45D5 /* WebLinks.swift */,
 				D98903AA2CDE347800717646 /* ExternalDeepLinks.swift */,
 			);
@@ -731,6 +734,7 @@
 				D9DA3AB12D1618AF001AB599 /* FeatureFlagView.swift in Sources */,
 				D9A70DEC2C8595E5002F6583 /* Spacing.swift in Sources */,
 				D970CD7E2D03B890004D8E66 /* AppEntryView.swift in Sources */,
+				D9B4AB562D24B8B500E201CA /* AppInfo.swift in Sources */,
 				D98D2BDA2CA9B14A0050F2A8 /* View+ControlFlow.swift in Sources */,
 				D970CD7C2D03B888004D8E66 /* AppEntryFeature.swift in Sources */,
 				D9A70E152C859EA9002F6583 /* DailyPrayerTimesView.swift in Sources */,
