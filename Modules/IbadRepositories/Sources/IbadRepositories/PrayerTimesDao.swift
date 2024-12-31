@@ -56,17 +56,20 @@ public final class DayPrayerTimesModel {
     public var gregorian: String
     public var hijri: String
     public var prayerTimes: PrayerTimesModel
+    public var event: DayEventModel?
 
     init(
         id: Int,
         gregorian: String,
         hijri: String,
-        prayerTimes: PrayerTimesModel
+        prayerTimes: PrayerTimesModel,
+        event: DayEventModel? = nil
     ) {
         self.id = id
         self.gregorian = gregorian
         self.hijri = hijri
         self.prayerTimes = prayerTimes
+        self.event = event
     }
 }
 
@@ -77,6 +80,11 @@ public struct PrayerTimesModel: Codable {
     public var asr: String
     public var maghrib: String
     public var ishaa: String
+}
+
+public struct DayEventModel: Codable {
+    public var ar: String
+    public var en: String?
 }
 
 extension DayPrayerTimesModel {

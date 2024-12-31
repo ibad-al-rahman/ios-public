@@ -20,6 +20,7 @@
 		D9170D6B2CF0B1F7006E45D5 /* EditSinglePrayerTimeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9170D6A2CF0B1F3006E45D5 /* EditSinglePrayerTimeView.swift */; };
 		D9170D6D2CF0D1E1006E45D5 /* PrayerTimesOffset.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9170D6C2CF0D1DA006E45D5 /* PrayerTimesOffset.swift */; };
 		D9170D6F2CF0D5F7006E45D5 /* Prayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9170D6E2CF0D5F1006E45D5 /* Prayer.swift */; };
+		D91D99602D23C442004AA72D /* DayEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = D91D995F2D23C43C004AA72D /* DayEvent.swift */; };
 		D941B4242D16D87F004FFF5C /* PrayerTimesSha1.swift in Sources */ = {isa = PBXBuildFile; fileRef = D941B4232D16D876004FFF5C /* PrayerTimesSha1.swift */; };
 		D970CD7C2D03B888004D8E66 /* AppEntryFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = D970CD7B2D03B885004D8E66 /* AppEntryFeature.swift */; };
 		D970CD7E2D03B890004D8E66 /* AppEntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D970CD7D2D03B88D004D8E66 /* AppEntryView.swift */; };
@@ -103,6 +104,7 @@
 		D9170D6A2CF0B1F3006E45D5 /* EditSinglePrayerTimeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditSinglePrayerTimeView.swift; sourceTree = "<group>"; };
 		D9170D6C2CF0D1DA006E45D5 /* PrayerTimesOffset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrayerTimesOffset.swift; sourceTree = "<group>"; };
 		D9170D6E2CF0D5F1006E45D5 /* Prayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Prayer.swift; sourceTree = "<group>"; };
+		D91D995F2D23C43C004AA72D /* DayEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayEvent.swift; sourceTree = "<group>"; };
 		D941B4232D16D876004FFF5C /* PrayerTimesSha1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrayerTimesSha1.swift; sourceTree = "<group>"; };
 		D970CD7B2D03B885004D8E66 /* AppEntryFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppEntryFeature.swift; sourceTree = "<group>"; };
 		D970CD7D2D03B88D004D8E66 /* AppEntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppEntryView.swift; sourceTree = "<group>"; };
@@ -482,6 +484,7 @@
 		D9A70E0B2C859E0C002F6583 /* Entities */ = {
 			isa = PBXGroup;
 			children = (
+				D91D995F2D23C43C004AA72D /* DayEvent.swift */,
 				D941B4232D16D876004FFF5C /* PrayerTimesSha1.swift */,
 				D9170D6E2CF0D5F1006E45D5 /* Prayer.swift */,
 				D9170D6C2CF0D1DA006E45D5 /* PrayerTimesOffset.swift */,
@@ -761,6 +764,7 @@
 				D98D2BE12CA9B7260050F2A8 /* SettingsFeature+Destination.swift in Sources */,
 				D9A70E002C85972D002F6583 /* DeveloperButtonFeature.swift in Sources */,
 				D9170D612CF0A5C3006E45D5 /* EditPrayerTimesView.swift in Sources */,
+				D91D99602D23C442004AA72D /* DayEvent.swift in Sources */,
 				D9170D5F2CF0A5BD006E45D5 /* EditPrayerTimesFeature.swift in Sources */,
 				D9A70E0D2C859E1E002F6583 /* DayPrayerTimes.swift in Sources */,
 			);

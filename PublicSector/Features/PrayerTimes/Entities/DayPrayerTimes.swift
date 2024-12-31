@@ -18,6 +18,7 @@ struct DayPrayerTimes: Equatable, Identifiable {
     var asr: Date
     var maghrib: Date
     var ishaa: Date
+    var event: DayEvent?
 
     mutating func offset(_ offset: PrayerTimesOffset) {
         let calendar = Calendar.current
@@ -95,6 +96,8 @@ extension DayPrayerTimes {
         guard let ishaa = timeFormatter.date(from: response.prayerTimes.ishaa)
         else { return nil }
         self.ishaa = ishaa
+
+        self.event = DayEvent(from: response)
     }
 
     init?(from response: DayPrayerTimesModel) {
@@ -144,6 +147,8 @@ extension DayPrayerTimes {
         guard let ishaa = timeFormatter.date(from: response.prayerTimes.ishaa)
         else { return nil }
         self.ishaa = ishaa
+
+        self.event = DayEvent(from: response)
     }
 
     static func placeholder() -> DayPrayerTimes {

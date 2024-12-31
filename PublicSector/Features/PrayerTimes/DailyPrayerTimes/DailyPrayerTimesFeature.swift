@@ -22,6 +22,18 @@ struct DailyPrayerTimesFeature {
         var canResetDate: Bool {
             Calendar.current.isDateInToday(date) == false
         }
+        var event: String? {
+            guard let event = todaysPrayerTimes?.event else { return nil }
+            return if event.en != nil {
+                switch Locale.current.language.languageCode?.identifier {
+                case "en": event.en
+                case "ar": event.ar
+                default: nil
+                }
+            } else {
+                event.ar
+            }
+        }
     }
 
     enum Action: BaseAction, BindableAction {
@@ -68,7 +80,10 @@ struct DailyPrayerTimesFeature {
                 return .none
 
             case .binding(\.date):
-                return getDayPrayerTimes(date: state.date)
+                return .concatenate(
+                    fillYearData(date: state.date, sha1: state.prayerTimesSha1),
+                    getDayPrayerTimes(date: state.date)
+                )
 
             default: return .none
             }
