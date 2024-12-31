@@ -52,7 +52,8 @@ extension PrayerTimesRemoteRepo: TestDependencyKey {
                         asr: "2:10 pm",
                         maghrib: "4:34 pm",
                         ishaa: "5:56 pm"
-                    )
+                    ),
+                    event: nil
                 )
             },
             getYearPrayerTimes: { _ in [] }

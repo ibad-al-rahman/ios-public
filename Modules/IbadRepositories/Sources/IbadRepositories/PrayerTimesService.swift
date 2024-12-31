@@ -61,6 +61,7 @@ public struct DayPrayerTimesResponse: Decodable, Sendable {
     public let gregorian: String
     public let hijri: String
     public let prayerTimes: PrayerTimesResponse
+    public let event: DayEventResponse?
 }
 
 public struct PrayerTimesResponse: Decodable, Sendable {
@@ -70,6 +71,11 @@ public struct PrayerTimesResponse: Decodable, Sendable {
     public let asr: String
     public let maghrib: String
     public let ishaa: String
+}
+
+public struct DayEventResponse: Decodable, Sendable {
+    public let ar: String
+    public let en: String?
 }
 
 extension DayPrayerTimesResponse {
@@ -85,7 +91,8 @@ extension DayPrayerTimesResponse {
                 asr: self.prayerTimes.asr,
                 maghrib: self.prayerTimes.maghrib,
                 ishaa: self.prayerTimes.ishaa
-            )
+            ),
+            event: self.event.map { DayEventModel(ar: $0.ar, en: $0.en) }
         )
     }
 }

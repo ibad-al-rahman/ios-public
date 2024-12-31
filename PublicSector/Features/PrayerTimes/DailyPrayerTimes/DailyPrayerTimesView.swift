@@ -22,7 +22,7 @@ struct DailyPrayerTimesView: View {
                     .redacted(reason: .placeholder)
             }
             todaysEvents
-                .featureFlagged(.prayerTimesEvents)
+//                .featureFlagged(.prayerTimesEvents)
         }
         .onAppear { store.send(.onAppear) }
     }
@@ -107,11 +107,16 @@ struct DailyPrayerTimesView: View {
         }
     }
 
+    @ViewBuilder
     private var todaysEvents: some View {
-        Section {
-            Text(verbatim: "The memory of the Battle of Badr")
-        } header: {
-            Text("Holidays and Events")
+        if let event = store.event {
+            Section {
+                Text(event)
+            } header: {
+                Text("Holidays and Events")
+            }
+        } else {
+            EmptyView()
         }
     }
 
