@@ -65,6 +65,7 @@
 		D9A70E1F2C85A261002F6583 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = D9A70E1E2C85A261002F6583 /* Localizable.xcstrings */; };
 		D9B34CE22CDFBA1B00C07BA7 /* DebugSettings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D9B34CE02CDFBA1B00C07BA7 /* DebugSettings.bundle */; };
 		D9B34CE32CDFBA1B00C07BA7 /* ReleaseSettings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D9B34CE12CDFBA1B00C07BA7 /* ReleaseSettings.bundle */; };
+		D9B4AB502D24B1E300E201CA /* InfoPlist.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = D9B4AB4F2D24B1E300E201CA /* InfoPlist.xcstrings */; };
 		D9C85AC62CF38EEC00730F12 /* NavigationRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9C85AC52CF38EE000730F12 /* NavigationRowView.swift */; };
 		D9DA3AAE2D161431001AB599 /* IbadRemoteConfig in Frameworks */ = {isa = PBXBuildFile; productRef = D9DA3AAD2D161431001AB599 /* IbadRemoteConfig */; };
 		D9DA3AB12D1618AF001AB599 /* FeatureFlagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9DA3AB02D1618A6001AB599 /* FeatureFlagView.swift */; };
@@ -151,6 +152,7 @@
 		D9A70E1E2C85A261002F6583 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		D9B34CE02CDFBA1B00C07BA7 /* DebugSettings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = DebugSettings.bundle; sourceTree = "<group>"; };
 		D9B34CE12CDFBA1B00C07BA7 /* ReleaseSettings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = ReleaseSettings.bundle; sourceTree = "<group>"; };
+		D9B4AB4F2D24B1E300E201CA /* InfoPlist.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = InfoPlist.xcstrings; sourceTree = "<group>"; };
 		D9C85AC52CF38EE000730F12 /* NavigationRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationRowView.swift; sourceTree = "<group>"; };
 		D9DA3AA52D15FC88001AB599 /* ci_post_clone.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = ci_post_clone.sh; sourceTree = "<group>"; };
 		D9DA3AAB2D160B89001AB599 /* IbadRemoteConfig */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = IbadRemoteConfig; sourceTree = "<group>"; };
@@ -379,6 +381,7 @@
 				D9A70E1E2C85A261002F6583 /* Localizable.xcstrings */,
 				D9EE4FD82CE10E6000C5AEE4 /* LaunchScreen.storyboard */,
 				D9EE4FDA2CE1144500C5AEE4 /* Info.plist */,
+				D9B4AB4F2D24B1E300E201CA /* InfoPlist.xcstrings */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -645,6 +648,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D9B34CE22CDFBA1B00C07BA7 /* DebugSettings.bundle in Resources */,
+				D9B4AB502D24B1E300E201CA /* InfoPlist.xcstrings in Resources */,
 				D9B34CE32CDFBA1B00C07BA7 /* ReleaseSettings.bundle in Resources */,
 				D9A70DC12C850B79002F6583 /* Preview Assets.xcassets in Resources */,
 				D9EE4FD92CE10E6000C5AEE4 /* LaunchScreen.storyboard in Resources */,
@@ -863,6 +867,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -920,6 +925,7 @@
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_EMIT_LOC_STRINGS = YES;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
