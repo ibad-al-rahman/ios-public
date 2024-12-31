@@ -10,7 +10,7 @@
 defaults write com.apple.dt.Xcode IDESkipMacroFingerprintValidation -bool YES
 defaults write com.apple.dt.Xcode IDESkipPackagePluginFingerprintValidatation -bool YES
 
-if [[ $CI_WORKFLOW == "Deploy Release" || $CI_WORKFLOW == "Deploy Debug" ]]
+if [[ $CI_WORKFLOW == "Deploy Debug" || $CI_WORKFLOW == "External Testers" ]]
 then
     cd .. && agvtool new-marketing-version $(date +'%y.%m.%d')
 else
