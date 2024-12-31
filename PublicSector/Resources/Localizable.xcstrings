@@ -81,6 +81,16 @@
         }
       }
     },
+    "Build number" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "رقم الإصدار"
+          }
+        }
+      }
+    },
     "Contact us" : {
       "localizations" : {
         "ar" : {
@@ -522,7 +532,7 @@
         "ar" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "إصدار"
+            "value" : "رقم الإصدار الدلالي"
           }
         },
         "en" : {

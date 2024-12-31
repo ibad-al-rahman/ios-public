@@ -6,10 +6,12 @@
 //
 
 import ComposableArchitecture
+import Dependencies
 import SwiftUI
 
 struct HelpView: View {
     @Bindable var store: StoreOf<HelpFeature>
+    @Dependency(\.appInfo) private var appInfo
 
     var body: some View {
         NavigationView {
@@ -20,7 +22,9 @@ struct HelpView: View {
                 }
 
                 Section("App Info") {
-                    Text("Version").badge(Text(verbatim: "0.1.0"))
+                    Text("Version").badge(Text(verbatim: appInfo.version()))
+                    Text("Build number")
+                        .badge(Text(verbatim: appInfo.buildNumber()))
                 }
             }
             .navigationTitle("Help")
