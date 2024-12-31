@@ -19,9 +19,12 @@ struct DailyPrayerTimesFeature {
         @Shared(.prayerTimesSha1) var prayerTimesSha1 = [:]
         var date: Date = .now
         var todaysPrayerTimes: DayPrayerTimes?
+        var checkedYears: [Int] = []
+
         var canResetDate: Bool {
             Calendar.current.isDateInToday(date) == false
         }
+
         var event: String? {
             guard let event = todaysPrayerTimes?.event else { return nil }
             return if event.en != nil {
@@ -52,6 +55,7 @@ struct DailyPrayerTimesFeature {
         enum ReducerAction {
             case setSha1(sha1: String, year: Int)
             case getDayPrayerTimes(DayPrayerTimes?)
+            case appendCheckedYear(year: Int)
         }
 
         @CasePathable
@@ -67,7 +71,7 @@ struct DailyPrayerTimesFeature {
             switch action {
             case .view(.onAppear):
                 return .concatenate(
-                    fillYearData(date: state.date, sha1: state.prayerTimesSha1),
+                    fillYearData(state: state),
                     getDayPrayerTimes(date: state.date)
                 )
 
@@ -79,9 +83,13 @@ struct DailyPrayerTimesFeature {
                 state.prayerTimesSha1.setSha1(sha1: sha1, for: year)
                 return .none
 
+            case .reducer(.appendCheckedYear(let year)):
+                state.checkedYears.append(year)
+                return .none
+
             case .binding(\.date):
                 return .concatenate(
-                    fillYearData(date: state.date, sha1: state.prayerTimesSha1),
+                    fillYearData(state: state),
                     getDayPrayerTimes(date: state.date)
                 )
 
@@ -90,15 +98,16 @@ struct DailyPrayerTimesFeature {
         }
     }
 
-    private func fillYearData(date: Date, sha1: PrayerTimesSha1) -> EffectOf<Self> {
+    private func fillYearData(state: State) -> EffectOf<Self> {
         .run { send in
             let components = Calendar.current.dateComponents(
-                [.year, .month, .day], from: date
+                [.year, .month, .day], from: state.date
             )
-            guard let year = components.year
+            guard let year = components.year,
+                  state.checkedYears.contains(year) == false
             else { return }
 
-            let yearSha1 = sha1.getSha1(year: year)
+            let yearSha1 = state.prayerTimesSha1.getSha1(year: year)
 
             let responseSha = await prayerTimesRemoteRepo.getSha1(year: year)
             if let responseSha, yearSha1 != responseSha {
@@ -111,6 +120,7 @@ struct DailyPrayerTimesFeature {
                     daysOfYear.map { $0.intoModel }
                 )
             }
+            await send(.reducer(.appendCheckedYear(year: year)))
         }
     }
 
