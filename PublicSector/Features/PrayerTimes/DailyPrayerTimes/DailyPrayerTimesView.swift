@@ -35,6 +35,20 @@ struct DailyPrayerTimesView: View {
                 displayedComponents: [.date]
             )
             .datePickerStyle(.compact)
+        } header: {
+            HStack {
+                Spacer()
+
+                if store.canResetDate {
+                    Button(action: { store.date = .now }) {
+                        Label(
+                            "Back to today",
+                            systemImage: "clock.arrow.trianglehead.counterclockwise.rotate.90"
+                        )
+                    }
+                    .textCase(nil)
+                }
+            }
         } footer: {
             if let hijriDate = store.todaysPrayerTimes?.hijri {
                 Text(hijriDate)

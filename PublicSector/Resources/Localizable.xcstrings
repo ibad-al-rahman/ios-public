@@ -71,6 +71,16 @@
         }
       }
     },
+    "Back to today" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "إعادة إلى اليوم"
+          }
+        }
+      }
+    },
     "Contact us" : {
       "localizations" : {
         "ar" : {
