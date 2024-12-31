@@ -76,7 +76,7 @@
         "ar" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "إعادة إلى اليوم"
+            "value" : "الانتقال إلى اليوم"
           }
         }
       }
@@ -394,6 +394,16 @@
         }
       }
     },
+    "Retry" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "إعادة المحاولة"
+          }
+        }
+      }
+    },
     "Settings" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -424,6 +434,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Share"
+          }
+        }
+      }
+    },
+    "Something went wrong" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "حدث خطأ ما"
           }
         }
       }
@@ -509,6 +529,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Version"
+          }
+        }
+      }
+    },
+    "We couldn’t reach the server. Please check your internet connection and try again." : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "تعذر الوصول. يرجى التحقق من اتصالك بالإنترنت والمحاولة مرة أخرى."
           }
         }
       }

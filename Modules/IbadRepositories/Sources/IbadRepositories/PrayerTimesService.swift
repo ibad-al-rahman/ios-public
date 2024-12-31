@@ -9,7 +9,12 @@ import Alamofire
 import OSLog
 
 struct PrayerTimesService {
-    func getSha1(year: Int) async -> String? {
+    let nwReachabilityManager = NetworkReachabilityManager()
+
+    func getSha1(year: Int) async -> Result<String, ServiceError> {
+        guard let nwReachabilityManager, nwReachabilityManager.isReachable
+        else { return .failure(.unreachable) }
+
         let year = String(format: "%04d", year)
         let endpoint = PrayerTimesEndpoint.getSha1(year: year)
         let response = await AF.request(endpoint.url, interceptor: .retryPolicy)
@@ -17,9 +22,9 @@ struct PrayerTimesService {
             .validate()
             .serializingDecodable(Sha1Response.self)
             .response
-        guard let sha1 = response.value?.sha1 else { return nil }
+        guard let sha1 = response.value?.sha1 else { return .failure(.unknown) }
         Logger.remote.info("Fetched prayer times sha1: \(sha1)")
-        return sha1
+        return .success(sha1)
     }
 
     func getDayPrayerTimes(
@@ -38,7 +43,12 @@ struct PrayerTimesService {
         return response.value
     }
 
-    func getYearPrayerTimes(year: Int) async -> [DayPrayerTimesResponse]? {
+    func getYearPrayerTimes(
+        year: Int
+    ) async -> Result<[DayPrayerTimesResponse], ServiceError> {
+        guard let nwReachabilityManager, nwReachabilityManager.isReachable
+        else { return .failure(.unreachable) }
+
         let endpoint = PrayerTimesEndpoint.getYearPrayerTimes(
             year: String(format: "%04d", year)
         )
@@ -47,9 +57,15 @@ struct PrayerTimesService {
             .validate()
             .serializingDecodable([DayPrayerTimesResponse].self)
             .response
+        guard let prayerTimes = response.value else { return .failure(.unknown) }
         Logger.remote.info("Fetched \(year) year prayer times")
-        return response.value
+        return .success(prayerTimes)
     }
+}
+
+public enum ServiceError: Error {
+    case unreachable
+    case unknown
 }
 
 struct Sha1Response: Decodable, Sendable {

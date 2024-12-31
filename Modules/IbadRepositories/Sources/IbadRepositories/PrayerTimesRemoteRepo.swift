@@ -11,13 +11,14 @@ import Foundation
 
 @DependencyClient
 public struct PrayerTimesRemoteRepo: Sendable {
-    public var getSha1: @Sendable (_ year: Int) async -> String?
-    public var getDayPrayerTimes: @Sendable (
-        _ year: Int, _ month: Int, _ day: Int
-    ) async -> DayPrayerTimesResponse?
+    public var getSha1: @Sendable (
+        _ year: Int
+    ) async -> Result<String, ServiceError> = { _ in .failure(.unknown) }
     public var getYearPrayerTimes: @Sendable (
         _ year: Int
-    ) async -> [DayPrayerTimesResponse]?
+    ) async -> Result<[DayPrayerTimesResponse], ServiceError> = {
+        _ in .failure(.unknown)
+    }
 }
 
 extension PrayerTimesRemoteRepo: DependencyKey {
@@ -26,9 +27,6 @@ extension PrayerTimesRemoteRepo: DependencyKey {
 
         return PrayerTimesRemoteRepo(
             getSha1: { year in await service.getSha1(year: year) },
-            getDayPrayerTimes: { year, month, day in
-                await service.getDayPrayerTimes(year: year, month: month, day: day)
-            },
             getYearPrayerTimes: { year in
                 await service.getYearPrayerTimes(year: year)
             }
@@ -39,24 +37,8 @@ extension PrayerTimesRemoteRepo: DependencyKey {
 extension PrayerTimesRemoteRepo: TestDependencyKey {
     public static var previewValue: PrayerTimesRemoteRepo {
         PrayerTimesRemoteRepo(
-            getSha1: { _ in "sha1" },
-            getDayPrayerTimes: { _, _, _ in
-                DayPrayerTimesResponse(
-                    id: 0,
-                    gregorian: "01/01/2024",
-                    hijri: "01/01/1445",
-                    prayerTimes: PrayerTimesResponse(
-                        fajer: "4:51 am",
-                        sunrise: "6:28 am",
-                        dhuhr: "11:29 am",
-                        asr: "2:10 pm",
-                        maghrib: "4:34 pm",
-                        ishaa: "5:56 pm"
-                    ),
-                    event: nil
-                )
-            },
-            getYearPrayerTimes: { _ in [] }
+            getSha1: { _ in .success("sha1") },
+            getYearPrayerTimes: { _ in .success([]) }
         )
     }
 
