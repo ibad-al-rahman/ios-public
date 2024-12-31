@@ -19,6 +19,9 @@ struct DailyPrayerTimesFeature {
         @Shared(.prayerTimesSha1) var prayerTimesSha1 = [:]
         var date: Date = .now
         var todaysPrayerTimes: DayPrayerTimes?
+        var canResetDate: Bool {
+            Calendar.current.isDateInToday(date) == false
+        }
     }
 
     enum Action: BaseAction, BindableAction {
