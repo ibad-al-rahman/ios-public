@@ -117,9 +117,20 @@ struct DailyPrayerTimesFeature {
             )
             guard let year = components.year,
                   let month = components.month,
-                  let day = components.day,
-                  state.checkedYears.contains(year) == false
+                  let day = components.day
             else { return }
+
+            guard state.checkedYears.contains(year) == false
+            else {
+                guard let day = prayerTimesLocalRepo.getDayPrayerTimes(
+                    year: year, month: month, day: day
+                ) else { return }
+                await send(
+                    .reducer(.getDayPrayerTimes(DayPrayerTimes(from: day))),
+                    animation: .default
+                )
+                return
+            }
 
             let yearSha1 = state.prayerTimesSha1.getSha1(year: year)
             let responseSha = await prayerTimesRemoteRepo.getSha1(year: year)
