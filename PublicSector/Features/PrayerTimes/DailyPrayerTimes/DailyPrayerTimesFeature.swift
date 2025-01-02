@@ -13,6 +13,7 @@ import IbadRepositories
 struct DailyPrayerTimesFeature {
     @Dependency(\.prayerTimesLocalRepo) private var prayerTimesLocalRepo
     @Dependency(\.prayerTimesRemoteRepo) private var prayerTimesRemoteRepo
+    @Dependency(\.publicationRemoteRepo) private var publicationRemoteRepo
 
     @ObservableState
     struct State: Equatable {
@@ -75,11 +76,26 @@ struct DailyPrayerTimesFeature {
 
     var body: some ReducerOf<Self> {
         BindingReducer()
-        Reduce { state, action in
+        Reduce {
+ state,
+ action in
             switch action {
             case .view(.onAppear):
                 state.error = nil
-                return getDayPrayerTimes(state: state)
+                return .merge(
+                    getDayPrayerTimes(state: state),
+                    .run { _ in
+                        let res = await publicationRemoteRepo
+                            .downloadPublication(
+                                id: "40f3656a3597df8eab3a3ad47f2230cf",
+                                to: .documentsDirectory
+                                    .appending(
+                                        component: "40f3656a3597df8eab3a3ad47f2230cf"
+                                    )
+                            )
+                        print(res)
+                    }
+                )
 
             case .view(.onTapRetry):
                 state.error = nil
