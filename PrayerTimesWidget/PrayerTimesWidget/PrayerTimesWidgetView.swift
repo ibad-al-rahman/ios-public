@@ -65,28 +65,51 @@ struct PrayerTimesWidgetView: View {
             HStack {
                 logo
                 Spacer()
-                Text("3 Rajab 1446").font(.caption2)
+                if let hijriDate = store.todaysPrayerTimes?.hijri {
+                    Text(hijriDate)
+                } else {
+                    Text(verbatim: "Placeholder")
+                        .redacted(reason: .placeholder)
+                }
             }
 
             HStack {
                 VStack {
                     prayerTime(
-                        "Fajer",
-                        time: store.date,
+                        .fajer,
+                        time: prayerTimes.fajer,
                         systemImage: "moon.stars"
                     )
-                    prayerTime("Sunrise", time: store.date, systemImage: "sunrise")
-                    prayerTime("Duhur", time: store.date, systemImage: "sun.max")
+                    prayerTime(
+                        .sunrise,
+                        time: prayerTimes.sunrise,
+                        systemImage: "sunrise"
+                    )
+                    prayerTime(
+                        .dhuhr,
+                        time: prayerTimes.dhuhr,
+                        systemImage: "sun.max"
+                    )
                 }
 
                 Divider()
 
                 VStack {
-                    prayerTime("Asr", time: store.date, systemImage: "sun.min")
-                    prayerTime("Maghrib", time: store.date, systemImage: "sunset")
-                        .background(Capsule().fill(Color.primary))
-                        .foregroundStyle(.background)
-                    prayerTime("Ishaa", time: store.date, systemImage: "moon")
+                    prayerTime(
+                        .asr,
+                        time: prayerTimes.asr,
+                        systemImage: "sun.min"
+                    )
+                    prayerTime(
+                        .maghrib,
+                        time: prayerTimes.maghrib,
+                        systemImage: "sunset"
+                    )
+                    prayerTime(
+                        .ishaa,
+                        time: prayerTimes.ishaa,
+                        systemImage: "moon"
+                    )
                 }
             }
         }
@@ -101,17 +124,22 @@ struct PrayerTimesWidgetView: View {
 
     @ViewBuilder
     private func prayerTime(
-        _ label: String,
+        _ prayer: Prayer,
         time: Date,
         systemImage: String
     ) -> some View {
         HStack {
-            Text(label).font(.caption2)
+            Text(prayer.localizedStringKey).font(.caption2)
             Spacer()
             Text(time, format: .dateTime.hour().minute()).font(.caption2)
         }
         .padding(2)
         .padding(.horizontal, 8)
+        .if(store.currentPrayerTime == prayer) {
+            $0
+                .background(Capsule().fill(Color.primary))
+                .foregroundStyle(.background)
+        }
     }
 }
 
