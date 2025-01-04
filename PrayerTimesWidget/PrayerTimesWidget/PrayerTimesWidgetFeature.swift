@@ -1,0 +1,45 @@
+//
+//  PrayerTimesWidgetFeature.swift
+//  PublicSector
+//
+//  Created by Hamza Jadid on 04/01/2025.
+//
+
+import ComposableArchitecture
+import Foundation
+import IbadRepositories
+
+@Reducer
+struct PrayerTimesWidgetFeature {
+    @Dependency(\.prayerTimesLocalRepo) private var prayerTimesLocalRepo
+
+    @ObservableState
+    struct State: Equatable {
+        let date: Date
+        var todaysPrayerTimes: DayPrayerTimes?
+    }
+
+    enum Action {
+        case onAppear
+    }
+
+    var body: some ReducerOf<Self> {
+        Reduce { state, action in
+            switch action {
+            case .onAppear:
+                let components = Calendar.current.dateComponents(
+                    [.year, .month, .day], from: state.date
+                )
+                guard let year = components.year,
+                      let month = components.month,
+                      let day = components.day,
+                      let dayPrayerTimes = prayerTimesLocalRepo.getDayPrayerTimes(
+                        year: year, month: month, day: day
+                    )
+                else { return .none }
+                state.todaysPrayerTimes = DayPrayerTimes(from: dayPrayerTimes)
+                return .none
+            }
+        }
+    }
+}

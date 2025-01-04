@@ -75,6 +75,8 @@
 		D9EAEF562D27199100C8D1F4 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9EAEF552D27199100C8D1F4 /* WidgetKit.framework */; };
 		D9EAEF582D27199100C8D1F4 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9EAEF572D27199100C8D1F4 /* SwiftUI.framework */; };
 		D9EAEF632D27199200C8D1F4 /* PrayerTimesWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = D9EAEF532D27199100C8D1F4 /* PrayerTimesWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		D9EAEF762D29461E00C8D1F4 /* IbadRepositories in Frameworks */ = {isa = PBXBuildFile; productRef = D9EAEF752D29461E00C8D1F4 /* IbadRepositories */; };
+		D9EAEF7D2D29469800C8D1F4 /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = D9EAEF7C2D29469800C8D1F4 /* ComposableArchitecture */; };
 		D9EE4FD92CE10E6000C5AEE4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D9EE4FD82CE10E6000C5AEE4 /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
@@ -237,6 +239,8 @@
 			files = (
 				D9EAEF582D27199100C8D1F4 /* SwiftUI.framework in Frameworks */,
 				D9EAEF562D27199100C8D1F4 /* WidgetKit.framework in Frameworks */,
+				D9EAEF7D2D29469800C8D1F4 /* ComposableArchitecture in Frameworks */,
+				D9EAEF762D29461E00C8D1F4 /* IbadRepositories in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -677,6 +681,8 @@
 			);
 			name = PrayerTimesWidgetExtension;
 			packageProductDependencies = (
+				D9EAEF752D29461E00C8D1F4 /* IbadRepositories */,
+				D9EAEF7C2D29469800C8D1F4 /* ComposableArchitecture */,
 			);
 			productName = PrayerTimesWidgetExtension;
 			productReference = D9EAEF532D27199100C8D1F4 /* PrayerTimesWidgetExtension.appex */;
@@ -1336,6 +1342,15 @@
 		D9DA3AAD2D161431001AB599 /* IbadRemoteConfig */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = IbadRemoteConfig;
+		};
+		D9EAEF752D29461E00C8D1F4 /* IbadRepositories */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = IbadRepositories;
+		};
+		D9EAEF7C2D29469800C8D1F4 /* ComposableArchitecture */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D9A6E1BB2CEC71FE006123D1 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */;
+			productName = ComposableArchitecture;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
