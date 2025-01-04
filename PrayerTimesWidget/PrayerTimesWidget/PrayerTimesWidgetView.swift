@@ -1,12 +1,13 @@
 //
-//  PrayerTimesWidget.swift
-//  PrayerTimesWidget
+//  PrayerTimesWidgetView.swift
+//  PublicSector
 //
-//  Created by Hamza Jadid on 02/01/2025.
+//  Created by Hamza Jadid on 04/01/2025.
 //
 
-import WidgetKit
+import ComposableArchitecture
 import SwiftUI
+import WidgetKit
 
 struct Provider: TimelineProvider {
     func placeholder(in context: Context) -> SimpleEntry {
@@ -36,50 +37,56 @@ struct Provider: TimelineProvider {
         let timeline = Timeline(entries: entries, policy: .atEnd)
         completion(timeline)
     }
-
-    //    func relevances() async -> WidgetRelevances<Void> {
-    //        // Generate a list containing the contexts this widget is relevant in.
-    //    }
 }
 
 struct SimpleEntry: TimelineEntry {
     let date: Date
 }
 
-struct PrayerTimesWidgetEntryView : View {
-    var entry: Provider.Entry
+struct PrayerTimesWidgetView: View {
+    let store: StoreOf<PrayerTimesWidgetFeature>
 
     var body: some View {
-        mediumContent
+        content.onAppear { store.send(.onAppear) }
     }
 
-    var mediumContent: some View {
+    @ViewBuilder
+    private var content: some View {
+        if let prayerTimes = store.todaysPrayerTimes {
+            mediumContent(prayerTimes)
+        } else {
+            mediumContent(.placeholder())
+                .redacted(reason: .placeholder)
+        }
+    }
+
+    private func mediumContent(_ prayerTimes: DayPrayerTimes) -> some View {
         VStack {
             HStack {
                 logo
                 Spacer()
-                Text("3 Rajab 1446")
-                    .font(.caption2)
+                Text("3 Rajab 1446").font(.caption2)
             }
+
             HStack {
                 VStack {
                     prayerTime(
                         "Fajer",
-                        time: entry.date,
+                        time: store.date,
                         systemImage: "moon.stars"
                     )
-                    prayerTime("Sunrise", time: entry.date, systemImage: "sunrise")
-                    prayerTime("Duhur", time: entry.date, systemImage: "sun.max")
+                    prayerTime("Sunrise", time: store.date, systemImage: "sunrise")
+                    prayerTime("Duhur", time: store.date, systemImage: "sun.max")
                 }
+
                 Divider()
+
                 VStack {
-                    prayerTime("Asr", time: entry.date, systemImage: "sun.min")
-                    prayerTime("Maghrib", time: entry.date, systemImage: "sunset")
-                        .background(
-                            Capsule().fill(Color.black)
-                        )
-                        .foregroundStyle(.white)
-                    prayerTime("Ishaa", time: entry.date, systemImage: "moon")
+                    prayerTime("Asr", time: store.date, systemImage: "sun.min")
+                    prayerTime("Maghrib", time: store.date, systemImage: "sunset")
+                        .background(Capsule().fill(Color.primary))
+                        .foregroundStyle(.background)
+                    prayerTime("Ishaa", time: store.date, systemImage: "moon")
                 }
             }
         }
@@ -114,12 +121,18 @@ struct PrayerTimesWidget: Widget {
     var body: some WidgetConfiguration {
         StaticConfiguration(kind: kind, provider: Provider()) { entry in
             if #available(iOS 17.0, *) {
-                PrayerTimesWidgetEntryView(entry: entry)
-                    .containerBackground(.fill.tertiary, for: .widget)
+                PrayerTimesWidgetView(store: Store(
+                    initialState: PrayerTimesWidgetFeature.State(date: entry.date),
+                    reducer: PrayerTimesWidgetFeature.init
+                ))
+                .containerBackground(.fill.tertiary, for: .widget)
             } else {
-                PrayerTimesWidgetEntryView(entry: entry)
-                    .padding()
-                    .background()
+                PrayerTimesWidgetView(store: Store(
+                    initialState: PrayerTimesWidgetFeature.State(date: entry.date),
+                    reducer: PrayerTimesWidgetFeature.init
+                ))
+                .padding()
+                .background()
             }
         }
         .configurationDisplayName("My Widget")
