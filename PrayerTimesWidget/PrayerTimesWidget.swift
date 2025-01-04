@@ -20,7 +20,24 @@ struct Provider: TimelineProvider {
     func getSnapshot(
         in context: Context, completion: @escaping (PrayerTimeEntry) -> ()
     ) {
-        let entry = PrayerTimeEntry(date: .now, currentPrayer: .maghrib)
+        let date = Date.now
+        let components = Calendar.current.dateComponents(
+            [.year, .month, .day], from: date
+        )
+        guard let year = components.year,
+              let month = components.month,
+              let day = components.day,
+              let dayPrayerTimes = prayerTimesLocalRepo.getDayPrayerTimes(
+                year: year, month: month, day: day
+              ),
+              let prayerTimes = DayPrayerTimes(from: dayPrayerTimes)
+        else {
+            completion(PrayerTimeEntry(date: .now, currentPrayer: .maghrib))
+            return
+        }
+        let entry = PrayerTimeEntry(
+            date: date,currentPrayer: prayerTimes.getPrayer(time: date)
+        )
         completion(entry)
     }
 
