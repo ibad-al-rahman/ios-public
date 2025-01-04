@@ -36,10 +36,10 @@ struct PrayerTimesWidgetFeature {
                       let day = components.day,
                       let dayPrayerTimes = prayerTimesLocalRepo.getDayPrayerTimes(
                         year: year, month: month, day: day
-                    )
+                      ),
+                      let prayerTimes = DayPrayerTimes(from: dayPrayerTimes)
                 else { return .none }
-                guard let prayerTimes = DayPrayerTimes(from: dayPrayerTimes)
-                else { return .none }
+
                 state.todaysPrayerTimes = prayerTimes
                 state.currentPrayerTime = getCurrentPrayerTime(
                     date: state.date,
