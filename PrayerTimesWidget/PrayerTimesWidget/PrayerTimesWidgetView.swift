@@ -16,7 +16,7 @@ struct PrayerTimesWidgetView: View {
     var body: some View {
         content
             .onAppear { store.send(.onAppear) }
-            .dynamicTypeSize(.xLarge)
+            .dynamicTypeSize(.large)
     }
 
     @ViewBuilder
@@ -36,8 +36,10 @@ struct PrayerTimesWidgetView: View {
                 Spacer()
                 if let hijriDate = store.todaysPrayerTimes?.hijri {
                     Text(hijriDate)
+                        .font(.caption)
                 } else {
                     Text(verbatim: "Placeholder").redacted(reason: .placeholder)
+                        .font(.caption)
                 }
             }
 
@@ -61,6 +63,8 @@ struct PrayerTimesWidgetView: View {
                 }
 
                 Divider()
+                    .frame(width: 1)
+                    .overlay(.gray.opacity(0.8))
 
                 VStack {
                     prayerTime(
