@@ -16,13 +16,4 @@ extension View {
             self
         }
     }
-
-    @ViewBuilder
-    func ifLet<T, Content: View>(_ optional: T?, content: (T, Self) -> Content) -> some View {
-        if let value = optional {
-            content(value, self)
-        } else {
-            self
-        }
-    }
 }
