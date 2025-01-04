@@ -199,7 +199,7 @@
 		D9EAEF672D27199200C8D1F4 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				Info.plist,
+				Resources/Info.plist,
 			);
 			target = D9EAEF522D27199100C8D1F4 /* PrayerTimesWidgetExtension */;
 		};
@@ -1202,12 +1202,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
-				CODE_SIGN_ENTITLEMENTS = PrayerTimesWidget/PrayerTimesWidgetExtension.entitlements;
+				CODE_SIGN_ENTITLEMENTS = PrayerTimesWidget/Resources/PrayerTimesWidgetExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = AV5475SLZ7;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = PrayerTimesWidget/Info.plist;
+				INFOPLIST_FILE = PrayerTimesWidget/Resources/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = PrayerTimesWidget;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
@@ -1235,12 +1235,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
-				CODE_SIGN_ENTITLEMENTS = PrayerTimesWidget/PrayerTimesWidgetExtension.entitlements;
+				CODE_SIGN_ENTITLEMENTS = PrayerTimesWidget/Resources/PrayerTimesWidgetExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = AV5475SLZ7;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = PrayerTimesWidget/Info.plist;
+				INFOPLIST_FILE = PrayerTimesWidget/Resources/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = PrayerTimesWidget;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;

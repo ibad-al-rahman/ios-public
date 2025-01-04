@@ -16,8 +16,8 @@ struct PrayerTimesWidgetFeature {
     @ObservableState
     struct State: Equatable {
         let date: Date
+        let currentPrayer: Prayer
         var todaysPrayerTimes: DayPrayerTimes?
-        var currentPrayerTime: Prayer?
     }
 
     enum Action {
@@ -41,28 +41,8 @@ struct PrayerTimesWidgetFeature {
                 else { return .none }
 
                 state.todaysPrayerTimes = prayerTimes
-                state.currentPrayerTime = getCurrentPrayerTime(
-                    date: state.date,
-                    prayerTimes: prayerTimes
-                )
                 return .none
             }
-        }
-    }
-
-    private func getCurrentPrayerTime(date: Date, prayerTimes: DayPrayerTimes) -> Prayer {
-        return if date.ltTime(prayerTimes.fajer) {
-            .ishaa
-        } else if date.ltTime(prayerTimes.sunrise) {
-            .fajer
-        } else if date.ltTime(prayerTimes.dhuhr) {
-            .sunrise
-        } else if date.ltTime(prayerTimes.asr) {
-            .dhuhr
-        } else if date.ltTime(prayerTimes.maghrib) {
-            .asr
-        } else {
-            .maghrib
         }
     }
 }

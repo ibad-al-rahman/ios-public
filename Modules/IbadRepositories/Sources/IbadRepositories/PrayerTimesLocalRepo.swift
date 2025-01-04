@@ -36,7 +36,24 @@ extension PrayerTimesLocalRepo: DependencyKey {
 
 extension PrayerTimesLocalRepo: TestDependencyKey {
     public static var previewValue: PrayerTimesLocalRepo {
-        PrayerTimesLocalRepo()
+        PrayerTimesLocalRepo(
+            getDayPrayerTimes: { _, _, _ in
+                DayPrayerTimesModel(
+                    id: 20250102,
+                    gregorian: "02/01/2025",
+                    hijri: "02/01/1446",
+                    prayerTimes: PrayerTimesModel(
+                        fajer: "5:07 am",
+                        sunrise: "6:44 am",
+                        dhuhr: "11:42 am",
+                        asr: "2:23 pm",
+                        maghrib: "4:46 pm",
+                        ishaa: "6:08 pm"
+                    )
+                )
+            },
+            createYearPrayerTimes: { _ in }
+        )
     }
 
     public static var testValue: PrayerTimesLocalRepo {

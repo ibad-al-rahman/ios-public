@@ -19,10 +19,31 @@ struct DayPrayerTimes: Equatable, Identifiable {
     var maghrib: Date
     var ishaa: Date
     var event: DayEvent?
+
+    var sorted: [Date] {
+        [fajer, sunrise, dhuhr, asr, maghrib, ishaa]
+    }
+
+    func getPrayer(time: Date) -> Prayer {
+        return if time.ltTime(fajer) {
+            .ishaa
+        } else if time.ltTime(sunrise) {
+            .fajer
+        } else if time.ltTime(dhuhr) {
+            .sunrise
+        } else if time.ltTime(asr) {
+            .dhuhr
+        } else if time.ltTime(maghrib) {
+            .asr
+        } else {
+            .maghrib
+        }
+    }
 }
 
 extension DayPrayerTimes {
-    init?(from response: DayPrayerTimesModel) {
+    init?(from model: DayPrayerTimesModel) {
+        let calendar = Calendar.current
         let gregorianFormatter = DateFormatter()
         let hijriFormatter = DateFormatter()
         let timeFormatter = DateFormatter()
@@ -34,43 +55,112 @@ extension DayPrayerTimes {
         timeFormatter.amSymbol = "am"
         timeFormatter.pmSymbol = "pm"
 
-        self.id = response.id
+        self.id = model.id
 
-        guard let gregorian = gregorianFormatter.date(from: response.gregorian)
+        guard let gregorian = gregorianFormatter.date(from: model.gregorian)
         else { return nil }
         self.gregorian = gregorian
 
-        guard let hijriDate = hijriFormatter.date(from: response.hijri)
+        let gregorianComponents = calendar.dateComponents(
+            [.year, .month, .day],
+            from: gregorian
+        )
+        guard let year = gregorianComponents.year,
+              let month = gregorianComponents.month,
+              let day = gregorianComponents.day
+        else { return nil }
+
+        guard let hijriDate = hijriFormatter.date(from: model.hijri)
         else { return nil }
         hijriFormatter.dateFormat = "d MMMM yyyy"
         let hijri = hijriFormatter.string(from: hijriDate)
         self.hijri = hijri
 
-        guard let fajer = timeFormatter.date(from: response.prayerTimes.fajer)
+        guard let fajer = timeFormatter.date(from: model.prayerTimes.fajer)
         else { return nil }
-        self.fajer = fajer
 
-        guard let sunrise = timeFormatter.date(from: response.prayerTimes.sunrise)
+        var fajerComponents = calendar.dateComponents(
+            [.year, .month, .day, .hour, .minute, .second],
+            from: fajer
+        )
+        fajerComponents.year = year
+        fajerComponents.month = month
+        fajerComponents.day = day
+        let fajerDate = calendar.date(from: fajerComponents)
+        guard let fajerDate else { return nil }
+        self.fajer = fajerDate
+
+        guard let sunrise = timeFormatter.date(from: model.prayerTimes.sunrise)
         else { return nil }
-        self.sunrise = sunrise
 
-        guard let dhuhr = timeFormatter.date(from: response.prayerTimes.dhuhr)
+        var sunriseComponents = calendar.dateComponents(
+            [.year, .month, .day, .hour, .minute, .second],
+            from: sunrise
+        )
+        sunriseComponents.year = year
+        sunriseComponents.month = month
+        sunriseComponents.day = day
+        let sunriseDate = calendar.date(from: sunriseComponents)
+        guard let sunriseDate else { return nil }
+        self.sunrise = sunriseDate
+
+        guard let dhuhr = timeFormatter.date(from: model.prayerTimes.dhuhr)
         else { return nil }
-        self.dhuhr = dhuhr
 
-        guard let asr = timeFormatter.date(from: response.prayerTimes.asr)
+        var dhuhrComponents = calendar.dateComponents(
+            [.year, .month, .day, .hour, .minute, .second],
+            from: dhuhr
+        )
+        dhuhrComponents.year = year
+        dhuhrComponents.month = month
+        dhuhrComponents.day = day
+        let dhuhrDate = calendar.date(from: dhuhrComponents)
+        guard let dhuhrDate else { return nil }
+        self.dhuhr = dhuhrDate
+
+        guard let asr = timeFormatter.date(from: model.prayerTimes.asr)
         else { return nil }
-        self.asr = asr
 
-        guard let maghrib = timeFormatter.date(from: response.prayerTimes.maghrib)
+        var asrComponents = calendar.dateComponents(
+            [.year, .month, .day, .hour, .minute, .second],
+            from: asr
+        )
+        asrComponents.year = year
+        asrComponents.month = month
+        asrComponents.day = day
+        let asrDate = calendar.date(from: asrComponents)
+        guard let asrDate else { return nil }
+        self.asr = asrDate
+
+        guard let maghrib = timeFormatter.date(from: model.prayerTimes.maghrib)
         else { return nil }
-        self.maghrib = maghrib
 
-        guard let ishaa = timeFormatter.date(from: response.prayerTimes.ishaa)
+        var maghribComponents = calendar.dateComponents(
+            [.year, .month, .day, .hour, .minute, .second],
+            from: maghrib
+        )
+        maghribComponents.year = year
+        maghribComponents.month = month
+        maghribComponents.day = day
+        let maghribDate = calendar.date(from: maghribComponents)
+        guard let maghribDate else { return nil }
+        self.maghrib = maghribDate
+
+        guard let ishaa = timeFormatter.date(from: model.prayerTimes.ishaa)
         else { return nil }
-        self.ishaa = ishaa
 
-        self.event = DayEvent(from: response)
+        var ishaaComponents = calendar.dateComponents(
+            [.year, .month, .day, .hour, .minute, .second],
+            from: ishaa
+        )
+        ishaaComponents.year = year
+        ishaaComponents.month = month
+        ishaaComponents.day = day
+        let ishaaDate = calendar.date(from: ishaaComponents)
+        guard let ishaaDate else { return nil }
+        self.ishaa = ishaaDate
+
+        self.event = DayEvent(from: model)
     }
 
     static func placeholder() -> DayPrayerTimes {
