@@ -50,17 +50,28 @@ struct Provider: TimelineProvider {
                 )
             }
         let now = Date.now
+        upcomingPrayers.insert(PrayerTimeEntry(
+            date: now, currentPrayer: prayerTimes.getPrayer(time: now)
+        ), at: 0)
+
         let secondsPerDay = 60 * 60 * 24.0
         let tomorrowMidnight = Calendar.current.startOfDay(
             for: .now.addingTimeInterval(secondsPerDay)
         )
-
-        upcomingPrayers.insert(PrayerTimeEntry(
-            date: now, currentPrayer: prayerTimes.getPrayer(time: now)
-        ), at: 0)
+        let tomorrowComponents = Calendar.current.dateComponents(
+            [.year, .month, .day], from: tomorrowMidnight
+        )
+        guard let tomorrowYear = tomorrowComponents.year,
+              let tomorrowMonth = tomorrowComponents.month,
+              let tomorrowDay = tomorrowComponents.day,
+              let dayPrayerTimes = prayerTimesLocalRepo.getDayPrayerTimes(
+                year: tomorrowYear, month: tomorrowMonth, day: tomorrowDay
+              ),
+              let tomorrowPrayerTimes = DayPrayerTimes(from: dayPrayerTimes)
+        else { return }
         upcomingPrayers.append(PrayerTimeEntry(
             date: tomorrowMidnight,
-            currentPrayer: prayerTimes.getPrayer(time: tomorrowMidnight)
+            currentPrayer: tomorrowPrayerTimes.getPrayer(time: tomorrowMidnight)
         ))
 
         let timeline = Timeline(entries: upcomingPrayers, policy: .atEnd)
