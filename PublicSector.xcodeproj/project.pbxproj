@@ -1206,7 +1206,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = AV5475SLZ7;
-				GENERATE_INFOPLIST_FILE = YES;
+				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_FILE = PrayerTimesWidget/Resources/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = PrayerTimesWidget;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
@@ -1239,7 +1239,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = AV5475SLZ7;
-				GENERATE_INFOPLIST_FILE = YES;
+				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_FILE = PrayerTimesWidget/Resources/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = PrayerTimesWidget;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
