@@ -2,6 +2,7 @@
   "sourceLanguage" : "en",
   "strings" : {
     "CFBundleDisplayName" : {
+      "comment" : "App name",
       "extractionState" : "manual",
       "localizations" : {
         "ar" : {
@@ -22,6 +23,12 @@
       "comment" : "Bundle name",
       "extractionState" : "extracted_with_value",
       "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "القطاع العام"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "new",
