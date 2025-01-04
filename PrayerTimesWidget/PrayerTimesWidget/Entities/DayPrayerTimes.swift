@@ -27,9 +27,9 @@ extension DayPrayerTimes {
         let hijriFormatter = DateFormatter()
         let timeFormatter = DateFormatter()
 
-        gregorianFormatter.dateFormat = "dd/mm/yyyy"
+        gregorianFormatter.dateFormat = "dd/MM/yyyy"
         hijriFormatter.calendar = Calendar(identifier: .islamicUmmAlQura)
-        hijriFormatter.dateFormat = "dd/mm/yyyy"
+        hijriFormatter.dateFormat = "dd/MM/yyyy"
         timeFormatter.dateFormat = "h:mm a"
         timeFormatter.amSymbol = "am"
         timeFormatter.pmSymbol = "pm"

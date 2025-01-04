@@ -190,8 +190,7 @@
 		D9EAEF532D27199100C8D1F4 /* PrayerTimesWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = PrayerTimesWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		D9EAEF552D27199100C8D1F4 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		D9EAEF572D27199100C8D1F4 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
-		D9EAEF832D2950DF00C8D1F4 /* PublicSector.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PublicSector.entitlements; sourceTree = "<group>"; };
-		D9EAEF842D29511800C8D1F4 /* PrayerTimesWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PrayerTimesWidgetExtension.entitlements; sourceTree = "<group>"; };
+		D9EAEF832D2950DF00C8D1F4 /* PublicSector.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Resources/PublicSector.entitlements; sourceTree = "<group>"; };
 		D9EE4FD82CE10E6000C5AEE4 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D9EE4FDA2CE1144500C5AEE4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -344,7 +343,6 @@
 		D9A70DAD2C850B78002F6583 = {
 			isa = PBXGroup;
 			children = (
-				D9EAEF842D29511800C8D1F4 /* PrayerTimesWidgetExtension.entitlements */,
 				D9DA3AA22D15FB72001AB599 /* ci_scripts */,
 				D9089CE02CFDAC0200881BB6 /* Modules */,
 				D9A70DB82C850B78002F6583 /* PublicSector */,
@@ -370,7 +368,6 @@
 		D9A70DB82C850B78002F6583 /* PublicSector */ = {
 			isa = PBXGroup;
 			children = (
-				D9EAEF832D2950DF00C8D1F4 /* PublicSector.entitlements */,
 				D9C85AC42CF38ED800730F12 /* Components */,
 				D98903A92CDE346C00717646 /* Dependencies */,
 				D98D2BD52CA9ACA90050F2A8 /* Extensions */,
@@ -446,6 +443,7 @@
 				D9EE4FD82CE10E6000C5AEE4 /* LaunchScreen.storyboard */,
 				D9EE4FDA2CE1144500C5AEE4 /* Info.plist */,
 				D9B4AB4F2D24B1E300E201CA /* InfoPlist.xcstrings */,
+				D9EAEF832D2950DF00C8D1F4 /* PublicSector.entitlements */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -1059,7 +1057,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
-				CODE_SIGN_ENTITLEMENTS = PublicSector/PublicSector.entitlements;
+				CODE_SIGN_ENTITLEMENTS = PublicSector/Resources/PublicSector.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"PublicSector/Preview Content\"";
@@ -1098,7 +1096,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
-				CODE_SIGN_ENTITLEMENTS = PublicSector/PublicSector.entitlements;
+				CODE_SIGN_ENTITLEMENTS = PublicSector/Resources/PublicSector.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"PublicSector/Preview Content\"";
@@ -1204,7 +1202,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
-				CODE_SIGN_ENTITLEMENTS = PrayerTimesWidgetExtension.entitlements;
+				CODE_SIGN_ENTITLEMENTS = PrayerTimesWidget/PrayerTimesWidgetExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = AV5475SLZ7;
@@ -1237,7 +1235,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
-				CODE_SIGN_ENTITLEMENTS = PrayerTimesWidgetExtension.entitlements;
+				CODE_SIGN_ENTITLEMENTS = PrayerTimesWidget/PrayerTimesWidgetExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = AV5475SLZ7;

@@ -23,14 +23,6 @@ extension Date {
               let rhsMinute = rhsComponents.minute
         else { return false }
 
-        return if lhsHour < rhsHour {
-            true
-        } else if lhsHour == rhsHour && lhsMinute < rhsMinute {
-            true
-        } else if lhsHour == rhsHour && lhsMinute == rhsMinute {
-            true
-        } else {
-            false
-        }
+        return lhsHour < rhsHour || (lhsHour == rhsHour && lhsMinute <= rhsMinute)
     }
 }
