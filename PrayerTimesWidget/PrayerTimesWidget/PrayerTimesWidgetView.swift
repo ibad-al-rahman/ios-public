@@ -162,8 +162,8 @@ struct PrayerTimesWidget: Widget {
                 .background()
             }
         }
-        .configurationDisplayName("My Widget")
-        .description("This is an example widget.")
+        .configurationDisplayName("Prayer Times")
+        .description("View prayer times")
         .supportedFamilies([.systemMedium])
     }
 }
