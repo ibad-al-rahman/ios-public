@@ -10,7 +10,7 @@ import IbadRepositories
 import SwiftUI
 import WidgetKit
 
-struct Provider: TimelineProvider {
+struct PrayerTimeTimelineProvider: TimelineProvider {
     @Dependency(\.prayerTimesLocalRepo) private var prayerTimesLocalRepo
 
     func placeholder(in context: Context) -> PrayerTimeEntry {
@@ -42,7 +42,8 @@ struct Provider: TimelineProvider {
     }
 
     func getTimeline(
-        in context: Context, completion: @escaping (Timeline<Entry>) -> ()
+        in context: Context,
+        completion: @escaping (Timeline<PrayerTimeEntry>) -> ()
     ) {
         let currentDate = Date.now
         let components = Calendar.current.dateComponents(
@@ -105,7 +106,9 @@ struct PrayerTimesWidget: Widget {
     let kind: String = "PrayerTimesWidget"
 
     var body: some WidgetConfiguration {
-        StaticConfiguration(kind: kind, provider: Provider()) { entry in
+        StaticConfiguration(
+            kind: kind, provider: PrayerTimeTimelineProvider()
+        ) { entry in
             if #available(iOS 17.0, *) {
                 PrayerTimesWidgetView(store: Store(
                     initialState: PrayerTimesWidgetFeature.State(
