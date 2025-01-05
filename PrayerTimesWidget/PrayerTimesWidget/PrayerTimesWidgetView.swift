@@ -16,7 +16,7 @@ struct PrayerTimesWidgetView: View {
     var body: some View {
         content
             .onAppear { store.send(.onAppear) }
-            .dynamicTypeSize(.large)
+            .dynamicTypeSize(.xLarge)
     }
 
     @ViewBuilder
@@ -91,7 +91,7 @@ struct PrayerTimesWidgetView: View {
         Image("Logo")
             .resizable()
             .scaledToFit()
-            .frame(width: UIScreen.main.bounds.width / 12)
+            .frame(width: 32)
     }
 
     @ViewBuilder
@@ -101,9 +101,9 @@ struct PrayerTimesWidgetView: View {
         systemImage: String
     ) -> some View {
         HStack {
-            Text(prayer.localizedStringKey).font(.caption2)
+            Text(prayer.localizedStringKey).font(.caption)
             Spacer()
-            Text(time, format: .dateTime.hour().minute()).font(.caption2)
+            Text(time, format: .dateTime.hour().minute()).font(.caption)
         }
         .padding(2)
         .padding(.horizontal, 8)
