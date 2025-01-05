@@ -25,17 +25,17 @@ struct DayPrayerTimes: Equatable, Identifiable {
     }
 
     func getPrayer(time: Date) -> Prayer {
-        return if time <= fajer {
+        return if time < fajer {
             .ishaa
-        } else if time <= sunrise {
+        } else if time < sunrise {
             .fajer
-        } else if time <= dhuhr {
+        } else if time < dhuhr {
             .sunrise
-        } else if time <= asr {
+        } else if time < asr {
             .dhuhr
-        } else if time <= maghrib {
+        } else if time < maghrib {
             .asr
-        } else if time <= ishaa {
+        } else if time < ishaa {
             .maghrib
         } else {
             .ishaa
