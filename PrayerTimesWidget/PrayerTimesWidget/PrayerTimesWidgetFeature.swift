@@ -17,6 +17,8 @@ struct PrayerTimesWidgetFeature {
     struct State: Equatable {
         let date: Date
         let currentPrayer: Prayer
+        let nextPrayer: Prayer
+        let nextPrayerDate: Date
         var todaysPrayerTimes: DayPrayerTimes?
     }
 

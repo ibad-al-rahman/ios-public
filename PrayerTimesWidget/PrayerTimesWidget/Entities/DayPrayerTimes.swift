@@ -12,6 +12,8 @@ struct DayPrayerTimes: Equatable, Identifiable {
     let id: Int
     let gregorian: Date
     let hijri: String
+    let hijriDay: Int
+    let hijriMonth: String
     var fajer: Date
     var sunrise: Date
     var dhuhr: Date
@@ -39,6 +41,45 @@ struct DayPrayerTimes: Equatable, Identifiable {
             .maghrib
         } else {
             .ishaa
+        }
+    }
+
+    func getNextPrayer(time: Date) -> Prayer {
+        return if time < fajer {
+            .fajer
+        } else if time < sunrise {
+            .sunrise
+        } else if time < dhuhr {
+            .dhuhr
+        } else if time < asr {
+            .asr
+        } else if time < maghrib {
+            .maghrib
+        } else if time < ishaa {
+            .ishaa
+        } else {
+            .fajer
+        }
+    }
+
+    func getNextPrayerTime(
+        time: Date,
+        tomorrowPrayerTimes: DayPrayerTimes
+    ) -> Date {
+        return if time < fajer {
+            fajer
+        } else if time < sunrise {
+            sunrise
+        } else if time < dhuhr {
+            dhuhr
+        } else if time < asr {
+            asr
+        } else if time < maghrib {
+            maghrib
+        } else if time < ishaa {
+            ishaa
+        } else {
+            tomorrowPrayerTimes.fajer
         }
     }
 }
@@ -74,9 +115,17 @@ extension DayPrayerTimes {
 
         guard let hijriDate = hijriFormatter.date(from: model.hijri)
         else { return nil }
+
+        hijriFormatter.dateFormat = "d"
+        guard let hijriDay = Int(hijriFormatter.string(from: hijriDate))
+        else { return nil }
+        self.hijriDay = hijriDay
+
+        hijriFormatter.dateFormat = "MMMM"
+        self.hijriMonth = hijriFormatter.string(from: hijriDate)
+
         hijriFormatter.dateFormat = "d MMMM yyyy"
-        let hijri = hijriFormatter.string(from: hijriDate)
-        self.hijri = hijri
+        self.hijri = hijriFormatter.string(from: hijriDate)
 
         guard let fajer = timeFormatter.date(from: model.prayerTimes.fajer)
         else { return nil }
@@ -170,6 +219,8 @@ extension DayPrayerTimes {
             id: 0,
             gregorian: .now,
             hijri: "1/1/1444",
+            hijriDay: 1,
+            hijriMonth: "Muharram",
             fajer: .now,
             sunrise: .now,
             dhuhr: .now,
