@@ -12,77 +12,106 @@ import WidgetKit
 
 struct PrayerTimesWidgetView: View {
     let store: StoreOf<PrayerTimesWidgetFeature>
+    @Environment(\.widgetFamily) var widgetFamily
 
     var body: some View {
         content
             .onAppear { store.send(.onAppear) }
-            .dynamicTypeSize(.xLarge)
     }
 
     @ViewBuilder
     private var content: some View {
-        if let prayerTimes = store.todaysPrayerTimes {
-            mediumContent(prayerTimes)
-        } else {
-            mediumContent(.placeholder())
-                .redacted(reason: .placeholder)
+        switch widgetFamily {
+        case .systemSmall:
+            smallContent
+
+        case .systemMedium:
+            if let prayerTimes = store.todaysPrayerTimes {
+                mediumContent(prayerTimes)
+            } else {
+                mediumContent(.placeholder())
+                    .redacted(reason: .placeholder)
+            }
+
+        default:
+            EmptyView()
+        }
+    }
+
+    private var smallContent: some View {
+        VStack(alignment: .leading, spacing: 0) {
+            HStack(alignment: .top) {
+                logo
+                Spacer()
+                VStack {
+                    if let hijriDay = store.todaysPrayerTimes?.hijriDay,
+                       let hijriMonth = store.todaysPrayerTimes?.hijriMonth {
+                        Text("\(hijriDay)")
+                            .bold()
+
+                        Text(hijriMonth)
+                            .font(.caption)
+                    } else {
+                        Text(verbatim: "18")
+                            .redacted(reason: .placeholder)
+                            .font(.caption)
+
+                        Text(verbatim: "Placeholder")
+                            .redacted(reason: .placeholder)
+                            .font(.caption)
+                    }
+                }
+            }
+            Spacer()
+            HStack(spacing: 0) {
+                Text(store.nextPrayer.localizedStringKey)
+                    .bold()
+                Text(" ")
+                Text("after:")
+            }
+            Text(store.nextPrayerDate, style: .timer)
+                .bold()
+                .monospacedDigit()
         }
     }
 
     private func mediumContent(_ prayerTimes: DayPrayerTimes) -> some View {
-        VStack {
-            HStack {
-                logo
-                Spacer()
-                if let hijriDate = store.todaysPrayerTimes?.hijri {
-                    Text(hijriDate)
-                        .font(.caption)
-                } else {
-                    Text(verbatim: "Placeholder").redacted(reason: .placeholder)
-                        .font(.caption)
-                }
-            }
+        HStack {
+            smallContent
 
-            HStack {
-                VStack {
-                    prayerTime(
-                        .fajer,
-                        time: prayerTimes.fajer,
-                        systemImage: "moon.stars"
-                    )
-                    prayerTime(
-                        .sunrise,
-                        time: prayerTimes.sunrise,
-                        systemImage: "sunrise"
-                    )
-                    prayerTime(
-                        .dhuhr,
-                        time: prayerTimes.dhuhr,
-                        systemImage: "sun.max"
-                    )
-                }
+            Divider()
 
-                Divider()
-                    .frame(width: 1)
-                    .overlay(.gray.opacity(0.8))
-
-                VStack {
-                    prayerTime(
-                        .asr,
-                        time: prayerTimes.asr,
-                        systemImage: "sun.min"
-                    )
-                    prayerTime(
-                        .maghrib,
-                        time: prayerTimes.maghrib,
-                        systemImage: "sunset"
-                    )
-                    prayerTime(
-                        .ishaa,
-                        time: prayerTimes.ishaa,
-                        systemImage: "moon"
-                    )
-                }
+            VStack(alignment: .leading, spacing: 0) {
+                prayerTime(
+                    .fajer,
+                    time: prayerTimes.fajer,
+                    systemImage: "moon.stars"
+                )
+                prayerTime(
+                    .sunrise,
+                    time: prayerTimes.sunrise,
+                    systemImage: "sunrise"
+                )
+                prayerTime(
+                    .dhuhr,
+                    time: prayerTimes.dhuhr,
+                    systemImage: "sun.max"
+                )
+                prayerTime(
+                    .asr,
+                    time: prayerTimes.asr,
+                    systemImage: "sun.min"
+                )
+                prayerTime(
+                    .maghrib,
+                    time: prayerTimes.maghrib,
+                    systemImage: "sunset"
+                )
+                prayerTime(
+                    .ishaa,
+                    time: prayerTimes.ishaa,
+                    systemImage: "moon"
+                )
             }
         }
     }
@@ -91,7 +120,7 @@ struct PrayerTimesWidgetView: View {
         Image("Logo")
             .resizable()
             .scaledToFit()
-            .frame(width: 32)
+            .frame(width: 52)
     }
 
     @ViewBuilder
@@ -101,9 +130,9 @@ struct PrayerTimesWidgetView: View {
         systemImage: String
     ) -> some View {
         HStack {
-            Text(prayer.localizedStringKey).font(.caption)
+            Text(prayer.localizedStringKey).font(.caption2)
             Spacer()
-            Text(time, format: .dateTime.hour().minute()).font(.caption)
+            Text(time, format: .dateTime.hour().minute()).font(.caption2)
         }
         .padding(2)
         .padding(.horizontal, 8)
