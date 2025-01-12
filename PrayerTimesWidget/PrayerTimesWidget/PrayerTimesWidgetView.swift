@@ -17,6 +17,7 @@ struct PrayerTimesWidgetView: View {
     var body: some View {
         content
             .onAppear { store.send(.onAppear) }
+            .dynamicTypeSize(.large)
     }
 
     @ViewBuilder
