@@ -43,11 +43,11 @@ struct EditSinglePrayerTimeFeature {
         Reduce { state, action in
             switch action {
             case .view(.onTapInc):
-                state.offset.inc(state.prayer)
+                state.$offset.withLock { $0.inc(state.prayer) }
                 return .none
 
             case .view(.onTapDec):
-                state.offset.dec(state.prayer)
+                state.$offset.withLock { $0.dec(state.prayer) }
                 return .none
 
             default: return .none

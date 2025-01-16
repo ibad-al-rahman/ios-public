@@ -90,7 +90,9 @@ struct DailyPrayerTimesFeature {
                 return .none
 
             case let .reducer(.setSha1(sha1, year)):
-                state.prayerTimesSha1.setSha1(sha1: sha1, for: year)
+                state.$prayerTimesSha1.withLock {
+                    $0.setSha1(sha1: sha1, for: year)
+                }
                 return .none
 
             case .reducer(.appendCheckedYear(let year)):
@@ -170,9 +172,11 @@ struct DailyPrayerTimesFeature {
                 await send(.reducer(.appendCheckedYear(year: year)))
             }
 
-            guard let day = prayerTimesLocalRepo.getDayPrayerTimes(
+            @SharedReader(.localPrayerTimes(year: year)) var localPrayerTimes = .empty
+            guard let day = localPrayerTimes.getDayPrayerTimes(
                 year: year, month: month, day: day
             ) else { return }
+
             await send(
                 .reducer(.getDayPrayerTimes(DayPrayerTimes(from: day))),
                 animation: .default
@@ -183,9 +187,13 @@ struct DailyPrayerTimesFeature {
     private func persistPrayerTimes(year: Int) async -> Result<(), ServiceError> {
         switch await prayerTimesRemoteRepo.getYearPrayerTimes(year: year) {
         case .success(let daysOfYear):
-            prayerTimesLocalRepo.createYearPrayerTimes(
-                daysOfYear.map { $0.intoModel }
-            )
+            @Shared(.localPrayerTimes(year: year)) var localPrayerTimes = .empty
+            $localPrayerTimes.withLock {
+                $0 = YearPrayerTimesStorage(
+                    year: IdentifiedArray(uniqueElements: daysOfYear.map { day in day.intoStorage }),
+                    sha1: ""
+                )
+            }
             return .success(())
 
         case .failure(let why):

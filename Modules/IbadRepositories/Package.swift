@@ -17,13 +17,26 @@ let package = Package(
         .package(
             url: "https://github.com/pointfreeco/swift-dependencies",
             .upToNextMajor(from: "1.6.1")
+        ),
+        .package(
+            url: "https://github.com/pointfreeco/swift-identified-collections",
+            .upToNextMajor(from: "1.1.0")
+        ),
+        .package(
+            url: "https://github.com/pointfreeco/swift-sharing",
+            .upToNextMajor(from: "2.1.0")
         )
     ],
     targets: [
         .target(name: "IbadRepositories", dependencies: [
             .product(name: "Alamofire", package: "Alamofire"),
             .product(name: "Dependencies", package: "swift-dependencies"),
-            .product(name: "DependenciesMacros", package: "swift-dependencies")
+            .product(name: "DependenciesMacros", package: "swift-dependencies"),
+            .product(
+                name: "IdentifiedCollections",
+                package: "swift-identified-collections"
+            ),
+            .product(name: "Sharing", package: "swift-sharing")
         ]),
         .testTarget(name: "IbadRepositoriesTests", dependencies: ["IbadRepositories"]),
     ]
