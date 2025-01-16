@@ -1,5 +1,5 @@
 {
-  "originHash" : "264b915b02a6f70cd196f363a9db6f53d69dba286dbd07d00ea7abbc38b0db79",
+  "originHash" : "b511fad44e5f029461bd4440db0b592cf471cf9b9d40488412712190114fdb49",
   "pins" : [
     {
       "identity" : "alamofire",
@@ -51,8 +51,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/pointfreeco/swift-composable-architecture",
       "state" : {
-        "revision" : "69247baf7be2fd6f5820192caef0082d01849cd0",
-        "version" : "1.16.1"
+        "revision" : "2ebda6ae2b155a5c3d75aff5f6d25c024bc91311",
+        "version" : "1.17.1"
       }
     },
     {
@@ -114,8 +114,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/pointfreeco/swift-sharing",
       "state" : {
-        "revision" : "974e51b3612317ba5883a73dc9fd9e2409a11f2d",
-        "version" : "1.1.1"
+        "revision" : "641edfa456fa6a927d12137c38fc71cbd9861be0",
+        "version" : "2.1.0"
       }
     },
     {

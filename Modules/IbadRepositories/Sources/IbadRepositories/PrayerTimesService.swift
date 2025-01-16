@@ -111,4 +111,21 @@ extension DayPrayerTimesResponse {
             event: self.event.map { DayEventModel(ar: $0.ar, en: $0.en) }
         )
     }
+
+    public var intoStorage: DayPrayerTimesStorage {
+        DayPrayerTimesStorage(
+            id: self.id,
+            gregorian: self.gregorian,
+            hijri: self.hijri,
+            prayerTimes: PrayerTimesStorage(
+                fajer: self.prayerTimes.fajer,
+                sunrise: self.prayerTimes.sunrise,
+                dhuhr: self.prayerTimes.dhuhr,
+                asr: self.prayerTimes.asr,
+                maghrib: self.prayerTimes.maghrib,
+                ishaa: self.prayerTimes.ishaa
+            ),
+            event: self.event.map { DayEventStorage(ar: $0.ar, en: $0.en) }
+        )
+    }
 }

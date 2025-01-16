@@ -16,7 +16,7 @@ let package = Package(
         ),
         .package(
             url: "https://github.com/pointfreeco/swift-sharing",
-            .upToNextMajor(from: "1.0.0")
+            .upToNextMajor(from: "2.1.0")
         )
     ],
     targets: [
