@@ -25,4 +25,15 @@ enum Prayer: Equatable {
         case .ishaa: "Ishaa"
         }
     }
+
+    var symbol: String {
+        switch self {
+        case .fajer: "moon.stars"
+        case .sunrise: "sunrise"
+        case .dhuhr: "sun.max"
+        case .asr: "sun.min"
+        case .maghrib: "sunset"
+        case .ishaa: "moon"
+        }
+    }
 }

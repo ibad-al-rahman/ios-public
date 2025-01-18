@@ -158,7 +158,7 @@ struct PrayerTimesWidget: Widget {
         }
         .configurationDisplayName("Prayer Times")
         .description("View prayer times")
-        .supportedFamilies([.systemSmall, .systemMedium])
+        .supportedFamilies([.systemSmall, .systemMedium, .accessoryRectangular])
     }
 }
 
