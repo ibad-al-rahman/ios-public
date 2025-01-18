@@ -41,13 +41,13 @@ struct PrayerTimesWidgetView: View {
 
     private var smallContent: some View {
         VStack(alignment: .leading, spacing: 0) {
-            HStack(alignment: .top) {
+            HStack(alignment: .center) {
                 logo
                 Spacer()
                 VStack {
                     if let hijriDay = store.todaysPrayerTimes?.hijriDay,
                        let hijriMonth = store.todaysPrayerTimes?.hijriMonth {
-                        Text("\(hijriDay)")
+                        Text(hijriDay)
                             .bold()
 
                         Text(hijriMonth)
@@ -67,7 +67,7 @@ struct PrayerTimesWidgetView: View {
             HStack(spacing: 0) {
                 Text(store.nextPrayer.localizedStringKey)
                     .bold()
-                Text(" ")
+                Text(verbatim: " ")
                 Text("after:")
             }
             Text(store.nextPrayerDate, style: .timer)

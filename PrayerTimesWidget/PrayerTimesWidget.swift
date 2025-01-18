@@ -57,7 +57,6 @@ struct PrayerTimeTimelineProvider: TimelineProvider {
         ),
               let prayerTimes = DayPrayerTimes(from: dayPrayerTimes)
         else { return [] }
-
         let secondsPerDay = 60 * 60 * 24.0
         let tomorrowMidnight = Calendar.current.startOfDay(
             for: .now.addingTimeInterval(secondsPerDay)
