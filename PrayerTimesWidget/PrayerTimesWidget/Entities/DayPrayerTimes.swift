@@ -12,7 +12,7 @@ struct DayPrayerTimes: Equatable, Identifiable {
     let id: Int
     let gregorian: Date
     let hijri: String
-    let hijriDay: Int
+    let hijriDay: String
     let hijriMonth: String
     var fajer: Date
     var sunrise: Date
@@ -116,9 +116,7 @@ extension DayPrayerTimes {
         else { return nil }
 
         hijriFormatter.dateFormat = "d"
-        guard let hijriDay = Int(hijriFormatter.string(from: hijriDate))
-        else { return nil }
-        self.hijriDay = hijriDay
+        self.hijriDay = hijriFormatter.string(from: hijriDate)
 
         hijriFormatter.dateFormat = "MMMM"
         self.hijriMonth = hijriFormatter.string(from: hijriDate)
@@ -216,7 +214,7 @@ extension DayPrayerTimes {
             id: 0,
             gregorian: .now,
             hijri: "1/1/1444",
-            hijriDay: 1,
+            hijriDay: "1",
             hijriMonth: "Muharram",
             fajer: .now,
             sunrise: .now,
