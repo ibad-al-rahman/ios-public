@@ -86,7 +86,7 @@
         "ar" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "رقم الإصدار"
+            "value" : "البنية"
           }
         }
       }
@@ -532,7 +532,7 @@
         "ar" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "رقم الإصدار الدلالي"
+            "value" : "الإصدار"
           }
         },
         "en" : {
