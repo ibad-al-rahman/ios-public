@@ -11,8 +11,7 @@ import IbadRepositories
 
 @Reducer
 struct DailyPrayerTimesFeature {
-    @Dependency(\.prayerTimesLocalRepo) private var prayerTimesLocalRepo
-    @Dependency(\.prayerTimesRemoteRepo) private var prayerTimesRemoteRepo
+    @Dependency(\.prayerTimesRepository) private var prayerTimesRepository
 
     @ObservableState
     struct State: Equatable {
@@ -124,7 +123,8 @@ struct DailyPrayerTimesFeature {
 
             guard state.checkedYears.contains(year) == false
             else {
-                guard let day = prayerTimesLocalRepo.getDayPrayerTimes(
+                @SharedReader(.localPrayerTimes(year: year)) var localPrayerTimes = .empty
+                guard let day = localPrayerTimes.getDayPrayerTimes(
                     year: year, month: month, day: day
                 ) else { return }
                 await send(
@@ -135,7 +135,7 @@ struct DailyPrayerTimesFeature {
             }
 
             let yearSha1 = state.prayerTimesSha1.getSha1(year: year)
-            let responseSha = await prayerTimesRemoteRepo.getSha1(year: year)
+            let responseSha = await prayerTimesRepository.getSha1(year: year)
 
             var isDirty = false
             var newSha = yearSha1
@@ -185,7 +185,7 @@ struct DailyPrayerTimesFeature {
     }
 
     private func persistPrayerTimes(year: Int) async -> Result<(), ServiceError> {
-        switch await prayerTimesRemoteRepo.getYearPrayerTimes(year: year) {
+        switch await prayerTimesRepository.getYearPrayerTimes(year: year) {
         case .success(let daysOfYear):
             @Shared(.localPrayerTimes(year: year)) var localPrayerTimes = .empty
             $localPrayerTimes.withLock {

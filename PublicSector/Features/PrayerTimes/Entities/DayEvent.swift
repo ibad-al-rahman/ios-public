@@ -19,12 +19,6 @@ extension DayEvent {
         self.ar = event.ar
     }
 
-    init?(from model: DayPrayerTimesModel) {
-        guard let event = model.event else { return nil }
-        self.en = event.en
-        self.ar = event.ar
-    }
-
     init?(from storage: DayPrayerTimesStorage) {
         guard let event = storage.event else { return nil }
         self.en = event.en

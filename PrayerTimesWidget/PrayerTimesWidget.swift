@@ -11,8 +11,6 @@ import SwiftUI
 import WidgetKit
 
 struct PrayerTimeTimelineProvider: TimelineProvider {
-    @Dependency(\.prayerTimesLocalRepo) private var prayerTimesLocalRepo
-
     func placeholder(in context: Context) -> PrayerTimeEntry {
         PrayerTimeEntry(
             date: .now,
@@ -50,10 +48,13 @@ struct PrayerTimeTimelineProvider: TimelineProvider {
         )
         guard let year = components.year,
               let month = components.month,
-              let day = components.day,
-              let dayPrayerTimes = prayerTimesLocalRepo.getDayPrayerTimes(
-                year: year, month: month, day: day
-              ),
+              let day = components.day
+        else { return [] }
+
+        @SharedReader(.localPrayerTimes(year: year)) var localPrayerTimes = .empty
+        guard let dayPrayerTimes = localPrayerTimes.getDayPrayerTimes(
+            year: year, month: month, day: day
+        ),
               let prayerTimes = DayPrayerTimes(from: dayPrayerTimes)
         else { return [] }
 
@@ -66,10 +67,13 @@ struct PrayerTimeTimelineProvider: TimelineProvider {
         )
         guard let tomorrowYear = tomorrowComponents.year,
               let tomorrowMonth = tomorrowComponents.month,
-              let tomorrowDay = tomorrowComponents.day,
-              let dayPrayerTimes = prayerTimesLocalRepo.getDayPrayerTimes(
-                year: tomorrowYear, month: tomorrowMonth, day: tomorrowDay
-              ),
+              let tomorrowDay = tomorrowComponents.day
+        else { return [] }
+
+        @SharedReader(.localPrayerTimes(year: tomorrowYear)) var tomorrowsLocalPrayerTimes = .empty
+        guard let dayPrayerTimes = tomorrowsLocalPrayerTimes.getDayPrayerTimes(
+            year: tomorrowYear, month: tomorrowMonth, day: tomorrowDay
+        ),
               let tomorrowPrayerTimes = DayPrayerTimes(from: dayPrayerTimes)
         else { return [] }
 
