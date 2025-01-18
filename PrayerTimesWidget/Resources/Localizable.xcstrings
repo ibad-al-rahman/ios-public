@@ -17,6 +17,17 @@
         }
       }
     },
+    "After:" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "بعد:"
+          }
+        }
+      }
+    },
     "Asr" : {
       "extractionState" : "manual",
       "localizations" : {

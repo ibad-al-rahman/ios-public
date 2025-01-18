@@ -34,6 +34,9 @@ struct PrayerTimesWidgetView: View {
                     .redacted(reason: .placeholder)
             }
 
+        case .accessoryRectangular:
+            accessoryRectangularContent
+
         default:
             EmptyView()
         }
@@ -113,6 +116,28 @@ struct PrayerTimesWidgetView: View {
                     time: prayerTimes.ishaa,
                     systemImage: "moon"
                 )
+            }
+        }
+    }
+
+    private var accessoryRectangularContent: some View {
+        HStack {
+            Image(systemName: store.nextPrayer.symbol)
+            Spacer()
+            VStack(alignment: .leading) {
+                Text(store.nextPrayer.localizedStringKey)
+                    .bold()
+                Text(
+                    store.nextPrayerDate,
+                    format: .dateTime.hour().minute()
+                )
+                .bold()
+                HStack(spacing: 0) {
+                    Text("After:")
+                    Text(verbatim: " ")
+                    Text(store.nextPrayerDate, style: .timer)
+                        .monospacedDigit()
+                }
             }
         }
     }
