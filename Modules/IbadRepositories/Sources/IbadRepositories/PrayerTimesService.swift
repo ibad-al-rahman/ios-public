@@ -27,22 +27,6 @@ struct PrayerTimesService {
         return .success(sha1)
     }
 
-    func getDayPrayerTimes(
-        year: Int, month: Int, day: Int
-    ) async -> DayPrayerTimesResponse? {
-        let endpoint = PrayerTimesEndpoint.getDayPrayerTimes(
-            year: String(format: "%04d", year),
-            month: String(format: "%02d", month),
-            day: String(format: "%02d", day)
-        )
-        let response = await AF.request(endpoint.url, interceptor: .retryPolicy)
-            .cacheResponse(using: .cache)
-            .validate()
-            .serializingDecodable(DayPrayerTimesResponse.self)
-            .response
-        return response.value
-    }
-
     func getYearPrayerTimes(
         year: Int
     ) async -> Result<[DayPrayerTimesResponse], ServiceError> {
@@ -95,23 +79,6 @@ public struct DayEventResponse: Decodable, Sendable {
 }
 
 extension DayPrayerTimesResponse {
-    public var intoModel: DayPrayerTimesModel {
-        DayPrayerTimesModel(
-            id: self.id,
-            gregorian: self.gregorian,
-            hijri: self.hijri,
-            prayerTimes: PrayerTimesModel(
-                fajer: self.prayerTimes.fajer,
-                sunrise: self.prayerTimes.sunrise,
-                dhuhr: self.prayerTimes.dhuhr,
-                asr: self.prayerTimes.asr,
-                maghrib: self.prayerTimes.maghrib,
-                ishaa: self.prayerTimes.ishaa
-            ),
-            event: self.event.map { DayEventModel(ar: $0.ar, en: $0.en) }
-        )
-    }
-
     public var intoStorage: DayPrayerTimesStorage {
         DayPrayerTimesStorage(
             id: self.id,

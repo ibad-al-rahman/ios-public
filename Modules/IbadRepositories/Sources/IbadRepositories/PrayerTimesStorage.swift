@@ -58,8 +58,13 @@ public struct DayEventStorage: Codable, Sendable {
 
 public extension SharedKey where Self == FileStorageKey<YearPrayerTimesStorage> {
     static func localPrayerTimes(year: Int) -> Self {
+        let baseUrl = FileManager.default.containerURL(
+            forSecurityApplicationGroupIdentifier: "group.com.ibadalrahman.PublicSector"
+        )?.appendingPathComponent(
+            "Documents", conformingTo: .directory
+        ) ?? .documentsDirectory
         return fileStorage(
-            .documentsDirectory
+            baseUrl
                 .appendingPathComponent("prayerTimes", conformingTo: .directory)
                 .appending(component: "\(year).json")
         )

@@ -6,7 +6,7 @@
     },
     "%lld" : {
       "localizations" : {
-        "ar" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "%lld"
@@ -21,6 +21,12 @@
             "state" : "translated",
             "value" : "بعد:"
           }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "after:"
+          }
         }
       }
     },
@@ -31,6 +37,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "العصر"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Asr"
           }
         }
       }
@@ -43,6 +55,12 @@
             "state" : "translated",
             "value" : "الظهر"
           }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dhuhr"
+          }
         }
       }
     },
@@ -53,6 +71,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "الفجر"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fajer"
           }
         }
       }
@@ -65,6 +89,12 @@
             "state" : "translated",
             "value" : "العشاء"
           }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ishaa"
+          }
         }
       }
     },
@@ -76,6 +106,12 @@
             "state" : "translated",
             "value" : "المغرب"
           }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Maghrib"
+          }
         }
       }
     },
@@ -85,6 +121,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "مواقيت الصلاة"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Prayer Times"
           }
         }
       }
@@ -97,6 +139,12 @@
             "state" : "translated",
             "value" : "الشروق"
           }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sunrise"
+          }
         }
       }
     },
@@ -106,6 +154,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "عرض أوقات الصلاة"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "View prayer times"
           }
         }
       }

@@ -100,57 +100,6 @@ extension DayPrayerTimes {
         self.event = DayEvent(from: response)
     }
 
-    init?(from model: DayPrayerTimesModel) {
-        let gregorianFormatter = DateFormatter()
-        let hijriFormatter = DateFormatter()
-        let timeFormatter = DateFormatter()
-
-        gregorianFormatter.dateFormat = "dd/MM/yyyy"
-        hijriFormatter.calendar = Calendar(identifier: .islamicUmmAlQura)
-        hijriFormatter.dateFormat = "dd/MM/yyyy"
-        timeFormatter.dateFormat = "h:mm a"
-        timeFormatter.amSymbol = "am"
-        timeFormatter.pmSymbol = "pm"
-
-        self.id = model.id
-
-        guard let gregorian = gregorianFormatter.date(from: model.gregorian)
-        else { return nil }
-        self.gregorian = gregorian
-
-        guard let hijriDate = hijriFormatter.date(from: model.hijri)
-        else { return nil }
-        hijriFormatter.dateFormat = "d MMMM yyyy"
-        let hijri = hijriFormatter.string(from: hijriDate)
-        self.hijri = hijri
-
-        guard let fajer = timeFormatter.date(from: model.prayerTimes.fajer)
-        else { return nil }
-        self.fajer = fajer
-
-        guard let sunrise = timeFormatter.date(from: model.prayerTimes.sunrise)
-        else { return nil }
-        self.sunrise = sunrise
-
-        guard let dhuhr = timeFormatter.date(from: model.prayerTimes.dhuhr)
-        else { return nil }
-        self.dhuhr = dhuhr
-
-        guard let asr = timeFormatter.date(from: model.prayerTimes.asr)
-        else { return nil }
-        self.asr = asr
-
-        guard let maghrib = timeFormatter.date(from: model.prayerTimes.maghrib)
-        else { return nil }
-        self.maghrib = maghrib
-
-        guard let ishaa = timeFormatter.date(from: model.prayerTimes.ishaa)
-        else { return nil }
-        self.ishaa = ishaa
-
-        self.event = DayEvent(from: model)
-    }
-
     init?(from storage: DayPrayerTimesStorage) {
         let gregorianFormatter = DateFormatter()
         let hijriFormatter = DateFormatter()

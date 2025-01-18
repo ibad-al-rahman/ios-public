@@ -20,7 +20,6 @@ struct DayPrayerTimes: Equatable, Identifiable {
     var asr: Date
     var maghrib: Date
     var ishaa: Date
-    var event: DayEvent?
 
     var sorted: [Date] {
         [fajer, sunrise, dhuhr, asr, maghrib, ishaa]
@@ -85,7 +84,7 @@ struct DayPrayerTimes: Equatable, Identifiable {
 }
 
 extension DayPrayerTimes {
-    init?(from model: DayPrayerTimesModel) {
+    init?(from model: DayPrayerTimesStorage) {
         let calendar = Calendar.current
         let gregorianFormatter = DateFormatter()
         let hijriFormatter = DateFormatter()
@@ -210,8 +209,6 @@ extension DayPrayerTimes {
         let ishaaDate = calendar.date(from: ishaaComponents)
         guard let ishaaDate else { return nil }
         self.ishaa = ishaaDate
-
-        self.event = DayEvent(from: model)
     }
 
     static func placeholder() -> DayPrayerTimes {

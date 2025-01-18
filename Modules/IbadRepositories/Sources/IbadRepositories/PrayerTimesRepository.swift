@@ -1,5 +1,5 @@
 //
-//  PrayerTimesRemoteRepo.swift
+//  PrayerTimesRepository.swift
 //  IbadRepositories
 //
 //  Created by Hamza Jadid on 02/12/2024.
@@ -10,7 +10,7 @@ import DependenciesMacros
 import Foundation
 
 @DependencyClient
-public struct PrayerTimesRemoteRepo: Sendable {
+public struct PrayerTimesRepository: Sendable {
     public var getSha1: @Sendable (
         _ year: Int
     ) async -> Result<String, ServiceError> = { _ in .failure(.unknown) }
@@ -21,11 +21,11 @@ public struct PrayerTimesRemoteRepo: Sendable {
     }
 }
 
-extension PrayerTimesRemoteRepo: DependencyKey {
-    public static var liveValue: PrayerTimesRemoteRepo {
+extension PrayerTimesRepository: DependencyKey {
+    public static var liveValue: PrayerTimesRepository {
         let service = PrayerTimesService()
 
-        return PrayerTimesRemoteRepo(
+        return PrayerTimesRepository(
             getSha1: { year in await service.getSha1(year: year) },
             getYearPrayerTimes: { year in
                 await service.getYearPrayerTimes(year: year)
@@ -34,22 +34,22 @@ extension PrayerTimesRemoteRepo: DependencyKey {
     }
 }
 
-extension PrayerTimesRemoteRepo: TestDependencyKey {
-    public static var previewValue: PrayerTimesRemoteRepo {
-        PrayerTimesRemoteRepo(
+extension PrayerTimesRepository: TestDependencyKey {
+    public static var previewValue: PrayerTimesRepository {
+        PrayerTimesRepository(
             getSha1: { _ in .success("sha1") },
             getYearPrayerTimes: { _ in .success([]) }
         )
     }
 
-    public static var testValue: PrayerTimesRemoteRepo {
-        PrayerTimesRemoteRepo()
+    public static var testValue: PrayerTimesRepository {
+        PrayerTimesRepository()
     }
 }
 
 public extension DependencyValues {
-    var prayerTimesRemoteRepo: PrayerTimesRemoteRepo {
-        get { self[PrayerTimesRemoteRepo.self] }
-        set { self[PrayerTimesRemoteRepo.self] = newValue }
+    var prayerTimesRepository: PrayerTimesRepository {
+        get { self[PrayerTimesRepository.self] }
+        set { self[PrayerTimesRepository.self] = newValue }
     }
 }

@@ -11,8 +11,6 @@ import IbadRepositories
 
 @Reducer
 struct PrayerTimesWidgetFeature {
-    @Dependency(\.prayerTimesLocalRepo) private var prayerTimesLocalRepo
-
     @ObservableState
     struct State: Equatable {
         let date: Date
@@ -35,11 +33,14 @@ struct PrayerTimesWidgetFeature {
                 )
                 guard let year = components.year,
                       let month = components.month,
-                      let day = components.day,
-                      let dayPrayerTimes = prayerTimesLocalRepo.getDayPrayerTimes(
-                        year: year, month: month, day: day
-                      ),
-                      let prayerTimes = DayPrayerTimes(from: dayPrayerTimes)
+                      let day = components.day
+                else { return .none }
+
+                @SharedReader(.localPrayerTimes(year: year)) var localPrayerTimes = .empty
+                guard let local = localPrayerTimes.getDayPrayerTimes(
+                    year: year, month: month, day: day
+                ),
+                      let prayerTimes = DayPrayerTimes(from: local)
                 else { return .none }
 
                 state.todaysPrayerTimes = prayerTimes
