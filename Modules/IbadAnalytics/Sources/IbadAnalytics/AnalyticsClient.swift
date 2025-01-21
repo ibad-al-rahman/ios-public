@@ -8,7 +8,7 @@
 import Foundation
 import XCTestDynamicOverlay
 
-public struct AnalyticsClient {
+public struct AnalyticsClient: Sendable {
     public var sendAnalytics: @Sendable (AnalyticsData) -> Void
 
     public init(sendAnalytics: @escaping @Sendable (AnalyticsData) -> Void) {
@@ -25,11 +25,11 @@ extension AnalyticsClient {
 }
 
 extension AnalyticsClient {
-    static var unimplemented: Self = Self(
-        sendAnalytics: XCTUnimplemented("\(Self.self).sendAnalytics")
+    static let unimplemented: Self = Self(
+        sendAnalytics: IssueReporting.unimplemented("\(Self.self).sendAnalytics")
     )
 
-    public static var consoleLogger: Self = .init(
+    public static let consoleLogger: Self = .init(
         sendAnalytics: { analytics in
 #if DEBUG
             print("[Analytics] ✅ \(analytics)")

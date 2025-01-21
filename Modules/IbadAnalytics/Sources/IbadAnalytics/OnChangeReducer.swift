@@ -10,40 +10,39 @@ import ComposableArchitecture
 
 extension Reducer {
     @inlinable
-    public func analyticsOnChange<V: Equatable>(
-        of toValue: @escaping (State) -> V,
-        _ toAnalyticsData: @escaping (V, V) -> AnalyticsData
+    public func analyticsOnChange<V: Equatable & Sendable>(
+        of toValue: @Sendable @escaping (State) -> V,
+        _ toAnalyticsData: @Sendable @escaping (V, V) -> AnalyticsData
     ) -> _OnChangeAnalyticsReducer<Self, V> {
-        _OnChangeAnalyticsReducer(base: self, toValue: toValue, isDuplicate: ==, toAnalyticsData: toAnalyticsData)
+        _OnChangeAnalyticsReducer(
+            base: self,
+            toValue: toValue,
+            toAnalyticsData: toAnalyticsData
+        )
     }
 }
 
-public struct _OnChangeAnalyticsReducer<Base: Reducer, Value: Equatable>: Reducer {
+public struct _OnChangeAnalyticsReducer<Base: Reducer & Sendable, Value: Equatable & Sendable>: Reducer, Sendable {
     @usableFromInline
     let base: Base
 
     @usableFromInline
-    let toValue: (Base.State) -> Value
-
-    @usableFromInline
-    let isDuplicate: (Value, Value) -> Bool
+    let toValue: @Sendable (Base.State) -> Value
 
     @usableFromInline
     @Dependency(\.analyticsClient) var analyticsClient
 
     @usableFromInline
-    let toAnalyticsData: (Value, Value) -> AnalyticsData
+    let toAnalyticsData: @Sendable (Value, Value) -> AnalyticsData
 
     @usableFromInline
     init(
         base: Base,
-        toValue: @escaping (Base.State) -> Value,
-        isDuplicate: @escaping (Value, Value) -> Bool,
-        toAnalyticsData: @escaping (Value, Value) -> AnalyticsData
+        toValue: @Sendable @escaping (Base.State) -> Value,
+        toAnalyticsData: @Sendable @escaping (Value, Value) -> AnalyticsData
     ) {
         self.base = base
         self.toValue = toValue
-        self.isDuplicate = isDuplicate
         self.toAnalyticsData = toAnalyticsData
     }
 
@@ -53,7 +52,7 @@ public struct _OnChangeAnalyticsReducer<Base: Reducer, Value: Equatable>: Reduce
         let effects = self.base.reduce(into: &state, action: action)
         let newValue = toValue(state)
 
-        return isDuplicate(oldValue, newValue)
+        return oldValue == newValue
         ? effects
         : effects.merge(with: .run { _ in analyticsClient.sendAnalytics(toAnalyticsData(oldValue, newValue)) })
     }

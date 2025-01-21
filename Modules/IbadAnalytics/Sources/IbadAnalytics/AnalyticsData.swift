@@ -5,7 +5,7 @@
 //  Created by Hamza Jadid on 21/01/2025.
 //
 
-public enum AnalyticsData: Equatable {
+public enum AnalyticsData: Equatable, Sendable {
     case event(name: String, properties: [String: String] = [:])
     case screen(name: String)
     case userId(String)
