@@ -144,6 +144,7 @@
 		D91BF12D2D3FDC8000BEB410 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D91BF12F2D3FDDF700BEB410 /* GoogleService-Info-Release.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info-Release.plist"; sourceTree = "<group>"; };
 		D91BF1332D3FDF6D00BEB410 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		D91BF1392D3FED9400BEB410 /* IbadAnalytics */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = IbadAnalytics; sourceTree = "<group>"; };
 		D91D995F2D23C43C004AA72D /* DayEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayEvent.swift; sourceTree = "<group>"; };
 		D941B4232D16D876004FFF5C /* PrayerTimesSha1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrayerTimesSha1.swift; sourceTree = "<group>"; };
 		D970CD7B2D03B885004D8E66 /* AppEntryFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppEntryFeature.swift; sourceTree = "<group>"; };
@@ -267,6 +268,7 @@
 		D9089CE02CFDAC0200881BB6 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				D91BF1392D3FED9400BEB410 /* IbadAnalytics */,
 				D9DA3AAB2D160B89001AB599 /* IbadRemoteConfig */,
 				D9089CE12CFDAD4500881BB6 /* IbadRepositories */,
 			);
