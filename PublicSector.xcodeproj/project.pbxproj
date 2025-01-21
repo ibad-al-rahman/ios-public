@@ -815,6 +815,7 @@
 /* Begin PBXShellScriptBuildPhase section */
 		D91BF1322D3FDF2200BEB410 /* Google Service File Selection */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
