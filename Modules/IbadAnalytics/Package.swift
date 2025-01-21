@@ -14,6 +14,10 @@ let package = Package(
             url: "https://github.com/pointfreeco/swift-composable-architecture",
             .upToNextMajor(from: "1.0.0")
         ),
+        .package(
+            url: "https://github.com/firebase/firebase-ios-sdk",
+            .upToNextMajor(from: "11.7.0")
+        )
     ],
     targets: [
         .target(
@@ -23,6 +27,12 @@ let package = Package(
                     name: "ComposableArchitecture",
                     package: "swift-composable-architecture"
                 ),
+                .product(
+                    name: "FirebaseAnalytics", package: "firebase-ios-sdk"
+                ),
+                .product(
+                    name: "FirebaseCrashlytics", package: "firebase-ios-sdk"
+                )
             ]
         ),
         .testTarget(name: "IbadAnalyticsTests", dependencies: ["IbadAnalytics"])
