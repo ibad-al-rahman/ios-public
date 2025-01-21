@@ -29,20 +29,6 @@ extension AnalyticsClient {
     static let unimplemented: Self = Self(
         sendAnalytics: IssueReporting.unimplemented("\(Self.self).sendAnalytics")
     )
-
-    public static let osLogger: Self = .init(
-        sendAnalytics: { analytics in
-#if DEBUG
-            switch analytics {
-            case .error:
-                Logger.analytics.error("Analytics: \(analytics.debugDescription)")
-
-            default:
-                Logger.analytics.info("Analytics: \(analytics.debugDescription)")
-            }
-#endif
-        }
-    )
 }
 
 #if DEBUG
