@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import OSLog
 import XCTestDynamicOverlay
 
 public struct AnalyticsClient: Sendable {
@@ -29,10 +30,16 @@ extension AnalyticsClient {
         sendAnalytics: IssueReporting.unimplemented("\(Self.self).sendAnalytics")
     )
 
-    public static let consoleLogger: Self = .init(
+    public static let osLogger: Self = .init(
         sendAnalytics: { analytics in
 #if DEBUG
-            print("[Analytics] ✅ \(analytics)")
+            switch analytics {
+            case .error:
+                Logger.analytics.error("\(analytics.debugDescription)")
+
+            default:
+                Logger.analytics.info("\(analytics.debugDescription)")
+            }
 #endif
         }
     )
@@ -41,10 +48,9 @@ extension AnalyticsClient {
 #if DEBUG
 extension AnalyticsClient {
     public mutating func expect(_ expectedAnalytics: AnalyticsData?) {
-        let fulfill = expectation(description: "analytics")
         self.sendAnalytics = { @Sendable [self] analytics in
             if analytics == expectedAnalytics {
-                fulfill()
+                expectation(description: "analytics")()
             } else {
                 self.sendAnalytics(analytics)
             }
