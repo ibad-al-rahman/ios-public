@@ -35,10 +35,10 @@ extension AnalyticsClient {
 #if DEBUG
             switch analytics {
             case .error:
-                Logger.analytics.error("\(analytics.debugDescription)")
+                Logger.analytics.error("Analytics: \(analytics.debugDescription)")
 
             default:
-                Logger.analytics.info("\(analytics.debugDescription)")
+                Logger.analytics.info("Analytics: \(analytics.debugDescription)")
             }
 #endif
         }

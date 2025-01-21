@@ -17,6 +17,7 @@ struct AppView: View {
             .ifLet(store.appearance.colorScheme) { colorScheme, view in
                 view.environment(\.colorScheme, colorScheme)
             }
+            .onAppear { store.send(.onAppear) }
     }
 
     var content: some View {

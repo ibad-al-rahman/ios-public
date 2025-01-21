@@ -8,9 +8,12 @@
 import ComposableArchitecture
 
 extension AnalyticsClient: DependencyKey {
-    public static let liveValue: AnalyticsClient = .unimplemented
+    public static let liveValue: AnalyticsClient = .merge(
+        .osLogger,
+        .firebaseClient
+    )
     public static let testValue: AnalyticsClient = .unimplemented
-    public static let previewValue: AnalyticsClient = .consoleLogger
+    public static let previewValue: AnalyticsClient = .osLogger
 }
 
 public extension DependencyValues {

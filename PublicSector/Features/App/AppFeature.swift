@@ -6,6 +6,7 @@
 //
 
 import ComposableArchitecture
+import IbadAnalytics
 
 @Reducer
 struct AppFeature {
@@ -32,7 +33,9 @@ struct AppFeature {
         case delegate(DelegateAction)
         case binding(BindingAction<State>)
 
-        enum ViewAction { }
+        enum ViewAction {
+            case onAppear
+        }
         @CasePathable
         enum ReducerAction { }
         @CasePathable
@@ -47,6 +50,15 @@ struct AppFeature {
     }
 
     var body: some ReducerOf<Self> {
+        AnalyticsReducer { state, action in
+            switch action {
+            case .view(.onAppear):
+                return .screen(name: "App")
+
+            default:
+                return .none
+            }
+        }
         BindingReducer()
         Scope(state: \.prayerTimes, action: \.dependent.prayerTimes) {
             PrayerTimesFeature()

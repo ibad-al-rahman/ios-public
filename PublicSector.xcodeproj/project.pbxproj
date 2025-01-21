@@ -28,6 +28,7 @@
 		D91BF12E2D3FDC8100BEB410 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D91BF12D2D3FDC8000BEB410 /* AppDelegate.swift */; };
 		D91BF1302D3FDDF700BEB410 /* GoogleService-Info-Release.plist in Resources */ = {isa = PBXBuildFile; fileRef = D91BF12F2D3FDDF700BEB410 /* GoogleService-Info-Release.plist */; };
 		D91BF1342D3FDF6D00BEB410 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D91BF1332D3FDF6D00BEB410 /* GoogleService-Info.plist */; };
+		D91BF13C2D4019B500BEB410 /* IbadAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = D91BF13B2D4019B500BEB410 /* IbadAnalytics */; };
 		D91D99602D23C442004AA72D /* DayEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = D91D995F2D23C43C004AA72D /* DayEvent.swift */; };
 		D941B4242D16D87F004FFF5C /* PrayerTimesSha1.swift in Sources */ = {isa = PBXBuildFile; fileRef = D941B4232D16D876004FFF5C /* PrayerTimesSha1.swift */; };
 		D970CD7C2D03B888004D8E66 /* AppEntryFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = D970CD7B2D03B885004D8E66 /* AppEntryFeature.swift */; };
@@ -232,6 +233,7 @@
 				D9089CE42CFDC16D00881BB6 /* IbadRepositories in Frameworks */,
 				D91BF12C2D3FDB9800BEB410 /* FirebaseRemoteConfig in Frameworks */,
 				D91BF12A2D3FDB9800BEB410 /* FirebaseCrashlytics in Frameworks */,
+				D91BF13C2D4019B500BEB410 /* IbadAnalytics in Frameworks */,
 				D91BF1262D3FDB9800BEB410 /* FirebaseAnalytics in Frameworks */,
 				D9A6E1BD2CEC71FE006123D1 /* ComposableArchitecture in Frameworks */,
 			);
@@ -652,6 +654,7 @@
 				D91BF1272D3FDB9800BEB410 /* FirebaseCore */,
 				D91BF1292D3FDB9800BEB410 /* FirebaseCrashlytics */,
 				D91BF12B2D3FDB9800BEB410 /* FirebaseRemoteConfig */,
+				D91BF13B2D4019B500BEB410 /* IbadAnalytics */,
 			);
 			productName = PublicSector;
 			productReference = D9A70DB62C850B78002F6583 /* PublicSector.app */;
@@ -758,6 +761,7 @@
 				D9089CE22CFDC16D00881BB6 /* XCLocalSwiftPackageReference "Modules/IbadRepositories" */,
 				D9DA3AAC2D161431001AB599 /* XCLocalSwiftPackageReference "Modules/IbadRemoteConfig" */,
 				D91BF1242D3FDB9800BEB410 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				D91BF13A2D4019B500BEB410 /* XCLocalSwiftPackageReference "Modules/IbadAnalytics" */,
 			);
 			productRefGroup = D9A70DB72C850B78002F6583 /* Products */;
 			projectDirPath = "";
@@ -1369,6 +1373,10 @@
 			isa = XCLocalSwiftPackageReference;
 			relativePath = Modules/IbadRepositories;
 		};
+		D91BF13A2D4019B500BEB410 /* XCLocalSwiftPackageReference "Modules/IbadAnalytics" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = Modules/IbadAnalytics;
+		};
 		D9DA3AAC2D161431001AB599 /* XCLocalSwiftPackageReference "Modules/IbadRemoteConfig" */ = {
 			isa = XCLocalSwiftPackageReference;
 			relativePath = Modules/IbadRemoteConfig;
@@ -1418,6 +1426,10 @@
 			isa = XCSwiftPackageProductDependency;
 			package = D91BF1242D3FDB9800BEB410 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseRemoteConfig;
+		};
+		D91BF13B2D4019B500BEB410 /* IbadAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = IbadAnalytics;
 		};
 		D9A6E1BC2CEC71FE006123D1 /* ComposableArchitecture */ = {
 			isa = XCSwiftPackageProductDependency;
