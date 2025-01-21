@@ -28,6 +28,28 @@ public enum AnalyticsData: Equatable, Sendable {
             return false
         }
     }
+
+    public var debugDescription: String {
+        switch self {
+        case .error(let err):
+            return err.localizedDescription
+
+        case .screen(let name):
+            return "{ eventType: screen, name: \(name) }"
+
+        case .userId(let id):
+            return "{ eventType: userId, id: \(id) }"
+
+        case let .userProperty(name, value):
+            return "{ eventType: userProperty, \(name): \(value) }"
+
+        case let .event(name, properties):
+            let stringifiedProperties = properties
+                .map { "\($0.key): \($0.value)" }
+                .joined(separator: ",")
+            return "{ eventType: event, properties: { \(stringifiedProperties) } }"
+        }
+    }
 }
 
 extension AnalyticsData: ExpressibleByStringLiteral {

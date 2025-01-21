@@ -8,20 +8,20 @@
 import Foundation
 import ComposableArchitecture
 
-public struct MultipleAnalyticsReducer<State, Action>: Reducer {
+public struct MultipleAnalyticsReducer<State, Action>: Reducer, Sendable {
     @usableFromInline
-    let toAnalyticsData: (State, Action) -> [AnalyticsData]?
+    let toAnalyticsData: @Sendable (State, Action) -> [AnalyticsData]?
 
     @usableFromInline
     @Dependency(\.analyticsClient) var analyticsClient
 
     @inlinable
-    public init(_ toAnalyticsData: @escaping (State, Action) -> [AnalyticsData]?) {
+    public init(_ toAnalyticsData: @Sendable @escaping (State, Action) -> [AnalyticsData]?) {
         self.init(toAnalyticsData: toAnalyticsData, internal: ())
     }
 
     @usableFromInline
-    init(toAnalyticsData: @escaping (State, Action) -> [AnalyticsData]?, internal: Void) {
+    init(toAnalyticsData: @Sendable @escaping (State, Action) -> [AnalyticsData]?, internal: Void) {
         self.toAnalyticsData = toAnalyticsData
     }
 
