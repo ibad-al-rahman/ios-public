@@ -6,6 +6,7 @@
 //
 
 import ComposableArchitecture
+import IbadAnalytics
 
 @Reducer
 struct SettingsFeature {
@@ -25,6 +26,7 @@ struct SettingsFeature {
         case binding(BindingAction<State>)
 
         enum ViewAction {
+            case onAppear
             case onTapAppearance
             case onTapLanguage
             case onTapDonate
@@ -44,6 +46,15 @@ struct SettingsFeature {
     }
 
     var body: some ReducerOf<Self> {
+        AnalyticsReducer { state, action in
+            switch action {
+            case .view(.onAppear):
+                return .screen(name: "Settings")
+
+            default:
+                return .none
+            }
+        }
         BindingReducer()
         Reduce { state, action in
             switch action {

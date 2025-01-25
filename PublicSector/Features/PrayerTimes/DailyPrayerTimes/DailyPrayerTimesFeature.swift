@@ -7,6 +7,7 @@
 
 import ComposableArchitecture
 import Foundation
+import IbadAnalytics
 import IbadRepositories
 
 @Reducer
@@ -74,6 +75,15 @@ struct DailyPrayerTimesFeature {
 
     var body: some ReducerOf<Self> {
         BindingReducer()
+        AnalyticsReducer { state, action in
+            switch action {
+            case .view(.onAppear):
+                return .screen(name: "DailyPrayerTimes")
+
+            default:
+                return .none
+            }
+        }
         Reduce { state, action in
             switch action {
             case .view(.onAppear):

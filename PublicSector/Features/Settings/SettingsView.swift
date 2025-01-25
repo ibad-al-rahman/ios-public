@@ -53,6 +53,7 @@ struct SettingsView: View {
             )
             .navigationTitle("Settings")
         }
+        .onAppear { store.send(.onAppear) }
     }
 
     private var displaySection: some View {
