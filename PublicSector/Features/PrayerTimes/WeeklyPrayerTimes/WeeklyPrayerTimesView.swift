@@ -18,7 +18,7 @@ struct WeeklyPrayerTimesView: View {
                     Grid {
                         GridRow {
                             Text("Week")
-                            Text(Prayer.fajer.localizedStringKey)
+                            Text(Prayer.fajr.localizedStringKey)
                             Text(Prayer.sunrise.localizedStringKey)
                             Text(Prayer.dhuhr.localizedStringKey)
                             Text(Prayer.asr.localizedStringKey)
@@ -32,7 +32,7 @@ struct WeeklyPrayerTimesView: View {
 //
 //                            GridRow {
 //                                Text(day.date, format: .dateTime.weekday())
-//                                dateText(date: day.fajerTime)
+//                                dateText(date: day.fajrTime)
 //                                dateText(date: day.sunriseTime)
 //                                dateText(date: day.dhuhrTime)
 //                                dateText(date: day.asrTime)

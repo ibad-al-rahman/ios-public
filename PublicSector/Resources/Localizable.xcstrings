@@ -246,7 +246,7 @@
         }
       }
     },
-    "Fajer" : {
+    "Fajr" : {
       "extractionState" : "manual",
       "localizations" : {
         "ar" : {
@@ -258,7 +258,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Fajer"
+            "value" : "Fajr"
           }
         }
       }

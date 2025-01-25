@@ -6,7 +6,7 @@
 //
 
 struct PrayerTimesOffset: Equatable, Codable {
-    var fajer: Int
+    var fajr: Int
     var sunrise: Int
     var dhuhr: Int
     var asr: Int
@@ -14,7 +14,7 @@ struct PrayerTimesOffset: Equatable, Codable {
     var ishaa: Int
 
     static let `default` = PrayerTimesOffset(
-        fajer: 0,
+        fajr: 0,
         sunrise: 0,
         dhuhr: 0,
         asr: 0,
@@ -24,7 +24,7 @@ struct PrayerTimesOffset: Equatable, Codable {
 
     func val(_ prayer: Prayer) -> Int {
         switch prayer {
-        case .fajer: fajer
+        case .fajr: fajr
         case .sunrise: sunrise
         case .dhuhr: dhuhr
         case .asr: asr
@@ -35,7 +35,7 @@ struct PrayerTimesOffset: Equatable, Codable {
 
     mutating func inc(_ prayer: Prayer) {
         switch prayer {
-        case .fajer: fajer += 1
+        case .fajr: fajr += 1
         case .sunrise: sunrise += 1
         case .dhuhr: dhuhr += 1
         case .asr: asr += 1
@@ -46,7 +46,7 @@ struct PrayerTimesOffset: Equatable, Codable {
 
     mutating func dec(_ prayer: Prayer) {
         switch prayer {
-        case .fajer: fajer -= 1
+        case .fajr: fajr -= 1
         case .sunrise: sunrise -= 1
         case .dhuhr: dhuhr -= 1
         case .asr: asr -= 1

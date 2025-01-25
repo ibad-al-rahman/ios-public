@@ -72,8 +72,8 @@ struct DailyPrayerTimesView: View {
         Section {
             Group {
                 prayerTime(
-                    .fajer,
-                    time: prayerTimes.fajer,
+                    .fajr,
+                    time: prayerTimes.fajr,
                     systemImage: "moon.stars"
                 )
                 prayerTime(

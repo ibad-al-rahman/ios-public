@@ -14,7 +14,7 @@ struct DayPrayerTimes: Equatable, Identifiable {
     let hijri: String
     let hijriDay: String
     let hijriMonth: String
-    var fajer: Date
+    var fajr: Date
     var sunrise: Date
     var dhuhr: Date
     var asr: Date
@@ -22,14 +22,14 @@ struct DayPrayerTimes: Equatable, Identifiable {
     var ishaa: Date
 
     var sorted: [Date] {
-        [fajer, sunrise, dhuhr, asr, maghrib, ishaa]
+        [fajr, sunrise, dhuhr, asr, maghrib, ishaa]
     }
 
     func getPrayer(time: Date) -> Prayer {
-        return if time < fajer {
+        return if time < fajr {
             .ishaa
         } else if time < sunrise {
-            .fajer
+            .fajr
         } else if time < dhuhr {
             .sunrise
         } else if time < asr {
@@ -44,8 +44,8 @@ struct DayPrayerTimes: Equatable, Identifiable {
     }
 
     func getNextPrayer(time: Date) -> Prayer {
-        return if time < fajer {
-            .fajer
+        return if time < fajr {
+            .fajr
         } else if time < sunrise {
             .sunrise
         } else if time < dhuhr {
@@ -57,7 +57,7 @@ struct DayPrayerTimes: Equatable, Identifiable {
         } else if time < ishaa {
             .ishaa
         } else {
-            .fajer
+            .fajr
         }
     }
 
@@ -65,8 +65,8 @@ struct DayPrayerTimes: Equatable, Identifiable {
         time: Date,
         tomorrowPrayerTimes: DayPrayerTimes
     ) -> Date {
-        return if time < fajer {
-            fajer
+        return if time < fajr {
+            fajr
         } else if time < sunrise {
             sunrise
         } else if time < dhuhr {
@@ -78,7 +78,7 @@ struct DayPrayerTimes: Equatable, Identifiable {
         } else if time < ishaa {
             ishaa
         } else {
-            tomorrowPrayerTimes.fajer
+            tomorrowPrayerTimes.fajr
         }
     }
 }
@@ -124,19 +124,19 @@ extension DayPrayerTimes {
         hijriFormatter.dateFormat = "d MMMM yyyy"
         self.hijri = hijriFormatter.string(from: hijriDate)
 
-        guard let fajer = timeFormatter.date(from: model.prayerTimes.fajer)
+        guard let fajr = timeFormatter.date(from: model.prayerTimes.fajr)
         else { return nil }
 
-        var fajerComponents = calendar.dateComponents(
+        var fajrComponents = calendar.dateComponents(
             [.year, .month, .day, .hour, .minute, .second],
-            from: fajer
+            from: fajr
         )
-        fajerComponents.year = year
-        fajerComponents.month = month
-        fajerComponents.day = day
-        let fajerDate = calendar.date(from: fajerComponents)
-        guard let fajerDate else { return nil }
-        self.fajer = fajerDate
+        fajrComponents.year = year
+        fajrComponents.month = month
+        fajrComponents.day = day
+        let fajrDate = calendar.date(from: fajrComponents)
+        guard let fajrDate else { return nil }
+        self.fajr = fajrDate
 
         guard let sunrise = timeFormatter.date(from: model.prayerTimes.sunrise)
         else { return nil }
@@ -216,7 +216,7 @@ extension DayPrayerTimes {
             hijri: "1/1/1444",
             hijriDay: "1",
             hijriMonth: "Muharram",
-            fajer: .now,
+            fajr: .now,
             sunrise: .now,
             dhuhr: .now,
             asr: .now,
