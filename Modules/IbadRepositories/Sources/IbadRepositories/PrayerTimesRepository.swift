@@ -14,9 +14,9 @@ public struct PrayerTimesRepository: Sendable {
     public var getSha1: @Sendable (
         _ year: Int
     ) async -> Result<String, ServiceError> = { _ in .failure(.unknown) }
-    public var getYearPrayerTimes: @Sendable (
+    public var getYearDayPrayerTimes: @Sendable (
         _ year: Int
-    ) async -> Result<[DayPrayerTimesResponse], ServiceError> = {
+    ) async -> Result<YearDayPrayerTimesRespones, ServiceError> = {
         _ in .failure(.unknown)
     }
 }
@@ -27,8 +27,8 @@ extension PrayerTimesRepository: DependencyKey {
 
         return PrayerTimesRepository(
             getSha1: { year in await service.getSha1(year: year) },
-            getYearPrayerTimes: { year in
-                await service.getYearPrayerTimes(year: year)
+            getYearDayPrayerTimes: { year in
+                await service.getYearDayPrayerTimes(year: year)
             }
         )
     }
@@ -38,7 +38,11 @@ extension PrayerTimesRepository: TestDependencyKey {
     public static var previewValue: PrayerTimesRepository {
         PrayerTimesRepository(
             getSha1: { _ in .success("sha1") },
-            getYearPrayerTimes: { _ in .success([]) }
+            getYearDayPrayerTimes: { _ in
+                .success(
+                    YearDayPrayerTimesRespones(year: [], sha1: "")
+                )
+            }
         )
     }
 

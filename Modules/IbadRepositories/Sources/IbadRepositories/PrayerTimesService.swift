@@ -27,19 +27,19 @@ struct PrayerTimesService {
         return .success(sha1)
     }
 
-    func getYearPrayerTimes(
+    func getYearDayPrayerTimes(
         year: Int
-    ) async -> Result<[DayPrayerTimesResponse], ServiceError> {
+    ) async -> Result<YearDayPrayerTimesRespones, ServiceError> {
         guard let nwReachabilityManager, nwReachabilityManager.isReachable
         else { return .failure(.unreachable) }
 
-        let endpoint = PrayerTimesEndpoint.getYearPrayerTimes(
+        let endpoint = PrayerTimesEndpoint.getYearDayPrayerTimes(
             year: String(format: "%04d", year)
         )
         let response = await AF.request(endpoint.url, interceptor: .retryPolicy)
             .cacheResponse(using: .cache)
             .validate()
-            .serializingDecodable([DayPrayerTimesResponse].self)
+            .serializingDecodable(YearDayPrayerTimesRespones.self)
             .response
         guard let prayerTimes = response.value else { return .failure(.unknown) }
         Logger.remote.info("Fetched \(year) year prayer times")
@@ -54,6 +54,11 @@ public enum ServiceError: Error {
 
 struct Sha1Response: Decodable, Sendable {
     let sha1: String
+}
+
+public struct YearDayPrayerTimesRespones: Decodable, Sendable {
+    public let year: [DayPrayerTimesResponse]
+    public let sha1: String
 }
 
 public struct DayPrayerTimesResponse: Decodable, Sendable {
