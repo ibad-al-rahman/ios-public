@@ -8,7 +8,7 @@
 import SwiftUI
 
 enum Prayer: Equatable {
-    case fajer
+    case fajr
     case sunrise
     case dhuhr
     case asr
@@ -17,7 +17,7 @@ enum Prayer: Equatable {
 
     var localizedStringKey: LocalizedStringKey {
         switch self {
-        case .fajer: "Fajer"
+        case .fajr: "Fajr"
         case .sunrise: "Sunrise"
         case .dhuhr: "Dhuhr"
         case .asr: "Asr"

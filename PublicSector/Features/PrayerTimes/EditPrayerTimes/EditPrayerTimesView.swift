@@ -15,8 +15,8 @@ struct EditPrayerTimesView: View {
         NavigationView {
             List {
                 EditSinglePrayerTimeView(store: store.scope(
-                    state: \.fajerState,
-                    action: \.dependent.fajer
+                    state: \.fajrState,
+                    action: \.dependent.fajr
                 ))
                 EditSinglePrayerTimeView(store: store.scope(
                     state: \.sunriseState,

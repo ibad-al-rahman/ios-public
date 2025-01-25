@@ -12,7 +12,7 @@ struct DayPrayerTimes: Equatable, Identifiable {
     let id: Int
     let gregorian: Date
     let hijri: String
-    var fajer: Date
+    var fajr: Date
     var sunrise: Date
     var dhuhr: Date
     var asr: Date
@@ -22,8 +22,8 @@ struct DayPrayerTimes: Equatable, Identifiable {
 
     mutating func offset(_ offset: PrayerTimesOffset) {
         let calendar = Calendar.current
-        self.fajer = calendar.date(
-            byAdding: .minute, value: offset.fajer, to: fajer
+        self.fajr = calendar.date(
+            byAdding: .minute, value: offset.fajr, to: fajr
         )!
 
         self.sunrise = calendar.date(
@@ -73,9 +73,9 @@ extension DayPrayerTimes {
         let hijri = hijriFormatter.string(from: hijriDate)
         self.hijri = hijri
 
-        guard let fajer = timeFormatter.date(from: response.prayerTimes.fajer)
+        guard let fajr = timeFormatter.date(from: response.prayerTimes.fajr)
         else { return nil }
-        self.fajer = fajer
+        self.fajr = fajr
 
         guard let sunrise = timeFormatter.date(from: response.prayerTimes.sunrise)
         else { return nil }
@@ -124,9 +124,9 @@ extension DayPrayerTimes {
         let hijri = hijriFormatter.string(from: hijriDate)
         self.hijri = hijri
 
-        guard let fajer = timeFormatter.date(from: storage.prayerTimes.fajer)
+        guard let fajr = timeFormatter.date(from: storage.prayerTimes.fajr)
         else { return nil }
-        self.fajer = fajer
+        self.fajr = fajr
 
         guard let sunrise = timeFormatter.date(from: storage.prayerTimes.sunrise)
         else { return nil }
@@ -156,7 +156,7 @@ extension DayPrayerTimes {
             id: 0,
             gregorian: .now,
             hijri: "1/1/1444",
-            fajer: .now,
+            fajr: .now,
             sunrise: .now,
             dhuhr: .now,
             asr: .now,

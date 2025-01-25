@@ -13,7 +13,7 @@ struct EditPrayerTimesFeature {
 
     @ObservableState
     struct State: Equatable {
-        var fajerState = EditSinglePrayerTimeFeature.State(prayer: .fajer)
+        var fajrState = EditSinglePrayerTimeFeature.State(prayer: .fajr)
         var sunriseState = EditSinglePrayerTimeFeature.State(prayer: .sunrise)
         var dhuhrState = EditSinglePrayerTimeFeature.State(prayer: .dhuhr)
         var asrState = EditSinglePrayerTimeFeature.State(prayer: .asr)
@@ -39,7 +39,7 @@ struct EditPrayerTimesFeature {
 
         @CasePathable
         enum DependentAction {
-            case fajer(EditSinglePrayerTimeFeature.Action)
+            case fajr(EditSinglePrayerTimeFeature.Action)
             case sunrise(EditSinglePrayerTimeFeature.Action)
             case dhuhr(EditSinglePrayerTimeFeature.Action)
             case asr(EditSinglePrayerTimeFeature.Action)
@@ -58,7 +58,7 @@ struct EditPrayerTimesFeature {
             }
         }
 
-        Scope(state: \.fajerState, action: \.dependent.fajer) {
+        Scope(state: \.fajrState, action: \.dependent.fajr) {
             EditSinglePrayerTimeFeature()
         }
         Scope(state: \.sunriseState, action: \.dependent.sunrise) {

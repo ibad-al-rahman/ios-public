@@ -43,7 +43,7 @@ public struct DayPrayerTimesStorage: Codable, Identifiable, Sendable {
 }
 
 public struct PrayerTimesStorage: Codable, Sendable {
-    public let fajer: String
+    public let fajr: String
     public let sunrise: String
     public let dhuhr: String
     public let asr: String

@@ -87,8 +87,8 @@ struct PrayerTimesWidgetView: View {
 
             VStack(alignment: .leading, spacing: 0) {
                 prayerTime(
-                    .fajer,
-                    time: prayerTimes.fajer,
+                    .fajr,
+                    time: prayerTimes.fajr,
                     systemImage: "moon.stars"
                 )
                 prayerTime(
