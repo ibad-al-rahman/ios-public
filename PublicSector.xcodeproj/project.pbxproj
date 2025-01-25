@@ -29,6 +29,7 @@
 		D91BF1302D3FDDF700BEB410 /* GoogleService-Info-Release.plist in Resources */ = {isa = PBXBuildFile; fileRef = D91BF12F2D3FDDF700BEB410 /* GoogleService-Info-Release.plist */; };
 		D91BF1342D3FDF6D00BEB410 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D91BF1332D3FDF6D00BEB410 /* GoogleService-Info.plist */; };
 		D91BF13C2D4019B500BEB410 /* IbadAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = D91BF13B2D4019B500BEB410 /* IbadAnalytics */; };
+		D91BF19F2D45116B00BEB410 /* Date+YMD.swift in Sources */ = {isa = PBXBuildFile; fileRef = D91BF19E2D45116400BEB410 /* Date+YMD.swift */; };
 		D91D99602D23C442004AA72D /* DayEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = D91D995F2D23C43C004AA72D /* DayEvent.swift */; };
 		D941B4242D16D87F004FFF5C /* PrayerTimesSha1.swift in Sources */ = {isa = PBXBuildFile; fileRef = D941B4232D16D876004FFF5C /* PrayerTimesSha1.swift */; };
 		D970CD7C2D03B888004D8E66 /* AppEntryFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = D970CD7B2D03B885004D8E66 /* AppEntryFeature.swift */; };
@@ -146,6 +147,7 @@
 		D91BF12F2D3FDDF700BEB410 /* GoogleService-Info-Release.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info-Release.plist"; sourceTree = "<group>"; };
 		D91BF1332D3FDF6D00BEB410 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		D91BF1392D3FED9400BEB410 /* IbadAnalytics */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = IbadAnalytics; sourceTree = "<group>"; };
+		D91BF19E2D45116400BEB410 /* Date+YMD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+YMD.swift"; sourceTree = "<group>"; };
 		D91D995F2D23C43C004AA72D /* DayEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayEvent.swift; sourceTree = "<group>"; };
 		D941B4232D16D876004FFF5C /* PrayerTimesSha1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrayerTimesSha1.swift; sourceTree = "<group>"; };
 		D970CD7B2D03B885004D8E66 /* AppEntryFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppEntryFeature.swift; sourceTree = "<group>"; };
@@ -345,6 +347,7 @@
 		D98D2BD52CA9ACA90050F2A8 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				D91BF19E2D45116400BEB410 /* Date+YMD.swift */,
 				D98D2BD62CA9ACD20050F2A8 /* SharedState+Keys.swift */,
 				D98D2BD92CA9B14A0050F2A8 /* View+ControlFlow.swift */,
 			);
@@ -893,6 +896,7 @@
 				D9DA3AB12D1618AF001AB599 /* FeatureFlagView.swift in Sources */,
 				D9A70DEC2C8595E5002F6583 /* Spacing.swift in Sources */,
 				D970CD7E2D03B890004D8E66 /* AppEntryView.swift in Sources */,
+				D91BF19F2D45116B00BEB410 /* Date+YMD.swift in Sources */,
 				D9B4AB562D24B8B500E201CA /* AppInfo.swift in Sources */,
 				D98D2BDA2CA9B14A0050F2A8 /* View+ControlFlow.swift in Sources */,
 				D970CD7C2D03B888004D8E66 /* AppEntryFeature.swift in Sources */,

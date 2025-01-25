@@ -16,7 +16,6 @@ struct DailyPrayerTimesFeature {
 
     @ObservableState
     struct State: Equatable {
-        @Shared(.prayerTimesSha1) var prayerTimesSha1 = [:]
         var date: Date = .now
         var checkedYears = Set<Int>()
         var todaysPrayerTimes: DayPrayerTimes?
@@ -55,7 +54,6 @@ struct DailyPrayerTimesFeature {
 
         @CasePathable
         enum ReducerAction {
-            case setSha1(sha1: String, year: Int)
             case getDayPrayerTimes(DayPrayerTimes?)
             case appendCheckedYear(year: Int)
             case setError(Error)
@@ -98,12 +96,6 @@ struct DailyPrayerTimesFeature {
                 state.todaysPrayerTimes = prayerTimes
                 return .none
 
-            case let .reducer(.setSha1(sha1, year)):
-                state.$prayerTimesSha1.withLock {
-                    $0.setSha1(sha1: sha1, for: year)
-                }
-                return .none
-
             case .reducer(.appendCheckedYear(let year)):
                 state.checkedYears.insert(year)
                 return .none
@@ -123,14 +115,13 @@ struct DailyPrayerTimesFeature {
 
     private func getDayPrayerTimes(state: State) -> EffectOf<Self> {
         .run { send in
-            let components = Calendar.current.dateComponents(
-                [.year, .month, .day], from: state.date
-            )
-            guard let year = components.year,
-                  let month = components.month,
-                  let day = components.day
-            else { return }
+            guard let ymd = state.date.ymd else { return }
+            let year = ymd.year
+            let month = ymd.month
+            let day = ymd.day
 
+            // if we already checked this year's sha, then skip the process
+            // and ready from the storage
             guard state.checkedYears.contains(year) == false
             else {
                 @SharedReader(.localPrayerTimes(year: year)) var localPrayerTimes = .empty
@@ -144,21 +135,19 @@ struct DailyPrayerTimesFeature {
                 return
             }
 
-            let yearSha1 = state.prayerTimesSha1.getSha1(year: year)
+            @SharedReader(.prayerTimesSha1) var prayerTimesSha1 = [:]
+            let yearSha1 = prayerTimesSha1.getSha1(year: year)
             let responseSha = await prayerTimesRepository.getSha1(year: year)
 
             var isDirty = false
-            var newSha = yearSha1
 
             switch (yearSha1, responseSha) {
             case let (.some(currentSha), .success(remoteSha)):
                 if currentSha == remoteSha { break }
                 isDirty = true
-                newSha = remoteSha
 
             case (.none, .success(let remoteSha)):
                 isDirty = true
-                newSha = remoteSha
 
             case (.some, .failure):
                 break
@@ -172,13 +161,19 @@ struct DailyPrayerTimesFeature {
                 return
             }
 
-            if let newSha, isDirty {
+            if isDirty {
                 switch await persistPrayerTimes(year: year) {
-                case .success: break
-                case .failure(.unreachable): return
-                case .failure(.unknown): return
+                case .success:
+                    break
+
+                case .failure(.unreachable):
+                    await send(.reducer(.setError(.unreachable)))
+                    return
+
+                case .failure(.unknown):
+                    await send(.reducer(.setError(.unknown)))
+                    return
                 }
-                await send(.reducer(.setSha1(sha1: newSha, year: year)))
                 await send(.reducer(.appendCheckedYear(year: year)))
             }
 
@@ -195,14 +190,18 @@ struct DailyPrayerTimesFeature {
     }
 
     private func persistPrayerTimes(year: Int) async -> Result<(), ServiceError> {
-        switch await prayerTimesRepository.getYearPrayerTimes(year: year) {
-        case .success(let daysOfYear):
+        switch await prayerTimesRepository.getYearDayPrayerTimes(year: year) {
+        case .success(let response):
             @Shared(.localPrayerTimes(year: year)) var localPrayerTimes = .empty
+            @Shared(.prayerTimesSha1) var prayerTimesSha1 = [:]
             $localPrayerTimes.withLock {
                 $0 = YearPrayerTimesStorage(
-                    year: IdentifiedArray(uniqueElements: daysOfYear.map { day in day.intoStorage }),
-                    sha1: ""
+                    year: IdentifiedArray(uniqueElements: response.year.map { day in day.intoStorage }),
+                    sha1: response.sha1
                 )
+            }
+            $prayerTimesSha1.withLock {
+                $0.setSha1(sha1: response.sha1, for: year)
             }
             return .success(())
 
