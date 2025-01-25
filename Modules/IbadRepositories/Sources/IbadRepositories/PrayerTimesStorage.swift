@@ -16,6 +16,10 @@ public struct YearPrayerTimesStorage: Codable, Sendable {
 
     public static let empty = Self(year: IdentifiedArray(), sha1: "")
 
+    public var isEmpty: Bool {
+        self.year.isEmpty
+    }
+
     public init(year: IdentifiedArrayOf<DayPrayerTimesStorage>, sha1: String) {
         self.year = year
         self.sha1 = sha1
