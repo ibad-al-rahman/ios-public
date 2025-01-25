@@ -146,7 +146,7 @@ struct DailyPrayerTimesFeature {
                 if currentSha == remoteSha { break }
                 isDirty = true
 
-            case (.none, .success(let remoteSha)):
+            case (.none, .success):
                 isDirty = true
 
             case (.some, .failure):
@@ -161,7 +161,9 @@ struct DailyPrayerTimesFeature {
                 return
             }
 
-            if isDirty {
+            @SharedReader(.localPrayerTimes(year: year)) var localPrayerTimes = .empty
+
+            if isDirty || localPrayerTimes.isEmpty {
                 switch await persistPrayerTimes(year: year) {
                 case .success:
                     break
@@ -177,7 +179,6 @@ struct DailyPrayerTimesFeature {
                 await send(.reducer(.appendCheckedYear(year: year)))
             }
 
-            @SharedReader(.localPrayerTimes(year: year)) var localPrayerTimes = .empty
             guard let day = localPrayerTimes.getDayPrayerTimes(
                 year: year, month: month, day: day
             ) else { return }
