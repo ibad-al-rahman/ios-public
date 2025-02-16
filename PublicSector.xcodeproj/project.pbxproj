@@ -82,6 +82,7 @@
 		D9DA3AB12D1618AF001AB599 /* FeatureFlagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9DA3AB02D1618A6001AB599 /* FeatureFlagView.swift */; };
 		D9DA3AB32D1618B6001AB599 /* FeatureFlagFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9DA3AB22D1618B3001AB599 /* FeatureFlagFeature.swift */; };
 		D9DA3AB52D161C2D001AB599 /* DeveloperMenuFeature+Destination.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9DA3AB42D161C26001AB599 /* DeveloperMenuFeature+Destination.swift */; };
+		D9E13FD02D62680300D74C66 /* Date+Time.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9E13FCF2D6267FE00D74C66 /* Date+Time.swift */; };
 		D9EAEF562D27199100C8D1F4 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9EAEF552D27199100C8D1F4 /* WidgetKit.framework */; };
 		D9EAEF582D27199100C8D1F4 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9EAEF572D27199100C8D1F4 /* SwiftUI.framework */; };
 		D9EAEF632D27199200C8D1F4 /* PrayerTimesWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = D9EAEF532D27199100C8D1F4 /* PrayerTimesWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -203,6 +204,7 @@
 		D9DA3AB02D1618A6001AB599 /* FeatureFlagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeatureFlagView.swift; sourceTree = "<group>"; };
 		D9DA3AB22D1618B3001AB599 /* FeatureFlagFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeatureFlagFeature.swift; sourceTree = "<group>"; };
 		D9DA3AB42D161C26001AB599 /* DeveloperMenuFeature+Destination.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DeveloperMenuFeature+Destination.swift"; sourceTree = "<group>"; };
+		D9E13FCF2D6267FE00D74C66 /* Date+Time.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Time.swift"; sourceTree = "<group>"; };
 		D9EAEF532D27199100C8D1F4 /* PrayerTimesWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = PrayerTimesWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		D9EAEF552D27199100C8D1F4 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		D9EAEF572D27199100C8D1F4 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
@@ -347,6 +349,7 @@
 		D98D2BD52CA9ACA90050F2A8 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				D9E13FCF2D6267FE00D74C66 /* Date+Time.swift */,
 				D91BF19E2D45116400BEB410 /* Date+YMD.swift */,
 				D98D2BD62CA9ACD20050F2A8 /* SharedState+Keys.swift */,
 				D98D2BD92CA9B14A0050F2A8 /* View+ControlFlow.swift */,
@@ -926,6 +929,7 @@
 				D9A70E0F2C859E57002F6583 /* WeeklyPrayerTimesFeature.swift in Sources */,
 				D9A70E132C859E83002F6583 /* DailyPrayerTimesFeature.swift in Sources */,
 				D9A70E112C859E65002F6583 /* WeeklyPrayerTimesView.swift in Sources */,
+				D9E13FD02D62680300D74C66 /* Date+Time.swift in Sources */,
 				D9A70DF02C859627002F6583 /* Store+BaseFeature.swift in Sources */,
 				D9A70DFE2C859717002F6583 /* DeveloperMenuView.swift in Sources */,
 				D9C85AC62CF38EEC00730F12 /* NavigationRowView.swift in Sources */,

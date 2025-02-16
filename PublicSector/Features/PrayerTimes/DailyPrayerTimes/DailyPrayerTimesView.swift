@@ -10,6 +10,7 @@ import IbadRepositories
 import SwiftUI
 
 struct DailyPrayerTimesView: View {
+    @Environment(\.scenePhase) var scenePhase
     @Bindable var store: StoreOf<DailyPrayerTimesFeature>
 
     var body: some View {
@@ -22,6 +23,11 @@ struct DailyPrayerTimesView: View {
             }
         }
         .onAppear { store.send(.onAppear) }
+        .onChange(of: scenePhase) { (oldPhase, newPhase) in
+            if newPhase == .active {
+                store.send(.onAppear)
+            }
+        }
     }
 
     var content: some View {
@@ -107,11 +113,13 @@ struct DailyPrayerTimesView: View {
             HStack {
                 Text("Timings")
                 Spacer()
-                Button(action: { store.send(.onTapShare) }) {
-                    Label("Share", systemImage: "square.and.arrow.up")
+                if let prayerTimes = store.todaysPrayerTimes?.shareableText {
+                    ShareLink(item: prayerTimes) {
+                        Label("Share", systemImage: "square.and.arrow.up")
+                    }
+                    .textCase(nil)
+                    .featureFlagged(.prayerTimesShare)
                 }
-                .textCase(nil)
-                .featureFlagged(.prayerTimesShare)
             }
         }
     }
