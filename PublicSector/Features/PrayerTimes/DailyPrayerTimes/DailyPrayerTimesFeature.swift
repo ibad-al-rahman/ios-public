@@ -25,6 +25,14 @@ struct DailyPrayerTimesFeature {
             Calendar.current.isDateInToday(date) == false
         }
 
+        var shareablePrayerTimes: String? {
+            guard let todaysPrayerTimes else { return nil }
+            return """
+            Prayer times for:
+            Fajr: \(todaysPrayerTimes.fajr)
+            """
+        }
+
         var event: String? {
             guard let event = todaysPrayerTimes?.event else { return nil }
             return if event.en != nil {
@@ -48,7 +56,6 @@ struct DailyPrayerTimesFeature {
 
         enum ViewAction {
             case onAppear
-            case onTapShare
             case onTapRetry
         }
 
@@ -86,6 +93,7 @@ struct DailyPrayerTimesFeature {
             switch action {
             case .view(.onAppear):
                 state.error = nil
+                state.date = .now
                 return getDayPrayerTimes(state: state)
 
             case .view(.onTapRetry):

@@ -15,7 +15,7 @@ struct WeeklyPrayerTimesView: View {
         Form {
             Section {
                 ScrollView(.horizontal) {
-                    Grid {
+                    Grid(horizontalSpacing: .zero, verticalSpacing: .zero) {
                         GridRow {
                             Text("Week")
                             Text(Prayer.fajr.localizedStringKey)
@@ -26,6 +26,20 @@ struct WeeklyPrayerTimesView: View {
                             Text(Prayer.ishaa.localizedStringKey)
                         }
                         .bold()
+                        .padding(.small)
+
+                        Divider()
+
+                        GridRow {
+                            Text(verbatim: "Monday")
+                            Text(Date.now, format: .dateTime.hour().minute())
+                            Text(Date.now, format: .dateTime.hour().minute())
+                            Text(Date.now, format: .dateTime.hour().minute())
+                            Text(Date.now, format: .dateTime.hour().minute())
+                            Text(Date.now, format: .dateTime.hour().minute())
+                            Text(Date.now, format: .dateTime.hour().minute())
+                        }
+                        .padding(.small)
 
 //                        ForEach(store.week) { day in
 //                            Divider()
@@ -46,11 +60,6 @@ struct WeeklyPrayerTimesView: View {
             } header: {
                 HStack {
                     Text("Timings")
-                    Spacer()
-                    Button(action: {}) {
-                        Label("Share", systemImage: "square.and.arrow.up")
-                    }
-                    .textCase(nil)
                 }
             }
         }

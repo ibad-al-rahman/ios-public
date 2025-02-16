@@ -46,6 +46,19 @@ struct DayPrayerTimes: Equatable, Identifiable {
             byAdding: .minute, value: offset.ishaa, to: ishaa
         )!
     }
+
+    var shareableText: String? {
+        return """
+        \(String(localized: "Prayer Times"))
+        \(hijri)
+        🌌 \(String(localized: "Fajr")): \(fajr.time) 🌌
+        🌄 \(String(localized: "Sunrise")): \(sunrise.time) 🌄
+        ☀️ \(String(localized: "Dhuhr")): \(dhuhr.time) ☀️
+        🌆 \(String(localized: "Asr")): \(asr.time) 🌆
+        🌅 \(String(localized: "Maghrib")): \(maghrib.time) 🌅
+        🌃 \(String(localized: "Ishaa")): \(ishaa.time) 🌃
+        """
+    }
 }
 
 extension DayPrayerTimes {
