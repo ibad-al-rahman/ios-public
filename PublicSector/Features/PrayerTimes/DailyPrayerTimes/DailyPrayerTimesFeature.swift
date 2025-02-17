@@ -132,8 +132,8 @@ struct DailyPrayerTimesFeature {
             // and ready from the storage
             guard state.checkedYears.contains(year) == false
             else {
-                @SharedReader(.localPrayerTimes(year: year)) var localPrayerTimes = .empty
-                guard let day = localPrayerTimes.getDayPrayerTimes(
+                @SharedReader(.localDayPrayerTimes(year: year)) var localDayPrayerTimes = .empty
+                guard let day = localDayPrayerTimes.getDayPrayerTimes(
                     year: year, month: month, day: day
                 ) else { return }
                 await send(
@@ -169,9 +169,9 @@ struct DailyPrayerTimesFeature {
                 return
             }
 
-            @SharedReader(.localPrayerTimes(year: year)) var localPrayerTimes = .empty
+            @SharedReader(.localDayPrayerTimes(year: year)) var localDayPrayerTimes = .empty
 
-            if isDirty || localPrayerTimes.isEmpty {
+            if isDirty || localDayPrayerTimes.isEmpty {
                 switch await persistPrayerTimes(year: year) {
                 case .success:
                     break
@@ -187,7 +187,7 @@ struct DailyPrayerTimesFeature {
                 await send(.reducer(.appendCheckedYear(year: year)))
             }
 
-            guard let day = localPrayerTimes.getDayPrayerTimes(
+            guard let day = localDayPrayerTimes.getDayPrayerTimes(
                 year: year, month: month, day: day
             ) else { return }
 
@@ -201,9 +201,9 @@ struct DailyPrayerTimesFeature {
     private func persistPrayerTimes(year: Int) async -> Result<(), ServiceError> {
         switch await prayerTimesRepository.getYearDayPrayerTimes(year: year) {
         case .success(let response):
-            @Shared(.localPrayerTimes(year: year)) var localPrayerTimes = .empty
+            @Shared(.localDayPrayerTimes(year: year)) var localDayPrayerTimes = .empty
             @Shared(.prayerTimesSha1) var prayerTimesSha1 = [:]
-            $localPrayerTimes.withLock {
+            $localDayPrayerTimes.withLock {
                 $0 = YearPrayerTimesStorage(
                     year: IdentifiedArray(uniqueElements: response.year.map { day in day.intoStorage }),
                     sha1: response.sha1

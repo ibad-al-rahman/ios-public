@@ -11,6 +11,7 @@ import Foundation
 enum PrayerTimesEndpoint: EndpointProtocol {
     case getSha1(year: String)
     case getYearDayPrayerTimes(year: String)
+    case getYearWeekPrayertimes(year: String)
 
     var baseUrl: String { "https://ibad-al-rahman.github.io/prayer-times/v1" }
 
@@ -21,6 +22,9 @@ enum PrayerTimesEndpoint: EndpointProtocol {
 
         case .getYearDayPrayerTimes(let year):
             "/year/days/\(year).json"
+
+        case .getYearWeekPrayertimes(let year):
+            "/year/weeks/\(year).json"
         }
     }
 
@@ -28,7 +32,7 @@ enum PrayerTimesEndpoint: EndpointProtocol {
 
     var method: HTTPMethod {
         switch self {
-        case .getSha1, .getYearDayPrayerTimes:
+        case .getSha1, .getYearDayPrayerTimes, .getYearWeekPrayertimes:
             .get
         }
     }

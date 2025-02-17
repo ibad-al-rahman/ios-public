@@ -19,6 +19,11 @@ public struct PrayerTimesRepository: Sendable {
     ) async -> Result<YearDayPrayerTimesRespones, ServiceError> = {
         _ in .failure(.unknown)
     }
+    public var getYearWeekPrayerTimes: @Sendable (
+        _ year: Int
+    ) async -> Result<YearWeekPrayerTimesResponse, ServiceError> = {
+        _ in .failure(.unknown)
+    }
 }
 
 extension PrayerTimesRepository: DependencyKey {
@@ -29,6 +34,9 @@ extension PrayerTimesRepository: DependencyKey {
             getSha1: { year in await service.getSha1(year: year) },
             getYearDayPrayerTimes: { year in
                 await service.getYearDayPrayerTimes(year: year)
+            },
+            getYearWeekPrayerTimes: { year in
+                await service.getYearWeekPrayerTimes(year: year)
             }
         )
     }
@@ -41,6 +49,23 @@ extension PrayerTimesRepository: TestDependencyKey {
             getYearDayPrayerTimes: { _ in
                 .success(
                     YearDayPrayerTimesRespones(year: [], sha1: "")
+                )
+            },
+            getYearWeekPrayerTimes: { _ in
+                .success(
+                    YearWeekPrayerTimesResponse(
+                        sha1: "",
+                        weeks: [.init(
+                            id: 0,
+                            mon: nil,
+                            tue: nil,
+                            wed: nil,
+                            thu: nil,
+                            fri: nil,
+                            sat: nil,
+                            sun: nil
+                        )]
+                    )
                 )
             }
         )

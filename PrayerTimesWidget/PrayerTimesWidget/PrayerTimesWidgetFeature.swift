@@ -36,8 +36,8 @@ struct PrayerTimesWidgetFeature {
                       let day = components.day
                 else { return .none }
 
-                @SharedReader(.localPrayerTimes(year: year)) var localPrayerTimes = .empty
-                guard let local = localPrayerTimes.getDayPrayerTimes(
+                @SharedReader(.localDayPrayerTimes(year: year)) var localDayPrayerTimes = .empty
+                guard let local = localDayPrayerTimes.getDayPrayerTimes(
                     year: year, month: month, day: day
                 ),
                       let prayerTimes = DayPrayerTimes(from: local)

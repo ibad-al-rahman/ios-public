@@ -51,8 +51,8 @@ struct PrayerTimeTimelineProvider: TimelineProvider {
               let day = components.day
         else { return [] }
 
-        @SharedReader(.localPrayerTimes(year: year)) var localPrayerTimes = .empty
-        guard let dayPrayerTimes = localPrayerTimes.getDayPrayerTimes(
+        @SharedReader(.localDayPrayerTimes(year: year)) var localDayPrayerTimes = .empty
+        guard let dayPrayerTimes = localDayPrayerTimes.getDayPrayerTimes(
             year: year, month: month, day: day
         ),
               let prayerTimes = DayPrayerTimes(from: dayPrayerTimes)
@@ -69,8 +69,8 @@ struct PrayerTimeTimelineProvider: TimelineProvider {
               let tomorrowDay = tomorrowComponents.day
         else { return [] }
 
-        @SharedReader(.localPrayerTimes(year: tomorrowYear)) var tomorrowsLocalPrayerTimes = .empty
-        guard let dayPrayerTimes = tomorrowsLocalPrayerTimes.getDayPrayerTimes(
+        @SharedReader(.localDayPrayerTimes(year: tomorrowYear)) var tomorrowsLocalDayPrayerTimes = .empty
+        guard let dayPrayerTimes = tomorrowsLocalDayPrayerTimes.getDayPrayerTimes(
             year: tomorrowYear, month: tomorrowMonth, day: tomorrowDay
         ),
               let tomorrowPrayerTimes = DayPrayerTimes(from: dayPrayerTimes)
