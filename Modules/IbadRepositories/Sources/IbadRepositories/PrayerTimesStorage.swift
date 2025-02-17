@@ -38,8 +38,27 @@ public struct YearPrayerTimesStorage: Codable, Sendable {
     }
 }
 
+public struct WeekPrayerTimesStorage: Codable, Identifiable, Sendable {
+    public let id: Int
+    public let mon: DayPrayertimesStorage?
+    public let tue: DayPrayertimesStorage?
+    public let wed: DayPrayertimesStorage?
+    public let thu: DayPrayertimesStorage?
+    public let fri: DayPrayertimesStorage?
+    public let sat: DayPrayertimesStorage?
+    public let sun: DayPrayertimesStorage?
+
+    public struct DayPrayertimesStorage: Codable, Identifiable, Sendable {
+        public let id: Int
+        public let gregorian: String
+        public let hijri: String
+        public let prayerTimes: PrayerTimesStorage
+    }
+}
+
 public struct DayPrayerTimesStorage: Codable, Identifiable, Sendable {
     public let id: Int
+    public let weekId: Int
     public let gregorian: String
     public let hijri: String
     public let prayerTimes: PrayerTimesStorage
@@ -61,7 +80,7 @@ public struct DayEventStorage: Codable, Sendable {
 }
 
 public extension SharedKey where Self == FileStorageKey<YearPrayerTimesStorage> {
-    static func localPrayerTimes(year: Int) -> Self {
+    static func localDayPrayerTimes(year: Int) -> Self {
         let baseUrl = FileManager.default.containerURL(
             forSecurityApplicationGroupIdentifier: "group.com.ibadalrahman.PublicSector"
         )?.appendingPathComponent(
@@ -70,6 +89,7 @@ public extension SharedKey where Self == FileStorageKey<YearPrayerTimesStorage> 
         return fileStorage(
             baseUrl
                 .appendingPathComponent("prayerTimes", conformingTo: .directory)
+                .appendingPathComponent("days", conformingTo: .directory)
                 .appending(component: "\(year).json")
         )
     }

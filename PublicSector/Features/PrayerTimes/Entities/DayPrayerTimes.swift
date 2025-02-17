@@ -10,6 +10,7 @@ import Foundation
 
 struct DayPrayerTimes: Equatable, Identifiable {
     let id: Int
+    let weekId: Int
     let gregorian: Date
     let hijri: String
     var fajr: Date
@@ -76,6 +77,7 @@ extension DayPrayerTimes {
         timeFormatter.pmSymbol = "pm"
 
         self.id = response.id
+        self.weekId = response.weekId
 
         guard let gregorian = gregorianFormatter.date(from: response.gregorian)
         else { return nil }
@@ -127,6 +129,7 @@ extension DayPrayerTimes {
         timeFormatter.pmSymbol = "pm"
 
         self.id = storage.id
+        self.weekId = storage.weekId
 
         guard let gregorian = gregorianFormatter.date(from: storage.gregorian)
         else { return nil }
@@ -168,6 +171,7 @@ extension DayPrayerTimes {
     static func placeholder() -> DayPrayerTimes {
         DayPrayerTimes(
             id: 0,
+            weekId: 0,
             gregorian: .now,
             hijri: "1/1/1444",
             fajr: .now,

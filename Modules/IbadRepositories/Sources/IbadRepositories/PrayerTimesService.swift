@@ -45,6 +45,25 @@ struct PrayerTimesService {
         Logger.remote.info("Fetched \(year) year prayer times")
         return .success(prayerTimes)
     }
+
+    func getYearWeekPrayerTimes(
+        year: Int
+    ) async -> Result<YearWeekPrayerTimesResponse, ServiceError> {
+        guard let nwReachabilityManager, nwReachabilityManager.isReachable
+        else { return .failure(.unreachable) }
+
+        let endpoint = PrayerTimesEndpoint.getYearWeekPrayertimes(
+            year: String(format: "%04d", year)
+        )
+        let response = await AF.request(endpoint.url, interceptor: .retryPolicy)
+            .cacheResponse(using: .cache)
+            .validate()
+            .serializingDecodable(YearWeekPrayerTimesResponse.self)
+            .response
+        guard let prayerTimes = response.value else { return .failure(.unknown) }
+        Logger.remote.info("Fetched \(year) year week prayer times")
+        return .success(prayerTimes)
+    }
 }
 
 public enum ServiceError: Error {
@@ -61,8 +80,32 @@ public struct YearDayPrayerTimesRespones: Decodable, Sendable {
     public let sha1: String
 }
 
+public struct YearWeekPrayerTimesResponse: Decodable, Sendable {
+    public let sha1: String
+    public let weeks: [WeekPrayerTimes]
+
+    public struct WeekPrayerTimes: Decodable, Sendable {
+        public let id: Int
+        public let mon: DayPrayertimes?
+        public let tue: DayPrayertimes?
+        public let wed: DayPrayertimes?
+        public let thu: DayPrayertimes?
+        public let fri: DayPrayertimes?
+        public let sat: DayPrayertimes?
+        public let sun: DayPrayertimes?
+    }
+
+    public struct DayPrayertimes: Decodable, Sendable {
+        public let id: Int
+        public let gregorian: String
+        public let hijri: String
+        public let prayerTimes: PrayerTimesResponse
+    }
+}
+
 public struct DayPrayerTimesResponse: Decodable, Sendable {
     public let id: Int
+    public let weekId: Int
     public let gregorian: String
     public let hijri: String
     public let prayerTimes: PrayerTimesResponse
@@ -87,6 +130,7 @@ extension DayPrayerTimesResponse {
     public var intoStorage: DayPrayerTimesStorage {
         DayPrayerTimesStorage(
             id: self.id,
+            weekId: self.weekId,
             gregorian: self.gregorian,
             hijri: self.hijri,
             prayerTimes: PrayerTimesStorage(
