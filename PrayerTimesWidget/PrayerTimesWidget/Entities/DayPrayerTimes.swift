@@ -14,6 +14,10 @@ struct DayPrayerTimes: Equatable, Identifiable {
     let hijri: String
     let hijriDay: String
     let hijriMonth: String
+    let hijriYear: String
+    let gregorianDay: String
+    let gregorianMonth: String
+    let gregorianYear: String
     var fajr: Date
     var sunrise: Date
     var dhuhr: Date
@@ -103,6 +107,15 @@ extension DayPrayerTimes {
         else { return nil }
         self.gregorian = gregorian
 
+        gregorianFormatter.dateFormat = "d"
+        self.gregorianDay = gregorianFormatter.string(from: gregorian)
+
+        gregorianFormatter.dateFormat = "MMMM"
+        self.gregorianMonth = gregorianFormatter.string(from: gregorian)
+
+        gregorianFormatter.dateFormat = "yyyy"
+        self.gregorianYear = gregorianFormatter.string(from: gregorian)
+
         let gregorianComponents = calendar.dateComponents(
             [.year, .month, .day],
             from: gregorian
@@ -120,6 +133,9 @@ extension DayPrayerTimes {
 
         hijriFormatter.dateFormat = "MMMM"
         self.hijriMonth = hijriFormatter.string(from: hijriDate)
+
+        hijriFormatter.dateFormat = "yyyy"
+        self.hijriYear = hijriFormatter.string(from: hijriDate)
 
         hijriFormatter.dateFormat = "d MMMM yyyy"
         self.hijri = hijriFormatter.string(from: hijriDate)
@@ -213,9 +229,13 @@ extension DayPrayerTimes {
         DayPrayerTimes(
             id: 0,
             gregorian: .now,
-            hijri: "1/1/1444",
-            hijriDay: "1",
-            hijriMonth: "Muharram",
+            hijri: "1",
+            hijriDay: "January",
+            hijriMonth: "2024",
+            hijriYear: "1/1/1444",
+            gregorianDay: "1",
+            gregorianMonth: "Muharram",
+            gregorianYear: "1444",
             fajr: .now,
             sunrise: .now,
             dhuhr: .now,

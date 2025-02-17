@@ -43,39 +43,60 @@ struct PrayerTimesWidgetView: View {
     }
 
     private var smallContent: some View {
-        VStack(alignment: .leading, spacing: 0) {
-            HStack(alignment: .center) {
-                logo
-                Spacer()
-                VStack {
-                    if let hijriDay = store.todaysPrayerTimes?.hijriDay,
-                       let hijriMonth = store.todaysPrayerTimes?.hijriMonth {
-                        Text(hijriDay)
+        ZStack {
+            Image("Logo")
+                .resizable()
+                .scaledToFit()
+                .opacity(0.15)
+            VStack(alignment: .leading, spacing: 0) {
+                HStack(alignment: .center) {
+                    VStack {
+                        if let hijriDay = store.todaysPrayerTimes?.hijriDay,
+                           let hijriMonth = store.todaysPrayerTimes?.hijriMonth,
+                           let hijriYear = store.todaysPrayerTimes?.hijriYear,
+                           let gregorianDay = store.todaysPrayerTimes?.gregorianDay,
+                           let gregorianMonth = store.todaysPrayerTimes?.gregorianMonth,
+                           let gregorianYear = store.todaysPrayerTimes?.gregorianYear {
+                            HStack {
+                                VStack {
+                                    Text(hijriDay)
+                                    Text(hijriMonth)
+                                    Text(hijriYear)
+                                }
+
+                                Spacer()
+
+                                VStack {
+                                    Text(gregorianDay)
+                                    Text(gregorianMonth)
+                                    Text(gregorianYear)
+                                }
+                            }
+                            .font(.caption)
                             .bold()
 
-                        Text(hijriMonth)
-                            .font(.caption)
-                    } else {
-                        Text(verbatim: "18")
-                            .redacted(reason: .placeholder)
-                            .font(.caption)
+                        } else {
+                            Text(verbatim: "18")
+                                .redacted(reason: .placeholder)
+                                .font(.caption)
 
-                        Text(verbatim: "Placeholder")
-                            .redacted(reason: .placeholder)
-                            .font(.caption)
+                            Text(verbatim: "Placeholder")
+                                .redacted(reason: .placeholder)
+                                .font(.caption)
+                        }
                     }
                 }
-            }
-            Spacer()
-            HStack(spacing: 0) {
-                Text(store.nextPrayer.localizedStringKey)
+                Spacer()
+                HStack(spacing: 0) {
+                    Text(store.nextPrayer.localizedStringKey)
+                        .bold()
+                    Text(verbatim: " ")
+                    Text("after:")
+                }
+                Text(store.nextPrayerDate, style: .timer)
                     .bold()
-                Text(verbatim: " ")
-                Text("after:")
+                    .monospacedDigit()
             }
-            Text(store.nextPrayerDate, style: .timer)
-                .bold()
-                .monospacedDigit()
         }
     }
 

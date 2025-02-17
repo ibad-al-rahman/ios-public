@@ -14,6 +14,13 @@ struct Ymd {
 }
 
 extension Date {
+    var stringDate: String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "d MMMM yyyy"
+        let date = dateFormatter.string(from: self)
+        return date
+    }
+
     var ymd: Ymd? {
         let components = Calendar.current.dateComponents(
             [.year, .month, .day], from: self
