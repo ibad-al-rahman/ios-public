@@ -47,10 +47,11 @@ struct DayPrayerTimes: Equatable, Identifiable {
         )!
     }
 
-    var shareableText: String? {
-        return """
+    var shareableText: String {
+        """
         \(String(localized: "Prayer Times"))
         \(hijri)
+        \(gregorian.stringDate)
         🌌 \(String(localized: "Fajr")): \(fajr.time) 🌌
         🌄 \(String(localized: "Sunrise")): \(sunrise.time) 🌄
         ☀️ \(String(localized: "Dhuhr")): \(dhuhr.time) ☀️
