@@ -126,6 +126,39 @@ public struct DayEventResponse: Decodable, Sendable {
     public let en: String?
 }
 
+extension YearWeekPrayerTimesResponse.DayPrayertimes {
+    public var intoStorage: YearWeekPrayerTimesStorage.DayPrayertimesStorage {
+        YearWeekPrayerTimesStorage.DayPrayertimesStorage(
+            id: id,
+            gregorian: gregorian,
+            hijri: hijri,
+            prayerTimes: PrayerTimesStorage(
+                fajr: self.prayerTimes.fajr,
+                sunrise: self.prayerTimes.sunrise,
+                dhuhr: self.prayerTimes.dhuhr,
+                asr: self.prayerTimes.asr,
+                maghrib: self.prayerTimes.maghrib,
+                ishaa: self.prayerTimes.ishaa
+            )
+        )
+    }
+}
+
+extension YearWeekPrayerTimesResponse.WeekPrayerTimes {
+    public var intoStorage: YearWeekPrayerTimesStorage.WeekPrayerTimesStorage {
+        YearWeekPrayerTimesStorage.WeekPrayerTimesStorage(
+            id: id,
+            mon: mon?.intoStorage,
+            tue: tue?.intoStorage,
+            wed: wed?.intoStorage,
+            thu: thu?.intoStorage,
+            fri: fri?.intoStorage,
+            sat: sat?.intoStorage,
+            sun: sun?.intoStorage
+        )
+    }
+}
+
 extension DayPrayerTimesResponse {
     public var intoStorage: DayPrayerTimesStorage {
         DayPrayerTimesStorage(

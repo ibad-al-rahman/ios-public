@@ -28,32 +28,20 @@ struct WeeklyPrayerTimesView: View {
                         .bold()
                         .padding(.small)
 
-                        Divider()
+                        ForEach(store.compactedWeek) { day in
+                            Divider()
 
-                        GridRow {
-                            Text(verbatim: "Monday")
-                            Text(Date.now, format: .dateTime.hour().minute())
-                            Text(Date.now, format: .dateTime.hour().minute())
-                            Text(Date.now, format: .dateTime.hour().minute())
-                            Text(Date.now, format: .dateTime.hour().minute())
-                            Text(Date.now, format: .dateTime.hour().minute())
-                            Text(Date.now, format: .dateTime.hour().minute())
+                            GridRow {
+                                Text(day.gregorian, format: .dateTime.weekday())
+                                dateText(date: day.fajr)
+                                dateText(date: day.sunrise)
+                                dateText(date: day.dhuhr)
+                                dateText(date: day.asr)
+                                dateText(date: day.maghrib)
+                                dateText(date: day.ishaa)
+                            }
+                            .padding(.small)
                         }
-                        .padding(.small)
-
-//                        ForEach(store.week) { day in
-//                            Divider()
-//
-//                            GridRow {
-//                                Text(day.date, format: .dateTime.weekday())
-//                                dateText(date: day.fajrTime)
-//                                dateText(date: day.sunriseTime)
-//                                dateText(date: day.dhuhrTime)
-//                                dateText(date: day.asrTime)
-//                                dateText(date: day.maghribTime)
-//                                dateText(date: day.ishaaTime)
-//                            }
-//                        }
                     }
                 }
                 .scrollIndicators(.hidden)
@@ -63,6 +51,7 @@ struct WeeklyPrayerTimesView: View {
                 }
             }
         }
+        .onAppear { store.send(.onAppear) }
     }
 
     private func dateText(date: Date?) -> some View {

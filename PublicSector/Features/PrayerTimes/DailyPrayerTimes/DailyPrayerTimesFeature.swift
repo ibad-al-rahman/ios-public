@@ -199,6 +199,21 @@ struct DailyPrayerTimesFeature {
     }
 
     private func persistPrayerTimes(year: Int) async -> Result<(), ServiceError> {
+        switch await prayerTimesRepository.getYearWeekPrayerTimes(year: year) {
+        case .success(let response):
+            @Shared(
+                .localWeekPrayerTimes(year: year)
+            ) var localWeekPrayerTimes = .empty
+            $localWeekPrayerTimes.withLock {
+                $0 = YearWeekPrayerTimesStorage(
+                    year: IdentifiedArray(uniqueElements: response.weeks.map { week in week.intoStorage })
+                )
+            }
+
+        case .failure(let why):
+            return .failure(why)
+        }
+
         switch await prayerTimesRepository.getYearDayPrayerTimes(year: year) {
         case .success(let response):
             @Shared(.localDayPrayerTimes(year: year)) var localDayPrayerTimes = .empty

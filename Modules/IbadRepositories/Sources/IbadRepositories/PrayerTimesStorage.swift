@@ -38,15 +38,38 @@ public struct YearPrayerTimesStorage: Codable, Sendable {
     }
 }
 
-public struct WeekPrayerTimesStorage: Codable, Identifiable, Sendable {
-    public let id: Int
-    public let mon: DayPrayertimesStorage?
-    public let tue: DayPrayertimesStorage?
-    public let wed: DayPrayertimesStorage?
-    public let thu: DayPrayertimesStorage?
-    public let fri: DayPrayertimesStorage?
-    public let sat: DayPrayertimesStorage?
-    public let sun: DayPrayertimesStorage?
+public struct YearWeekPrayerTimesStorage: Codable, Sendable {
+    public let year: IdentifiedArrayOf<WeekPrayerTimesStorage>
+
+    public static let empty = Self(year: IdentifiedArray())
+
+    public var isEmpty: Bool {
+        self.year.isEmpty
+    }
+
+    public init(year: IdentifiedArrayOf<WeekPrayerTimesStorage>) {
+        self.year = year
+    }
+
+    public func getWeekPrayerTimes(weekId: Int) -> WeekPrayerTimesStorage? {
+        guard let week = self.year[id: weekId]
+        else {
+            Logger.local.warning("Couldn't found \(weekId) week prayer time")
+            return nil
+        }
+        return week
+    }
+
+    public struct WeekPrayerTimesStorage: Codable, Identifiable, Sendable {
+        public let id: Int
+        public let mon: DayPrayertimesStorage?
+        public let tue: DayPrayertimesStorage?
+        public let wed: DayPrayertimesStorage?
+        public let thu: DayPrayertimesStorage?
+        public let fri: DayPrayertimesStorage?
+        public let sat: DayPrayertimesStorage?
+        public let sun: DayPrayertimesStorage?
+    }
 
     public struct DayPrayertimesStorage: Codable, Identifiable, Sendable {
         public let id: Int
@@ -55,6 +78,8 @@ public struct WeekPrayerTimesStorage: Codable, Identifiable, Sendable {
         public let prayerTimes: PrayerTimesStorage
     }
 }
+
+
 
 public struct DayPrayerTimesStorage: Codable, Identifiable, Sendable {
     public let id: Int
@@ -90,6 +115,22 @@ public extension SharedKey where Self == FileStorageKey<YearPrayerTimesStorage> 
             baseUrl
                 .appendingPathComponent("prayerTimes", conformingTo: .directory)
                 .appendingPathComponent("days", conformingTo: .directory)
+                .appending(component: "\(year).json")
+        )
+    }
+}
+
+public extension SharedKey where Self == FileStorageKey<YearWeekPrayerTimesStorage> {
+    static func localWeekPrayerTimes(year: Int) -> Self {
+        let baseUrl = FileManager.default.containerURL(
+            forSecurityApplicationGroupIdentifier: "group.com.ibadalrahman.PublicSector"
+        )?.appendingPathComponent(
+            "Documents", conformingTo: .directory
+        ) ?? .documentsDirectory
+        return fileStorage(
+            baseUrl
+                .appendingPathComponent("prayerTimes", conformingTo: .directory)
+                .appendingPathComponent("weeks", conformingTo: .directory)
                 .appending(component: "\(year).json")
         )
     }
