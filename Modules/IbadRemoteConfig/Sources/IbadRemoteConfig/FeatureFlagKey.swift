@@ -44,10 +44,10 @@ public enum FeatureFlagKey: String, Codable, CaseIterable, Sendable {
 public extension [FeatureFlagKey: Bool] {
     static var `default`: [FeatureFlagKey: Bool] {
         [
-            .prayerTimesWeeklyView: false,
+            .prayerTimesWeeklyView: true,
             .prayerTimesOffset: false,
-            .prayerTimesEvents: false,
-            .prayerTimesShare: false,
+            .prayerTimesEvents: true,
+            .prayerTimesShare: true,
             .adhkarScreen: false,
             .settingsRateUs: false,
             .settingsInviteFriends: false
