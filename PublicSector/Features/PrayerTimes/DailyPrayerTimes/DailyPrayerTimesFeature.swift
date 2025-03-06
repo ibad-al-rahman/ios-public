@@ -73,7 +73,7 @@ struct DailyPrayerTimesFeature {
         enum DependentAction { }
     }
 
-    enum Error {
+    enum Error: Swift.Error {
         case unreachable
         case unknown
     }
@@ -84,6 +84,9 @@ struct DailyPrayerTimesFeature {
             switch action {
             case .view(.onAppear):
                 return .screen(name: "DailyPrayerTimes")
+
+            case .reducer(.setError(let why)):
+                return .error(why)
 
             default:
                 return .none
