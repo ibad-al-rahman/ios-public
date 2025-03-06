@@ -145,7 +145,7 @@ struct DailyPrayerTimesFeature {
 
             @SharedReader(.prayerTimesSha1) var prayerTimesSha1 = [:]
             let yearSha1 = prayerTimesSha1.getSha1(year: year)
-            let responseSha = await prayerTimesRepository.getSha1(year: year)
+            let responseSha = await Result { try await prayerTimesRepository.getSha1(year: year) }
 
             var isDirty = false
 
@@ -160,27 +160,22 @@ struct DailyPrayerTimesFeature {
             case (.some, .failure):
                 break
 
-            case (.none, .failure(.unreachable)):
-                await send(.reducer(.setError(.unreachable)))
-                return
-
-            case (.none, .failure(.unknown)):
+            case (.none, .failure):
                 await send(.reducer(.setError(.unknown)))
                 return
             }
 
             @SharedReader(.localDayPrayerTimes(year: year)) var localDayPrayerTimes = .empty
 
+            let persistanceResult = await Result {
+                try await persistPrayerTimes(year: year)
+            }
             if isDirty || localDayPrayerTimes.isEmpty {
-                switch await persistPrayerTimes(year: year) {
+                switch persistanceResult {
                 case .success:
                     break
 
-                case .failure(.unreachable):
-                    await send(.reducer(.setError(.unreachable)))
-                    return
-
-                case .failure(.unknown):
+                case .failure:
                     await send(.reducer(.setError(.unknown)))
                     return
                 }
@@ -198,39 +193,28 @@ struct DailyPrayerTimesFeature {
         }
     }
 
-    private func persistPrayerTimes(year: Int) async -> Result<(), ServiceError> {
-        switch await prayerTimesRepository.getYearWeekPrayerTimes(year: year) {
-        case .success(let response):
-            @Shared(
-                .localWeekPrayerTimes(year: year)
-            ) var localWeekPrayerTimes = .empty
-            $localWeekPrayerTimes.withLock {
-                $0 = YearWeekPrayerTimesStorage(
-                    year: IdentifiedArray(uniqueElements: response.weeks.map { week in week.intoStorage })
-                )
-            }
-
-        case .failure(let why):
-            return .failure(why)
+    private func persistPrayerTimes(year: Int) async throws {
+        let weeksResponse = try await prayerTimesRepository.getYearWeekPrayerTimes(year: year)
+        @Shared(
+            .localWeekPrayerTimes(year: year)
+        ) var localWeekPrayerTimes = .empty
+        $localWeekPrayerTimes.withLock {
+            $0 = YearWeekPrayerTimesStorage(
+                year: IdentifiedArray(uniqueElements: weeksResponse.weeks.map { week in week.intoStorage })
+            )
         }
 
-        switch await prayerTimesRepository.getYearDayPrayerTimes(year: year) {
-        case .success(let response):
-            @Shared(.localDayPrayerTimes(year: year)) var localDayPrayerTimes = .empty
-            @Shared(.prayerTimesSha1) var prayerTimesSha1 = [:]
-            $localDayPrayerTimes.withLock {
-                $0 = YearPrayerTimesStorage(
-                    year: IdentifiedArray(uniqueElements: response.year.map { day in day.intoStorage }),
-                    sha1: response.sha1
-                )
-            }
-            $prayerTimesSha1.withLock {
-                $0.setSha1(sha1: response.sha1, for: year)
-            }
-            return .success(())
-
-        case .failure(let why):
-            return .failure(why)
+        let daysReponse = try await prayerTimesRepository.getYearDayPrayerTimes(year: year)
+        @Shared(.localDayPrayerTimes(year: year)) var localDayPrayerTimes = .empty
+        @Shared(.prayerTimesSha1) var prayerTimesSha1 = [:]
+        $localDayPrayerTimes.withLock {
+            $0 = YearPrayerTimesStorage(
+                year: IdentifiedArray(uniqueElements: daysReponse.year.map { day in day.intoStorage }),
+                sha1: daysReponse.sha1
+            )
+        }
+        $prayerTimesSha1.withLock {
+            $0.setSha1(sha1: daysReponse.sha1, for: year)
         }
     }
 }

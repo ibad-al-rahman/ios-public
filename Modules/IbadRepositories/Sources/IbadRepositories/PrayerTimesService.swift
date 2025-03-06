@@ -9,66 +9,52 @@ import Alamofire
 import OSLog
 
 struct PrayerTimesService {
-    let nwReachabilityManager = NetworkReachabilityManager()
-
-    func getSha1(year: Int) async -> Result<String, ServiceError> {
-        guard let nwReachabilityManager, nwReachabilityManager.isReachable
-        else { return .failure(.unreachable) }
-
-        let year = String(format: "%04d", year)
-        let endpoint = PrayerTimesEndpoint.getSha1(year: year)
-        let response = await AF.request(endpoint.url, interceptor: .retryPolicy)
-            .cacheResponse(using: .cache)
-            .validate()
-            .serializingDecodable(Sha1Response.self)
-            .response
-        guard let sha1 = response.value?.sha1 else { return .failure(.unknown) }
-        Logger.remote.info("Fetched prayer times sha1: \(sha1)")
-        return .success(sha1)
+    func getSha1(year: Int) async throws -> String {
+        let endpoint = PrayerTimesEndpoint.getSha1(
+            year: String(format: "%04d", year)
+        )
+        guard let url = URL(string: endpoint.url) else {
+            throw URLError(.badURL)
+        }
+        var request = URLRequest(url: url)
+        request.httpMethod = endpoint.method.rawValue
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        let (data, response) = try await URLSession.shared.data(for: request)
+        let sha1Response = try JSONDecoder().decode(Sha1Response.self, from: data)
+        return sha1Response.sha1
     }
 
     func getYearDayPrayerTimes(
         year: Int
-    ) async -> Result<YearDayPrayerTimesRespones, ServiceError> {
-        guard let nwReachabilityManager, nwReachabilityManager.isReachable
-        else { return .failure(.unreachable) }
-
+    ) async throws -> YearDayPrayerTimesRespones {
         let endpoint = PrayerTimesEndpoint.getYearDayPrayerTimes(
             year: String(format: "%04d", year)
         )
-        let response = await AF.request(endpoint.url, interceptor: .retryPolicy)
-            .cacheResponse(using: .cache)
-            .validate()
-            .serializingDecodable(YearDayPrayerTimesRespones.self)
-            .response
-        guard let prayerTimes = response.value else { return .failure(.unknown) }
-        Logger.remote.info("Fetched \(year) year prayer times")
-        return .success(prayerTimes)
+        guard let url = URL(string: endpoint.url) else {
+            throw URLError(.badURL)
+        }
+        var request = URLRequest(url: url)
+        request.httpMethod = endpoint.method.rawValue
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        let (data, response) = try await URLSession.shared.data(for: request)
+        return try JSONDecoder().decode(YearDayPrayerTimesRespones.self, from: data)
     }
 
     func getYearWeekPrayerTimes(
         year: Int
-    ) async -> Result<YearWeekPrayerTimesResponse, ServiceError> {
-        guard let nwReachabilityManager, nwReachabilityManager.isReachable
-        else { return .failure(.unreachable) }
-
+    ) async throws -> YearWeekPrayerTimesResponse {
         let endpoint = PrayerTimesEndpoint.getYearWeekPrayertimes(
             year: String(format: "%04d", year)
         )
-        let response = await AF.request(endpoint.url, interceptor: .retryPolicy)
-            .cacheResponse(using: .cache)
-            .validate()
-            .serializingDecodable(YearWeekPrayerTimesResponse.self)
-            .response
-        guard let prayerTimes = response.value else { return .failure(.unknown) }
-        Logger.remote.info("Fetched \(year) year week prayer times")
-        return .success(prayerTimes)
+        guard let url = URL(string: endpoint.url) else {
+            throw URLError(.badURL)
+        }
+        var request = URLRequest(url: url)
+        request.httpMethod = endpoint.method.rawValue
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        let (data, response) = try await URLSession.shared.data(for: request)
+        return try JSONDecoder().decode(YearWeekPrayerTimesResponse.self, from: data)
     }
-}
-
-public enum ServiceError: Error {
-    case unreachable
-    case unknown
 }
 
 struct Sha1Response: Decodable, Sendable {

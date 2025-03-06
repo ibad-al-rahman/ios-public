@@ -11,19 +11,13 @@ import Foundation
 
 @DependencyClient
 public struct PrayerTimesRepository: Sendable {
-    public var getSha1: @Sendable (
-        _ year: Int
-    ) async -> Result<String, ServiceError> = { _ in .failure(.unknown) }
+    public var getSha1: @Sendable (_ year: Int) async throws -> String
     public var getYearDayPrayerTimes: @Sendable (
         _ year: Int
-    ) async -> Result<YearDayPrayerTimesRespones, ServiceError> = {
-        _ in .failure(.unknown)
-    }
+    ) async throws -> YearDayPrayerTimesRespones
     public var getYearWeekPrayerTimes: @Sendable (
         _ year: Int
-    ) async -> Result<YearWeekPrayerTimesResponse, ServiceError> = {
-        _ in .failure(.unknown)
-    }
+    ) async throws -> YearWeekPrayerTimesResponse
 }
 
 extension PrayerTimesRepository: DependencyKey {
@@ -31,12 +25,12 @@ extension PrayerTimesRepository: DependencyKey {
         let service = PrayerTimesService()
 
         return PrayerTimesRepository(
-            getSha1: { year in await service.getSha1(year: year) },
+            getSha1: { year in try await service.getSha1(year: year) },
             getYearDayPrayerTimes: { year in
-                await service.getYearDayPrayerTimes(year: year)
+                try await service.getYearDayPrayerTimes(year: year)
             },
             getYearWeekPrayerTimes: { year in
-                await service.getYearWeekPrayerTimes(year: year)
+                try await service.getYearWeekPrayerTimes(year: year)
             }
         )
     }
@@ -45,27 +39,23 @@ extension PrayerTimesRepository: DependencyKey {
 extension PrayerTimesRepository: TestDependencyKey {
     public static var previewValue: PrayerTimesRepository {
         PrayerTimesRepository(
-            getSha1: { _ in .success("sha1") },
+            getSha1: { _ in "sha1" },
             getYearDayPrayerTimes: { _ in
-                .success(
-                    YearDayPrayerTimesRespones(year: [], sha1: "")
-                )
+                YearDayPrayerTimesRespones(year: [], sha1: "")
             },
             getYearWeekPrayerTimes: { _ in
-                .success(
-                    YearWeekPrayerTimesResponse(
-                        sha1: "",
-                        weeks: [.init(
-                            id: 0,
-                            mon: nil,
-                            tue: nil,
-                            wed: nil,
-                            thu: nil,
-                            fri: nil,
-                            sat: nil,
-                            sun: nil
-                        )]
-                    )
+                YearWeekPrayerTimesResponse(
+                    sha1: "",
+                    weeks: [.init(
+                        id: 0,
+                        mon: nil,
+                        tue: nil,
+                        wed: nil,
+                        thu: nil,
+                        fri: nil,
+                        sat: nil,
+                        sun: nil
+                    )]
                 )
             }
         )
