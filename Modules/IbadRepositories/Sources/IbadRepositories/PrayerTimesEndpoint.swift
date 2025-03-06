@@ -5,7 +5,6 @@
 //  Created by Hamza Jadid on 02/12/2024.
 //
 
-import Alamofire
 import Foundation
 
 enum PrayerTimesEndpoint: EndpointProtocol {
