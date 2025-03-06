@@ -19,7 +19,7 @@ struct PrayerTimesService {
         var request = URLRequest(url: url)
         request.httpMethod = endpoint.method.rawValue
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        let (data, response) = try await URLSession.shared.data(for: request)
+        let (data, _) = try await URLSession.shared.data(for: request)
         let sha1Response = try JSONDecoder().decode(Sha1Response.self, from: data)
         return sha1Response.sha1
     }
@@ -36,7 +36,7 @@ struct PrayerTimesService {
         var request = URLRequest(url: url)
         request.httpMethod = endpoint.method.rawValue
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        let (data, response) = try await URLSession.shared.data(for: request)
+        let (data, _) = try await URLSession.shared.data(for: request)
         return try JSONDecoder().decode(YearDayPrayerTimesRespones.self, from: data)
     }
 
@@ -52,7 +52,7 @@ struct PrayerTimesService {
         var request = URLRequest(url: url)
         request.httpMethod = endpoint.method.rawValue
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        let (data, response) = try await URLSession.shared.data(for: request)
+        let (data, _) = try await URLSession.shared.data(for: request)
         return try JSONDecoder().decode(YearWeekPrayerTimesResponse.self, from: data)
     }
 }

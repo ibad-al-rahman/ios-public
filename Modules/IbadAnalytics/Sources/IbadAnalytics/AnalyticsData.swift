@@ -47,7 +47,7 @@ public enum AnalyticsData: Equatable, Sendable {
             let stringifiedProperties = properties
                 .map { "\($0.key): \($0.value)" }
                 .joined(separator: ",")
-            return "{ eventType: event, properties: { \(stringifiedProperties) } }"
+            return "{ eventType: event, name: \(name), properties: { \(stringifiedProperties) } }"
         }
     }
 }
