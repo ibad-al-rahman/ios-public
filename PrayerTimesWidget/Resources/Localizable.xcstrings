@@ -25,6 +25,12 @@
             "state" : "translated",
             "value" : "بعد:"
           }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "After:"
+          }
         }
       }
     },
