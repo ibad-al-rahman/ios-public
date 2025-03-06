@@ -69,6 +69,7 @@ public struct YearWeekPrayerTimesStorage: Codable, Sendable {
         public let fri: DayPrayertimesStorage?
         public let sat: DayPrayertimesStorage?
         public let sun: DayPrayertimesStorage?
+        public let hadith: HadithStorage?
     }
 
     public struct DayPrayertimesStorage: Codable, Identifiable, Sendable {
@@ -76,6 +77,11 @@ public struct YearWeekPrayerTimesStorage: Codable, Sendable {
         public let gregorian: String
         public let hijri: String
         public let prayerTimes: PrayerTimesStorage
+    }
+
+    public struct HadithStorage: Codable, Sendable {
+        public let hadith: String
+        public let note: String?
     }
 }
 

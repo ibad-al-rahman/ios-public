@@ -79,6 +79,7 @@ public struct YearWeekPrayerTimesResponse: Decodable, Sendable {
         public let fri: DayPrayertimes?
         public let sat: DayPrayertimes?
         public let sun: DayPrayertimes?
+        public let hadith: Hadith?
     }
 
     public struct DayPrayertimes: Decodable, Sendable {
@@ -86,6 +87,11 @@ public struct YearWeekPrayerTimesResponse: Decodable, Sendable {
         public let gregorian: String
         public let hijri: String
         public let prayerTimes: PrayerTimesResponse
+    }
+
+    public struct Hadith: Decodable, Sendable {
+        public let hadith: String
+        public let note: String?
     }
 }
 
@@ -140,8 +146,15 @@ extension YearWeekPrayerTimesResponse.WeekPrayerTimes {
             thu: thu?.intoStorage,
             fri: fri?.intoStorage,
             sat: sat?.intoStorage,
-            sun: sun?.intoStorage
+            sun: sun?.intoStorage,
+            hadith: hadith?.intoStorage
         )
+    }
+}
+
+extension YearWeekPrayerTimesResponse.Hadith {
+    public var intoStorage: YearWeekPrayerTimesStorage.HadithStorage {
+        YearWeekPrayerTimesStorage.HadithStorage(hadith: hadith, note: note)
     }
 }
 
