@@ -79,8 +79,6 @@ public struct YearWeekPrayerTimesStorage: Codable, Sendable {
     }
 }
 
-
-
 public struct DayPrayerTimesStorage: Codable, Identifiable, Sendable {
     public let id: Int
     public let weekId: Int
@@ -104,15 +102,23 @@ public struct DayEventStorage: Codable, Sendable {
     public let en: String?
 }
 
+public struct PrayerTimesStorageFileManager {
+    static let baseUrl = FileManager.default.containerURL(
+        forSecurityApplicationGroupIdentifier: "group.com.ibadalrahman.PublicSector"
+    )?.appendingPathComponent(
+        "Documents", conformingTo: .directory
+    ) ?? .documentsDirectory
+
+    public static func removeDocuments() throws {
+        try FileManager.default.removeItem(at: baseUrl)
+        try FileManager.default.removeItem(at: .documentsDirectory)
+    }
+}
+
 public extension SharedKey where Self == FileStorageKey<YearPrayerTimesStorage> {
     static func localDayPrayerTimes(year: Int) -> Self {
-        let baseUrl = FileManager.default.containerURL(
-            forSecurityApplicationGroupIdentifier: "group.com.ibadalrahman.PublicSector"
-        )?.appendingPathComponent(
-            "Documents", conformingTo: .directory
-        ) ?? .documentsDirectory
-        return fileStorage(
-            baseUrl
+        fileStorage(
+            PrayerTimesStorageFileManager.baseUrl
                 .appendingPathComponent("prayerTimes", conformingTo: .directory)
                 .appendingPathComponent("days", conformingTo: .directory)
                 .appending(component: "\(year).json")
@@ -122,13 +128,8 @@ public extension SharedKey where Self == FileStorageKey<YearPrayerTimesStorage> 
 
 public extension SharedKey where Self == FileStorageKey<YearWeekPrayerTimesStorage> {
     static func localWeekPrayerTimes(year: Int) -> Self {
-        let baseUrl = FileManager.default.containerURL(
-            forSecurityApplicationGroupIdentifier: "group.com.ibadalrahman.PublicSector"
-        )?.appendingPathComponent(
-            "Documents", conformingTo: .directory
-        ) ?? .documentsDirectory
-        return fileStorage(
-            baseUrl
+        fileStorage(
+            PrayerTimesStorageFileManager.baseUrl
                 .appendingPathComponent("prayerTimes", conformingTo: .directory)
                 .appendingPathComponent("weeks", conformingTo: .directory)
                 .appending(component: "\(year).json")

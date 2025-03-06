@@ -91,6 +91,16 @@
         }
       }
     },
+    "Clean cache" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "مسح ذاكرة التخزين المؤقت"
+          }
+        }
+      }
+    },
     "Contact us" : {
       "localizations" : {
         "ar" : {

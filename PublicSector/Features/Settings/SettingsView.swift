@@ -36,6 +36,12 @@ struct SettingsView: View {
                         .foregroundStyle(.primary, .primary)
                         .featureFlagged(.settingsInviteFriends)
                 }
+
+                Section {
+                    Button(action: { store.send(.onTapCleanCache) }) {
+                        Text("Clean cache")
+                    }
+                }
             }
             .navigationDestination(
                 item: $store.scope(
