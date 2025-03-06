@@ -54,7 +54,8 @@ extension PrayerTimesRepository: TestDependencyKey {
                         thu: nil,
                         fri: nil,
                         sat: nil,
-                        sun: nil
+                        sun: nil,
+                        hadith: nil
                     )]
                 )
             }
