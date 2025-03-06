@@ -9,6 +9,7 @@ import ComposableArchitecture
 import Foundation
 import IbadAnalytics
 import IbadRepositories
+import WidgetKit
 
 @Reducer
 struct DailyPrayerTimesFeature {
@@ -97,6 +98,7 @@ struct DailyPrayerTimesFeature {
             case .view(.onAppear):
                 state.error = nil
                 state.date = .now
+                WidgetCenter.shared.reloadAllTimelines()
                 return getDayPrayerTimes(state: state)
 
             case .view(.onTapRetry):

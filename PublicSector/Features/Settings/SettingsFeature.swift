@@ -7,6 +7,7 @@
 
 import ComposableArchitecture
 import IbadAnalytics
+import IbadRepositories
 
 @Reducer
 struct SettingsFeature {
@@ -31,6 +32,7 @@ struct SettingsFeature {
             case onTapLanguage
             case onTapDonate
             case onTapHelp
+            case onTapCleanCache
         }
 
         @CasePathable
@@ -70,6 +72,10 @@ struct SettingsFeature {
 
             case .view(.onTapHelp):
                 state.destination = .help(HelpFeature.State())
+                return .none
+
+            case .view(.onTapCleanCache):
+                try? PrayerTimesStorageFileManager.removeDocuments()
                 return .none
 
             default:
