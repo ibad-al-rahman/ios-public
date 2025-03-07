@@ -50,6 +50,20 @@ struct WeeklyPrayerTimesView: View {
                     Text("Timings")
                 }
             }
+
+            if let hadith = store.hadith {
+                Section {
+                    Text(verbatim: hadith.hadith)
+                        .environment(\.layoutDirection, .rightToLeft)
+                } header: {
+                    Text("Hadith of the Week")
+                } footer: {
+                    if let hadithNote = hadith.note {
+                        Text(verbatim: hadithNote)
+                            .environment(\.layoutDirection, .rightToLeft)
+                    }
+                }
+            }
         }
         .onAppear { store.send(.onAppear) }
     }
