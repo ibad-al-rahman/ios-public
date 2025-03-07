@@ -39,6 +39,7 @@ struct DailyPrayerTimesView: View {
                     .redacted(reason: .placeholder)
             }
             todaysEvents
+            weeklyHadith
         }
     }
 
@@ -134,6 +135,23 @@ struct DailyPrayerTimesView: View {
             }
         } else {
             EmptyView()
+        }
+    }
+
+    @ViewBuilder
+    private var weeklyHadith: some View {
+        if let hadith = store.weeklyHadith {
+            Section {
+                Text(verbatim: hadith.hadith)
+                    .environment(\.layoutDirection, .rightToLeft)
+            } header: {
+                Text("Hadith of the Week")
+            } footer: {
+                if let hadithNote = hadith.note {
+                    Text(verbatim: hadithNote)
+                        .environment(\.layoutDirection, .rightToLeft)
+                }
+            }
         }
     }
 

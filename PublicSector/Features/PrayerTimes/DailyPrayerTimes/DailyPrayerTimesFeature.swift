@@ -20,18 +20,11 @@ struct DailyPrayerTimesFeature {
         var date: Date = .now
         var checkedYears = Set<Int>()
         var todaysPrayerTimes: DayPrayerTimes?
+        var weeklyHadith: Hadith?
         var error: Error?
 
         var canResetDate: Bool {
             Calendar.current.isDateInToday(date) == false
-        }
-
-        var shareablePrayerTimes: String? {
-            guard let todaysPrayerTimes else { return nil }
-            return """
-            Prayer times for:
-            Fajr: \(todaysPrayerTimes.fajr)
-            """
         }
 
         var event: String? {
@@ -63,6 +56,7 @@ struct DailyPrayerTimesFeature {
         @CasePathable
         enum ReducerAction {
             case getDayPrayerTimes(DayPrayerTimes?)
+            case getWeeklyHadith(Hadith?)
             case appendCheckedYear(year: Int)
             case setError(Error)
         }
@@ -107,6 +101,10 @@ struct DailyPrayerTimesFeature {
 
             case .reducer(.getDayPrayerTimes(.some(let prayerTimes))):
                 state.todaysPrayerTimes = prayerTimes
+                return .none
+
+            case .reducer(.getWeeklyHadith(let hadith)):
+                state.weeklyHadith = hadith
                 return .none
 
             case .reducer(.appendCheckedYear(let year)):
@@ -193,6 +191,19 @@ struct DailyPrayerTimesFeature {
 
             await send(
                 .reducer(.getDayPrayerTimes(DayPrayerTimes(from: day))),
+                animation: .default
+            )
+
+            @SharedReader(
+                .localWeekPrayerTimes(year: ymd.year)
+            ) var localWeekPrayerTimes = .empty
+
+            guard let week = localWeekPrayerTimes.getWeekPrayerTimes(
+                weekId: day.weekId
+            )
+            else { return }
+            await send(
+                .reducer(.getWeeklyHadith(Hadith(from: week.hadith))),
                 animation: .default
             )
         }
