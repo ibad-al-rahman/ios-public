@@ -50,14 +50,20 @@ struct DayPrayerTimes: Equatable, Identifiable {
 
     var shareableText: String {
         """
-        \(String(localized: "Prayer Times"))
+        \(String(localized: "Annual Prayer Times by Ibad"))
         \(hijri)
         \(gregorian.stringDate)
+
         🌌 \(String(localized: "Fajr")): \(fajr.time) 🌌
+
         🌄 \(String(localized: "Sunrise")): \(sunrise.time) 🌄
+
         ☀️ \(String(localized: "Dhuhr")): \(dhuhr.time) ☀️
+
         🌆 \(String(localized: "Asr")): \(asr.time) 🌆
+
         🌅 \(String(localized: "Maghrib")): \(maghrib.time) 🌅
+
         🌃 \(String(localized: "Ishaa")): \(ishaa.time) 🌃
         """
     }

@@ -21,6 +21,23 @@
         }
       }
     },
+    "Annual Prayer Times by Ibad" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "مواقيت الصلاة بحسب تقويم جماعة عباد الرحمٰن السنوي"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Prayer times according to the annual calendar of Ibad al-Rahman"
+          }
+        }
+      }
+    },
     "App Info" : {
       "extractionState" : "manual",
       "localizations" : {
