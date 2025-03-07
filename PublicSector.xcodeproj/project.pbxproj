@@ -43,6 +43,7 @@
 		D98D2BDF2CA9B5140050F2A8 /* AppearanceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D98D2BDE2CA9B5140050F2A8 /* AppearanceView.swift */; };
 		D98D2BE12CA9B7260050F2A8 /* SettingsFeature+Destination.swift in Sources */ = {isa = PBXBuildFile; fileRef = D98D2BE02CA9B7260050F2A8 /* SettingsFeature+Destination.swift */; };
 		D98D2BE32CA9B9310050F2A8 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = D98D2BE22CA9B9310050F2A8 /* Settings.swift */; };
+		D9A40D5E2D7A6DE500C1BBF3 /* Hadith.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A40D5D2D7A6DE300C1BBF3 /* Hadith.swift */; };
 		D9A6E1BD2CEC71FE006123D1 /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = D9A6E1BC2CEC71FE006123D1 /* ComposableArchitecture */; };
 		D9A70DBA2C850B78002F6583 /* PublicSectorApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A70DB92C850B78002F6583 /* PublicSectorApp.swift */; };
 		D9A70DBC2C850B78002F6583 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A70DBB2C850B78002F6583 /* ContentView.swift */; };
@@ -162,6 +163,7 @@
 		D98D2BDE2CA9B5140050F2A8 /* AppearanceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppearanceView.swift; sourceTree = "<group>"; };
 		D98D2BE02CA9B7260050F2A8 /* SettingsFeature+Destination.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SettingsFeature+Destination.swift"; sourceTree = "<group>"; };
 		D98D2BE22CA9B9310050F2A8 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
+		D9A40D5D2D7A6DE300C1BBF3 /* Hadith.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hadith.swift; sourceTree = "<group>"; };
 		D9A70DB62C850B78002F6583 /* PublicSector.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PublicSector.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D9A70DB92C850B78002F6583 /* PublicSectorApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublicSectorApp.swift; sourceTree = "<group>"; };
 		D9A70DBB2C850B78002F6583 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -579,6 +581,7 @@
 		D9A70E0B2C859E0C002F6583 /* Entities */ = {
 			isa = PBXGroup;
 			children = (
+				D9A40D5D2D7A6DE300C1BBF3 /* Hadith.swift */,
 				D91D995F2D23C43C004AA72D /* DayEvent.swift */,
 				D941B4232D16D876004FFF5C /* PrayerTimesSha1.swift */,
 				D9170D6E2CF0D5F1006E45D5 /* Prayer.swift */,
@@ -912,6 +915,7 @@
 				D97A9FE72D03ACC6000F3070 /* StartupView.swift in Sources */,
 				D9170D522CEFDE41006E45D5 /* WebLinks.swift in Sources */,
 				D9DA3AB32D1618B6001AB599 /* FeatureFlagFeature.swift in Sources */,
+				D9A40D5E2D7A6DE500C1BBF3 /* Hadith.swift in Sources */,
 				D941B4242D16D87F004FFF5C /* PrayerTimesSha1.swift in Sources */,
 				D9A70DFC2C8596FF002F6583 /* DeveloperMenuFeature.swift in Sources */,
 				D9A70E082C859D3F002F6583 /* SettingsView.swift in Sources */,

@@ -20,6 +20,7 @@ struct WeeklyPrayerTimesFeature {
         var wed: DayPrayerTimes?
         var thu: DayPrayerTimes?
         var fri: DayPrayerTimes?
+        var hadith: Hadith?
 
         var isLoading: Bool {
             sat == nil
@@ -92,6 +93,7 @@ struct WeeklyPrayerTimesFeature {
                 state.wed = DayPrayerTimes(from: week.wed, weekId: 0)
                 state.thu = DayPrayerTimes(from: week.thu, weekId: 0)
                 state.fri = DayPrayerTimes(from: week.fri, weekId: 0)
+                state.hadith = Hadith(from: week.hadith)
                 return .none
 
             default:

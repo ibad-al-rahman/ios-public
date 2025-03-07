@@ -273,6 +273,16 @@
         }
       }
     },
+    "Hadith of the Week" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "حديث الأسبوع"
+          }
+        }
+      }
+    },
     "Help" : {
       "localizations" : {
         "ar" : {
