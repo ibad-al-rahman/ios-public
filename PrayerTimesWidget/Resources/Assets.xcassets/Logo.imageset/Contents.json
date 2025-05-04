@@ -1,7 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "new_ibad_logo_white.svg",
+      "filename" : "ibad_logo_light_theme.svg",
+      "idiom" : "universal"
+    },
+    {
+      "appearances" : [
+        {
+          "appearance" : "luminosity",
+          "value" : "light"
+        }
+      ],
+      "filename" : "ibad_logo_light_theme 1.svg",
       "idiom" : "universal"
     },
     {
@@ -11,7 +21,7 @@
           "value" : "dark"
         }
       ],
-      "filename" : "new_ibad_logo_white copy.svg",
+      "filename" : "ibad_logo_dark_theme.svg",
       "idiom" : "universal"
     }
   ],

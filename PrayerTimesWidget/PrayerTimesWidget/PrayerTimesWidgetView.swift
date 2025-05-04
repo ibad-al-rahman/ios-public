@@ -185,7 +185,7 @@ struct PrayerTimesWidgetView: View {
         .padding(.horizontal, 8)
         .if(store.currentPrayer == prayer) {
             $0
-                .background(Capsule().fill(Color.primary))
+                .background(Capsule().fill(.accent))
                 .foregroundStyle(.background)
                 .bold()
         }

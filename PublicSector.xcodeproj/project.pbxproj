@@ -201,6 +201,7 @@
 		D9B4AB4F2D24B1E300E201CA /* InfoPlist.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = InfoPlist.xcstrings; sourceTree = "<group>"; };
 		D9B4AB552D24B8B100E201CA /* AppInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppInfo.swift; sourceTree = "<group>"; };
 		D9C85AC52CF38EE000730F12 /* NavigationRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationRowView.swift; sourceTree = "<group>"; };
+		D9CCDEBB2D88CAAA00276FCD /* IbadPrayerTimesService */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = IbadPrayerTimesService; sourceTree = "<group>"; };
 		D9DA3AA52D15FC88001AB599 /* ci_post_clone.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = ci_post_clone.sh; sourceTree = "<group>"; };
 		D9DA3AAB2D160B89001AB599 /* IbadRemoteConfig */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = IbadRemoteConfig; sourceTree = "<group>"; };
 		D9DA3AB02D1618A6001AB599 /* FeatureFlagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeatureFlagView.swift; sourceTree = "<group>"; };
@@ -276,6 +277,7 @@
 		D9089CE02CFDAC0200881BB6 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				D9CCDEBB2D88CAAA00276FCD /* IbadPrayerTimesService */,
 				D91BF1392D3FED9400BEB410 /* IbadAnalytics */,
 				D9DA3AAB2D160B89001AB599 /* IbadRemoteConfig */,
 				D9089CE12CFDAD4500881BB6 /* IbadRepositories */,

@@ -11,10 +11,6 @@ let package = Package(
     ],
     dependencies: [
         .package(
-            url: "https://github.com/Alamofire/Alamofire",
-            .upToNextMajor(from: "5.10.1")
-        ),
-        .package(
             url: "https://github.com/pointfreeco/swift-dependencies",
             .upToNextMajor(from: "1.6.1")
         ),
@@ -29,7 +25,6 @@ let package = Package(
     ],
     targets: [
         .target(name: "IbadRepositories", dependencies: [
-            .product(name: "Alamofire", package: "Alamofire"),
             .product(name: "Dependencies", package: "swift-dependencies"),
             .product(name: "DependenciesMacros", package: "swift-dependencies"),
             .product(
