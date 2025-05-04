@@ -34,6 +34,7 @@ public struct YearPrayerTimesStorage: Codable, Sendable {
             Logger.local.warning("Couldn't found \(idStr) prayer time")
             return nil
         }
+        Logger.local.info("Found \(idStr) \(day.gregorian)")
         return day
     }
 }
