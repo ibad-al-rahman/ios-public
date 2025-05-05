@@ -95,8 +95,13 @@ extension DayPrayerTimes {
         let timeFormatter = DateFormatter()
 
         gregorianFormatter.dateFormat = "dd/MM/yyyy"
+        // DON'T REMOVE THE LOCALE AND CALENDAR else day 30 of each month will fail
+        gregorianFormatter.locale = Locale(identifier: "en_US_POSIX")
+        gregorianFormatter.calendar = Calendar(identifier: .gregorian)
         hijriFormatter.calendar = Calendar(identifier: .islamicUmmAlQura)
         hijriFormatter.dateFormat = "dd/MM/yyyy"
+        // DON'T REMOVE THE LOCALE else 24-hour systems won't work
+        timeFormatter.locale = Locale(identifier: "en_US_POSIX")
         timeFormatter.dateFormat = "h:mm a"
         timeFormatter.amSymbol = "am"
         timeFormatter.pmSymbol = "pm"
