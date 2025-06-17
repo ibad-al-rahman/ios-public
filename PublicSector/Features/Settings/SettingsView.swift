@@ -30,11 +30,13 @@ struct SettingsView: View {
 
                     Label("Rate us", systemImage: "star")
                         .foregroundStyle(.primary, .primary)
-                        .featureFlagged(.settingsRateUs)
+                        .onTapGesture { store.send(.onTapRateUs) }
 
-                    Label("Invite your friends", systemImage: "paperplane")
-                        .foregroundStyle(.primary, .primary)
-                        .featureFlagged(.settingsInviteFriends)
+                    ShareLink(item: store.inviteFriendsShareContent) {
+                        Label("Invite your friends", systemImage: "paperplane")
+                            .foregroundStyle(.primary, .primary)
+                    }
+                    .buttonStyle(.plain)
                 }
 
                 Section {
