@@ -16,6 +16,10 @@ struct SettingsFeature {
 
     @ObservableState
     struct State: Equatable {
+        var inviteFriendsShareContent: String {
+            "https://apps.apple.com/lb/app/ibad-al-rahman/id6739705601"
+        }
+
         @Presents var destination: Destination.State?
     }
 
@@ -32,6 +36,7 @@ struct SettingsFeature {
             case onTapLanguage
             case onTapDonate
             case onTapHelp
+            case onTapRateUs
             case onTapCleanCache
         }
 
@@ -73,6 +78,9 @@ struct SettingsFeature {
             case .view(.onTapHelp):
                 state.destination = .help(HelpFeature.State())
                 return .none
+
+            case .view(.onTapRateUs):
+                return .run { _ in await externalDeepLinks.appStoreRatePage() }
 
             case .view(.onTapCleanCache):
                 try? PrayerTimesStorageFileManager.removeDocuments()
