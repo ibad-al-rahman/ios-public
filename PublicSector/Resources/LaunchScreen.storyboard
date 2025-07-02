@@ -16,7 +16,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="MultiColoLogo" translatesAutoresizingMaskIntoConstraints="NO" id="I0o-xT-wqF">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="MultiColorLogo" translatesAutoresizingMaskIntoConstraints="NO" id="I0o-xT-wqF">
                                 <rect key="frame" x="82" y="323" width="250" height="250"/>
                                 <color key="backgroundColor" name="Background"/>
                                 <constraints>
@@ -39,7 +39,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="MultiColoLogo" width="1080" height="1080"/>
+        <image name="MultiColorLogo" width="1080" height="1080"/>
         <namedColor name="Background">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
