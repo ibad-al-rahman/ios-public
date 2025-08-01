@@ -16,7 +16,6 @@ struct PrayerTimesView: View {
         NavigationStack {
             VStack {
                 picker
-                    .featureFlagged(.prayerTimesWeeklyView)
                 content
             }
             .navigationTitle("Prayer Times")

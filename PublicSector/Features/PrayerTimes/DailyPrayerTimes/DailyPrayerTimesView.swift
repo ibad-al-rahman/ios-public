@@ -119,7 +119,6 @@ struct DailyPrayerTimesView: View {
                         Label("Share", systemImage: "square.and.arrow.up")
                     }
                     .textCase(nil)
-                    .featureFlagged(.prayerTimesShare)
                 }
             }
         }
