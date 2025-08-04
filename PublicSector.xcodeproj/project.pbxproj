@@ -32,6 +32,7 @@
 		D91BF19F2D45116B00BEB410 /* Date+YMD.swift in Sources */ = {isa = PBXBuildFile; fileRef = D91BF19E2D45116400BEB410 /* Date+YMD.swift */; };
 		D91D99602D23C442004AA72D /* DayEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = D91D995F2D23C43C004AA72D /* DayEvent.swift */; };
 		D941B4242D16D87F004FFF5C /* PrayerTimesSha1.swift in Sources */ = {isa = PBXBuildFile; fileRef = D941B4232D16D876004FFF5C /* PrayerTimesSha1.swift */; };
+		D95D31EA2E3D4DCA006820F4 /* Permissions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D95D31E92E3D4DC6006820F4 /* Permissions.swift */; };
 		D970CD7C2D03B888004D8E66 /* AppEntryFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = D970CD7B2D03B885004D8E66 /* AppEntryFeature.swift */; };
 		D970CD7E2D03B890004D8E66 /* AppEntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D970CD7D2D03B88D004D8E66 /* AppEntryView.swift */; };
 		D97A9FE52D03ACC0000F3070 /* StartupFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = D97A9FE42D03ACBD000F3070 /* StartupFeature.swift */; };
@@ -152,6 +153,7 @@
 		D91BF19E2D45116400BEB410 /* Date+YMD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+YMD.swift"; sourceTree = "<group>"; };
 		D91D995F2D23C43C004AA72D /* DayEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayEvent.swift; sourceTree = "<group>"; };
 		D941B4232D16D876004FFF5C /* PrayerTimesSha1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrayerTimesSha1.swift; sourceTree = "<group>"; };
+		D95D31E92E3D4DC6006820F4 /* Permissions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Permissions.swift; sourceTree = "<group>"; };
 		D970CD7B2D03B885004D8E66 /* AppEntryFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppEntryFeature.swift; sourceTree = "<group>"; };
 		D970CD7D2D03B88D004D8E66 /* AppEntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppEntryView.swift; sourceTree = "<group>"; };
 		D97A9FE42D03ACBD000F3070 /* StartupFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartupFeature.swift; sourceTree = "<group>"; };
@@ -343,6 +345,7 @@
 		D98903A92CDE346C00717646 /* Dependencies */ = {
 			isa = PBXGroup;
 			children = (
+				D95D31E92E3D4DC6006820F4 /* Permissions.swift */,
 				D9B4AB552D24B8B100E201CA /* AppInfo.swift */,
 				D9170D512CEFDE15006E45D5 /* WebLinks.swift */,
 				D98903AA2CDE347800717646 /* ExternalDeepLinks.swift */,
@@ -912,6 +915,7 @@
 				D9170D632CF0A64D006E45D5 /* PrayerTimesFeature+Destination.swift in Sources */,
 				D9DA3AB52D161C2D001AB599 /* DeveloperMenuFeature+Destination.swift in Sources */,
 				D9170D5A2CF0974E006E45D5 /* AdhkarFeature.swift in Sources */,
+				D95D31EA2E3D4DCA006820F4 /* Permissions.swift in Sources */,
 				D9A70E062C859977002F6583 /* SettingsFeature.swift in Sources */,
 				D9170D6B2CF0B1F7006E45D5 /* EditSinglePrayerTimeView.swift in Sources */,
 				D97A9FE72D03ACC6000F3070 /* StartupView.swift in Sources */,
