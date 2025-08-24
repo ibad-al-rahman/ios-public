@@ -65,6 +65,10 @@ struct DayPrayerTimes: Equatable, Identifiable {
         🌅 \(String(localized: "Maghrib")): \(maghrib.time) 🌅
 
         🌃 \(String(localized: "Ishaa")): \(ishaa.time) 🌃
+
+        \(String(localized: "Download app"))
+        \(String(localized: "Android")): https://play.google.com/store/apps/details?id=org.ibadalrahman.publicsector
+        \(String(localized: "iOS")): https://apps.apple.com/lb/app/ibad-al-rahman/id6739705601
         """
     }
 }
