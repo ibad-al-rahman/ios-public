@@ -21,6 +21,23 @@
         }
       }
     },
+    "Android" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "أندرويد"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Android"
+          }
+        }
+      }
+    },
     "Annual Prayer Times by Ibad" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -253,6 +270,23 @@
         }
       }
     },
+    "Download app" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "حمّل تطبيق عباد الرحمن"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Download the Ibad Al-Rahman app today"
+          }
+        }
+      }
+    },
     "Edit" : {
       "localizations" : {
         "ar" : {
@@ -333,6 +367,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "أدع أصدقائك"
+          }
+        }
+      }
+    },
+    "iOS" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "آيفون"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "iOS"
           }
         }
       }
