@@ -28,3 +28,29 @@ extension SharedKey where Self == FileStorageKey<PrayerTimesSha1> {
         )
     }
 }
+
+extension SharedKey where Self == AppStorageKey<Bool> {
+    static var notificationsEnabled: Self {
+        appStorage("notificationsEnabled")
+    }
+
+    static var fajrNotificationEnabled: Self {
+        appStorage("fajrNotificationEnabled")
+    }
+
+    static var dhuhrNotificationEnabled: Self {
+        appStorage("dhuhrNotificationEnabled")
+    }
+
+    static var asrNotificationEnabled: Self {
+        appStorage("asrNotificationEnabled")
+    }
+
+    static var maghribNotificationEnabled: Self {
+        appStorage("maghribNotificationEnabled")
+    }
+
+    static var ishaaNotificationEnabled: Self {
+        appStorage("ishaaNotificationEnabled")
+    }
+}

@@ -12,12 +12,12 @@ import IbadAnalytics
 struct NotificationsFeature {
     @ObservableState
     struct State: Equatable {
-        var notificationsEnabled: Bool = false
-        var fajrNotificationEnabled: Bool = false
-        var dhuhrNotificationEnabled: Bool = false
-        var asrNotificationEnabled: Bool = false
-        var maghribNotificationEnabled: Bool = false
-        var ishaaNotificationEnabled: Bool = false
+        @Shared(.notificationsEnabled) var notificationsEnabled = false
+        @Shared(.fajrNotificationEnabled) var fajrNotificationEnabled = false
+        @Shared(.dhuhrNotificationEnabled) var dhuhrNotificationEnabled = false
+        @Shared(.asrNotificationEnabled) var asrNotificationEnabled = false
+        @Shared(.maghribNotificationEnabled) var maghribNotificationEnabled = false
+        @Shared(.ishaaNotificationEnabled) var ishaaNotificationEnabled = false
     }
 
     enum Action: BaseAction, BindableAction {
