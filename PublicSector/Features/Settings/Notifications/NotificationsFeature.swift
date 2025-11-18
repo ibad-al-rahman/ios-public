@@ -7,9 +7,11 @@
 
 import ComposableArchitecture
 import IbadAnalytics
+import UserNotifications
 
 @Reducer
 struct NotificationsFeature {
+    @Dependency(\.permissions) var permissions
     @ObservableState
     struct State: Equatable {
         @Shared(.notificationsEnabled) var notificationsEnabled = false
@@ -36,7 +38,9 @@ struct NotificationsFeature {
         }
 
         @CasePathable
-        enum ReducerAction { }
+        enum ReducerAction {
+            case permissionResponse(Result<Bool, Error>)
+        }
 
         @CasePathable
         enum DelegateAction { }
@@ -55,6 +59,48 @@ struct NotificationsFeature {
             }
         }
         BindingReducer()
-        EmptyReducer()
+        Reduce { state, action in
+            switch action {
+            case .binding(\.notificationsEnabled):
+                guard state.notificationsEnabled else {
+                    return .none
+                }
+
+                return .run { send in
+                    let status = await permissions.getPushNotificationPermissionStatus()
+
+                    switch status {
+                    case .authorized:
+                        return
+
+                    case .notDetermined, .provisional, .ephemeral:
+                        await send(.reducer(.permissionResponse(Result {
+                            try await permissions.requestPushNotificationPermission()
+                        })))
+
+                    case .denied:
+                        await send(.reducer(.permissionResponse(Result {
+                            try await permissions.requestPushNotificationPermission()
+                        })))
+
+                    @unknown default:
+                        return
+                    }
+                }
+
+            case let .reducer(.permissionResponse(.success(granted))):
+                if !granted {
+                    state.$notificationsEnabled.withLock { $0 = false }
+                }
+                return .none
+
+            case .reducer(.permissionResponse(.failure)):
+                state.$notificationsEnabled.withLock { $0 = false }
+                return .none
+
+            default:
+                return .none
+            }
+        }
     }
 }
