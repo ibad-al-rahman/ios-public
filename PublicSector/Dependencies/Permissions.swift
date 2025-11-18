@@ -12,6 +12,7 @@ import UserNotifications
 @DependencyClient
 struct Permissions: Sendable {
     var requestPushNotificationPermission: @Sendable () async throws -> Bool = { false }
+    var getPushNotificationPermissionStatus: @Sendable () async -> UNAuthorizationStatus = { .notDetermined }
 }
 
 extension Permissions: DependencyKey {
@@ -21,6 +22,12 @@ extension Permissions: DependencyKey {
                 try await UNUserNotificationCenter
                     .current()
                     .requestAuthorization(options: [.badge, .sound, .alert])
+            },
+            getPushNotificationPermissionStatus: {
+                let settings = await UNUserNotificationCenter
+                    .current()
+                    .notificationSettings()
+                return settings.authorizationStatus
             }
         )
     }()
