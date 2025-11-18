@@ -12,7 +12,12 @@ import IbadAnalytics
 struct NotificationsFeature {
     @ObservableState
     struct State: Equatable {
-        // Add notification-related state properties here
+        var notificationsEnabled: Bool = false
+        var fajrNotificationEnabled: Bool = false
+        var dhuhrNotificationEnabled: Bool = false
+        var asrNotificationEnabled: Bool = false
+        var maghribNotificationEnabled: Bool = false
+        var ishaaNotificationEnabled: Bool = false
     }
 
     enum Action: BaseAction, BindableAction {

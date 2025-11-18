@@ -14,8 +14,26 @@ struct NotificationsView: View {
     var body: some View {
         Form {
             Section {
-                Text("Notification settings will be configured here")
-                    .foregroundColor(.secondary)
+                Toggle("Enable Notifications", isOn: $store.notificationsEnabled)
+            }
+
+            Section {
+                Toggle("Fajr", isOn: $store.fajrNotificationEnabled)
+                    .disabled(!store.notificationsEnabled)
+
+                Toggle("Dhuhr", isOn: $store.dhuhrNotificationEnabled)
+                    .disabled(!store.notificationsEnabled)
+
+                Toggle("Asr", isOn: $store.asrNotificationEnabled)
+                    .disabled(!store.notificationsEnabled)
+
+                Toggle("Maghrib", isOn: $store.maghribNotificationEnabled)
+                    .disabled(!store.notificationsEnabled)
+
+                Toggle("Ishaa", isOn: $store.ishaaNotificationEnabled)
+                    .disabled(!store.notificationsEnabled)
+            } header: {
+                Text("Prayer Notifications")
             }
         }
         .navigationTitle("Notifications")
