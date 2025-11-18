@@ -12,6 +12,8 @@ import UserNotifications
 @Reducer
 struct NotificationsFeature {
     @Dependency(\.permissions) var permissions
+    @Dependency(\.externalDeepLinks) var externalDeepLinks
+
     @ObservableState
     struct State: Equatable {
         @Shared(.notificationsEnabled) var notificationsEnabled = false
@@ -20,6 +22,8 @@ struct NotificationsFeature {
         @Shared(.asrNotificationEnabled) var asrNotificationEnabled = false
         @Shared(.maghribNotificationEnabled) var maghribNotificationEnabled = false
         @Shared(.ishaaNotificationEnabled) var ishaaNotificationEnabled = false
+
+        @Presents var destination: Destination.State?
 
         var notificationsDisabled: Bool {
             !notificationsEnabled
@@ -46,7 +50,9 @@ struct NotificationsFeature {
         enum DelegateAction { }
 
         @CasePathable
-        enum DependentAction { }
+        enum DependentAction {
+            case destination(PresentationAction<Destination.Action>)
+        }
     }
 
     var body: some ReducerOf<Self> {
@@ -79,9 +85,7 @@ struct NotificationsFeature {
                         })))
 
                     case .denied:
-                        await send(.reducer(.permissionResponse(Result {
-                            try await permissions.requestPushNotificationPermission()
-                        })))
+                        await send(.reducer(.permissionResponse(.success(false))))
 
                     @unknown default:
                         return
@@ -91,6 +95,7 @@ struct NotificationsFeature {
             case let .reducer(.permissionResponse(.success(granted))):
                 if !granted {
                     state.$notificationsEnabled.withLock { $0 = false }
+                    state.destination = .alert(.unauthorizedNotificationPermission)
                 }
                 return .none
 
@@ -98,9 +103,20 @@ struct NotificationsFeature {
                 state.$notificationsEnabled.withLock { $0 = false }
                 return .none
 
+            case .dependent(.destination(.presented(.alert(.openSettings)))):
+                return .run { _ in
+                    await externalDeepLinks.appSettings()
+                }
+
+            case .dependent(.destination(.presented(.alert(.cancel)))):
+                return .none
+
             default:
                 return .none
             }
+        }
+        .ifLet(\.$destination, action: \.dependent.destination) {
+            Destination()
         }
     }
 }

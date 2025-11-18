@@ -82,6 +82,8 @@
 		D9C85AC62CF38EEC00730F12 /* NavigationRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9C85AC52CF38EE000730F12 /* NavigationRowView.swift */; };
 		D9D785AF2ECD10C6004D81F8 /* NotificationsFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9D785AE2ECD10C2004D81F8 /* NotificationsFeature.swift */; };
 		D9D785B12ECD10CD004D81F8 /* NotificationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9D785B02ECD10C9004D81F8 /* NotificationsView.swift */; };
+		D9D785B32ECD1CD8004D81F8 /* NotificationsFeature+Destination.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9D785B22ECD1CCF004D81F8 /* NotificationsFeature+Destination.swift */; };
+		D9D785B52ECD1DDA004D81F8 /* AlertState+Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9D785B42ECD1DD6004D81F8 /* AlertState+Notifications.swift */; };
 		D9DA3AAE2D161431001AB599 /* IbadRemoteConfig in Frameworks */ = {isa = PBXBuildFile; productRef = D9DA3AAD2D161431001AB599 /* IbadRemoteConfig */; };
 		D9DA3AB12D1618AF001AB599 /* FeatureFlagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9DA3AB02D1618A6001AB599 /* FeatureFlagView.swift */; };
 		D9DA3AB32D1618B6001AB599 /* FeatureFlagFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9DA3AB22D1618B3001AB599 /* FeatureFlagFeature.swift */; };
@@ -208,6 +210,8 @@
 		D9CCDEBB2D88CAAA00276FCD /* IbadPrayerTimesService */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = IbadPrayerTimesService; sourceTree = "<group>"; };
 		D9D785AE2ECD10C2004D81F8 /* NotificationsFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsFeature.swift; sourceTree = "<group>"; };
 		D9D785B02ECD10C9004D81F8 /* NotificationsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsView.swift; sourceTree = "<group>"; };
+		D9D785B22ECD1CCF004D81F8 /* NotificationsFeature+Destination.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NotificationsFeature+Destination.swift"; sourceTree = "<group>"; };
+		D9D785B42ECD1DD6004D81F8 /* AlertState+Notifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AlertState+Notifications.swift"; sourceTree = "<group>"; };
 		D9DA3AA52D15FC88001AB599 /* ci_post_clone.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = ci_post_clone.sh; sourceTree = "<group>"; };
 		D9DA3AAB2D160B89001AB599 /* IbadRemoteConfig */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = IbadRemoteConfig; sourceTree = "<group>"; };
 		D9DA3AB02D1618A6001AB599 /* FeatureFlagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeatureFlagView.swift; sourceTree = "<group>"; };
@@ -621,6 +625,8 @@
 		D9D785AD2ECD10BB004D81F8 /* Notifications */ = {
 			isa = PBXGroup;
 			children = (
+				D9D785B42ECD1DD6004D81F8 /* AlertState+Notifications.swift */,
+				D9D785B22ECD1CCF004D81F8 /* NotificationsFeature+Destination.swift */,
 				D9D785B02ECD10C9004D81F8 /* NotificationsView.swift */,
 				D9D785AE2ECD10C2004D81F8 /* NotificationsFeature.swift */,
 			);
@@ -926,6 +932,7 @@
 				D9B4AB562D24B8B500E201CA /* AppInfo.swift in Sources */,
 				D98D2BDA2CA9B14A0050F2A8 /* View+ControlFlow.swift in Sources */,
 				D970CD7C2D03B888004D8E66 /* AppEntryFeature.swift in Sources */,
+				D9D785B32ECD1CD8004D81F8 /* NotificationsFeature+Destination.swift in Sources */,
 				D9A70E152C859EA9002F6583 /* DailyPrayerTimesView.swift in Sources */,
 				D9170D632CF0A64D006E45D5 /* PrayerTimesFeature+Destination.swift in Sources */,
 				D9DA3AB52D161C2D001AB599 /* DeveloperMenuFeature+Destination.swift in Sources */,
@@ -937,6 +944,7 @@
 				D9170D522CEFDE41006E45D5 /* WebLinks.swift in Sources */,
 				D9DA3AB32D1618B6001AB599 /* FeatureFlagFeature.swift in Sources */,
 				D9A40D5E2D7A6DE500C1BBF3 /* Hadith.swift in Sources */,
+				D9D785B52ECD1DDA004D81F8 /* AlertState+Notifications.swift in Sources */,
 				D941B4242D16D87F004FFF5C /* PrayerTimesSha1.swift in Sources */,
 				D9A70DFC2C8596FF002F6583 /* DeveloperMenuFeature.swift in Sources */,
 				D9A70E082C859D3F002F6583 /* SettingsView.swift in Sources */,

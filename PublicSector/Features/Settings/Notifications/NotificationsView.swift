@@ -40,6 +40,10 @@ struct NotificationsView: View {
         .onAppear {
             store.send(.view(.onAppear))
         }
+        .alert($store.scope(
+            state: \.destination?.alert,
+            action: \.dependent.destination.alert
+        ))
     }
 }
 
