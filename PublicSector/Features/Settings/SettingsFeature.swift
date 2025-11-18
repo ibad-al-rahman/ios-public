@@ -34,6 +34,7 @@ struct SettingsFeature {
             case onAppear
             case onTapAppearance
             case onTapLanguage
+            case onTapNotifications
             case onTapDonate
             case onTapHelp
             case onTapRateUs
@@ -71,6 +72,10 @@ struct SettingsFeature {
 
             case .view(.onTapLanguage):
                 return .run { _ in await externalDeepLinks.appSettings() }
+
+            case .view(.onTapNotifications):
+                state.destination = .notifications(NotificationsFeature.State())
+                return .none
 
             case .view(.onTapDonate):
                 return .run { _ in await webLinks.openDonationLink() }

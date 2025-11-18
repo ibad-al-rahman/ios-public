@@ -80,6 +80,8 @@
 		D9B4AB502D24B1E300E201CA /* InfoPlist.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = D9B4AB4F2D24B1E300E201CA /* InfoPlist.xcstrings */; };
 		D9B4AB562D24B8B500E201CA /* AppInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9B4AB552D24B8B100E201CA /* AppInfo.swift */; };
 		D9C85AC62CF38EEC00730F12 /* NavigationRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9C85AC52CF38EE000730F12 /* NavigationRowView.swift */; };
+		D9D785AF2ECD10C6004D81F8 /* NotificationsFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9D785AE2ECD10C2004D81F8 /* NotificationsFeature.swift */; };
+		D9D785B12ECD10CD004D81F8 /* NotificationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9D785B02ECD10C9004D81F8 /* NotificationsView.swift */; };
 		D9DA3AAE2D161431001AB599 /* IbadRemoteConfig in Frameworks */ = {isa = PBXBuildFile; productRef = D9DA3AAD2D161431001AB599 /* IbadRemoteConfig */; };
 		D9DA3AB12D1618AF001AB599 /* FeatureFlagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9DA3AB02D1618A6001AB599 /* FeatureFlagView.swift */; };
 		D9DA3AB32D1618B6001AB599 /* FeatureFlagFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9DA3AB22D1618B3001AB599 /* FeatureFlagFeature.swift */; };
@@ -204,6 +206,8 @@
 		D9B4AB552D24B8B100E201CA /* AppInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppInfo.swift; sourceTree = "<group>"; };
 		D9C85AC52CF38EE000730F12 /* NavigationRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationRowView.swift; sourceTree = "<group>"; };
 		D9CCDEBB2D88CAAA00276FCD /* IbadPrayerTimesService */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = IbadPrayerTimesService; sourceTree = "<group>"; };
+		D9D785AE2ECD10C2004D81F8 /* NotificationsFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsFeature.swift; sourceTree = "<group>"; };
+		D9D785B02ECD10C9004D81F8 /* NotificationsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsView.swift; sourceTree = "<group>"; };
 		D9DA3AA52D15FC88001AB599 /* ci_post_clone.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = ci_post_clone.sh; sourceTree = "<group>"; };
 		D9DA3AAB2D160B89001AB599 /* IbadRemoteConfig */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = IbadRemoteConfig; sourceTree = "<group>"; };
 		D9DA3AB02D1618A6001AB599 /* FeatureFlagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeatureFlagView.swift; sourceTree = "<group>"; };
@@ -511,6 +515,7 @@
 		D9A70DF62C8596C4002F6583 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
+				D9D785AD2ECD10BB004D81F8 /* Notifications */,
 				D9170D532CEFE54A006E45D5 /* Help */,
 				D98D2BDB2CA9B5000050F2A8 /* Appearance */,
 				D9A70E052C859977002F6583 /* SettingsFeature.swift */,
@@ -611,6 +616,15 @@
 				D9C85AC52CF38EE000730F12 /* NavigationRowView.swift */,
 			);
 			path = Components;
+			sourceTree = "<group>";
+		};
+		D9D785AD2ECD10BB004D81F8 /* Notifications */ = {
+			isa = PBXGroup;
+			children = (
+				D9D785B02ECD10C9004D81F8 /* NotificationsView.swift */,
+				D9D785AE2ECD10C2004D81F8 /* NotificationsFeature.swift */,
+			);
+			path = Notifications;
 			sourceTree = "<group>";
 		};
 		D9DA3AA22D15FB72001AB599 /* ci_scripts */ = {
@@ -906,6 +920,7 @@
 				D9A70DBA2C850B78002F6583 /* PublicSectorApp.swift in Sources */,
 				D9DA3AB12D1618AF001AB599 /* FeatureFlagView.swift in Sources */,
 				D9A70DEC2C8595E5002F6583 /* Spacing.swift in Sources */,
+				D9D785B12ECD10CD004D81F8 /* NotificationsView.swift in Sources */,
 				D970CD7E2D03B890004D8E66 /* AppEntryView.swift in Sources */,
 				D91BF19F2D45116B00BEB410 /* Date+YMD.swift in Sources */,
 				D9B4AB562D24B8B500E201CA /* AppInfo.swift in Sources */,
@@ -932,6 +947,7 @@
 				D98D2BD72CA9ACD20050F2A8 /* SharedState+Keys.swift in Sources */,
 				D9A70DEE2C85960B002F6583 /* BaseFeature.swift in Sources */,
 				D9170D692CF0B1EF006E45D5 /* EditSinglePrayerTimeFeature.swift in Sources */,
+				D9D785AF2ECD10C6004D81F8 /* NotificationsFeature.swift in Sources */,
 				D9A70DF42C859684002F6583 /* Preview+Arabic.swift in Sources */,
 				D98903AB2CDE348C00717646 /* ExternalDeepLinks.swift in Sources */,
 				D9A70E172C859ED5002F6583 /* PrayerTimesFeature.swift in Sources */,
