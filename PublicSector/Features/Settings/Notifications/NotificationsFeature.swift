@@ -18,6 +18,10 @@ struct NotificationsFeature {
         @Shared(.asrNotificationEnabled) var asrNotificationEnabled = false
         @Shared(.maghribNotificationEnabled) var maghribNotificationEnabled = false
         @Shared(.ishaaNotificationEnabled) var ishaaNotificationEnabled = false
+
+        var notificationsDisabled: Bool {
+            !notificationsEnabled
+        }
     }
 
     enum Action: BaseAction, BindableAction {
