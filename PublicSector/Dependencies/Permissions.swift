@@ -11,13 +11,13 @@ import UserNotifications
 
 @DependencyClient
 struct Permissions: Sendable {
-    var pushNotificationPermission: @Sendable () async throws -> Bool = { false }
+    var requestPushNotificationPermission: @Sendable () async throws -> Bool = { false }
 }
 
 extension Permissions: DependencyKey {
     static let liveValue: Permissions = {
         Permissions(
-            pushNotificationPermission: {
+            requestPushNotificationPermission: {
                 try await UNUserNotificationCenter
                     .current()
                     .requestAuthorization(options: [.badge, .sound, .alert])
