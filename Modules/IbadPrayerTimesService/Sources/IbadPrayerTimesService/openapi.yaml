@@ -138,20 +138,22 @@ components:
       properties:
         fajr:
           type: string
+        sunrise:
+          type: string
         dhuhr:
           type: string
         asr:
           type: string
         maghrib:
           type: string
-        isha:
+        ishaa:
           type: string
       required:
         - fajr
         - dhuhr
         - asr
         - maghrib
-        - isha
+        - ishaa
 
     Event:
       properties:

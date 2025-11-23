@@ -5,7 +5,7 @@ import PackageDescription
 
 let package = Package(
     name: "IbadPrayerTimesService",
-    platforms: [.iOS(.v17)],
+    platforms: [.iOS(.v17), .macOS(.v11)],
     products: [
         .library(name: "IbadPrayerTimesService", targets: ["IbadPrayerTimesService"]),
     ],
