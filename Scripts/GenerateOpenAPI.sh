@@ -1,5 +1,5 @@
 #!/bin/sh
 
-cd ./Modules/IbadPrayerTimesService
+cd ./Modules/IbadPrayerTimesRepository
 echo "yes" | swift package generate-code-from-openapi
 cd -

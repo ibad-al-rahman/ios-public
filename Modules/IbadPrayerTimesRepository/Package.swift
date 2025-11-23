@@ -1,13 +1,13 @@
-// swift-tools-version: 6.0
+// swift-tools-version: 6.1
 // The swift-tools-version declares the minimum version of Swift required to build this package.
 
 import PackageDescription
 
 let package = Package(
-    name: "IbadPrayerTimesService",
+    name: "IbadPrayerTimesRepository",
     platforms: [.iOS(.v17), .macOS(.v11)],
     products: [
-        .library(name: "IbadPrayerTimesService", targets: ["IbadPrayerTimesService"]),
+        .library(name: "IbadPrayerTimesRepository", targets: ["IbadPrayerTimesRepository"]),
     ],
     dependencies: [
         .package(url: "https://github.com/apple/swift-openapi-generator", from: "1.6.0"),
@@ -17,7 +17,7 @@ let package = Package(
     ],
     targets: [
         .target(
-            name: "IbadPrayerTimesService",
+            name: "IbadPrayerTimesRepository",
             dependencies: [
                 .product(name: "OpenAPIRuntime", package: "swift-openapi-runtime"),
                 .product(name: "OpenAPIURLSession", package: "swift-openapi-urlsession"),
