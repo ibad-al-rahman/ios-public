@@ -41,9 +41,6 @@ let package = Package(
                     package: "swift-identified-collections"
                 ),
                 .product(name: "Sharing", package: "swift-sharing"),
-            ],
-            plugins: [
-                .plugin(name: "OpenAPIGenerator", package: "swift-openapi-generator"),
             ]
         ),
     ]

@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct DayPrayerTimes: Sendable, Equatable {
+public struct DayPrayerTimes: Sendable, Equatable, Identifiable {
     public let id: Int
     public let weekId: Int
     public let gregorian: Date
@@ -47,7 +47,7 @@ public struct DayPrayerTimes: Sendable, Equatable {
     }
 }
 
-public struct WeekPrayerTimes: Sendable, Equatable {
+public struct WeekPrayerTimes: Sendable, Equatable, Identifiable {
     public let id: Int
     public let mon: DayPrayertimes?
     public let tue: DayPrayertimes?
@@ -80,7 +80,7 @@ public struct WeekPrayerTimes: Sendable, Equatable {
         self.hadith = hadith
     }
 
-    public struct DayPrayertimes: Sendable, Equatable {
+    public struct DayPrayertimes: Sendable, Equatable, Identifiable {
         public let id: Int
         public let gregorian: Date
         public let hijri: String

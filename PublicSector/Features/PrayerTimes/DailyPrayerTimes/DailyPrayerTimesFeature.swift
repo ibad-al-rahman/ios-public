@@ -8,19 +8,19 @@
 import ComposableArchitecture
 import Foundation
 import IbadAnalytics
-import IbadRepositories
+import IbadPrayerTimesRepository
 import WidgetKit
 
 @Reducer
 struct DailyPrayerTimesFeature {
-    @Dependency(\.prayerTimesRepository) private var prayerTimesRepository
+    @Dependency(\.ibadPrayerTimesRepository) private var prayerTimesRepository
 
     @ObservableState
     struct State: Equatable {
         var date: Date = .now
         var checkedYears = Set<Int>()
         var todaysPrayerTimes: DayPrayerTimes?
-        var weeklyHadith: Hadith?
+        var weeklyHadith: WeekPrayerTimes.Hadith?
         var error: Error?
 
         var canResetDate: Bool {
@@ -28,16 +28,7 @@ struct DailyPrayerTimesFeature {
         }
 
         var event: String? {
-            guard let event = todaysPrayerTimes?.event else { return nil }
-            return if event.en != nil {
-                switch Locale.current.language.languageCode?.identifier {
-                case "en": event.en
-                case "ar": event.ar
-                default: nil
-                }
-            } else {
-                event.ar
-            }
+            todaysPrayerTimes?.displayEvent
         }
     }
 
@@ -56,7 +47,7 @@ struct DailyPrayerTimesFeature {
         @CasePathable
         enum ReducerAction {
             case getDayPrayerTimes(DayPrayerTimes?)
-            case getWeeklyHadith(Hadith?)
+            case getWeeklyHadith(WeekPrayerTimes.Hadith?)
             case appendCheckedYear(year: Int)
             case setError(Error)
         }
@@ -132,15 +123,14 @@ struct DailyPrayerTimesFeature {
             let day = ymd.day
 
             // if we already checked this year's sha, then skip the process
-            // and ready from the storage
+            // and read from the storage
             guard state.checkedYears.contains(year) == false
             else {
-                @SharedReader(.localDayPrayerTimes(year: year)) var localDayPrayerTimes = .empty
-                guard let day = localDayPrayerTimes.getDayPrayerTimes(
+                let day = try? await prayerTimesRepository.getDayPrayerTimes(
                     year: year, month: month, day: day
-                ) else { return }
+                )
                 await send(
-                    .reducer(.getDayPrayerTimes(DayPrayerTimes(from: day))),
+                    .reducer(.getDayPrayerTimes(day)),
                     animation: .default
                 )
                 return
@@ -148,7 +138,7 @@ struct DailyPrayerTimesFeature {
 
             @SharedReader(.prayerTimesSha1) var prayerTimesSha1 = [:]
             let yearSha1 = prayerTimesSha1.getSha1(year: year)
-            let responseSha = await Result { try await prayerTimesRepository.getSha1(year: year) }
+            let responseSha = await Result { try await prayerTimesRepository.fetchSha1(year: year) }
 
             var isDirty = false
 
@@ -168,11 +158,11 @@ struct DailyPrayerTimesFeature {
                 return
             }
 
-            @SharedReader(.localDayPrayerTimes(year: year)) var localDayPrayerTimes = .empty
-
             let persistanceResult = await Result {
                 try await persistPrayerTimes(year: year)
             }
+
+            @SharedReader(.localDayPrayerTimes(year: year)) var localDayPrayerTimes = .empty
             if isDirty || localDayPrayerTimes.isEmpty {
                 switch persistanceResult {
                 case .success:
@@ -185,52 +175,83 @@ struct DailyPrayerTimesFeature {
                 await send(.reducer(.appendCheckedYear(year: year)))
             }
 
-            guard let day = localDayPrayerTimes.getDayPrayerTimes(
+            guard let dayPrayerTimes = try? await prayerTimesRepository.getDayPrayerTimes(
                 year: year, month: month, day: day
             ) else { return }
 
             await send(
-                .reducer(.getDayPrayerTimes(DayPrayerTimes(from: day))),
+                .reducer(.getDayPrayerTimes(dayPrayerTimes)),
                 animation: .default
             )
 
-            @SharedReader(
-                .localWeekPrayerTimes(year: ymd.year)
-            ) var localWeekPrayerTimes = .empty
+            guard let week = try? await prayerTimesRepository.getWeekPrayerTimes(
+                year: year, month: month, day: day
+            ) else { return }
 
-            guard let week = localWeekPrayerTimes.getWeekPrayerTimes(
-                weekId: day.weekId
-            )
-            else { return }
             await send(
-                .reducer(.getWeeklyHadith(Hadith(from: week.hadith))),
+                .reducer(.getWeeklyHadith(week.hadith)),
                 animation: .default
             )
         }
     }
 
     private func persistPrayerTimes(year: Int) async throws {
-        let weeksResponse = try await prayerTimesRepository.getYearWeekPrayerTimes(year: year)
-        @Shared(
-            .localWeekPrayerTimes(year: year)
-        ) var localWeekPrayerTimes = .empty
-        $localWeekPrayerTimes.withLock {
-            $0 = YearWeekPrayerTimesStorage(
-                year: IdentifiedArray(uniqueElements: weeksResponse.weeks.map { week in week.intoStorage })
-            )
-        }
+        try await prayerTimesRepository.fetchPrayerTimes(year: year)
+    }
+}
 
-        let daysReponse = try await prayerTimesRepository.getYearDayPrayerTimes(year: year)
-        @Shared(.localDayPrayerTimes(year: year)) var localDayPrayerTimes = .empty
-        @Shared(.prayerTimesSha1) var prayerTimesSha1 = [:]
-        $localDayPrayerTimes.withLock {
-            $0 = YearPrayerTimesStorage(
-                year: IdentifiedArray(uniqueElements: daysReponse.year.map { day in day.intoStorage }),
-                sha1: daysReponse.sha1
-            )
+// MARK: - Domain Extensions
+extension DayPrayerTimes {
+    var shareableText: String {
+        """
+        \(String(localized: "Annual Prayer Times by Ibad"))
+        \(hijri)
+        \(gregorian.stringDate)
+
+        🌌 \(String(localized: "Fajr")): \(fajr.time) 🌌
+
+        🌄 \(String(localized: "Sunrise")): \(sunrise.time) 🌄
+
+        ☀️ \(String(localized: "Dhuhr")): \(dhuhr.time) ☀️
+
+        🌆 \(String(localized: "Asr")): \(asr.time) 🌆
+
+        🌅 \(String(localized: "Maghrib")): \(maghrib.time) 🌅
+
+        🌃 \(String(localized: "Ishaa")): \(ishaa.time) 🌃
+
+        \(String(localized: "Download app"))
+        \(String(localized: "Android")): https://play.google.com/store/apps/details?id=org.ibadalrahman.publicsector
+        \(String(localized: "iOS")): https://apps.apple.com/lb/app/ibad-al-rahman/id6739705601
+        """
+    }
+
+    var displayEvent: String? {
+        guard let event = event else { return nil }
+        return if event.en != nil {
+            switch Locale.current.language.languageCode?.identifier {
+            case "en": event.en
+            case "ar": event.ar
+            default: nil
+            }
+        } else {
+            event.ar
         }
-        $prayerTimesSha1.withLock {
-            $0.setSha1(sha1: daysReponse.sha1, for: year)
-        }
+    }
+
+    static func placeholder() -> DayPrayerTimes {
+        DayPrayerTimes(
+            id: 0,
+            weekId: 0,
+            gregorian: .now,
+            hijri: "1/1/1444",
+            fajr: .now,
+            sunrise: .now,
+            dhuhr: .now,
+            asr: .now,
+            maghrib: .now,
+            ishaa: .now,
+            event: nil
+        )
     }
 }

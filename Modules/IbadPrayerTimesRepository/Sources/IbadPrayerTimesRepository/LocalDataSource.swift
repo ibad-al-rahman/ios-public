@@ -167,7 +167,7 @@ public extension SharedKey where Self == FileStorageKey<PrayerTimesSha1> {
     }
 }
 
-extension OSLog.Logger {
+extension Logger {
     static let local = Logger(
         subsystem: "com.ibadalrahman.PublicSector",
         category: "IbadPrayerTimesRepository.LocalDataSource"

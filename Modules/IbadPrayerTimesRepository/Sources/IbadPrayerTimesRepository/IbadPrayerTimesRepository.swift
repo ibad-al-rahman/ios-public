@@ -45,7 +45,9 @@ extension IbadPrayerTimesRepository: DependencyKey {
                 let sha1 = try response.ok.body.json.sha1
 
                 @Shared(.prayerTimesSha1) var sha1Dict: PrayerTimesSha1 = [:]
-                sha1Dict.setSha1(sha1: sha1, for: year)
+                $sha1Dict.withLock { dict in
+                    dict.setSha1(sha1: sha1, for: year)
+                }
 
                 return sha1
             },
@@ -57,7 +59,7 @@ extension IbadPrayerTimesRepository: DependencyKey {
                 let daysEntity = daysData.toEntity
 
                 @Shared(.localDayPrayerTimes(year: year)) var localDays: YearPrayerTimesEntity = .empty
-                localDays = daysEntity
+                $localDays.withLock { $0 = daysEntity }
 
                 let weeksResponse = try await client.getYearPrayerTimesWeeks(
                     path: .init(year: String(format: "%04d", year))
@@ -66,7 +68,7 @@ extension IbadPrayerTimesRepository: DependencyKey {
                 let weeksEntity = weeksData.toEntity
 
                 @Shared(.localWeekPrayerTimes(year: year)) var localWeeks: YearWeekPrayerTimesEntity = .empty
-                localWeeks = weeksEntity
+                $localWeeks.withLock { $0 = weeksEntity }
             },
             getWeekPrayerTimes: { year, month, day in
                 @Shared(.localDayPrayerTimes(year: year)) var localDays: YearPrayerTimesEntity = .empty

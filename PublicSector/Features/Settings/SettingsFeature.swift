@@ -7,12 +7,13 @@
 
 import ComposableArchitecture
 import IbadAnalytics
-import IbadRepositories
+import IbadPrayerTimesRepository
 
 @Reducer
 struct SettingsFeature {
     @Dependency(\.webLinks) private var webLinks
     @Dependency(\.externalDeepLinks) private var externalDeepLinks
+    @Dependency(\.ibadPrayerTimesRepository) private var prayerTimesRepository
 
     @ObservableState
     struct State: Equatable {
@@ -88,8 +89,9 @@ struct SettingsFeature {
                 return .run { _ in await externalDeepLinks.appStoreRatePage() }
 
             case .view(.onTapCleanCache):
-                try? PrayerTimesStorageFileManager.removeDocuments()
-                return .none
+                return .run { _ in
+                    try? await prayerTimesRepository.clear()
+                }
 
             default:
                 return .none

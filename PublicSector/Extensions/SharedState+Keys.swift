@@ -13,22 +13,6 @@ extension SharedKey where Self == AppStorageKey<Settings.Appearance> {
     }
 }
 
-extension SharedKey where Self == FileStorageKey<PrayerTimesOffset> {
-    static var prayerTimesOffset: Self {
-        fileStorage(
-            .documentsDirectory.appending(component: "prayerTimesOffset.json")
-        )
-    }
-}
-
-extension SharedKey where Self == FileStorageKey<PrayerTimesSha1> {
-    static var prayerTimesSha1: Self {
-        fileStorage(
-            .documentsDirectory.appending(component: "prayerTimesSha1.json")
-        )
-    }
-}
-
 extension SharedKey where Self == AppStorageKey<Bool> {
     static var notificationsEnabled: Self {
         appStorage("notificationsEnabled")

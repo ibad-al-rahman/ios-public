@@ -7,20 +7,21 @@
 
 import ComposableArchitecture
 import Foundation
-import IbadRepositories
+import IbadPrayerTimesRepository
 
 @Reducer
 struct WeeklyPrayerTimesFeature {
+    @Dependency(\.ibadPrayerTimesRepository) private var prayerTimesRepository
     @ObservableState
     struct State: Equatable {
-        var sat: DayPrayerTimes?
-        var sun: DayPrayerTimes?
-        var mon: DayPrayerTimes?
-        var tue: DayPrayerTimes?
-        var wed: DayPrayerTimes?
-        var thu: DayPrayerTimes?
-        var fri: DayPrayerTimes?
-        var hadith: Hadith?
+        var sat: WeekPrayerTimes.DayPrayertimes?
+        var sun: WeekPrayerTimes.DayPrayertimes?
+        var mon: WeekPrayerTimes.DayPrayertimes?
+        var tue: WeekPrayerTimes.DayPrayertimes?
+        var wed: WeekPrayerTimes.DayPrayertimes?
+        var thu: WeekPrayerTimes.DayPrayertimes?
+        var fri: WeekPrayerTimes.DayPrayertimes?
+        var hadith: WeekPrayerTimes.Hadith?
 
         var isLoading: Bool {
             sat == nil
@@ -32,8 +33,8 @@ struct WeeklyPrayerTimesFeature {
             && fri == nil
         }
 
-        var week: [DayPrayerTimes?] { [sat, sun, mon, tue, wed, thu, fri] }
-        var compactedWeek: [DayPrayerTimes] { week.compactMap { $0 } }
+        var week: [WeekPrayerTimes.DayPrayertimes?] { [sat, sun, mon, tue, wed, thu, fri] }
+        var compactedWeek: [WeekPrayerTimes.DayPrayertimes] { week.compactMap { $0 } }
     }
 
     enum Action: BaseAction {
@@ -48,9 +49,7 @@ struct WeeklyPrayerTimesFeature {
 
         @CasePathable
         enum ReducerAction {
-            case setWeekPrayerTimes(
-                YearWeekPrayerTimesStorage.WeekPrayerTimesStorage
-            )
+            case setWeekPrayerTimes(WeekPrayerTimes)
         }
 
         @CasePathable
@@ -66,34 +65,22 @@ struct WeeklyPrayerTimesFeature {
             case .view(.onAppear):
                 guard let ymd = Date.now.ymd else { return .none }
                 return .run { [ymd] send in
-                    @SharedReader(
-                        .localDayPrayerTimes(year: ymd.year)
-                    ) var localDayPrayerTimes = .empty
-                    @SharedReader(
-                        .localWeekPrayerTimes(year: ymd.year)
-                    ) var localWeekPrayerTimes = .empty
-
-                    guard let day = localDayPrayerTimes.getDayPrayerTimes(
+                    guard let week = try await prayerTimesRepository.getWeekPrayerTimes(
                         year: ymd.year, month: ymd.month, day: ymd.day
                     ) else { return }
-
-                    guard let week = localWeekPrayerTimes.getWeekPrayerTimes(
-                        weekId: day.weekId
-                    )
-                    else { return }
 
                     await send(.reducer(.setWeekPrayerTimes(week)))
                 }
 
             case .reducer(.setWeekPrayerTimes(let week)):
-                state.sat = DayPrayerTimes(from: week.sat, weekId: 0)
-                state.sun = DayPrayerTimes(from: week.sun, weekId: 0)
-                state.mon = DayPrayerTimes(from: week.mon, weekId: 0)
-                state.tue = DayPrayerTimes(from: week.tue, weekId: 0)
-                state.wed = DayPrayerTimes(from: week.wed, weekId: 0)
-                state.thu = DayPrayerTimes(from: week.thu, weekId: 0)
-                state.fri = DayPrayerTimes(from: week.fri, weekId: 0)
-                state.hadith = Hadith(from: week.hadith)
+                state.sat = week.sat
+                state.sun = week.sun
+                state.mon = week.mon
+                state.tue = week.tue
+                state.wed = week.wed
+                state.thu = week.thu
+                state.fri = week.fri
+                state.hadith = week.hadith
                 return .none
 
             default:
