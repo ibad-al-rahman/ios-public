@@ -18,8 +18,8 @@ public struct IbadPrayerTimesRepository: Sendable {
     public var getSha1: @Sendable (_ year: Int) async throws -> String
     public var fetchSha1: @Sendable (_ year: Int) async throws -> String
     public var fetchPrayerTimes: @Sendable (_ year: Int) async throws -> Void
-    public var getWeekPrayerTimes: @Sendable (_ year: Int, _ month: Int, _ day: Int) async throws -> YearWeekPrayerTimesEntity.WeekPrayerTimesEntity?
-    public var getDayPrayerTimes: @Sendable (_ year: Int, _ month: Int, _ day: Int) async throws -> DayPrayerTimesEntity?
+    public var getWeekPrayerTimes: @Sendable (_ year: Int, _ month: Int, _ day: Int) async throws -> WeekPrayerTimes?
+    public var getDayPrayerTimes: @Sendable (_ year: Int, _ month: Int, _ day: Int) async throws -> DayPrayerTimes?
 }
 
 extension IbadPrayerTimesRepository: DependencyKey {
@@ -79,11 +79,11 @@ extension IbadPrayerTimesRepository: DependencyKey {
                 let weekId = dayData.weekId
 
                 @Shared(.localWeekPrayerTimes(year: year)) var localWeeks: YearWeekPrayerTimesEntity = .empty
-                return localWeeks.getWeekPrayerTimes(weekId: weekId)
+                return localWeeks.getWeekPrayerTimes(weekId: weekId)?.toDomain
             },
             getDayPrayerTimes: { year, month, day in
                 @Shared(.localDayPrayerTimes(year: year)) var localDays: YearPrayerTimesEntity = .empty
-                return localDays.getDayPrayerTimes(year: year, month: month, day: day)
+                return localDays.getDayPrayerTimes(year: year, month: month, day: day)?.toDomain
             }
         )
     }
