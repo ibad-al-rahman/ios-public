@@ -144,6 +144,29 @@ public extension SharedKey where Self == FileStorageKey<YearWeekPrayerTimesEntit
     }
 }
 
+public typealias PrayerTimesSha1 = [String: String]
+
+public extension PrayerTimesSha1 {
+    func getSha1(year: Int) -> String? {
+        let yearString = String(format: "%d", year)
+        return self[yearString]
+    }
+
+    mutating func setSha1(sha1: String, for year: Int) {
+        let yearString = String(format: "%d", year)
+        self[yearString] = sha1
+    }
+}
+
+public extension SharedKey where Self == FileStorageKey<PrayerTimesSha1> {
+    static var prayerTimesSha1: Self {
+        fileStorage(
+            PrayerTimesEntityFileManager.baseUrl
+                .appendingPathComponent("prayerTimesSha1.json")
+        )
+    }
+}
+
 extension OSLog.Logger {
     static let local = Logger(
         subsystem: "com.ibadalrahman.PublicSector",

@@ -10,6 +10,7 @@ import DependenciesMacros
 import Foundation
 import OpenAPIRuntime
 import OpenAPIURLSession
+import Sharing
 
 @DependencyClient
 public struct IbadPrayerTimesRepository: Sendable {
@@ -23,20 +24,51 @@ public struct IbadPrayerTimesRepository: Sendable {
 
 extension IbadPrayerTimesRepository: DependencyKey {
     public static var liveValue: IbadPrayerTimesRepository {
-        IbadPrayerTimesRepository(
+        let client = Client(
+            serverURL: try! Servers.Server1.url(),
+            transport: URLSessionTransport()
+        )
+
+        return IbadPrayerTimesRepository(
             clear: {
-                // TODO: Implement clear
+                try PrayerTimesEntityFileManager.removeDocuments()
             },
             getSha1: { year in
-                // TODO: Implement getSha1
-                return ""
+                @Shared(.prayerTimesSha1) var sha1Dict: PrayerTimesSha1 = [:]
+                return sha1Dict.getSha1(year: year) ?? ""
             },
             fetchSha1: { year in
-                // TODO: Implement fetchSha1
-                return ""
+                let response = try await client.getYearPrayerTimesSha1(
+                    path: .init(year: String(format: "%04d", year))
+                )
+
+                let sha1 = try response.ok.body.json.sha1
+
+                @Shared(.prayerTimesSha1) var sha1Dict: PrayerTimesSha1 = [:]
+                sha1Dict.setSha1(sha1: sha1, for: year)
+
+                return sha1
             },
             fetchPrayerTimes: { year in
-                // TODO: Implement fetchPrayerTimes
+                // Fetch days
+                let daysResponse = try await client.getYearPrayerTimesDays(
+                    path: .init(year: String(format: "%04d", year))
+                )
+                let daysData = try daysResponse.ok.body.json
+                let daysEntity = daysData.toEntity
+
+                @Shared(.localDayPrayerTimes(year: year)) var localDays: YearPrayerTimesEntity = .empty
+                localDays = daysEntity
+
+                // Fetch weeks
+                let weeksResponse = try await client.getYearPrayerTimesWeeks(
+                    path: .init(year: String(format: "%04d", year))
+                )
+                let weeksData = try weeksResponse.ok.body.json
+                let weeksEntity = weeksData.toEntity
+
+                @Shared(.localWeekPrayerTimes(year: year)) var localWeeks: YearWeekPrayerTimesEntity = .empty
+                localWeeks = weeksEntity
             },
             getWeekPrayerTimes: { year, month, day in
                 // TODO: Implement getWeekPrayerTimes
