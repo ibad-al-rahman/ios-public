@@ -10,24 +10,39 @@ import Foundation
 public struct DayPrayerTimes: Sendable, Equatable {
     public let id: Int
     public let weekId: Int
-    public let gregorian: String
+    public let gregorian: Date
     public let hijri: String
-    public let prayerTimes: PrayerTimes
+    public let fajr: Date
+    public let sunrise: Date
+    public let dhuhr: Date
+    public let asr: Date
+    public let maghrib: Date
+    public let ishaa: Date
     public let event: DayEvent?
 
     public init(
         id: Int,
         weekId: Int,
-        gregorian: String,
+        gregorian: Date,
         hijri: String,
-        prayerTimes: PrayerTimes,
+        fajr: Date,
+        sunrise: Date,
+        dhuhr: Date,
+        asr: Date,
+        maghrib: Date,
+        ishaa: Date,
         event: DayEvent?
     ) {
         self.id = id
         self.weekId = weekId
         self.gregorian = gregorian
         self.hijri = hijri
-        self.prayerTimes = prayerTimes
+        self.fajr = fajr
+        self.sunrise = sunrise
+        self.dhuhr = dhuhr
+        self.asr = asr
+        self.maghrib = maghrib
+        self.ishaa = ishaa
         self.event = event
     }
 }
@@ -67,20 +82,35 @@ public struct WeekPrayerTimes: Sendable, Equatable {
 
     public struct DayPrayertimes: Sendable, Equatable {
         public let id: Int
-        public let gregorian: String
+        public let gregorian: Date
         public let hijri: String
-        public let prayerTimes: PrayerTimes
+        public let fajr: Date
+        public let sunrise: Date
+        public let dhuhr: Date
+        public let asr: Date
+        public let maghrib: Date
+        public let ishaa: Date
 
         public init(
             id: Int,
-            gregorian: String,
+            gregorian: Date,
             hijri: String,
-            prayerTimes: PrayerTimes
+            fajr: Date,
+            sunrise: Date,
+            dhuhr: Date,
+            asr: Date,
+            maghrib: Date,
+            ishaa: Date
         ) {
             self.id = id
             self.gregorian = gregorian
             self.hijri = hijri
-            self.prayerTimes = prayerTimes
+            self.fajr = fajr
+            self.sunrise = sunrise
+            self.dhuhr = dhuhr
+            self.asr = asr
+            self.maghrib = maghrib
+            self.ishaa = ishaa
         }
     }
 
@@ -92,31 +122,6 @@ public struct WeekPrayerTimes: Sendable, Equatable {
             self.hadith = hadith
             self.note = note
         }
-    }
-}
-
-public struct PrayerTimes: Sendable, Equatable {
-    public let fajr: String
-    public let sunrise: String
-    public let dhuhr: String
-    public let asr: String
-    public let maghrib: String
-    public let ishaa: String
-
-    public init(
-        fajr: String,
-        sunrise: String,
-        dhuhr: String,
-        asr: String,
-        maghrib: String,
-        ishaa: String
-    ) {
-        self.fajr = fajr
-        self.sunrise = sunrise
-        self.dhuhr = dhuhr
-        self.asr = asr
-        self.maghrib = maghrib
-        self.ishaa = ishaa
     }
 }
 
@@ -133,48 +138,101 @@ public struct DayEvent: Sendable, Equatable {
 // MARK: - Entity to Domain Conversions
 
 extension DayPrayerTimesEntity {
-    public var toDomain: DayPrayerTimes {
-        DayPrayerTimes(
+    public var toDomain: DayPrayerTimes? {
+        let gregorianFormatter = DateFormatter()
+        let hijriFormatter = DateFormatter()
+        let timeFormatter = DateFormatter()
+
+        gregorianFormatter.dateFormat = "dd/MM/yyyy"
+        // DON'T REMOVE THE LOCALE AND CALENDAR else day 30 of each month will fail
+        gregorianFormatter.locale = Locale(identifier: "en_US_POSIX")
+        gregorianFormatter.calendar = Calendar(identifier: .gregorian)
+        hijriFormatter.calendar = Calendar(identifier: .islamicUmmAlQura)
+        hijriFormatter.dateFormat = "dd/MM/yyyy"
+        // DON'T REMOVE THE LOCALE else 24-hour systems won't work
+        timeFormatter.locale = Locale(identifier: "en_US_POSIX")
+        timeFormatter.dateFormat = "h:mm a"
+        timeFormatter.amSymbol = "am"
+        timeFormatter.pmSymbol = "pm"
+
+        guard let gregorianDate = gregorianFormatter.date(from: gregorian) else { return nil }
+
+        guard let hijriDate = hijriFormatter.date(from: hijri) else { return nil }
+        hijriFormatter.dateFormat = "d MMMM yyyy"
+        let formattedHijri = hijriFormatter.string(from: hijriDate)
+
+        guard let fajr = timeFormatter.date(from: prayerTimes.fajr) else { return nil }
+        guard let sunrise = timeFormatter.date(from: prayerTimes.sunrise) else { return nil }
+        guard let dhuhr = timeFormatter.date(from: prayerTimes.dhuhr) else { return nil }
+        guard let asr = timeFormatter.date(from: prayerTimes.asr) else { return nil }
+        guard let maghrib = timeFormatter.date(from: prayerTimes.maghrib) else { return nil }
+        guard let ishaa = timeFormatter.date(from: prayerTimes.ishaa) else { return nil }
+
+        return DayPrayerTimes(
             id: id,
             weekId: weekId,
-            gregorian: gregorian,
-            hijri: hijri,
-            prayerTimes: prayerTimes.toDomain,
+            gregorian: gregorianDate,
+            hijri: formattedHijri,
+            fajr: fajr,
+            sunrise: sunrise,
+            dhuhr: dhuhr,
+            asr: asr,
+            maghrib: maghrib,
+            ishaa: ishaa,
             event: event?.toDomain
         )
     }
 }
 
 extension YearWeekPrayerTimesEntity.WeekPrayerTimesEntity {
-    public var toDomain: WeekPrayerTimes {
+    public var toDomain: WeekPrayerTimes? {
         WeekPrayerTimes(
             id: id,
-            mon: mon?.toDomain,
-            tue: tue?.toDomain,
-            wed: wed?.toDomain,
-            thu: thu?.toDomain,
-            fri: fri?.toDomain,
-            sat: sat?.toDomain,
-            sun: sun?.toDomain,
+            mon: mon?.toDomain(weekId: id),
+            tue: tue?.toDomain(weekId: id),
+            wed: wed?.toDomain(weekId: id),
+            thu: thu?.toDomain(weekId: id),
+            fri: fri?.toDomain(weekId: id),
+            sat: sat?.toDomain(weekId: id),
+            sun: sun?.toDomain(weekId: id),
             hadith: hadith?.toDomain
         )
     }
 }
 
 extension YearWeekPrayerTimesEntity.DayPrayertimesEntity {
-    public var toDomain: WeekPrayerTimes.DayPrayertimes {
-        WeekPrayerTimes.DayPrayertimes(
-            id: id,
-            gregorian: gregorian,
-            hijri: hijri,
-            prayerTimes: prayerTimes.toDomain
-        )
-    }
-}
+    public func toDomain(weekId: Int) -> WeekPrayerTimes.DayPrayertimes? {
+        let gregorianFormatter = DateFormatter()
+        let hijriFormatter = DateFormatter()
+        let timeFormatter = DateFormatter()
 
-extension PrayerTimesEntity {
-    public var toDomain: PrayerTimes {
-        PrayerTimes(
+        gregorianFormatter.dateFormat = "dd/MM/yyyy"
+        gregorianFormatter.locale = Locale(identifier: "en_US_POSIX")
+        gregorianFormatter.calendar = Calendar(identifier: .gregorian)
+        hijriFormatter.calendar = Calendar(identifier: .islamicUmmAlQura)
+        hijriFormatter.dateFormat = "dd/MM/yyyy"
+        timeFormatter.locale = Locale(identifier: "en_US_POSIX")
+        timeFormatter.dateFormat = "h:mm a"
+        timeFormatter.amSymbol = "am"
+        timeFormatter.pmSymbol = "pm"
+
+        guard let gregorianDate = gregorianFormatter.date(from: gregorian) else { return nil }
+
+        guard let hijriDate = hijriFormatter.date(from: hijri) else { return nil }
+        hijriFormatter.dateFormat = "d MMMM yyyy"
+        let formattedHijri = hijriFormatter.string(from: hijriDate)
+
+        guard let fajr = timeFormatter.date(from: prayerTimes.fajr) else { return nil }
+        guard let sunrise = timeFormatter.date(from: prayerTimes.sunrise) else { return nil }
+        guard let dhuhr = timeFormatter.date(from: prayerTimes.dhuhr) else { return nil }
+        guard let asr = timeFormatter.date(from: prayerTimes.asr) else { return nil }
+        guard let maghrib = timeFormatter.date(from: prayerTimes.maghrib) else { return nil }
+        guard let ishaa = timeFormatter.date(from: prayerTimes.ishaa) else { return nil }
+
+        return WeekPrayerTimes.DayPrayertimes(
+            id: id,
+            gregorian: gregorianDate,
+            hijri: formattedHijri,
             fajr: fajr,
             sunrise: sunrise,
             dhuhr: dhuhr,

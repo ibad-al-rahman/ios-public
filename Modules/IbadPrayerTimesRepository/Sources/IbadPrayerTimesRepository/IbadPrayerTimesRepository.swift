@@ -50,7 +50,6 @@ extension IbadPrayerTimesRepository: DependencyKey {
                 return sha1
             },
             fetchPrayerTimes: { year in
-                // Fetch days
                 let daysResponse = try await client.getYearPrayerTimesDays(
                     path: .init(year: String(format: "%04d", year))
                 )
@@ -60,7 +59,6 @@ extension IbadPrayerTimesRepository: DependencyKey {
                 @Shared(.localDayPrayerTimes(year: year)) var localDays: YearPrayerTimesEntity = .empty
                 localDays = daysEntity
 
-                // Fetch weeks
                 let weeksResponse = try await client.getYearPrayerTimesWeeks(
                     path: .init(year: String(format: "%04d", year))
                 )
@@ -79,11 +77,17 @@ extension IbadPrayerTimesRepository: DependencyKey {
                 let weekId = dayData.weekId
 
                 @Shared(.localWeekPrayerTimes(year: year)) var localWeeks: YearWeekPrayerTimesEntity = .empty
-                return localWeeks.getWeekPrayerTimes(weekId: weekId)?.toDomain
+                guard let weekEntity = localWeeks.getWeekPrayerTimes(weekId: weekId) else {
+                    return nil
+                }
+                return weekEntity.toDomain
             },
             getDayPrayerTimes: { year, month, day in
                 @Shared(.localDayPrayerTimes(year: year)) var localDays: YearPrayerTimesEntity = .empty
-                return localDays.getDayPrayerTimes(year: year, month: month, day: day)?.toDomain
+                guard let dayEntity = localDays.getDayPrayerTimes(year: year, month: month, day: day) else {
+                    return nil
+                }
+                return dayEntity.toDomain
             }
         )
     }
