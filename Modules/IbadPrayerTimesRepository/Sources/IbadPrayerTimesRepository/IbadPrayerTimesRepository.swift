@@ -71,12 +71,19 @@ extension IbadPrayerTimesRepository: DependencyKey {
                 localWeeks = weeksEntity
             },
             getWeekPrayerTimes: { year, month, day in
-                // TODO: Implement getWeekPrayerTimes
-                return nil
+                @Shared(.localDayPrayerTimes(year: year)) var localDays: YearPrayerTimesEntity = .empty
+                guard let dayData = localDays.getDayPrayerTimes(year: year, month: month, day: day) else {
+                    return nil
+                }
+
+                let weekId = dayData.weekId
+
+                @Shared(.localWeekPrayerTimes(year: year)) var localWeeks: YearWeekPrayerTimesEntity = .empty
+                return localWeeks.getWeekPrayerTimes(weekId: weekId)
             },
             getDayPrayerTimes: { year, month, day in
-                // TODO: Implement getDayPrayerTimes
-                return nil
+                @Shared(.localDayPrayerTimes(year: year)) var localDays: YearPrayerTimesEntity = .empty
+                return localDays.getDayPrayerTimes(year: year, month: month, day: day)
             }
         )
     }
