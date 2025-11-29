@@ -11,7 +11,7 @@ import IbadPrayerTimesRepository
 
 @Reducer
 struct WeeklyPrayerTimesFeature {
-    @Dependency(\.ibadPrayerTimesRepository) private var prayerTimesRepository
+    @Dependency(\.ibadPrayerTimesRepositoryLite) private var prayerTimesRepository
     @ObservableState
     struct State: Equatable {
         var sat: WeekPrayerTimes.DayPrayertimes?
@@ -63,11 +63,8 @@ struct WeeklyPrayerTimesFeature {
         Reduce { state, action in
             switch action {
             case .view(.onAppear):
-                guard let ymd = Date.now.ymd else { return .none }
-                return .run { [ymd] send in
-                    guard let week = try await prayerTimesRepository.getWeekPrayerTimes(
-                        year: ymd.year, month: ymd.month, day: ymd.day
-                    ) else { return }
+                return .run { send in
+                    guard let week = try await prayerTimesRepository.getWeekPrayerTimes() else { return }
 
                     await send(.reducer(.setWeekPrayerTimes(week)))
                 }
