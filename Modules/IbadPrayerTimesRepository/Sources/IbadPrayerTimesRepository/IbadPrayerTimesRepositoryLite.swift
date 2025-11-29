@@ -52,6 +52,73 @@ extension IbadPrayerTimesRepositoryLite: DependencyKey {
                 let day = calendar.component(.day, from: today)
 
                 return try await repository.getWeekPrayerTimes(year, month, day)
+            },
+            getNextPrayerTime: {
+                let now = Date()
+                let calendar = Calendar.current
+                let today = now
+
+                let year = calendar.component(.year, from: today)
+                let month = calendar.component(.month, from: today)
+                let day = calendar.component(.day, from: today)
+
+                guard let todayPrayers = try await repository.getDayPrayerTimes(year, month, day) else {
+                    return nil
+                }
+
+                // Get current date components to compare times
+                let currentComponents = calendar.dateComponents([.hour, .minute], from: now)
+
+                // Helper function to get time components from prayer Date
+                func getTimeComponents(_ date: Date) -> DateComponents {
+                    calendar.dateComponents([.hour, .minute], from: date)
+                }
+
+                // Helper function to compare if prayer time is in the future
+                func isInFuture(_ prayerTime: Date) -> Bool {
+                    let prayerComponents = getTimeComponents(prayerTime)
+
+                    guard let currentHour = currentComponents.hour,
+                          let currentMinute = currentComponents.minute,
+                          let prayerHour = prayerComponents.hour,
+                          let prayerMinute = prayerComponents.minute else {
+                        return false
+                    }
+
+                    if prayerHour > currentHour {
+                        return true
+                    } else if prayerHour == currentHour && prayerMinute > currentMinute {
+                        return true
+                    }
+                    return false
+                }
+
+                // Check each prayer in order
+                if isInFuture(todayPrayers.fajr) {
+                    return todayPrayers.fajr
+                } else if isInFuture(todayPrayers.sunrise) {
+                    return todayPrayers.sunrise
+                } else if isInFuture(todayPrayers.dhuhr) {
+                    return todayPrayers.dhuhr
+                } else if isInFuture(todayPrayers.asr) {
+                    return todayPrayers.asr
+                } else if isInFuture(todayPrayers.maghrib) {
+                    return todayPrayers.maghrib
+                } else if isInFuture(todayPrayers.ishaa) {
+                    return todayPrayers.ishaa
+                }
+
+                // All prayers have passed, get tomorrow's Fajr
+                let tomorrow = calendar.date(byAdding: .day, value: 1, to: today) ?? today
+                let tomorrowYear = calendar.component(.year, from: tomorrow)
+                let tomorrowMonth = calendar.component(.month, from: tomorrow)
+                let tomorrowDay = calendar.component(.day, from: tomorrow)
+
+                guard let tomorrowPrayers = try await repository.getDayPrayerTimes(tomorrowYear, tomorrowMonth, tomorrowDay) else {
+                    return nil
+                }
+
+                return tomorrowPrayers.fajr
             }
         )
     }
@@ -61,7 +128,8 @@ extension IbadPrayerTimesRepositoryLite: TestDependencyKey {
     public static var previewValue: IbadPrayerTimesRepositoryLite {
         IbadPrayerTimesRepositoryLite(
             getPrayerTimes: { _ in nil },
-            getWeekPrayerTimes: { nil }
+            getWeekPrayerTimes: { nil },
+            getNextPrayerTime: { nil }
         )
     }
 
