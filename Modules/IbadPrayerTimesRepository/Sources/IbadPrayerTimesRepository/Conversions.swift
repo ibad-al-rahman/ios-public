@@ -34,7 +34,7 @@ extension Components.Schemas.Day {
 extension Components.Schemas.YearPrayerTimesWeeks {
     public var toEntity: YearWeekPrayerTimesEntity {
         YearWeekPrayerTimesEntity(
-            year: IdentifiedArray(uniqueElements: year.map { $0.toEntity })
+            weeks: IdentifiedArray(uniqueElements: weeks.map { $0.toEntity })
         )
     }
 }
@@ -55,7 +55,7 @@ extension Components.Schemas.Week {
     }
 }
 
-extension Components.Schemas.Day {
+extension Components.Schemas.WeekDay {
     public var toWeekDayEntity: YearWeekPrayerTimesEntity.DayPrayertimesEntity? {
         guard let prayerTimes = prayerTimes else { return nil }
         return YearWeekPrayerTimesEntity.DayPrayertimesEntity(
@@ -71,7 +71,7 @@ extension Components.Schemas.PrayerTimes {
     public var toEntity: PrayerTimesEntity {
         PrayerTimesEntity(
             fajr: fajr,
-            sunrise: sunrise ?? "",
+            sunrise: sunrise,
             dhuhr: dhuhr,
             asr: asr,
             maghrib: maghrib,

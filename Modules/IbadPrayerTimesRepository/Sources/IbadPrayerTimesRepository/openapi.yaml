@@ -81,14 +81,14 @@ components:
 
     YearPrayerTimesWeeks:
       properties:
-        year:
+        weeks:
           type: array
           items:
             $ref: "#/components/schemas/Week"
         sha1:
           type: string
       required:
-        - year
+        - weeks
         - sha1
 
     Week:
@@ -96,23 +96,40 @@ components:
         id:
           type: integer
         mon:
-          $ref: "#/components/schemas/Day"
+          $ref: "#/components/schemas/WeekDay"
         tue:
-          $ref: "#/components/schemas/Day"
+          $ref: "#/components/schemas/WeekDay"
         wed:
-          $ref: "#/components/schemas/Day"
+          $ref: "#/components/schemas/WeekDay"
         thu:
-          $ref: "#/components/schemas/Day"
+          $ref: "#/components/schemas/WeekDay"
         fri:
-          $ref: "#/components/schemas/Day"
+          $ref: "#/components/schemas/WeekDay"
         sat:
-          $ref: "#/components/schemas/Day"
+          $ref: "#/components/schemas/WeekDay"
         sun:
-          $ref: "#/components/schemas/Day"
+          $ref: "#/components/schemas/WeekDay"
         hadith:
           $ref: "#/components/schemas/Hadith"
       required:
         - id
+
+    WeekDay:
+      properties:
+        id:
+          type: integer
+        gregorian:
+          type: string
+        hijri:
+          type: string
+        prayerTimes:
+          $ref: "#/components/schemas/PrayerTimes"
+        event:
+          $ref: "#/components/schemas/Event"
+      required:
+        - id
+        - gregorian
+        - hijri
 
     Day:
       properties:
@@ -150,6 +167,7 @@ components:
           type: string
       required:
         - fajr
+        - sunrise
         - dhuhr
         - asr
         - maghrib

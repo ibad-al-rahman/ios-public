@@ -40,20 +40,20 @@ public struct YearPrayerTimesEntity: Codable, Sendable {
 }
 
 public struct YearWeekPrayerTimesEntity: Codable, Sendable {
-    public let year: IdentifiedArrayOf<WeekPrayerTimesEntity>
+    public let weeks: IdentifiedArrayOf<WeekPrayerTimesEntity>
 
-    public static let empty = Self(year: IdentifiedArray())
+    public static let empty = Self(weeks: IdentifiedArray())
 
     public var isEmpty: Bool {
-        self.year.isEmpty
+        self.weeks.isEmpty
     }
 
-    public init(year: IdentifiedArrayOf<WeekPrayerTimesEntity>) {
-        self.year = year
+    public init(weeks: IdentifiedArrayOf<WeekPrayerTimesEntity>) {
+        self.weeks = weeks
     }
 
     public func getWeekPrayerTimes(weekId: Int) -> WeekPrayerTimesEntity? {
-        guard let week = self.year[id: weekId]
+        guard let week = self.weeks[id: weekId]
         else {
             Logger.local.warning("Couldn't found \(weekId) week prayer time")
             return nil

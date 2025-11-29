@@ -2,6 +2,7 @@
   "sourceLanguage" : "en",
   "strings" : {
     "%lld" : {
+      "extractionState" : "stale",
       "localizations" : {
         "ar" : {
           "stringUnit" : {
@@ -298,6 +299,7 @@
       }
     },
     "Edit" : {
+      "extractionState" : "stale",
       "localizations" : {
         "ar" : {
           "stringUnit" : {

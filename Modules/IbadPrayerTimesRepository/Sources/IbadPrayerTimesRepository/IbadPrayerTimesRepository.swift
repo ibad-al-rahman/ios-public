@@ -64,6 +64,7 @@ extension IbadPrayerTimesRepository: DependencyKey {
                 let weeksResponse = try await client.getYearPrayerTimesWeeks(
                     path: .init(year: String(format: "%04d", year))
                 )
+                print("weeks: \(weeksResponse)")
                 let weeksData = try weeksResponse.ok.body.json
                 let weeksEntity = weeksData.toEntity
 

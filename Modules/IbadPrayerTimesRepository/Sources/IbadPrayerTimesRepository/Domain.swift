@@ -20,6 +20,31 @@ public struct DayPrayerTimes: Sendable, Equatable, Identifiable {
     public let ishaa: Date
     public let event: DayEvent?
 
+    var fajrId: String {
+        "f\(id)"
+    }
+
+    // made it "sr" because in the future we might add "suhur", so "s" will collide
+    var sunriseId: String {
+        "sr\(id)"
+    }
+
+    var dhuhrId: String {
+        "d\(id)"
+    }
+
+    var asrId: String {
+        "a\(id)"
+    }
+
+    var maghribId: String {
+        "m\(id)"
+    }
+
+    var ishaaId: String {
+        "i\(id)"
+    }
+
     public init(
         id: Int,
         weekId: Int,

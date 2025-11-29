@@ -122,24 +122,24 @@ public enum Components {
         }
         /// - Remark: Generated from `#/components/schemas/YearPrayerTimesWeeks`.
         public struct YearPrayerTimesWeeks: Codable, Hashable, Sendable {
-            /// - Remark: Generated from `#/components/schemas/YearPrayerTimesWeeks/year`.
-            public var year: [Components.Schemas.Week]
+            /// - Remark: Generated from `#/components/schemas/YearPrayerTimesWeeks/weeks`.
+            public var weeks: [Components.Schemas.Week]
             /// - Remark: Generated from `#/components/schemas/YearPrayerTimesWeeks/sha1`.
             public var sha1: Swift.String
             /// Creates a new `YearPrayerTimesWeeks`.
             ///
             /// - Parameters:
-            ///   - year:
+            ///   - weeks:
             ///   - sha1:
             public init(
-                year: [Components.Schemas.Week],
+                weeks: [Components.Schemas.Week],
                 sha1: Swift.String
             ) {
-                self.year = year
+                self.weeks = weeks
                 self.sha1 = sha1
             }
             public enum CodingKeys: String, CodingKey {
-                case year
+                case weeks
                 case sha1
             }
         }
@@ -148,19 +148,19 @@ public enum Components {
             /// - Remark: Generated from `#/components/schemas/Week/id`.
             public var id: Swift.Int
             /// - Remark: Generated from `#/components/schemas/Week/mon`.
-            public var mon: Components.Schemas.Day?
+            public var mon: Components.Schemas.WeekDay?
             /// - Remark: Generated from `#/components/schemas/Week/tue`.
-            public var tue: Components.Schemas.Day?
+            public var tue: Components.Schemas.WeekDay?
             /// - Remark: Generated from `#/components/schemas/Week/wed`.
-            public var wed: Components.Schemas.Day?
+            public var wed: Components.Schemas.WeekDay?
             /// - Remark: Generated from `#/components/schemas/Week/thu`.
-            public var thu: Components.Schemas.Day?
+            public var thu: Components.Schemas.WeekDay?
             /// - Remark: Generated from `#/components/schemas/Week/fri`.
-            public var fri: Components.Schemas.Day?
+            public var fri: Components.Schemas.WeekDay?
             /// - Remark: Generated from `#/components/schemas/Week/sat`.
-            public var sat: Components.Schemas.Day?
+            public var sat: Components.Schemas.WeekDay?
             /// - Remark: Generated from `#/components/schemas/Week/sun`.
-            public var sun: Components.Schemas.Day?
+            public var sun: Components.Schemas.WeekDay?
             /// - Remark: Generated from `#/components/schemas/Week/hadith`.
             public var hadith: Components.Schemas.Hadith?
             /// Creates a new `Week`.
@@ -177,13 +177,13 @@ public enum Components {
             ///   - hadith:
             public init(
                 id: Swift.Int,
-                mon: Components.Schemas.Day? = nil,
-                tue: Components.Schemas.Day? = nil,
-                wed: Components.Schemas.Day? = nil,
-                thu: Components.Schemas.Day? = nil,
-                fri: Components.Schemas.Day? = nil,
-                sat: Components.Schemas.Day? = nil,
-                sun: Components.Schemas.Day? = nil,
+                mon: Components.Schemas.WeekDay? = nil,
+                tue: Components.Schemas.WeekDay? = nil,
+                wed: Components.Schemas.WeekDay? = nil,
+                thu: Components.Schemas.WeekDay? = nil,
+                fri: Components.Schemas.WeekDay? = nil,
+                sat: Components.Schemas.WeekDay? = nil,
+                sun: Components.Schemas.WeekDay? = nil,
                 hadith: Components.Schemas.Hadith? = nil
             ) {
                 self.id = id
@@ -206,6 +206,47 @@ public enum Components {
                 case sat
                 case sun
                 case hadith
+            }
+        }
+        /// - Remark: Generated from `#/components/schemas/WeekDay`.
+        public struct WeekDay: Codable, Hashable, Sendable {
+            /// - Remark: Generated from `#/components/schemas/WeekDay/id`.
+            public var id: Swift.Int
+            /// - Remark: Generated from `#/components/schemas/WeekDay/gregorian`.
+            public var gregorian: Swift.String
+            /// - Remark: Generated from `#/components/schemas/WeekDay/hijri`.
+            public var hijri: Swift.String
+            /// - Remark: Generated from `#/components/schemas/WeekDay/prayerTimes`.
+            public var prayerTimes: Components.Schemas.PrayerTimes?
+            /// - Remark: Generated from `#/components/schemas/WeekDay/event`.
+            public var event: Components.Schemas.Event?
+            /// Creates a new `WeekDay`.
+            ///
+            /// - Parameters:
+            ///   - id:
+            ///   - gregorian:
+            ///   - hijri:
+            ///   - prayerTimes:
+            ///   - event:
+            public init(
+                id: Swift.Int,
+                gregorian: Swift.String,
+                hijri: Swift.String,
+                prayerTimes: Components.Schemas.PrayerTimes? = nil,
+                event: Components.Schemas.Event? = nil
+            ) {
+                self.id = id
+                self.gregorian = gregorian
+                self.hijri = hijri
+                self.prayerTimes = prayerTimes
+                self.event = event
+            }
+            public enum CodingKeys: String, CodingKey {
+                case id
+                case gregorian
+                case hijri
+                case prayerTimes
+                case event
             }
         }
         /// - Remark: Generated from `#/components/schemas/Day`.
@@ -260,7 +301,7 @@ public enum Components {
             /// - Remark: Generated from `#/components/schemas/PrayerTimes/fajr`.
             public var fajr: Swift.String
             /// - Remark: Generated from `#/components/schemas/PrayerTimes/sunrise`.
-            public var sunrise: Swift.String?
+            public var sunrise: Swift.String
             /// - Remark: Generated from `#/components/schemas/PrayerTimes/dhuhr`.
             public var dhuhr: Swift.String
             /// - Remark: Generated from `#/components/schemas/PrayerTimes/asr`.
@@ -280,7 +321,7 @@ public enum Components {
             ///   - ishaa:
             public init(
                 fajr: Swift.String,
-                sunrise: Swift.String? = nil,
+                sunrise: Swift.String,
                 dhuhr: Swift.String,
                 asr: Swift.String,
                 maghrib: Swift.String,
