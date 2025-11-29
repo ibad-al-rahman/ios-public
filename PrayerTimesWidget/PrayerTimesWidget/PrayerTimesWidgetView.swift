@@ -6,7 +6,7 @@
 //
 
 import ComposableArchitecture
-import IbadRepositories
+import IbadPrayerTimesRepository
 import SwiftUI
 import WidgetKit
 
@@ -51,12 +51,12 @@ struct PrayerTimesWidgetView: View {
             VStack(alignment: .leading, spacing: 0) {
                 HStack(alignment: .center) {
                     VStack {
-                        if let hijriDay = store.todaysPrayerTimes?.hijriDay,
-                           let hijriMonth = store.todaysPrayerTimes?.hijriMonth,
-                           let hijriYear = store.todaysPrayerTimes?.hijriYear,
-                           let gregorianDay = store.todaysPrayerTimes?.gregorianDay,
-                           let gregorianMonth = store.todaysPrayerTimes?.gregorianMonth,
-                           let gregorianYear = store.todaysPrayerTimes?.gregorianYear {
+                        if let hijriDay = store.todaysPrayerTimes?.hijriYmd.day,
+                           let hijriMonth = store.todaysPrayerTimes?.hijriYmd.month,
+                           let hijriYear = store.todaysPrayerTimes?.hijriYmd.year,
+                           let gregorianDay = store.todaysPrayerTimes?.gregorianYmd.day,
+                           let gregorianMonth = store.todaysPrayerTimes?.gregorianYmd.month,
+                           let gregorianYear = store.todaysPrayerTimes?.gregorianYmd.year {
                             HStack {
                                 VStack {
                                     Text(hijriDay)

@@ -6,7 +6,7 @@
 //
 
 import ComposableArchitecture
-import IbadRepositories
+import IbadPrayerTimesRepository
 import SwiftUI
 import WidgetKit
 
@@ -23,57 +23,40 @@ struct PrayerTimeTimelineProvider: TimelineProvider {
     func getSnapshot(
         in context: Context, completion: @escaping (PrayerTimeEntry) -> ()
     ) {
-        let prayerTimes = getPrayerTimesSequnce()
-        let entry = prayerTimes.first ?? PrayerTimeEntry(
-            date: .now,
-            currentPrayer: .maghrib,
-            nextPrayer: .ishaa,
-            nextPrayerDate: .now
-        )
-        completion(entry)
+        Task {
+            let prayerTimes = await getPrayerTimesSequnce()
+            let entry = prayerTimes.first ?? PrayerTimeEntry(
+                date: .now,
+                currentPrayer: .maghrib,
+                nextPrayer: .ishaa,
+                nextPrayerDate: .now
+            )
+            completion(entry)
+        }
     }
 
     func getTimeline(
         in context: Context,
         completion: @escaping (Timeline<PrayerTimeEntry>) -> ()
     ) {
-        let timeline = Timeline(entries: getPrayerTimesSequnce(), policy: .atEnd)
-        completion(timeline)
+        Task {
+            let timeline = Timeline(entries: await getPrayerTimesSequnce(), policy: .atEnd)
+            completion(timeline)
+        }
     }
 
-    func getPrayerTimesSequnce() -> [PrayerTimeEntry] {
-        let currentDate = Date.now
-        let components = Calendar.current.dateComponents(
-            [.year, .month, .day], from: currentDate
-        )
-        guard let year = components.year,
-              let month = components.month,
-              let day = components.day
+    func getPrayerTimesSequnce() async -> [PrayerTimeEntry] {
+        @Dependency(\.ibadPrayerTimesRepositoryLite) var repository
+
+        guard let prayerTimes = try? await repository.getPrayerTimes(.today)
         else { return [] }
 
-        @SharedReader(.localDayPrayerTimes(year: year)) var localDayPrayerTimes = .empty
-        guard let dayPrayerTimes = localDayPrayerTimes.getDayPrayerTimes(
-            year: year, month: month, day: day
-        ),
-              let prayerTimes = DayPrayerTimes(from: dayPrayerTimes)
-        else { return [] }
         let secondsPerDay = 60 * 60 * 24.0
         let tomorrowMidnight = Calendar.current.startOfDay(
             for: .now.addingTimeInterval(secondsPerDay)
         )
-        let tomorrowComponents = Calendar.current.dateComponents(
-            [.year, .month, .day], from: tomorrowMidnight
-        )
-        guard let tomorrowYear = tomorrowComponents.year,
-              let tomorrowMonth = tomorrowComponents.month,
-              let tomorrowDay = tomorrowComponents.day
-        else { return [] }
 
-        @SharedReader(.localDayPrayerTimes(year: tomorrowYear)) var tomorrowsLocalDayPrayerTimes = .empty
-        guard let dayPrayerTimes = tomorrowsLocalDayPrayerTimes.getDayPrayerTimes(
-            year: tomorrowYear, month: tomorrowMonth, day: tomorrowDay
-        ),
-              let tomorrowPrayerTimes = DayPrayerTimes(from: dayPrayerTimes)
+        guard let tomorrowPrayerTimes = try? await repository.getPrayerTimes(.tomorrow)
         else { return [] }
 
         let now = Date.now
@@ -89,7 +72,7 @@ struct PrayerTimeTimelineProvider: TimelineProvider {
             )],
             prayerTimes
                 .sorted
-                .filter { currentDate < $0 }
+                .filter { now < $0 }
                 .map {
                     PrayerTimeEntry(
                         date: $0,

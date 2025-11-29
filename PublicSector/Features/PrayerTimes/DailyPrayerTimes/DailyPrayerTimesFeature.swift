@@ -245,6 +245,8 @@ extension DayPrayerTimes {
             weekId: 0,
             gregorian: .now,
             hijri: "1/1/1444",
+            gregorianYmd: YMD(year: "2025", month: "January", day: "1"),
+            hijriYmd: YMD(year: "1", month: "Muharram", day: "1444"),
             fajr: .now,
             sunrise: .now,
             dhuhr: .now,

@@ -7,7 +7,7 @@
 
 import ComposableArchitecture
 import Foundation
-import IbadRepositories
+import IbadPrayerTimesRepository
 
 @Reducer
 struct PrayerTimesWidgetFeature {
@@ -37,13 +37,12 @@ struct PrayerTimesWidgetFeature {
                 else { return .none }
 
                 @SharedReader(.localDayPrayerTimes(year: year)) var localDayPrayerTimes = .empty
-                guard let local = localDayPrayerTimes.getDayPrayerTimes(
+                guard let prayerTimes = localDayPrayerTimes.getDayPrayerTimes(
                     year: year, month: month, day: day
-                ),
-                      let prayerTimes = DayPrayerTimes(from: local)
+                )
                 else { return .none }
 
-                state.todaysPrayerTimes = prayerTimes
+                state.todaysPrayerTimes = prayerTimes.toDomain
                 return .none
             }
         }

@@ -7,11 +7,25 @@
 
 import Foundation
 
+public struct YMD: Sendable, Equatable {
+    public let year: String
+    public let month: String
+    public let day: String
+
+    public init(year: String, month: String, day: String) {
+        self.year = year
+        self.month = month
+        self.day = day
+    }
+}
+
 public struct DayPrayerTimes: Sendable, Equatable, Identifiable {
     public let id: Int
     public let weekId: Int
     public let gregorian: Date
     public let hijri: String
+    public let gregorianYmd: YMD
+    public let hijriYmd: YMD
     public let fajr: Date
     public let sunrise: Date
     public let dhuhr: Date
@@ -20,29 +34,33 @@ public struct DayPrayerTimes: Sendable, Equatable, Identifiable {
     public let ishaa: Date
     public let event: DayEvent?
 
-    var fajrId: String {
+    public var fajrId: String {
         "f\(id)"
     }
 
     // made it "sr" because in the future we might add "suhur", so "s" will collide
-    var sunriseId: String {
+    public var sunriseId: String {
         "sr\(id)"
     }
 
-    var dhuhrId: String {
+    public var dhuhrId: String {
         "d\(id)"
     }
 
-    var asrId: String {
+    public var asrId: String {
         "a\(id)"
     }
 
-    var maghribId: String {
+    public var maghribId: String {
         "m\(id)"
     }
 
-    var ishaaId: String {
+    public var ishaaId: String {
         "i\(id)"
+    }
+
+    public var sorted: [Date] {
+        [fajr, sunrise, dhuhr, asr, maghrib, ishaa]
     }
 
     public init(
@@ -50,6 +68,8 @@ public struct DayPrayerTimes: Sendable, Equatable, Identifiable {
         weekId: Int,
         gregorian: Date,
         hijri: String,
+        gregorianYmd: YMD,
+        hijriYmd: YMD,
         fajr: Date,
         sunrise: Date,
         dhuhr: Date,
@@ -62,6 +82,8 @@ public struct DayPrayerTimes: Sendable, Equatable, Identifiable {
         self.weekId = weekId
         self.gregorian = gregorian
         self.hijri = hijri
+        self.gregorianYmd = gregorianYmd
+        self.hijriYmd = hijriYmd
         self.fajr = fajr
         self.sunrise = sunrise
         self.dhuhr = dhuhr
@@ -186,6 +208,22 @@ extension DayPrayerTimesEntity {
         hijriFormatter.dateFormat = "d MMMM yyyy"
         let formattedHijri = hijriFormatter.string(from: hijriDate)
 
+        // Extract Gregorian YMD
+        gregorianFormatter.dateFormat = "d"
+        let gregorianDay = gregorianFormatter.string(from: gregorianDate)
+        gregorianFormatter.dateFormat = "MMMM"
+        let gregorianMonth = gregorianFormatter.string(from: gregorianDate)
+        gregorianFormatter.dateFormat = "yyyy"
+        let gregorianYear = gregorianFormatter.string(from: gregorianDate)
+
+        // Extract Hijri YMD
+        hijriFormatter.dateFormat = "d"
+        let hijriDay = hijriFormatter.string(from: hijriDate)
+        hijriFormatter.dateFormat = "MMMM"
+        let hijriMonth = hijriFormatter.string(from: hijriDate)
+        hijriFormatter.dateFormat = "yyyy"
+        let hijriYear = hijriFormatter.string(from: hijriDate)
+
         guard let fajr = timeFormatter.date(from: prayerTimes.fajr) else { return nil }
         guard let sunrise = timeFormatter.date(from: prayerTimes.sunrise) else { return nil }
         guard let dhuhr = timeFormatter.date(from: prayerTimes.dhuhr) else { return nil }
@@ -198,6 +236,8 @@ extension DayPrayerTimesEntity {
             weekId: weekId,
             gregorian: gregorianDate,
             hijri: formattedHijri,
+            gregorianYmd: YMD(year: gregorianYear, month: gregorianMonth, day: gregorianDay),
+            hijriYmd: YMD(year: hijriYear, month: hijriMonth, day: hijriDay),
             fajr: fajr,
             sunrise: sunrise,
             dhuhr: dhuhr,

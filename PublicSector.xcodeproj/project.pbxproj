@@ -70,6 +70,7 @@
 		D9B34CE32CDFBA1B00C07BA7 /* ReleaseSettings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D9B34CE12CDFBA1B00C07BA7 /* ReleaseSettings.bundle */; };
 		D9B4AB502D24B1E300E201CA /* InfoPlist.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = D9B4AB4F2D24B1E300E201CA /* InfoPlist.xcstrings */; };
 		D9B4AB562D24B8B500E201CA /* AppInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9B4AB552D24B8B100E201CA /* AppInfo.swift */; };
+		D9C6B4EB2EDAC2FD00C4749B /* IbadPrayerTimesRepository in Frameworks */ = {isa = PBXBuildFile; productRef = D9C6B4EA2EDAC2FD00C4749B /* IbadPrayerTimesRepository */; };
 		D9C85AC62CF38EEC00730F12 /* NavigationRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9C85AC52CF38EE000730F12 /* NavigationRowView.swift */; };
 		D9D785AF2ECD10C6004D81F8 /* NotificationsFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9D785AE2ECD10C2004D81F8 /* NotificationsFeature.swift */; };
 		D9D785B12ECD10CD004D81F8 /* NotificationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9D785B02ECD10C9004D81F8 /* NotificationsView.swift */; };
@@ -83,7 +84,6 @@
 		D9EAEF562D27199100C8D1F4 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9EAEF552D27199100C8D1F4 /* WidgetKit.framework */; };
 		D9EAEF582D27199100C8D1F4 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9EAEF572D27199100C8D1F4 /* SwiftUI.framework */; };
 		D9EAEF632D27199200C8D1F4 /* PrayerTimesWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = D9EAEF532D27199100C8D1F4 /* PrayerTimesWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		D9EAEF762D29461E00C8D1F4 /* IbadRepositories in Frameworks */ = {isa = PBXBuildFile; productRef = D9EAEF752D29461E00C8D1F4 /* IbadRepositories */; };
 		D9EAEF7D2D29469800C8D1F4 /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = D9EAEF7C2D29469800C8D1F4 /* ComposableArchitecture */; };
 		D9EE4FD92CE10E6000C5AEE4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D9EE4FD82CE10E6000C5AEE4 /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
@@ -259,7 +259,7 @@
 				D9EAEF582D27199100C8D1F4 /* SwiftUI.framework in Frameworks */,
 				D9EAEF562D27199100C8D1F4 /* WidgetKit.framework in Frameworks */,
 				D9EAEF7D2D29469800C8D1F4 /* ComposableArchitecture in Frameworks */,
-				D9EAEF762D29461E00C8D1F4 /* IbadRepositories in Frameworks */,
+				D9C6B4EB2EDAC2FD00C4749B /* IbadPrayerTimesRepository in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -706,6 +706,7 @@
 			packageProductDependencies = (
 				D9EAEF752D29461E00C8D1F4 /* IbadRepositories */,
 				D9EAEF7C2D29469800C8D1F4 /* ComposableArchitecture */,
+				D9C6B4EA2EDAC2FD00C4749B /* IbadPrayerTimesRepository */,
 			);
 			productName = PrayerTimesWidgetExtension;
 			productReference = D9EAEF532D27199100C8D1F4 /* PrayerTimesWidgetExtension.appex */;
@@ -1428,6 +1429,10 @@
 			isa = XCSwiftPackageProductDependency;
 			package = D9A6E1BB2CEC71FE006123D1 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */;
 			productName = ComposableArchitecture;
+		};
+		D9C6B4EA2EDAC2FD00C4749B /* IbadPrayerTimesRepository */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = IbadPrayerTimesRepository;
 		};
 		D9DA3AAD2D161431001AB599 /* IbadRemoteConfig */ = {
 			isa = XCSwiftPackageProductDependency;
