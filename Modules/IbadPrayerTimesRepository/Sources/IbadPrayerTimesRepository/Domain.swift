@@ -231,6 +231,27 @@ extension DayPrayerTimesEntity {
         guard let maghrib = timeFormatter.date(from: prayerTimes.maghrib) else { return nil }
         guard let ishaa = timeFormatter.date(from: prayerTimes.ishaa) else { return nil }
 
+        let calendar = Calendar.current
+        guard let fajrWithDate = calendar.date(bySettingHour: calendar.component(.hour, from: fajr),
+                                               minute: calendar.component(.minute, from: fajr),
+                                               second: 0, of: gregorianDate),
+              let sunriseWithDate = calendar.date(bySettingHour: calendar.component(.hour, from: sunrise),
+                                                  minute: calendar.component(.minute, from: sunrise),
+                                                  second: 0, of: gregorianDate),
+              let dhuhrWithDate = calendar.date(bySettingHour: calendar.component(.hour, from: dhuhr),
+                                                minute: calendar.component(.minute, from: dhuhr),
+                                                second: 0, of: gregorianDate),
+              let asrWithDate = calendar.date(bySettingHour: calendar.component(.hour, from: asr),
+                                              minute: calendar.component(.minute, from: asr),
+                                              second: 0, of: gregorianDate),
+              let maghribWithDate = calendar.date(bySettingHour: calendar.component(.hour, from: maghrib),
+                                                  minute: calendar.component(.minute, from: maghrib),
+                                                  second: 0, of: gregorianDate),
+              let ishaaWithDate = calendar.date(bySettingHour: calendar.component(.hour, from: ishaa),
+                                                minute: calendar.component(.minute, from: ishaa),
+                                                second: 0, of: gregorianDate)
+        else { return nil }
+
         return DayPrayerTimes(
             id: id,
             weekId: weekId,
@@ -238,12 +259,12 @@ extension DayPrayerTimesEntity {
             hijri: formattedHijri,
             gregorianYmd: YMD(year: gregorianYear, month: gregorianMonth, day: gregorianDay),
             hijriYmd: YMD(year: hijriYear, month: hijriMonth, day: hijriDay),
-            fajr: fajr,
-            sunrise: sunrise,
-            dhuhr: dhuhr,
-            asr: asr,
-            maghrib: maghrib,
-            ishaa: ishaa,
+            fajr: fajrWithDate,
+            sunrise: sunriseWithDate,
+            dhuhr: dhuhrWithDate,
+            asr: asrWithDate,
+            maghrib: maghribWithDate,
+            ishaa: ishaaWithDate,
             event: event?.toDomain
         )
     }
@@ -294,16 +315,38 @@ extension YearWeekPrayerTimesEntity.DayPrayertimesEntity {
         guard let maghrib = timeFormatter.date(from: prayerTimes.maghrib) else { return nil }
         guard let ishaa = timeFormatter.date(from: prayerTimes.ishaa) else { return nil }
 
+        // Combine the gregorian date with the prayer times
+        let calendar = Calendar.current
+        guard let fajrWithDate = calendar.date(bySettingHour: calendar.component(.hour, from: fajr),
+                                                minute: calendar.component(.minute, from: fajr),
+                                                second: 0, of: gregorianDate),
+              let sunriseWithDate = calendar.date(bySettingHour: calendar.component(.hour, from: sunrise),
+                                                   minute: calendar.component(.minute, from: sunrise),
+                                                   second: 0, of: gregorianDate),
+              let dhuhrWithDate = calendar.date(bySettingHour: calendar.component(.hour, from: dhuhr),
+                                                 minute: calendar.component(.minute, from: dhuhr),
+                                                 second: 0, of: gregorianDate),
+              let asrWithDate = calendar.date(bySettingHour: calendar.component(.hour, from: asr),
+                                               minute: calendar.component(.minute, from: asr),
+                                               second: 0, of: gregorianDate),
+              let maghribWithDate = calendar.date(bySettingHour: calendar.component(.hour, from: maghrib),
+                                                   minute: calendar.component(.minute, from: maghrib),
+                                                   second: 0, of: gregorianDate),
+              let ishaaWithDate = calendar.date(bySettingHour: calendar.component(.hour, from: ishaa),
+                                                 minute: calendar.component(.minute, from: ishaa),
+                                                 second: 0, of: gregorianDate)
+        else { return nil }
+
         return WeekPrayerTimes.DayPrayertimes(
             id: id,
             gregorian: gregorianDate,
             hijri: formattedHijri,
-            fajr: fajr,
-            sunrise: sunrise,
-            dhuhr: dhuhr,
-            asr: asr,
-            maghrib: maghrib,
-            ishaa: ishaa
+            fajr: fajrWithDate,
+            sunrise: sunriseWithDate,
+            dhuhr: dhuhrWithDate,
+            asr: asrWithDate,
+            maghrib: maghribWithDate,
+            ishaa: ishaaWithDate
         )
     }
 }
