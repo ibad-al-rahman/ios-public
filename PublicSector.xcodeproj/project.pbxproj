@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		D9089CE42CFDC16D00881BB6 /* IbadRepositories in Frameworks */ = {isa = PBXBuildFile; productRef = D9089CE32CFDC16D00881BB6 /* IbadRepositories */; };
+		D90960E22EE4942800E4CD45 /* IbadRepositories in Frameworks */ = {isa = PBXBuildFile; productRef = D9EAEF752D29461E00C8D1F4 /* IbadRepositories */; };
+		D90961002EE5CF1600E4CD45 /* SwiftNavigation in Frameworks */ = {isa = PBXBuildFile; productRef = D90960FF2EE5CF1600E4CD45 /* SwiftNavigation */; };
+		D90961022EE5CF1600E4CD45 /* SwiftUINavigation in Frameworks */ = {isa = PBXBuildFile; productRef = D90961012EE5CF1600E4CD45 /* SwiftUINavigation */; };
 		D9170D522CEFDE41006E45D5 /* WebLinks.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9170D512CEFDE15006E45D5 /* WebLinks.swift */; };
 		D9170D552CEFE554006E45D5 /* HelpFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9170D542CEFE552006E45D5 /* HelpFeature.swift */; };
 		D9170D572CEFE558006E45D5 /* HelpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9170D562CEFE557006E45D5 /* HelpView.swift */; };
@@ -228,6 +231,8 @@
 			files = (
 				D9DA3AAE2D161431001AB599 /* IbadRemoteConfig in Frameworks */,
 				D91BF1282D3FDB9800BEB410 /* FirebaseCore in Frameworks */,
+				D90961022EE5CF1600E4CD45 /* SwiftUINavigation in Frameworks */,
+				D90961002EE5CF1600E4CD45 /* SwiftNavigation in Frameworks */,
 				D9089CE42CFDC16D00881BB6 /* IbadRepositories in Frameworks */,
 				D91BF12C2D3FDB9800BEB410 /* FirebaseRemoteConfig in Frameworks */,
 				D91BF12A2D3FDB9800BEB410 /* FirebaseCrashlytics in Frameworks */,
@@ -256,6 +261,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D90960E22EE4942800E4CD45 /* IbadRepositories in Frameworks */,
 				D9EAEF582D27199100C8D1F4 /* SwiftUI.framework in Frameworks */,
 				D9EAEF562D27199100C8D1F4 /* WidgetKit.framework in Frameworks */,
 				D9EAEF7D2D29469800C8D1F4 /* ComposableArchitecture in Frameworks */,
@@ -646,6 +652,8 @@
 				D91BF12B2D3FDB9800BEB410 /* FirebaseRemoteConfig */,
 				D91BF13B2D4019B500BEB410 /* IbadAnalytics */,
 				D9662EEB2ED60E60003538D6 /* IbadPrayerTimesRepository */,
+				D90960FF2EE5CF1600E4CD45 /* SwiftNavigation */,
+				D90961012EE5CF1600E4CD45 /* SwiftUINavigation */,
 			);
 			productName = PublicSector;
 			productReference = D9A70DB62C850B78002F6583 /* PublicSector.app */;
@@ -754,6 +762,7 @@
 				D91BF1242D3FDB9800BEB410 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				D91BF13A2D4019B500BEB410 /* XCLocalSwiftPackageReference "Modules/IbadAnalytics" */,
 				D9662EEA2ED60E60003538D6 /* XCLocalSwiftPackageReference "Modules/IbadPrayerTimesRepository" */,
+				D90960FE2EE5CF1600E4CD45 /* XCRemoteSwiftPackageReference "swift-navigation" */,
 			);
 			productRefGroup = D9A70DB72C850B78002F6583 /* Products */;
 			projectDirPath = "";
@@ -1374,6 +1383,14 @@
 /* End XCLocalSwiftPackageReference section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		D90960FE2EE5CF1600E4CD45 /* XCRemoteSwiftPackageReference "swift-navigation" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/pointfreeco/swift-navigation";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.6.0;
+			};
+		};
 		D91BF1242D3FDB9800BEB410 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
@@ -1396,6 +1413,16 @@
 		D9089CE32CFDC16D00881BB6 /* IbadRepositories */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = IbadRepositories;
+		};
+		D90960FF2EE5CF1600E4CD45 /* SwiftNavigation */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D90960FE2EE5CF1600E4CD45 /* XCRemoteSwiftPackageReference "swift-navigation" */;
+			productName = SwiftNavigation;
+		};
+		D90961012EE5CF1600E4CD45 /* SwiftUINavigation */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D90960FE2EE5CF1600E4CD45 /* XCRemoteSwiftPackageReference "swift-navigation" */;
+			productName = SwiftUINavigation;
 		};
 		D91BF1252D3FDB9800BEB410 /* FirebaseAnalytics */ = {
 			isa = XCSwiftPackageProductDependency;
