@@ -63,6 +63,17 @@ struct AppFeature {
             }
         }
         BindingReducer()
+        Reduce { state, action in
+            switch action {
+            case .dependent(.search(.delegate(.navigateToPrayerTimes(let date)))):
+                state.selectedTab = .prayerTimes
+                state.prayerTimes.dailyPrayerState.date = date
+                return .none
+
+            default:
+                return .none
+            }
+        }
         Scope(state: \.prayerTimes, action: \.dependent.prayerTimes) {
             PrayerTimesFeature()
         }

@@ -38,10 +38,11 @@ struct AppView: View {
         .tabItem {
             Label(
                 AppFeature.Tab.prayerTimes.localizedStringKey,
-                systemImage: "calendar.badge.clock"
+                systemImage: "clock"
             )
         }
         .tag(AppFeature.Tab.prayerTimes)
+        .environment(\.symbolVariants, store.selectedTab == .prayerTimes ? .fill : .none)
     }
 
     var searchScreen: some View {
@@ -54,7 +55,7 @@ struct AppView: View {
         .tabItem {
             Label(
                 AppFeature.Tab.search.localizedStringKey,
-                systemImage: "magnifyingglass"
+                systemImage: "calendar.badge.clock"
             )
         }
         .tag(AppFeature.Tab.search)

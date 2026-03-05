@@ -34,7 +34,10 @@ struct SearchView: View {
     private var resultRows: some View {
         Section {
             ForEach(store.filteredResults) { result in
-                resultRow(result)
+                Button { store.send(.view(.rowTapped(result))) } label: {
+                    resultRow(result)
+                }
+                .foregroundStyle(.primary)
             }
         } header: {
             Text(String(format: String(localized: "%lld results"), store.filteredResults.count))

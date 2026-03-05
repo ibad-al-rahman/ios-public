@@ -18,6 +18,7 @@ struct DailyPrayerTimesFeature {
     @ObservableState
     struct State: Equatable {
         var date: Date = .now
+        var hasAppeared: Bool = false
         var checkedYears = Set<Int>()
         var todaysPrayerTimes: DayPrayerTimes?
         var weeklyHadith: Hadith?
@@ -91,7 +92,10 @@ struct DailyPrayerTimesFeature {
             switch action {
             case .view(.onAppear):
                 state.error = nil
-                state.date = .now
+                if !state.hasAppeared {
+                    state.hasAppeared = true
+                    state.date = .now
+                }
                 WidgetCenter.shared.reloadAllTimelines()
                 return getDayPrayerTimes(state: state)
 
