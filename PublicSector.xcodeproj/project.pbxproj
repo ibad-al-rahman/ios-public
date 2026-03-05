@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		719899D02F59F76500BC65FB /* SwiftNavigation in Frameworks */ = {isa = PBXBuildFile; productRef = 719899CF2F59F76500BC65FB /* SwiftNavigation */; };
+		719899D22F59F76500BC65FB /* SwiftUINavigation in Frameworks */ = {isa = PBXBuildFile; productRef = 719899D12F59F76500BC65FB /* SwiftUINavigation */; };
 		D9089CE42CFDC16D00881BB6 /* IbadRepositories in Frameworks */ = {isa = PBXBuildFile; productRef = D9089CE32CFDC16D00881BB6 /* IbadRepositories */; };
 		D9170D522CEFDE41006E45D5 /* WebLinks.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9170D512CEFDE15006E45D5 /* WebLinks.swift */; };
 		D9170D552CEFE554006E45D5 /* HelpFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9170D542CEFE552006E45D5 /* HelpFeature.swift */; };
@@ -229,6 +231,7 @@
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
+		719899D32F59FF7A00BC65FB /* Search */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Search; sourceTree = "<group>"; };
 		D9EAEF592D27199100C8D1F4 /* PrayerTimesWidget */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (D9EAEF672D27199200C8D1F4 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = PrayerTimesWidget; sourceTree = "<group>"; };
 /* End PBXFileSystemSynchronizedRootGroup section */
 
@@ -237,6 +240,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				719899D02F59F76500BC65FB /* SwiftNavigation in Frameworks */,
 				D9DA3AAE2D161431001AB599 /* IbadRemoteConfig in Frameworks */,
 				D91BF1282D3FDB9800BEB410 /* FirebaseCore in Frameworks */,
 				D9089CE42CFDC16D00881BB6 /* IbadRepositories in Frameworks */,
@@ -244,6 +248,7 @@
 				D91BF12A2D3FDB9800BEB410 /* FirebaseCrashlytics in Frameworks */,
 				D91BF13C2D4019B500BEB410 /* IbadAnalytics in Frameworks */,
 				D91BF1262D3FDB9800BEB410 /* FirebaseAnalytics in Frameworks */,
+				719899D22F59F76500BC65FB /* SwiftUINavigation in Frameworks */,
 				D9A6E1BD2CEC71FE006123D1 /* ComposableArchitecture in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -488,6 +493,7 @@
 		D9A70DEA2C8595D6002F6583 /* Features */ = {
 			isa = PBXGroup;
 			children = (
+				719899D32F59FF7A00BC65FB /* Search */,
 				D970CD7A2D03B873004D8E66 /* AppEntry */,
 				D97A9FE32D03AC98000F3070 /* Startup */,
 				D9170D582CF09745006E45D5 /* Adhkar */,
@@ -659,6 +665,9 @@
 			dependencies = (
 				D9EAEF622D27199200C8D1F4 /* PBXTargetDependency */,
 			);
+			fileSystemSynchronizedGroups = (
+				719899D32F59FF7A00BC65FB /* Search */,
+			);
 			name = PublicSector;
 			packageProductDependencies = (
 				D9A6E1BC2CEC71FE006123D1 /* ComposableArchitecture */,
@@ -669,6 +678,8 @@
 				D91BF1292D3FDB9800BEB410 /* FirebaseCrashlytics */,
 				D91BF12B2D3FDB9800BEB410 /* FirebaseRemoteConfig */,
 				D91BF13B2D4019B500BEB410 /* IbadAnalytics */,
+				719899CF2F59F76500BC65FB /* SwiftNavigation */,
+				719899D12F59F76500BC65FB /* SwiftUINavigation */,
 			);
 			productName = PublicSector;
 			productReference = D9A70DB62C850B78002F6583 /* PublicSector.app */;
@@ -776,6 +787,7 @@
 				D9DA3AAC2D161431001AB599 /* XCLocalSwiftPackageReference "Modules/IbadRemoteConfig" */,
 				D91BF1242D3FDB9800BEB410 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				D91BF13A2D4019B500BEB410 /* XCLocalSwiftPackageReference "Modules/IbadAnalytics" */,
+				719899CE2F59F76500BC65FB /* XCRemoteSwiftPackageReference "swift-navigation" */,
 			);
 			productRefGroup = D9A70DB72C850B78002F6583 /* Products */;
 			projectDirPath = "";
@@ -1134,7 +1146,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"PublicSector/Preview Content\"";
-				DEVELOPMENT_TEAM = AV5475SLZ7;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = NO;
@@ -1173,7 +1185,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"PublicSector/Preview Content\"";
-				DEVELOPMENT_TEAM = AV5475SLZ7;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = NO;
@@ -1402,6 +1414,14 @@
 /* End XCLocalSwiftPackageReference section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		719899CE2F59F76500BC65FB /* XCRemoteSwiftPackageReference "swift-navigation" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/pointfreeco/swift-navigation";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.7.0;
+			};
+		};
 		D91BF1242D3FDB9800BEB410 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
@@ -1421,6 +1441,16 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		719899CF2F59F76500BC65FB /* SwiftNavigation */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 719899CE2F59F76500BC65FB /* XCRemoteSwiftPackageReference "swift-navigation" */;
+			productName = SwiftNavigation;
+		};
+		719899D12F59F76500BC65FB /* SwiftUINavigation */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 719899CE2F59F76500BC65FB /* XCRemoteSwiftPackageReference "swift-navigation" */;
+			productName = SwiftUINavigation;
+		};
 		D9089CE32CFDC16D00881BB6 /* IbadRepositories */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = IbadRepositories;
