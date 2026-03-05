@@ -398,6 +398,23 @@
         }
       }
     },
+    "Imsak" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "الإمساك"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Imsak"
+          }
+        }
+      }
+    },
     "Ishaa" : {
       "extractionState" : "manual",
       "localizations" : {
