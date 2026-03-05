@@ -12,9 +12,129 @@
 		</dict>
 		<dict>
 			<key>File</key>
+			<string>Packages/abseil</string>
+			<key>Title</key>
+			<string>abseil</string>
+			<key>Type</key>
+			<string>PSChildPaneSpecifier</string>
+		</dict>
+		<dict>
+			<key>File</key>
+			<string>Packages/AppCheck</string>
+			<key>Title</key>
+			<string>AppCheck</string>
+			<key>Type</key>
+			<string>PSChildPaneSpecifier</string>
+		</dict>
+		<dict>
+			<key>File</key>
 			<string>Packages/combine-schedulers</string>
 			<key>Title</key>
 			<string>combine-schedulers</string>
+			<key>Type</key>
+			<string>PSChildPaneSpecifier</string>
+		</dict>
+		<dict>
+			<key>File</key>
+			<string>Packages/Firebase</string>
+			<key>Title</key>
+			<string>Firebase</string>
+			<key>Type</key>
+			<string>PSChildPaneSpecifier</string>
+		</dict>
+		<dict>
+			<key>File</key>
+			<string>Packages/GoogleAppMeasurement</string>
+			<key>Title</key>
+			<string>GoogleAppMeasurement</string>
+			<key>Type</key>
+			<string>PSChildPaneSpecifier</string>
+		</dict>
+		<dict>
+			<key>File</key>
+			<string>Packages/GoogleDataTransport</string>
+			<key>Title</key>
+			<string>GoogleDataTransport</string>
+			<key>Type</key>
+			<string>PSChildPaneSpecifier</string>
+		</dict>
+		<dict>
+			<key>File</key>
+			<string>Packages/GoogleUtilities</string>
+			<key>Title</key>
+			<string>GoogleUtilities</string>
+			<key>Type</key>
+			<string>PSChildPaneSpecifier</string>
+		</dict>
+		<dict>
+			<key>File</key>
+			<string>Packages/gRPC</string>
+			<key>Title</key>
+			<string>gRPC</string>
+			<key>Type</key>
+			<string>PSChildPaneSpecifier</string>
+		</dict>
+		<dict>
+			<key>File</key>
+			<string>Packages/GTMSessionFetcher</string>
+			<key>Title</key>
+			<string>GTMSessionFetcher</string>
+			<key>Type</key>
+			<string>PSChildPaneSpecifier</string>
+		</dict>
+		<dict>
+			<key>File</key>
+			<string>Packages/InteropForGoogle</string>
+			<key>Title</key>
+			<string>InteropForGoogle</string>
+			<key>Type</key>
+			<string>PSChildPaneSpecifier</string>
+		</dict>
+		<dict>
+			<key>File</key>
+			<string>Packages/leveldb</string>
+			<key>Title</key>
+			<string>leveldb</string>
+			<key>Type</key>
+			<string>PSChildPaneSpecifier</string>
+		</dict>
+		<dict>
+			<key>File</key>
+			<string>Packages/nanopb</string>
+			<key>Title</key>
+			<string>nanopb</string>
+			<key>Type</key>
+			<string>PSChildPaneSpecifier</string>
+		</dict>
+		<dict>
+			<key>File</key>
+			<string>Packages/OpenAPIKit</string>
+			<key>Title</key>
+			<string>OpenAPIKit</string>
+			<key>Type</key>
+			<string>PSChildPaneSpecifier</string>
+		</dict>
+		<dict>
+			<key>File</key>
+			<string>Packages/Promises</string>
+			<key>Title</key>
+			<string>Promises</string>
+			<key>Type</key>
+			<string>PSChildPaneSpecifier</string>
+		</dict>
+		<dict>
+			<key>File</key>
+			<string>Packages/swift-algorithms</string>
+			<key>Title</key>
+			<string>swift-algorithms</string>
+			<key>Type</key>
+			<string>PSChildPaneSpecifier</string>
+		</dict>
+		<dict>
+			<key>File</key>
+			<string>Packages/swift-argument-parser</string>
+			<key>Title</key>
+			<string>swift-argument-parser</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -76,6 +196,14 @@
 		</dict>
 		<dict>
 			<key>File</key>
+			<string>Packages/swift-http-types</string>
+			<key>Title</key>
+			<string>swift-http-types</string>
+			<key>Type</key>
+			<string>PSChildPaneSpecifier</string>
+		</dict>
+		<dict>
+			<key>File</key>
 			<string>Packages/swift-identified-collections</string>
 			<key>Title</key>
 			<string>swift-identified-collections</string>
@@ -92,9 +220,57 @@
 		</dict>
 		<dict>
 			<key>File</key>
+			<string>Packages/swift-numerics</string>
+			<key>Title</key>
+			<string>swift-numerics</string>
+			<key>Type</key>
+			<string>PSChildPaneSpecifier</string>
+		</dict>
+		<dict>
+			<key>File</key>
+			<string>Packages/swift-openapi-generator</string>
+			<key>Title</key>
+			<string>swift-openapi-generator</string>
+			<key>Type</key>
+			<string>PSChildPaneSpecifier</string>
+		</dict>
+		<dict>
+			<key>File</key>
+			<string>Packages/swift-openapi-runtime</string>
+			<key>Title</key>
+			<string>swift-openapi-runtime</string>
+			<key>Type</key>
+			<string>PSChildPaneSpecifier</string>
+		</dict>
+		<dict>
+			<key>File</key>
+			<string>Packages/swift-openapi-urlsession</string>
+			<key>Title</key>
+			<string>swift-openapi-urlsession</string>
+			<key>Type</key>
+			<string>PSChildPaneSpecifier</string>
+		</dict>
+		<dict>
+			<key>File</key>
 			<string>Packages/swift-perception</string>
 			<key>Title</key>
 			<string>swift-perception</string>
+			<key>Type</key>
+			<string>PSChildPaneSpecifier</string>
+		</dict>
+		<dict>
+			<key>File</key>
+			<string>Packages/SwiftProtobuf</string>
+			<key>Title</key>
+			<string>SwiftProtobuf</string>
+			<key>Type</key>
+			<string>PSChildPaneSpecifier</string>
+		</dict>
+		<dict>
+			<key>File</key>
+			<string>Packages/swift-sharing</string>
+			<key>Title</key>
+			<string>swift-sharing</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -111,6 +287,14 @@
 			<string>Packages/xctest-dynamic-overlay</string>
 			<key>Title</key>
 			<string>xctest-dynamic-overlay</string>
+			<key>Type</key>
+			<string>PSChildPaneSpecifier</string>
+		</dict>
+		<dict>
+			<key>File</key>
+			<string>Packages/Yams</string>
+			<key>Title</key>
+			<string>Yams</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>

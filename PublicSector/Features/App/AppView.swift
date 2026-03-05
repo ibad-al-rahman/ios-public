@@ -23,6 +23,7 @@ struct AppView: View {
     var content: some View {
         TabView(selection: $store.selectedTab) {
             prayerTimesScreen
+            searchScreen
             adhkarScreen
                 .featureFlagged(.adhkarScreen)
             settingsScreen
@@ -41,6 +42,22 @@ struct AppView: View {
             )
         }
         .tag(AppFeature.Tab.prayerTimes)
+    }
+
+    var searchScreen: some View {
+        NavigationStack {
+            SearchView(store: store.scope(
+                state: \.search,
+                action: \.dependent.search
+            ))
+        }
+        .tabItem {
+            Label(
+                AppFeature.Tab.search.localizedStringKey,
+                systemImage: "magnifyingglass"
+            )
+        }
+        .tag(AppFeature.Tab.search)
     }
 
     var adhkarScreen: some View {
@@ -76,6 +93,7 @@ extension AppFeature.Tab {
     var localizedStringKey: LocalizedStringKey {
         switch self {
         case .prayerTimes: "Prayer Times"
+        case .search: "Events"
         case .settings: "Settings"
         case .adhkar: "Adhkar"
         }

@@ -11,6 +11,16 @@
         }
       }
     },
+    "%lld results" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld نتيجة"
+          }
+        }
+      }
+    },
     "Adhkar" : {
       "localizations" : {
         "ar" : {
@@ -465,6 +475,12 @@
         }
       }
     },
+    "No Events" : {
+
+    },
+    "No events or holidays found for this year." : {
+
+    },
     "Prayer Times" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -498,6 +514,26 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "إعادة المحاولة"
+          }
+        }
+      }
+    },
+    "Events" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "المناسبات"
+          }
+        }
+      }
+    },
+    "Search events and holidays" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ابحث عن الأعياد والمناسبات"
           }
         }
       }
