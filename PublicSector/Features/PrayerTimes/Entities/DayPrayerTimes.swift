@@ -13,6 +13,7 @@ struct DayPrayerTimes: Equatable, Identifiable {
     let weekId: Int
     let gregorian: Date
     let hijri: String
+    var imsak: Date?
     var fajr: Date
     var sunrise: Date
     var dhuhr: Date
@@ -103,6 +104,8 @@ extension DayPrayerTimes {
         hijriFormatter.dateFormat = "d MMMM yyyy"
         let hijri = hijriFormatter.string(from: hijriDate)
         self.hijri = hijri
+
+        self.imsak = storage.prayerTimes.imsak.flatMap { timeFormatter.date(from: $0) }
 
         guard let fajr = timeFormatter.date(from: storage.prayerTimes.fajr)
         else { return nil }

@@ -105,6 +105,7 @@ public struct DayPrayerTimesResponse: Decodable, Sendable {
 }
 
 public struct PrayerTimesResponse: Decodable, Sendable {
+    public let imsak: String?
     public let fajr: String
     public let sunrise: String
     public let dhuhr: String
@@ -125,6 +126,7 @@ extension YearWeekPrayerTimesResponse.DayPrayertimes {
             gregorian: gregorian,
             hijri: hijri,
             prayerTimes: PrayerTimesStorage(
+                imsak: self.prayerTimes.imsak,
                 fajr: self.prayerTimes.fajr,
                 sunrise: self.prayerTimes.sunrise,
                 dhuhr: self.prayerTimes.dhuhr,
@@ -166,6 +168,7 @@ extension DayPrayerTimesResponse {
             gregorian: self.gregorian,
             hijri: self.hijri,
             prayerTimes: PrayerTimesStorage(
+                imsak: self.prayerTimes.imsak,
                 fajr: self.prayerTimes.fajr,
                 sunrise: self.prayerTimes.sunrise,
                 dhuhr: self.prayerTimes.dhuhr,

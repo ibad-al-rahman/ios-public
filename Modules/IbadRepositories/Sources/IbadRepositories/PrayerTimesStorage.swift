@@ -96,6 +96,7 @@ public struct DayPrayerTimesStorage: Codable, Identifiable, Sendable {
 }
 
 public struct PrayerTimesStorage: Codable, Sendable {
+    public let imsak: String?
     public let fajr: String
     public let sunrise: String
     public let dhuhr: String
