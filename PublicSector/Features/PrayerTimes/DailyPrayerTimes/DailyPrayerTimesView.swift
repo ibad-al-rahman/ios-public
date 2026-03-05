@@ -78,6 +78,13 @@ struct DailyPrayerTimesView: View {
     private func dayPrayerTimes(_ prayerTimes: DayPrayerTimes) -> some View {
         Section {
             Group {
+                if let imsak = prayerTimes.imsak {
+                    prayerTime(
+                        .imsak,
+                        time: imsak,
+                        systemImage: "moon.zzz"
+                    )
+                }
                 prayerTime(
                     .fajr,
                     time: prayerTimes.fajr,

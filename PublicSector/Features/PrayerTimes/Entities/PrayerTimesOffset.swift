@@ -24,6 +24,7 @@ struct PrayerTimesOffset: Equatable, Codable {
 
     func val(_ prayer: Prayer) -> Int {
         switch prayer {
+        case .imsak: 0
         case .fajr: fajr
         case .sunrise: sunrise
         case .dhuhr: dhuhr
@@ -35,6 +36,7 @@ struct PrayerTimesOffset: Equatable, Codable {
 
     mutating func inc(_ prayer: Prayer) {
         switch prayer {
+        case .imsak: break
         case .fajr: fajr += 1
         case .sunrise: sunrise += 1
         case .dhuhr: dhuhr += 1
@@ -46,6 +48,7 @@ struct PrayerTimesOffset: Equatable, Codable {
 
     mutating func dec(_ prayer: Prayer) {
         switch prayer {
+        case .imsak: break
         case .fajr: fajr -= 1
         case .sunrise: sunrise -= 1
         case .dhuhr: dhuhr -= 1
