@@ -65,11 +65,6 @@ struct AppFeature {
         BindingReducer()
         Reduce { state, action in
             switch action {
-            case .dependent(.events(.delegate(.navigateToPrayerTimes(let date)))):
-                state.selectedTab = .prayerTimes
-                state.prayerTimes.dailyPrayerState.date = date
-                return .none
-
             default:
                 return .none
             }
