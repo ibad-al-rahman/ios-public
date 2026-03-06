@@ -1,5 +1,5 @@
 //
-//  SearchView.swift
+//  EventsView.swift
 //  PublicSector
 //
 //  Created by May Chehab on 05/03/2026.
@@ -8,8 +8,8 @@
 import ComposableArchitecture
 import SwiftUI
 
-struct SearchView: View {
-    @Bindable var store: StoreOf<SearchFeature>
+struct EventsView: View {
+    @Bindable var store: StoreOf<EventsFeature>
 
     var body: some View {
         List {
@@ -44,7 +44,7 @@ struct SearchView: View {
         }
     }
 
-    private func resultRow(_ result: SearchFeature.EventSearchResult) -> some View {
+    private func resultRow(_ result: EventsFeature.EventSearchResult) -> some View {
         VStack(alignment: .leading, spacing: Spacing.extraSmall.rawValue) {
             Text(verbatim: eventName(result))
                 .environment(\.layoutDirection, eventLayoutDirection(result))
@@ -88,7 +88,7 @@ struct SearchView: View {
         }
     }
 
-    private func eventName(_ result: SearchFeature.EventSearchResult) -> String {
+    private func eventName(_ result: EventsFeature.EventSearchResult) -> String {
         if result.en != nil {
             switch Locale.current.language.languageCode?.identifier {
             case "en": return result.en ?? result.ar
@@ -100,7 +100,7 @@ struct SearchView: View {
         }
     }
 
-    private func eventLayoutDirection(_ result: SearchFeature.EventSearchResult) -> LayoutDirection {
+    private func eventLayoutDirection(_ result: EventsFeature.EventSearchResult) -> LayoutDirection {
         if result.en != nil,
            Locale.current.language.languageCode?.identifier == "en" {
             return .leftToRight
@@ -111,18 +111,18 @@ struct SearchView: View {
 
 #Preview {
     NavigationStack {
-        SearchView(store: Store(
-            initialState: SearchFeature.State(),
-            reducer: SearchFeature.init
+        EventsView(store: Store(
+            initialState: EventsFeature.State(),
+            reducer: EventsFeature.init
         ))
     }
 }
 
 #Preview {
     NavigationStack {
-        SearchView(store: Store(
-            initialState: SearchFeature.State(),
-            reducer: SearchFeature.init
+        EventsView(store: Store(
+            initialState: EventsFeature.State(),
+            reducer: EventsFeature.init
         ))
     }
     .arabicEnvironment()

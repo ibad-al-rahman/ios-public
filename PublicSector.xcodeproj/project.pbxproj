@@ -231,7 +231,7 @@
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		719899D32F59FF7A00BC65FB /* Search */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Search; sourceTree = "<group>"; };
+		717FBF6F2F5B49DD005D5D48 /* Events */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Events; sourceTree = "<group>"; };
 		D9EAEF592D27199100C8D1F4 /* PrayerTimesWidget */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (D9EAEF672D27199200C8D1F4 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = PrayerTimesWidget; sourceTree = "<group>"; };
 /* End PBXFileSystemSynchronizedRootGroup section */
 
@@ -493,7 +493,7 @@
 		D9A70DEA2C8595D6002F6583 /* Features */ = {
 			isa = PBXGroup;
 			children = (
-				719899D32F59FF7A00BC65FB /* Search */,
+				717FBF6F2F5B49DD005D5D48 /* Events */,
 				D970CD7A2D03B873004D8E66 /* AppEntry */,
 				D97A9FE32D03AC98000F3070 /* Startup */,
 				D9170D582CF09745006E45D5 /* Adhkar */,
@@ -666,7 +666,7 @@
 				D9EAEF622D27199200C8D1F4 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
-				719899D32F59FF7A00BC65FB /* Search */,
+				717FBF6F2F5B49DD005D5D48 /* Events */,
 			);
 			name = PublicSector;
 			packageProductDependencies = (

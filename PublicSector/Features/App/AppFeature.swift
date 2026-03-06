@@ -12,7 +12,7 @@ import IbadAnalytics
 struct AppFeature {
     enum Tab {
         case prayerTimes
-        case search
+        case events
         case settings
         case adhkar
     }
@@ -23,7 +23,7 @@ struct AppFeature {
 
         var selectedTab: Tab = .prayerTimes
         var prayerTimes = PrayerTimesFeature.State()
-        var search = SearchFeature.State()
+        var events = EventsFeature.State()
         var settings = SettingsFeature.State()
         var adhkar = AdhkarFeature.State()
     }
@@ -46,7 +46,7 @@ struct AppFeature {
         @CasePathable
         enum DependentAction {
             case prayerTimes(PrayerTimesFeature.Action)
-            case search(SearchFeature.Action)
+            case events(EventsFeature.Action)
             case settings(SettingsFeature.Action)
             case adhkar(AdhkarFeature.Action)
         }
@@ -65,7 +65,7 @@ struct AppFeature {
         BindingReducer()
         Reduce { state, action in
             switch action {
-            case .dependent(.search(.delegate(.navigateToPrayerTimes(let date)))):
+            case .dependent(.events(.delegate(.navigateToPrayerTimes(let date)))):
                 state.selectedTab = .prayerTimes
                 state.prayerTimes.dailyPrayerState.date = date
                 return .none
@@ -77,8 +77,8 @@ struct AppFeature {
         Scope(state: \.prayerTimes, action: \.dependent.prayerTimes) {
             PrayerTimesFeature()
         }
-        Scope(state: \.search, action: \.dependent.search) {
-            SearchFeature()
+        Scope(state: \.events, action: \.dependent.events) {
+            EventsFeature()
         }
         Scope(state: \.settings, action: \.dependent.settings) {
             SettingsFeature()
