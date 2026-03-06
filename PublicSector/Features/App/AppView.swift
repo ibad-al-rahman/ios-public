@@ -40,9 +40,9 @@ struct AppView: View {
                 AppFeature.Tab.prayerTimes.localizedStringKey,
                 systemImage: "clock"
             )
+            .environment(\.symbolVariants, .none)
         }
         .tag(AppFeature.Tab.prayerTimes)
-        .environment(\.symbolVariants, store.selectedTab == .prayerTimes ? .fill : .none)
     }
 
     var eventsScreen: some View {
