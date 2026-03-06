@@ -1,5 +1,5 @@
 //
-//  SearchFeature.swift
+//  EventsFeature.swift
 //  PublicSector
 //
 //  Created by May Chehab on 05/03/2026.
@@ -11,7 +11,7 @@ import IbadAnalytics
 import IbadRepositories
 
 @Reducer
-struct SearchFeature {
+struct EventsFeature {
     struct EventSearchResult: Equatable, Identifiable {
         let id: Int
         let gregorian: Date
@@ -64,7 +64,7 @@ struct SearchFeature {
         AnalyticsReducer { _, action in
             switch action {
             case .view(.onAppear):
-                return .screen(name: "Search")
+                return .screen(name: "Events")
             default:
                 return .none
             }
