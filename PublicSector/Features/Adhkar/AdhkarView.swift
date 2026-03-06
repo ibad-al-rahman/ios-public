@@ -12,15 +12,31 @@ struct AdhkarView: View {
     @Bindable var store: StoreOf<AdhkarFeature>
 
     var body: some View {
-        NavigationView {
+        NavigationStack {
             Form {
                 Section {
                     NavigationRowView("Morning adhkar", systemName: "sun.horizon")
+                        .onTapGesture { store.send(.view(.onTapMorning)) }
                     NavigationRowView("Evening adhkar", systemName: "moon.stars")
+                        .onTapGesture { store.send(.view(.onTapEvening)) }
                 } header: {
                     Spacer(minLength: Spacing.small)
                 }
             }
+            .navigationDestination(
+                item: $store.scope(
+                    state: \.destination?.morning,
+                    action: \.dependent.destination.morning
+                ),
+                destination: { DhikrListView(store: $0) }
+            )
+            .navigationDestination(
+                item: $store.scope(
+                    state: \.destination?.evening,
+                    action: \.dependent.destination.evening
+                ),
+                destination: { DhikrListView(store: $0) }
+            )
             .navigationTitle("Adhkar")
         }
     }

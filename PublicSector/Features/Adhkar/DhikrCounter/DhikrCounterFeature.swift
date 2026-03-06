@@ -1,17 +1,25 @@
 //
-//  AdhkarFeature.swift
+//  DhikrCounterFeature.swift
 //  PublicSector
 //
-//  Created by Hamza Jadid on 22/11/2024.
+//  Created by Hamza Jadid on 06/03/2026.
 //
 
 import ComposableArchitecture
 
 @Reducer
-struct AdhkarFeature {
+struct DhikrCounterFeature {
     @ObservableState
     struct State: Equatable {
-        @Presents var destination: Destination.State?
+        let dhikr: Dhikr
+        var remaining: Int
+
+        init(dhikr: Dhikr) {
+            self.dhikr = dhikr
+            self.remaining = dhikr.count
+        }
+
+        var isDone: Bool { remaining == 0 }
     }
 
     enum Action: BaseAction {
@@ -21,8 +29,8 @@ struct AdhkarFeature {
         case dependent(DependentAction)
 
         enum ViewAction {
-            case onTapMorning
-            case onTapEvening
+            case onTap
+            case onReset
         }
 
         @CasePathable
@@ -32,28 +40,24 @@ struct AdhkarFeature {
         enum DelegateAction { }
 
         @CasePathable
-        enum DependentAction {
-            case destination(PresentationAction<Destination.Action>)
-        }
+        enum DependentAction { }
     }
 
     var body: some ReducerOf<Self> {
         Reduce { state, action in
             switch action {
-            case .view(.onTapMorning):
-                state.destination = .morning(DhikrListFeature.State(category: .morning))
+            case .view(.onTap):
+                guard !state.isDone else { return .none }
+                state.remaining -= 1
                 return .none
 
-            case .view(.onTapEvening):
-                state.destination = .evening(DhikrListFeature.State(category: .evening))
+            case .view(.onReset):
+                state.remaining = state.dhikr.count
                 return .none
 
             default:
                 return .none
             }
-        }
-        .ifLet(\.$destination, action: \.dependent.destination) {
-            Destination()
         }
     }
 }

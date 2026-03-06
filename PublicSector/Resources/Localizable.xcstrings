@@ -11,12 +11,64 @@
         }
       }
     },
+    "%lld / %lld" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$lld / %2$lld"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$lld / %2$lld"
+          }
+        }
+      }
+    },
+    "%lld of %lld adhkar" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$lld من أصل %2$lld ذكر"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$lld of %2$lld adhkar"
+          }
+        }
+      }
+    },
     "%lld results" : {
       "localizations" : {
         "ar" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "%lld نتيجة"
+          }
+        }
+      }
+    },
+    "%lld%%" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld٪"
+          }
+        }
+      }
+    },
+    "×%lld" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "×%lld"
           }
         }
       }
@@ -115,6 +167,16 @@
         }
       }
     },
+    "Back" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "السابق"
+          }
+        }
+      }
+    },
     "Back to today" : {
       "localizations" : {
         "ar" : {
@@ -141,6 +203,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "مسح ذاكرة التخزين المؤقت"
+          }
+        }
+      }
+    },
+    "complete" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "مكتمل"
           }
         }
       }
@@ -317,6 +389,16 @@
         }
       }
     },
+    "Events" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "المناسبات"
+          }
+        }
+      }
+    },
     "Fajr" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -371,6 +453,23 @@
         }
       }
     },
+    "Imsak" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "الإمساك"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Imsak"
+          }
+        }
+      }
+    },
     "Invite your friends" : {
       "localizations" : {
         "ar" : {
@@ -394,23 +493,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "iOS"
-          }
-        }
-      }
-    },
-    "Imsak" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "ar" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "الإمساك"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Imsak"
           }
         }
       }
@@ -482,12 +564,33 @@
         }
       }
     },
+    "Mode" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "وضع"
+          }
+        }
+      }
+    },
     "Morning adhkar" : {
       "localizations" : {
         "ar" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "أذكار الصباح"
+          }
+        }
+      }
+    },
+    "Next" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "التالي"
           }
         }
       }
@@ -525,22 +628,22 @@
         }
       }
     },
+    "Reset" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "إعادة"
+          }
+        }
+      }
+    },
     "Retry" : {
       "localizations" : {
         "ar" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "إعادة المحاولة"
-          }
-        }
-      }
-    },
-    "Events" : {
-      "localizations" : {
-        "ar" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "المناسبات"
           }
         }
       }
@@ -585,6 +688,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Share"
+          }
+        }
+      }
+    },
+    "Skip" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "تخطّى"
           }
         }
       }

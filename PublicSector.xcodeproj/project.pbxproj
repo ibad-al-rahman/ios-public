@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		717ACA1D2F5B6EB400708CA6 /* AdhkarFeature+Destination.swift in Sources */ = {isa = PBXBuildFile; fileRef = 717ACA1C2F5B6EB400708CA6 /* AdhkarFeature+Destination.swift */; };
 		719899D02F59F76500BC65FB /* SwiftNavigation in Frameworks */ = {isa = PBXBuildFile; productRef = 719899CF2F59F76500BC65FB /* SwiftNavigation */; };
 		719899D22F59F76500BC65FB /* SwiftUINavigation in Frameworks */ = {isa = PBXBuildFile; productRef = 719899D12F59F76500BC65FB /* SwiftUINavigation */; };
 		D9089CE42CFDC16D00881BB6 /* IbadRepositories in Frameworks */ = {isa = PBXBuildFile; productRef = D9089CE32CFDC16D00881BB6 /* IbadRepositories */; };
@@ -134,6 +135,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		717ACA1C2F5B6EB400708CA6 /* AdhkarFeature+Destination.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AdhkarFeature+Destination.swift"; sourceTree = "<group>"; };
 		D9089CE12CFDAD4500881BB6 /* IbadRepositories */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = IbadRepositories; sourceTree = "<group>"; };
 		D9170D512CEFDE15006E45D5 /* WebLinks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebLinks.swift; sourceTree = "<group>"; };
 		D9170D542CEFE552006E45D5 /* HelpFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpFeature.swift; sourceTree = "<group>"; };
@@ -231,6 +233,10 @@
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
+		7155FA242F5B6A040086A53D /* Entities */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Entities; sourceTree = "<group>"; };
+		7155FA2B2F5B6A380086A53D /* Data */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Data; sourceTree = "<group>"; };
+		7155FA302F5B6DA30086A53D /* DhikrList */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = DhikrList; sourceTree = "<group>"; };
+		717ACA1E2F5B711500708CA6 /* DhikrCounter */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = DhikrCounter; sourceTree = "<group>"; };
 		717FBF6F2F5B49DD005D5D48 /* Events */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Events; sourceTree = "<group>"; };
 		D9EAEF592D27199100C8D1F4 /* PrayerTimesWidget */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (D9EAEF672D27199200C8D1F4 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = PrayerTimesWidget; sourceTree = "<group>"; };
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -304,7 +310,12 @@
 		D9170D582CF09745006E45D5 /* Adhkar */ = {
 			isa = PBXGroup;
 			children = (
+				7155FA302F5B6DA30086A53D /* DhikrList */,
+				717ACA1E2F5B711500708CA6 /* DhikrCounter */,
+				7155FA242F5B6A040086A53D /* Entities */,
+				7155FA2B2F5B6A380086A53D /* Data */,
 				D9170D5B2CF09751006E45D5 /* AdhkarView.swift */,
+				717ACA1C2F5B6EB400708CA6 /* AdhkarFeature+Destination.swift */,
 				D9170D592CF0974B006E45D5 /* AdhkarFeature.swift */,
 			);
 			path = Adhkar;
@@ -666,6 +677,10 @@
 				D9EAEF622D27199200C8D1F4 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
+				7155FA242F5B6A040086A53D /* Entities */,
+				7155FA2B2F5B6A380086A53D /* Data */,
+				7155FA302F5B6DA30086A53D /* DhikrList */,
+				717ACA1E2F5B711500708CA6 /* DhikrCounter */,
 				717FBF6F2F5B49DD005D5D48 /* Events */,
 			);
 			name = PublicSector;
@@ -921,6 +936,7 @@
 				D970CD7E2D03B890004D8E66 /* AppEntryView.swift in Sources */,
 				D91BF19F2D45116B00BEB410 /* Date+YMD.swift in Sources */,
 				D9B4AB562D24B8B500E201CA /* AppInfo.swift in Sources */,
+				717ACA1D2F5B6EB400708CA6 /* AdhkarFeature+Destination.swift in Sources */,
 				D98D2BDA2CA9B14A0050F2A8 /* View+ControlFlow.swift in Sources */,
 				D970CD7C2D03B888004D8E66 /* AppEntryFeature.swift in Sources */,
 				D9A70E152C859EA9002F6583 /* DailyPrayerTimesView.swift in Sources */,
