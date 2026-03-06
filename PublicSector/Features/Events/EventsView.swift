@@ -34,10 +34,7 @@ struct EventsView: View {
     private var resultRows: some View {
         Section {
             ForEach(store.filteredResults) { result in
-                Button { store.send(.view(.rowTapped(result))) } label: {
-                    resultRow(result)
-                }
-                .foregroundStyle(.primary)
+                resultRow(result)
             }
         } header: {
             Text(String(format: String(localized: "%lld results"), store.filteredResults.count))

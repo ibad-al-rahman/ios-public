@@ -45,7 +45,6 @@ struct EventsFeature {
 
         enum ViewAction {
             case onAppear
-            case rowTapped(EventSearchResult)
         }
 
         @CasePathable
@@ -53,9 +52,7 @@ struct EventsFeature {
             case loadEvents([EventSearchResult])
         }
 
-        @CasePathable enum DelegateAction {
-            case navigateToPrayerTimes(date: Date)
-        }
+        @CasePathable enum DelegateAction { }
         @CasePathable enum DependentAction { }
     }
 
@@ -80,9 +77,6 @@ struct EventsFeature {
                 state.allEvents = results
                 state.isLoading = false
                 return .none
-
-            case .view(.rowTapped(let result)):
-                return .send(.delegate(.navigateToPrayerTimes(date: result.gregorian)))
 
             default:
                 return .none
