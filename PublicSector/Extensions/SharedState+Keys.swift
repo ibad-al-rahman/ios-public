@@ -28,3 +28,15 @@ extension SharedKey where Self == FileStorageKey<PrayerTimesSha1> {
         )
     }
 }
+
+extension SharedKey where Self == AppStorageKey<Bool> {
+    static var adhkarDailyEnabled: Self { appStorage("adhkarDailyEnabled") }
+    static var adhkarMorningEnabled: Self { appStorage("adhkarMorningEnabled") }
+    static var adhkarEveningEnabled: Self { appStorage("adhkarEveningEnabled") }
+}
+
+extension SharedKey where Self == AppStorageKey<Double> {
+    static var adhkarDailyTime: Self { appStorage("adhkarDailyTime") }
+    static var adhkarMorningTime: Self { appStorage("adhkarMorningTime") }
+    static var adhkarEveningTime: Self { appStorage("adhkarEveningTime") }
+}

@@ -11,6 +11,11 @@ import SwiftUI
 
 struct SettingsView: View {
     @Bindable var store: StoreOf<SettingsFeature>
+    @Environment(\.locale) private var locale
+
+    private var isArabic: Bool {
+        locale.language.languageCode?.identifier == "ar"
+    }
 
     var body: some View {
         NavigationStack {
@@ -23,6 +28,11 @@ struct SettingsView: View {
                 }
 
                 displaySection
+
+                Section(isArabic ? "الأذكار" : "Adhkar") {
+                    NavigationRowView(isArabic ? "تذكيرات الأذكار" : "Adhkar reminders", systemName: "bell")
+                        .onTapGesture { store.send(.onTapAdhkarNotifications) }
+                }
 
                 Section {
                     NavigationRowView("Help", systemName: "questionmark.circle")
@@ -51,6 +61,13 @@ struct SettingsView: View {
                     action: \.dependent.destination.appearance
                 ),
                 destination: { AppearanceView(store: $0) }
+            )
+            .navigationDestination(
+                item: $store.scope(
+                    state: \.destination?.adhkarNotifications,
+                    action: \.dependent.destination.adhkarNotifications
+                ),
+                destination: { AdhkarNotificationsView(store: $0) }
             )
             .sheet(
                 item: $store.scope(

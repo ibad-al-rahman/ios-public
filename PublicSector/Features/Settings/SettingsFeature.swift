@@ -38,6 +38,7 @@ struct SettingsFeature {
             case onTapHelp
             case onTapRateUs
             case onTapCleanCache
+            case onTapAdhkarNotifications
         }
 
         @CasePathable
@@ -81,6 +82,10 @@ struct SettingsFeature {
 
             case .view(.onTapRateUs):
                 return .run { _ in await externalDeepLinks.appStoreRatePage() }
+
+            case .view(.onTapAdhkarNotifications):
+                state.destination = .adhkarNotifications(AdhkarNotificationsFeature.State())
+                return .none
 
             case .view(.onTapCleanCache):
                 try? PrayerTimesStorageFileManager.removeDocuments()

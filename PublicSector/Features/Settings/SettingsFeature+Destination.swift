@@ -13,11 +13,13 @@ extension SettingsFeature {
         enum State: Identifiable, Equatable {
             case help(HelpFeature.State)
             case appearance(AppearanceFeature.State)
+            case adhkarNotifications(AdhkarNotificationsFeature.State)
 
             var id: AnyHashable {
                 switch self {
                 case .help: "help"
                 case .appearance: "appearance"
+                case .adhkarNotifications: "adhkarNotifications"
                 }
             }
         }
@@ -25,6 +27,7 @@ extension SettingsFeature {
         enum Action {
             case help(HelpFeature.Action)
             case appearance(AppearanceFeature.Action)
+            case adhkarNotifications(AdhkarNotificationsFeature.Action)
         }
 
         var body: some ReducerOf<Self> {
@@ -34,6 +37,10 @@ extension SettingsFeature {
 
             Scope(state: \.appearance, action: \.appearance) {
                 AppearanceFeature()
+            }
+
+            Scope(state: \.adhkarNotifications, action: \.adhkarNotifications) {
+                AdhkarNotificationsFeature()
             }
         }
     }

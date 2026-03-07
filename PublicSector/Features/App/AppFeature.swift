@@ -6,6 +6,7 @@
 //
 
 import ComposableArchitecture
+import Foundation
 import IbadAnalytics
 
 @Reducer
@@ -39,7 +40,10 @@ struct AppFeature {
             case onAppear
         }
         @CasePathable
-        enum ReducerAction { }
+        enum ReducerAction {
+            case openAdhkarTab
+            case openAdhkarCategory(AdhkarCategory)
+        }
         @CasePathable
         enum DelegateAction { }
 
@@ -65,6 +69,35 @@ struct AppFeature {
         BindingReducer()
         Reduce { state, action in
             switch action {
+            case .view(.onAppear):
+                return .run { send in
+                    for await notification in NotificationCenter.default.notifications(named: .adhkarNotificationTapped) {
+                        guard let category = notification.userInfo?["category"] as? String else { continue }
+                        switch category {
+                        case "daily": await send(.reducer(.openAdhkarTab))
+                        case "morning": await send(.reducer(.openAdhkarCategory(.morning)))
+                        case "evening": await send(.reducer(.openAdhkarCategory(.evening)))
+                        default: break
+                        }
+                    }
+                }
+
+            case .reducer(.openAdhkarTab):
+                state.selectedTab = .adhkar
+                return .none
+
+            case .reducer(.openAdhkarCategory(let category)):
+                state.selectedTab = .adhkar
+                switch category {
+                case .morning:
+                    state.adhkar.destination = .morning(DhikrListFeature.State(category: .morning))
+                case .evening:
+                    state.adhkar.destination = .evening(DhikrListFeature.State(category: .evening))
+                default:
+                    break
+                }
+                return .none
+
             default:
                 return .none
             }

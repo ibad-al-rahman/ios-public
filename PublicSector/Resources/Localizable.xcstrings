@@ -83,6 +83,12 @@
         }
       }
     },
+    "Adhkar reminders" : {
+
+    },
+    "Adhkar Reminders" : {
+
+    },
     "After prayer" : {
 
     },
@@ -775,6 +781,9 @@
         }
       }
     },
+    "Time" : {
+
+    },
     "Timings" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -875,6 +884,15 @@
 
     },
     "الأدعية العامة" : {
+
+    },
+    "الأذكار" : {
+
+    },
+    "الوقت" : {
+
+    },
+    "تذكيرات الأذكار" : {
 
     }
   },

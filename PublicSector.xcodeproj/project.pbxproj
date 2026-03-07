@@ -233,6 +233,7 @@
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
+		710278622F5C50AB000E5BB1 /* AdhkarNotifications */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = AdhkarNotifications; sourceTree = "<group>"; };
 		7155FA242F5B6A040086A53D /* Entities */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Entities; sourceTree = "<group>"; };
 		7155FA2B2F5B6A380086A53D /* Data */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Data; sourceTree = "<group>"; };
 		7155FA302F5B6DA30086A53D /* DhikrList */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = DhikrList; sourceTree = "<group>"; };
@@ -528,6 +529,7 @@
 		D9A70DF62C8596C4002F6583 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
+				710278622F5C50AB000E5BB1 /* AdhkarNotifications */,
 				D9170D532CEFE54A006E45D5 /* Help */,
 				D98D2BDB2CA9B5000050F2A8 /* Appearance */,
 				D9A70E052C859977002F6583 /* SettingsFeature.swift */,
@@ -677,6 +679,7 @@
 				D9EAEF622D27199200C8D1F4 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
+				710278622F5C50AB000E5BB1 /* AdhkarNotifications */,
 				7155FA242F5B6A040086A53D /* Entities */,
 				7155FA2B2F5B6A380086A53D /* Data */,
 				7155FA302F5B6DA30086A53D /* DhikrList */,
