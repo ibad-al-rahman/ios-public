@@ -7,10 +7,13 @@
 
 import ComposableArchitecture
 import Foundation
+import IbadAzan
 import IbadRepositories
 
 @Reducer
 struct PrayerTimesWidgetFeature {
+    @Dependency(\.azanService) private var azanService
+
     @ObservableState
     struct State: Equatable {
         let date: Date
@@ -28,6 +31,12 @@ struct PrayerTimesWidgetFeature {
         Reduce { state, action in
             switch action {
             case .onAppear:
+                let tzOffset = TimeZone.current.secondsFromGMT()
+                let timestamp = state.date.timeIntervalSince1970 + TimeInterval(tzOffset)
+                let prayerTimes = azanService.getPrecomputedPrayerTimes(
+                    timestampSecs: timestamp, provider: .darElFatwa(.beirut)
+                )
+                
                 let components = Calendar.current.dateComponents(
                     [.year, .month, .day], from: state.date
                 )
