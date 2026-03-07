@@ -23,6 +23,11 @@ struct AdhkarFeature {
         enum ViewAction {
             case onTapMorning
             case onTapEvening
+            case onTapAfterPrayer
+            case onTapBeforeSleep
+            case onTapWakingUp
+            case onTapEating
+            case onTapGeneralSupplications
         }
 
         @CasePathable
@@ -46,6 +51,26 @@ struct AdhkarFeature {
 
             case .view(.onTapEvening):
                 state.destination = .evening(DhikrListFeature.State(category: .evening))
+                return .none
+
+            case .view(.onTapAfterPrayer):
+                state.destination = .afterPrayer(DhikrListFeature.State(category: .afterPrayer))
+                return .none
+
+            case .view(.onTapBeforeSleep):
+                state.destination = .beforeSleep(DhikrListFeature.State(category: .beforeSleep))
+                return .none
+
+            case .view(.onTapWakingUp):
+                state.destination = .wakingUp(DhikrListFeature.State(category: .wakingUp))
+                return .none
+
+            case .view(.onTapEating):
+                state.destination = .eating(DhikrListFeature.State(category: .eating))
+                return .none
+
+            case .view(.onTapGeneralSupplications):
+                state.destination = .generalSupplications(DhikrListFeature.State(category: .generalSupplications))
                 return .none
 
             default:

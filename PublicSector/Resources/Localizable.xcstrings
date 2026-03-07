@@ -83,6 +83,9 @@
         }
       }
     },
+    "After prayer" : {
+
+    },
     "Android" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -186,6 +189,9 @@
           }
         }
       }
+    },
+    "Before sleep" : {
+
     },
     "Build number" : {
       "localizations" : {
@@ -369,6 +375,9 @@
         }
       }
     },
+    "Eating & drinking" : {
+
+    },
     "Edit" : {
       "localizations" : {
         "ar" : {
@@ -415,6 +424,9 @@
           }
         }
       }
+    },
+    "General supplications" : {
+
     },
     "Hadith of the Week" : {
       "localizations" : {
@@ -797,6 +809,9 @@
         }
       }
     },
+    "Waking up" : {
+
+    },
     "We couldn’t reach the server. Please check your internet connection and try again." : {
       "localizations" : {
         "ar" : {
@@ -840,6 +855,27 @@
           }
         }
       }
+    },
+    "أذكار الاستيقاظ" : {
+
+    },
+    "أذكار الصباح" : {
+
+    },
+    "أذكار الطعام والشراب" : {
+
+    },
+    "أذكار المساء" : {
+
+    },
+    "أذكار النوم" : {
+
+    },
+    "أذكار بعد الصلاة" : {
+
+    },
+    "الأدعية العامة" : {
+
     }
   },
   "version" : "1.0"

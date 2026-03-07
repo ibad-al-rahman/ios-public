@@ -20,11 +20,17 @@ struct DhikrListFeature {
         var remaining: [Int: Int] = [:]
         var viewMode: ViewMode = .list
         var journeyIndex: Int = 0
+        var selectedDhikrInfo: Dhikr? = nil
 
         var adhkar: [Dhikr] {
             switch category {
             case .morning: AdhkarData.morning
             case .evening: AdhkarData.evening
+            case .afterPrayer: AdhkarData.afterPrayer
+            case .beforeSleep: AdhkarData.beforeSleep
+            case .wakingUp: AdhkarData.wakingUp
+            case .eating: AdhkarData.eating
+            case .generalSupplications: AdhkarData.generalSupplications
             }
         }
 
@@ -55,6 +61,8 @@ struct DhikrListFeature {
             case onToggleViewMode
             case onJourneyNext
             case onJourneyPrevious
+            case onInfoTapped(Dhikr)
+            case onInfoDismissed
         }
 
         @CasePathable
@@ -101,6 +109,14 @@ struct DhikrListFeature {
                 if state.journeyIndex > 0 {
                     state.journeyIndex -= 1
                 }
+                return .none
+
+            case .view(.onInfoTapped(let dhikr)):
+                state.selectedDhikrInfo = dhikr
+                return .none
+
+            case .view(.onInfoDismissed):
+                state.selectedDhikrInfo = nil
                 return .none
 
             default:

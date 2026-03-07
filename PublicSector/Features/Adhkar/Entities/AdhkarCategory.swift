@@ -8,4 +8,9 @@
 enum AdhkarCategory: Equatable {
     case morning
     case evening
+    case afterPrayer
+    case beforeSleep
+    case wakingUp
+    case eating
+    case generalSupplications
 }

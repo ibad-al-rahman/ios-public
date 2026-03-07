@@ -19,6 +19,12 @@ struct DhikrListView: View {
                 journeyView
             }
         }
+        .sheet(item: Binding(
+            get: { store.selectedDhikrInfo },
+            set: { _ in store.send(.view(.onInfoDismissed)) }
+        )) { dhikr in
+            DhikrInfoSheet(dhikr: dhikr)
+        }
         .navigationTitle(title)
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
@@ -53,6 +59,18 @@ struct DhikrListView: View {
                                 store.send(.view(.onDhikrReset(dhikr)), animation: .spring(duration: 0.3))
                             } label: {
                                 Label("Reset", systemImage: "arrow.counterclockwise")
+                            }
+                        }
+                        .overlay(alignment: .bottomTrailing) {
+                            if dhikr.hasInfo {
+                                Button {
+                                    store.send(.view(.onInfoTapped(dhikr)))
+                                } label: {
+                                    Image(systemName: "info.circle")
+                                        .font(.caption)
+                                        .foregroundStyle(.secondary)
+                                        .padding(Spacing.large)
+                                }
                             }
                         }
                     }
@@ -101,24 +119,44 @@ struct DhikrListView: View {
                 let isDone = remaining == 0
                 let isLast = store.journeyIndex == store.adhkar.count - 1
 
-                Spacer()
-
                 // Progress indicator
-                Text("\(store.journeyIndex + 1) / \(store.adhkar.count)")
-                    .font(.subheadline)
-                    .foregroundStyle(.secondary)
+                HStack {
+                    if dhikr.hasInfo {
+                        Button {
+                            store.send(.view(.onInfoTapped(dhikr)))
+                        } label: {
+                            Image(systemName: "info.circle")
+                                .foregroundStyle(.secondary)
+                        }
+                    } else {
+                        Color.clear
+                    }
 
-                Spacer()
+                    Spacer()
+
+                    Text("\(store.journeyIndex + 1) / \(store.adhkar.count)")
+                        .font(.subheadline)
+                        .foregroundStyle(.secondary)
+
+                    Spacer()
+
+                    Color.clear
+                }
+                .padding(.horizontal, Spacing.large)
 
                 // Arabic text
-                Text(dhikr.ar)
-                    .font(.title2)
-                    .multilineTextAlignment(.center)
-                    .lineSpacing(Spacing.medium)
-                    .padding(.horizontal, Spacing.large)
-                    .foregroundStyle(isDone ? .tertiary : .primary)
+                ScrollView {
+                    Text(dhikr.ar)
+                        .font(.title2)
+                        .multilineTextAlignment(.center)
+                        .lineSpacing(Spacing.medium)
+                        .padding(.horizontal, Spacing.large)
+                        .foregroundStyle(isDone ? .tertiary : .primary)
+                        .frame(maxWidth: .infinity)
+                }
+                .scrollBounceBehavior(.basedOnSize)
 
-                Spacer()
+                Spacer(minLength: Spacing.medium)
 
                 // Tap button
                 Button {
@@ -295,11 +333,68 @@ struct DhikrListView: View {
         .animation(.spring(duration: 0.3), value: progress)
     }
 
-    private var title: LocalizedStringKey {
+    private var title: String {
         switch store.category {
-        case .morning: "Morning adhkar"
-        case .evening: "Evening adhkar"
+        case .morning: "أذكار الصباح"
+        case .evening: "أذكار المساء"
+        case .afterPrayer: "أذكار بعد الصلاة"
+        case .beforeSleep: "أذكار النوم"
+        case .wakingUp: "أذكار الاستيقاظ"
+        case .eating: "أذكار الطعام والشراب"
+        case .generalSupplications: "الأدعية العامة"
         }
+    }
+}
+
+// MARK: - Info Sheet
+
+private struct DhikrInfoSheet: View {
+    let dhikr: Dhikr
+
+    var body: some View {
+        NavigationStack {
+            List {
+                if let source = dhikr.source {
+                    Section {
+                        Text(verbatim: source)
+                            .font(.body)
+                            .lineSpacing(4)
+                            .frame(maxWidth: .infinity, alignment: .trailing)
+                            .multilineTextAlignment(.trailing)
+                    } header: {
+                        Text(verbatim: "المصدر")
+                    }
+                }
+
+                if let narrator = dhikr.narrator {
+                    Section {
+                        Text(verbatim: narrator)
+                            .font(.body)
+                            .lineSpacing(4)
+                            .frame(maxWidth: .infinity, alignment: .trailing)
+                            .multilineTextAlignment(.trailing)
+                    } header: {
+                        Text(verbatim: "الراوي")
+                    }
+                }
+
+                if let virtue = dhikr.virtue {
+                    Section {
+                        Text(verbatim: virtue)
+                            .font(.body)
+                            .lineSpacing(4)
+                            .frame(maxWidth: .infinity, alignment: .trailing)
+                            .multilineTextAlignment(.trailing)
+                    } header: {
+                        Text(verbatim: "الفضل")
+                    }
+                }
+            }
+            .navigationTitle(Text(verbatim: "معلومات الذكر"))
+            .navigationBarTitleDisplayMode(.inline)
+        }
+        .presentationDetents([.medium, .large])
+        .environment(\.layoutDirection, .rightToLeft)
     }
 }
 
