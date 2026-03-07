@@ -55,6 +55,9 @@ struct DhikrListView: View {
                         .buttonStyle(.plain)
                         .disabled(isDone)
                         .contextMenu {
+                            ShareLink(item: dhikr.ar) {
+                                Label("Share", systemImage: "square.and.arrow.up")
+                            }
                             Button {
                                 store.send(.view(.onDhikrReset(dhikr)), animation: .spring(duration: 0.3))
                             } label: {
@@ -140,21 +143,29 @@ struct DhikrListView: View {
 
                     Spacer()
 
-                    Color.clear
+                    ShareLink(item: dhikr.ar) {
+                        Image(systemName: "square.and.arrow.up")
+                            .foregroundStyle(.secondary)
+                    }
                 }
                 .padding(.horizontal, Spacing.large)
 
+                Spacer(minLength: Spacing.large)
+
                 // Arabic text
-                ScrollView {
-                    Text(dhikr.ar)
-                        .font(.title2)
-                        .multilineTextAlignment(.center)
-                        .lineSpacing(Spacing.medium)
-                        .padding(.horizontal, Spacing.large)
-                        .foregroundStyle(isDone ? .tertiary : .primary)
-                        .frame(maxWidth: .infinity)
+                GeometryReader { geo in
+                    ScrollView {
+                        Text(dhikr.ar)
+                            .font(.title2)
+                            .multilineTextAlignment(.center)
+                            .lineSpacing(Spacing.medium)
+                            .padding(.horizontal, Spacing.large)
+                            .foregroundStyle(isDone ? .tertiary : .primary)
+                            .frame(minWidth: geo.size.width, minHeight: geo.size.height, alignment: .center)
+                    }
+                    .scrollBounceBehavior(.basedOnSize)
                 }
-                .scrollBounceBehavior(.basedOnSize)
+                .frame(maxHeight: .infinity)
 
                 Spacer(minLength: Spacing.medium)
 
