@@ -8,12 +8,14 @@
 import ComposableArchitecture
 import Foundation
 import IbadAnalytics
+import IbadAzan
 import IbadRepositories
 import WidgetKit
 
 @Reducer
 struct DailyPrayerTimesFeature {
     @Dependency(\.prayerTimesRepository) private var prayerTimesRepository
+    @Dependency(\.azanService) private var azanService
 
     @ObservableState
     struct State: Equatable {
@@ -105,6 +107,17 @@ struct DailyPrayerTimesFeature {
 
             case .reducer(.getDayPrayerTimes(.some(let prayerTimes))):
                 state.todaysPrayerTimes = prayerTimes
+                let tzOffset = TimeZone.current.secondsFromGMT()
+                let timestamp = state.date.timeIntervalSince1970 + TimeInterval(tzOffset)
+                let prayerTimes = azanService.getPrecomputedPrayerTimes(
+                    timestampSecs: timestamp, provider: .darElFatwa(.beirut)
+                )
+                state.todaysPrayerTimes?.fajr = prayerTimes.fajr
+                state.todaysPrayerTimes?.sunrise = prayerTimes.sunrise
+                state.todaysPrayerTimes?.dhuhr = prayerTimes.dhuhr
+                state.todaysPrayerTimes?.asr = prayerTimes.asr
+                state.todaysPrayerTimes?.maghrib = prayerTimes.maghrib
+                state.todaysPrayerTimes?.ishaa = prayerTimes.ishaa
                 return .none
 
             case .reducer(.getWeeklyHadith(let hadith)):
