@@ -7,12 +7,12 @@
 
 import ComposableArchitecture
 import Foundation
-import IbadAzan
+import MiqatKit
 import IbadRepositories
 
 @Reducer
 struct PrayerTimesWidgetFeature {
-    @Dependency(\.azanService) private var azanService
+    @Dependency(\.miqatService) private var miqatService
 
     @ObservableState
     struct State: Equatable {
@@ -33,7 +33,7 @@ struct PrayerTimesWidgetFeature {
             case .onAppear:
                 let tzOffset = TimeZone.current.secondsFromGMT()
                 let timestamp = state.date.timeIntervalSince1970 + TimeInterval(tzOffset)
-                let prayerTimes = azanService.getPrecomputedPrayerTimes(
+                let prayerTimes = miqatService.getPrecomputedPrayerTimes(
                     timestampSecs: timestamp, provider: .darElFatwa(.beirut)
                 )
                 

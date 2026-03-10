@@ -1,5 +1,5 @@
 {
-  "originHash" : "aecba915159b7e82bdab0f4080b9faf171a2dca3e6497a6dbcf5a4e6ceecff3b",
+  "originHash" : "883a8d6dc4fc43bcf824036ad3e2be645e68a8d7b55216bef36d1c105220e48f",
   "pins" : [
     {
       "identity" : "abseil-cpp-binary",
@@ -17,15 +17,6 @@
       "state" : {
         "revision" : "61b85103a1aeed8218f17c794687781505fbbef5",
         "version" : "11.2.0"
-      }
-    },
-    {
-      "identity" : "azan",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/ibad-al-rahman/azan",
-      "state" : {
-        "revision" : "4ae2ca9487afc81c320f5be90d4956fee57c9b2c",
-        "version" : "0.3.2"
       }
     },
     {
@@ -107,6 +98,15 @@
       "state" : {
         "revision" : "a0bc79961d7be727d258d33d5a6b2f1023270ba1",
         "version" : "1.22.5"
+      }
+    },
+    {
+      "identity" : "miqat",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/ibad-al-rahman/miqat",
+      "state" : {
+        "revision" : "02d41879b7e4ba1df70faf260fd576a11efa258c",
+        "version" : "0.4.0"
       }
     },
     {
