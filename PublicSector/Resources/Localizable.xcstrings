@@ -1,16 +1,6 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
-    "%lld" : {
-      "localizations" : {
-        "ar" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%lld"
-          }
-        }
-      }
-    },
     "%lld results" : {
       "localizations" : {
         "ar" : {
@@ -297,16 +287,6 @@
         }
       }
     },
-    "Edit" : {
-      "localizations" : {
-        "ar" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "تعديل"
-          }
-        }
-      }
-    },
     "Evening adhkar" : {
       "localizations" : {
         "ar" : {
@@ -535,17 +515,6 @@
         }
       }
     },
-    "Retry" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "ar" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "إعادة المحاولة"
-          }
-        }
-      }
-    },
     "Search events and holidays" : {
       "localizations" : {
         "ar" : {
@@ -586,17 +555,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Share"
-          }
-        }
-      }
-    },
-    "Something went wrong" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "ar" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "حدث خطأ ما"
           }
         }
       }
@@ -682,17 +640,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Version"
-          }
-        }
-      }
-    },
-    "We couldn’t reach the server. Please check your internet connection and try again." : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "ar" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "تعذر الوصول. يرجى التحقق من اتصالك بالإنترنت والمحاولة مرة أخرى."
           }
         }
       }
