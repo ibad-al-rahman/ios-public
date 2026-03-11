@@ -8,27 +8,15 @@ import Foundation
 
 @DependencyClient
 public struct MiqatService: Sendable {
-    public var getPrecomputedPrayerTimes: @Sendable (
+    public var getMiqatData: @Sendable (
         _ timestampSecs: TimeInterval, _ provider: Provider
-    ) -> PrayerTimes = { _, _ in
-        let miqatPrayerTimes = Miqat.PrayerTimes.fromPrecomputed(
-            dateUtcTimestampSecs: Int64(Date.now.timeIntervalSince1970),
-            provider: .darElFatwa(.beirut)
-        )
-        return PrayerTimes(from: miqatPrayerTimes)
-    }
+    ) -> MiqatData = { MiqatData(timestampSecs: $0, provider: $1) }
 }
 
 extension MiqatService: DependencyKey {
     public static var liveValue: MiqatService {
         return MiqatService(
-            getPrecomputedPrayerTimes: { timestampSecs, provider in
-                let miqatPrayerTimes = Miqat.PrayerTimes.fromPrecomputed(
-                    dateUtcTimestampSecs: Int64(timestampSecs),
-                    provider: provider
-                )
-                return PrayerTimes(from: miqatPrayerTimes)
-            }
+            getMiqatData: { MiqatData(timestampSecs: $0, provider: $1) }
         )
     }
 }

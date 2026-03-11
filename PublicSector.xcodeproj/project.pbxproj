@@ -11,6 +11,7 @@
 		719899D22F59F76500BC65FB /* SwiftUINavigation in Frameworks */ = {isa = PBXBuildFile; productRef = 719899D12F59F76500BC65FB /* SwiftUINavigation */; };
 		B3A843082F60D0B300506D4C /* MiqatKit in Frameworks */ = {isa = PBXBuildFile; productRef = B3A843072F60D0B300506D4C /* MiqatKit */; };
 		B3A8430A2F60D14D00506D4C /* MiqatKit in Frameworks */ = {isa = PBXBuildFile; productRef = B3A843092F60D14D00506D4C /* MiqatKit */; };
+		B3A8430C2F60F11000506D4C /* DayInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A8430B2F60F0FF00506D4C /* DayInfo.swift */; };
 		D9089CE42CFDC16D00881BB6 /* IbadRepositories in Frameworks */ = {isa = PBXBuildFile; productRef = D9089CE32CFDC16D00881BB6 /* IbadRepositories */; };
 		D9170D522CEFDE41006E45D5 /* WebLinks.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9170D512CEFDE15006E45D5 /* WebLinks.swift */; };
 		D9170D552CEFE554006E45D5 /* HelpFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9170D542CEFE552006E45D5 /* HelpFeature.swift */; };
@@ -137,6 +138,7 @@
 
 /* Begin PBXFileReference section */
 		B3A843052F60D02F00506D4C /* MiqatKit */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = MiqatKit; sourceTree = "<group>"; };
+		B3A8430B2F60F0FF00506D4C /* DayInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayInfo.swift; sourceTree = "<group>"; };
 		D9089CE12CFDAD4500881BB6 /* IbadRepositories */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = IbadRepositories; sourceTree = "<group>"; };
 		D9170D512CEFDE15006E45D5 /* WebLinks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebLinks.swift; sourceTree = "<group>"; };
 		D9170D542CEFE552006E45D5 /* HelpFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpFeature.swift; sourceTree = "<group>"; };
@@ -598,6 +600,7 @@
 		D9A70E0B2C859E0C002F6583 /* Entities */ = {
 			isa = PBXGroup;
 			children = (
+				B3A8430B2F60F0FF00506D4C /* DayInfo.swift */,
 				D9A40D5D2D7A6DE300C1BBF3 /* Hadith.swift */,
 				D91D995F2D23C43C004AA72D /* DayEvent.swift */,
 				D941B4232D16D876004FFF5C /* PrayerTimesSha1.swift */,
@@ -965,6 +968,7 @@
 				D9A70DFE2C859717002F6583 /* DeveloperMenuView.swift in Sources */,
 				D9C85AC62CF38EEC00730F12 /* NavigationRowView.swift in Sources */,
 				D98D2BE32CA9B9310050F2A8 /* Settings.swift in Sources */,
+				B3A8430C2F60F11000506D4C /* DayInfo.swift in Sources */,
 				D97A9FE52D03ACC0000F3070 /* StartupFeature.swift in Sources */,
 				D9A70E192C859EE8002F6583 /* PrayerTimesView.swift in Sources */,
 				D98D2BE12CA9B7260050F2A8 /* SettingsFeature+Destination.swift in Sources */,

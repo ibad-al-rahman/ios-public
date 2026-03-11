@@ -11,8 +11,8 @@ import Foundation
 struct DayPrayerTimes: Equatable, Identifiable {
     let id: Int
     let weekId: Int
-    let gregorian: Date
-    let hijri: String
+    var gregorian: Date
+    var hijri: String
     var imsak: Date?
     var fajr: Date
     var sunrise: Date

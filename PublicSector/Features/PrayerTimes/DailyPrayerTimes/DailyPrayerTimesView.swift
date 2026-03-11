@@ -16,11 +16,7 @@ struct DailyPrayerTimesView: View {
     var body: some View {
         List {
             datePicker
-            if let error = store.error {
-                errorContent(error: error)
-            } else {
-                content
-            }
+            content
         }
         .onAppear { store.send(.onAppear) }
         .onChange(of: scenePhase) { (oldPhase, newPhase) in
@@ -32,14 +28,9 @@ struct DailyPrayerTimesView: View {
 
     var content: some View {
         Group {
-            if let prayerTimes = store.todaysPrayerTimes {
-                dayPrayerTimes(prayerTimes)
-            } else {
-                dayPrayerTimes(.placeholder())
-                    .redacted(reason: .placeholder)
-            }
-            todaysEvents
-            weeklyHadith
+            dayPrayerTimes(store.dayInfo)
+//            todaysEvents
+//            weeklyHadith
         }
     }
 
@@ -66,19 +57,14 @@ struct DailyPrayerTimesView: View {
                 }
             }
         } footer: {
-            if let hijriDate = store.todaysPrayerTimes?.hijri {
-                Text(hijriDate)
-            } else {
-                Text(verbatim: "Placeholder")
-                    .redacted(reason: .placeholder)
-            }
+            Text(store.dayInfo.hijri)
         }
     }
 
-    private func dayPrayerTimes(_ prayerTimes: DayPrayerTimes) -> some View {
+    private func dayPrayerTimes(_ dayInfo: DayInfo) -> some View {
         Section {
             Group {
-                if let imsak = prayerTimes.imsak {
+                if let imsak = dayInfo.imsak {
                     prayerTime(
                         .imsak,
                         time: imsak,
@@ -87,32 +73,32 @@ struct DailyPrayerTimesView: View {
                 }
                 prayerTime(
                     .fajr,
-                    time: prayerTimes.fajr,
+                    time: dayInfo.fajr,
                     systemImage: "moon.stars"
                 )
                 prayerTime(
                     .sunrise,
-                    time: prayerTimes.sunrise,
+                    time: dayInfo.sunrise,
                     systemImage: "sunrise"
                 )
                 prayerTime(
                     .dhuhr,
-                    time: prayerTimes.dhuhr,
+                    time: dayInfo.dhuhr,
                     systemImage: "sun.max"
                 )
                 prayerTime(
                     .asr,
-                    time: prayerTimes.asr,
+                    time: dayInfo.asr,
                     systemImage: "sun.min"
                 )
                 prayerTime(
                     .maghrib,
-                    time: prayerTimes.maghrib,
+                    time: dayInfo.maghrib,
                     systemImage: "sunset"
                 )
                 prayerTime(
                     .ishaa,
-                    time: prayerTimes.ishaa,
+                    time: dayInfo.ishaa,
                     systemImage: "moon"
                 )
             }
@@ -121,45 +107,43 @@ struct DailyPrayerTimesView: View {
             HStack {
                 Text("Timings")
                 Spacer()
-                if let prayerTimes = store.todaysPrayerTimes?.shareableText {
-                    ShareLink(item: prayerTimes) {
-                        Label("Share", systemImage: "square.and.arrow.up")
-                    }
-                    .textCase(nil)
+                ShareLink(item: store.shareableText) {
+                    Label("Share", systemImage: "square.and.arrow.up")
                 }
+                .textCase(nil)
             }
         }
     }
 
-    @ViewBuilder
-    private var todaysEvents: some View {
-        if let event = store.event {
-            Section {
-                Text(event)
-            } header: {
-                Text("Holidays and Events")
-            }
-        } else {
-            EmptyView()
-        }
-    }
+//    @ViewBuilder
+//    private var todaysEvents: some View {
+//        if let event = store.event {
+//            Section {
+//                Text(event)
+//            } header: {
+//                Text("Holidays and Events")
+//            }
+//        } else {
+//            EmptyView()
+//        }
+//    }
 
-    @ViewBuilder
-    private var weeklyHadith: some View {
-        if let hadith = store.weeklyHadith {
-            Section {
-                Text(verbatim: hadith.hadith)
-                    .environment(\.layoutDirection, .rightToLeft)
-            } header: {
-                Text("Hadith of the Week")
-            } footer: {
-                if let hadithNote = hadith.note {
-                    Text(verbatim: hadithNote)
-                        .environment(\.layoutDirection, .rightToLeft)
-                }
-            }
-        }
-    }
+//    @ViewBuilder
+//    private var weeklyHadith: some View {
+//        if let hadith = store.weeklyHadith {
+//            Section {
+//                Text(verbatim: hadith.hadith)
+//                    .environment(\.layoutDirection, .rightToLeft)
+//            } header: {
+//                Text("Hadith of the Week")
+//            } footer: {
+//                if let hadithNote = hadith.note {
+//                    Text(verbatim: hadithNote)
+//                        .environment(\.layoutDirection, .rightToLeft)
+//                }
+//            }
+//        }
+//    }
 
     @ViewBuilder
     private func prayerTime(
@@ -169,30 +153,6 @@ struct DailyPrayerTimesView: View {
     ) -> some View {
         Label(prayer.localizedStringKey, systemImage: systemImage)
             .badge(Text(time, format: .dateTime.hour().minute()))
-    }
-
-    private func errorContent(error: DailyPrayerTimesFeature.Error) -> some View {
-        Section {
-            Group {
-                HStack {
-                    Text(verbatim: "⚠️")
-                        .font(.title)
-                    Text(error.localizedStringKey)
-                }
-                Button(action: { store.send(.onTapRetry) }) {
-                    Text("Retry")
-                }
-            }
-        }
-    }
-}
-
-extension DailyPrayerTimesFeature.Error {
-    var localizedStringKey: LocalizedStringKey {
-        switch self {
-        case .unknown: "Something went wrong"
-        case .unreachable: "We couldn’t reach the server. Please check your internet connection and try again."
-        }
     }
 }
 
