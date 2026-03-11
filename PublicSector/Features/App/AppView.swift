@@ -24,6 +24,7 @@ struct AppView: View {
         TabView(selection: $store.selectedTab) {
             prayerTimesScreen
             eventsScreen
+                .featureFlagged(.eventsScreen)
             adhkarScreen
                 .featureFlagged(.adhkarScreen)
             settingsScreen

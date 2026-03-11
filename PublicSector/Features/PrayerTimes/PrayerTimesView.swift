@@ -8,7 +8,7 @@
 import ComposableArchitecture
 import IbadRemoteConfig
 import SwiftUI
-
+    
 struct PrayerTimesView: View {
     @Bindable var store: StoreOf<PrayerTimesFeature>
 
