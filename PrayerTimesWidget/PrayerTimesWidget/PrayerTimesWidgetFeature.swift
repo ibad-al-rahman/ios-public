@@ -31,12 +31,6 @@ struct PrayerTimesWidgetFeature {
         Reduce { state, action in
             switch action {
             case .onAppear:
-                let tzOffset = TimeZone.current.secondsFromGMT()
-                let timestamp = state.date.timeIntervalSince1970 + TimeInterval(tzOffset)
-                let prayerTimes = miqatService.getPrecomputedPrayerTimes(
-                    timestampSecs: timestamp, provider: .darElFatwa(.beirut)
-                )
-                
                 let components = Calendar.current.dateComponents(
                     [.year, .month, .day], from: state.date
                 )

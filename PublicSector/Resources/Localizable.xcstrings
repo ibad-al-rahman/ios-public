@@ -317,6 +317,16 @@
         }
       }
     },
+    "Events" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "المناسبات"
+          }
+        }
+      }
+    },
     "Fajr" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -371,6 +381,23 @@
         }
       }
     },
+    "Imsak" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "الإمساك"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Imsak"
+          }
+        }
+      }
+    },
     "Invite your friends" : {
       "localizations" : {
         "ar" : {
@@ -394,23 +421,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "iOS"
-          }
-        }
-      }
-    },
-    "Imsak" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "ar" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "الإمساك"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Imsak"
           }
         }
       }
@@ -526,21 +536,12 @@
       }
     },
     "Retry" : {
+      "extractionState" : "stale",
       "localizations" : {
         "ar" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "إعادة المحاولة"
-          }
-        }
-      }
-    },
-    "Events" : {
-      "localizations" : {
-        "ar" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "المناسبات"
           }
         }
       }
@@ -590,6 +591,7 @@
       }
     },
     "Something went wrong" : {
+      "extractionState" : "stale",
       "localizations" : {
         "ar" : {
           "stringUnit" : {
@@ -685,6 +687,7 @@
       }
     },
     "We couldn’t reach the server. Please check your internet connection and try again." : {
+      "extractionState" : "stale",
       "localizations" : {
         "ar" : {
           "stringUnit" : {
