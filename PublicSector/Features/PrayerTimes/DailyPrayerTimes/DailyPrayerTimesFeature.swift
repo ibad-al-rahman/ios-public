@@ -21,6 +21,7 @@ struct DailyPrayerTimesFeature {
         var date: Date = .now
         var hasAppeared: Bool = false
         var dayInfo: DayInfo = .init(
+            id: "",
             fajr: .now,
             sunrise: .now,
             dhuhr: .now,
@@ -117,16 +118,6 @@ struct DailyPrayerTimesFeature {
         let miqatData = miqatService.getMiqatData(
             timestampSecs: timestamp, provider: .darElFatwa(.beirut)
         )
-        state.dayInfo.imsak = miqatData.imsak
-        state.dayInfo.fajr = miqatData.fajr
-        state.dayInfo.sunrise = miqatData.sunrise
-        state.dayInfo.dhuhr = miqatData.dhuhr
-        state.dayInfo.asr = miqatData.asr
-        state.dayInfo.maghrib = miqatData.maghrib
-        state.dayInfo.ishaa = miqatData.ishaa
-
-        if let localeMonthName = miqatData.hijriLocaleMonth {
-            state.dayInfo.hijri = "\(miqatData.hijriDay) \(localeMonthName) \(miqatData.hijriYear)"
-        }
+        state.dayInfo = DayInfo(from: miqatData)
     }
 }

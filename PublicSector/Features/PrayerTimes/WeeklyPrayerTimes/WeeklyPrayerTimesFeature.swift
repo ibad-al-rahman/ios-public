@@ -7,33 +7,17 @@
 
 import ComposableArchitecture
 import Foundation
-import IbadRepositories
+import MiqatKit
 
 @Reducer
 struct WeeklyPrayerTimesFeature {
+    @Dependency(\.miqatService) private var miqatService
+
     @ObservableState
     struct State: Equatable {
-        var sat: DayPrayerTimes?
-        var sun: DayPrayerTimes?
-        var mon: DayPrayerTimes?
-        var tue: DayPrayerTimes?
-        var wed: DayPrayerTimes?
-        var thu: DayPrayerTimes?
-        var fri: DayPrayerTimes?
-        var hadith: Hadith?
+        var week: [DayInfo] = []
 
-        var isLoading: Bool {
-            sat == nil
-            && sun == nil
-            && mon == nil
-            && tue == nil
-            && wed == nil
-            && thu == nil
-            && fri == nil
-        }
-
-        var week: [DayPrayerTimes?] { [sat, sun, mon, tue, wed, thu, fri] }
-        var compactedWeek: [DayPrayerTimes] { week.compactMap { $0 } }
+        var isLoading: Bool { week.isEmpty }
     }
 
     enum Action: BaseAction {
@@ -47,11 +31,7 @@ struct WeeklyPrayerTimesFeature {
         }
 
         @CasePathable
-        enum ReducerAction {
-            case setWeekPrayerTimes(
-                YearWeekPrayerTimesStorage.WeekPrayerTimesStorage
-            )
-        }
+        enum ReducerAction { }
 
         @CasePathable
         enum DelegateAction { }
@@ -64,41 +44,29 @@ struct WeeklyPrayerTimesFeature {
         Reduce { state, action in
             switch action {
             case .view(.onAppear):
-                guard let ymd = Date.now.ymd else { return .none }
-                return .run { [ymd] send in
-                    @SharedReader(
-                        .localDayPrayerTimes(year: ymd.year)
-                    ) var localDayPrayerTimes = .empty
-                    @SharedReader(
-                        .localWeekPrayerTimes(year: ymd.year)
-                    ) var localWeekPrayerTimes = .empty
-
-                    guard let day = localDayPrayerTimes.getDayPrayerTimes(
-                        year: ymd.year, month: ymd.month, day: ymd.day
-                    ) else { return }
-
-                    guard let week = localWeekPrayerTimes.getWeekPrayerTimes(
-                        weekId: day.weekId
-                    )
-                    else { return }
-
-                    await send(.reducer(.setWeekPrayerTimes(week)))
-                }
-
-            case .reducer(.setWeekPrayerTimes(let week)):
-                state.sat = DayPrayerTimes(from: week.sat, weekId: 0)
-                state.sun = DayPrayerTimes(from: week.sun, weekId: 0)
-                state.mon = DayPrayerTimes(from: week.mon, weekId: 0)
-                state.tue = DayPrayerTimes(from: week.tue, weekId: 0)
-                state.wed = DayPrayerTimes(from: week.wed, weekId: 0)
-                state.thu = DayPrayerTimes(from: week.thu, weekId: 0)
-                state.fri = DayPrayerTimes(from: week.fri, weekId: 0)
-                state.hadith = Hadith(from: week.hadith)
+                fillWeek(state: &state)
                 return .none
 
             default:
                 return .none
             }
+        }
+    }
+
+    private func fillWeek(state: inout State) {
+        let calendar = Calendar.current
+        let now = Date.now
+        let weekday = calendar.component(.weekday, from: now) // 1=Sun…7=Sat
+        let daysBack = weekday % 7 // Sat→0, Sun→1, …, Fri→6
+        guard let saturday = calendar.date(byAdding: .day, value: -daysBack, to: now) else { return }
+
+        let tzOffset = TimeZone.current.secondsFromGMT()
+
+        state.week = (0..<7).compactMap { i in
+            guard let dayDate = calendar.date(byAdding: .day, value: i, to: saturday) else { return nil }
+            let timestamp = dayDate.timeIntervalSince1970 + TimeInterval(tzOffset)
+            let miqatData = miqatService.getMiqatData(timestampSecs: timestamp, provider: .darElFatwa(.beirut))
+            return DayInfo(from: miqatData)
         }
     }
 }

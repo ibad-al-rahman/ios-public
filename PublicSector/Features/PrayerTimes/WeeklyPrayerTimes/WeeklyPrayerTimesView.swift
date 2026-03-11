@@ -28,11 +28,11 @@ struct WeeklyPrayerTimesView: View {
                         .bold()
                         .padding(.small)
 
-                        ForEach(store.compactedWeek) { day in
+                        ForEach(store.week) { day in
                             Divider()
 
                             GridRow {
-                                Text(day.gregorian, format: .dateTime.weekday())
+                                Text(weekdayDate(from: day.id), format: .dateTime.weekday())
                                 dateText(date: day.fajr)
                                 dateText(date: day.sunrise)
                                 dateText(date: day.dhuhr)
@@ -51,21 +51,14 @@ struct WeeklyPrayerTimesView: View {
                 }
             }
 
-            if let hadith = store.hadith {
-                Section {
-                    Text(verbatim: hadith.hadith)
-                        .environment(\.layoutDirection, .rightToLeft)
-                } header: {
-                    Text("Hadith of the Week")
-                } footer: {
-                    if let hadithNote = hadith.note {
-                        Text(verbatim: hadithNote)
-                            .environment(\.layoutDirection, .rightToLeft)
-                    }
-                }
-            }
         }
         .onAppear { store.send(.onAppear) }
+    }
+
+    private func weekdayDate(from id: String) -> Date {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyyMMdd"
+        return formatter.date(from: id) ?? .now
     }
 
     private func dateText(date: Date?) -> some View {

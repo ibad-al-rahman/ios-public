@@ -8,7 +8,8 @@
 import Miqat
 import Foundation
 
-public struct MiqatData: Sendable, Equatable {
+public struct MiqatData: Sendable, Equatable, Identifiable {
+    public let id: String
     public let imsak: Date?
     public let fajr: Date
     public let sunrise: Date
@@ -33,10 +34,16 @@ public struct MiqatData: Sendable, Equatable {
     }
 
     init(timestampSecs: TimeInterval, provider: Provider) {
+        let date = Date(timeIntervalSince1970: timestampSecs)
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyyMMdd"
+        self.id = formatter.string(from: date)
+
         let prayerTimes = Miqat.PrayerTimes.fromPrecomputed(
             dateUtcTimestampSecs: Int64(timestampSecs),
             provider: .darElFatwa(.beirut)
         )
+
         self.fajr = Date(timeIntervalSince1970: TimeInterval(prayerTimes.fajr()))
         self.sunrise = Date(timeIntervalSince1970: TimeInterval(prayerTimes.sunrise()))
         self.dhuhr = Date(timeIntervalSince1970: TimeInterval(prayerTimes.dhuhr()))
