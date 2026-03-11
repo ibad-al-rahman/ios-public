@@ -325,6 +325,7 @@
       }
     },
     "Hadith of the Week" : {
+      "extractionState" : "stale",
       "localizations" : {
         "ar" : {
           "stringUnit" : {

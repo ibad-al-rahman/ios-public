@@ -18,7 +18,6 @@
 		D9170D572CEFE558006E45D5 /* HelpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9170D562CEFE557006E45D5 /* HelpView.swift */; };
 		D9170D5A2CF0974E006E45D5 /* AdhkarFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9170D592CF0974B006E45D5 /* AdhkarFeature.swift */; };
 		D9170D5C2CF09754006E45D5 /* AdhkarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9170D5B2CF09751006E45D5 /* AdhkarView.swift */; };
-		D9170D6D2CF0D1E1006E45D5 /* PrayerTimesOffset.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9170D6C2CF0D1DA006E45D5 /* PrayerTimesOffset.swift */; };
 		D9170D6F2CF0D5F7006E45D5 /* Prayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9170D6E2CF0D5F1006E45D5 /* Prayer.swift */; };
 		D91BF1232D3FDABD00BEB410 /* GoogleService-Info-Debug.plist in Resources */ = {isa = PBXBuildFile; fileRef = D91BF1222D3FDABD00BEB410 /* GoogleService-Info-Debug.plist */; };
 		D91BF1262D3FDB9800BEB410 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = D91BF1252D3FDB9800BEB410 /* FirebaseAnalytics */; };
@@ -30,8 +29,6 @@
 		D91BF1342D3FDF6D00BEB410 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D91BF1332D3FDF6D00BEB410 /* GoogleService-Info.plist */; };
 		D91BF13C2D4019B500BEB410 /* IbadAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = D91BF13B2D4019B500BEB410 /* IbadAnalytics */; };
 		D91BF19F2D45116B00BEB410 /* Date+YMD.swift in Sources */ = {isa = PBXBuildFile; fileRef = D91BF19E2D45116400BEB410 /* Date+YMD.swift */; };
-		D91D99602D23C442004AA72D /* DayEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = D91D995F2D23C43C004AA72D /* DayEvent.swift */; };
-		D941B4242D16D87F004FFF5C /* PrayerTimesSha1.swift in Sources */ = {isa = PBXBuildFile; fileRef = D941B4232D16D876004FFF5C /* PrayerTimesSha1.swift */; };
 		D95D31EA2E3D4DCA006820F4 /* Permissions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D95D31E92E3D4DC6006820F4 /* Permissions.swift */; };
 		D970CD7C2D03B888004D8E66 /* AppEntryFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = D970CD7B2D03B885004D8E66 /* AppEntryFeature.swift */; };
 		D970CD7E2D03B890004D8E66 /* AppEntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D970CD7D2D03B88D004D8E66 /* AppEntryView.swift */; };
@@ -44,7 +41,6 @@
 		D98D2BDF2CA9B5140050F2A8 /* AppearanceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D98D2BDE2CA9B5140050F2A8 /* AppearanceView.swift */; };
 		D98D2BE12CA9B7260050F2A8 /* SettingsFeature+Destination.swift in Sources */ = {isa = PBXBuildFile; fileRef = D98D2BE02CA9B7260050F2A8 /* SettingsFeature+Destination.swift */; };
 		D98D2BE32CA9B9310050F2A8 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = D98D2BE22CA9B9310050F2A8 /* Settings.swift */; };
-		D9A40D5E2D7A6DE500C1BBF3 /* Hadith.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A40D5D2D7A6DE300C1BBF3 /* Hadith.swift */; };
 		D9A6E1BD2CEC71FE006123D1 /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = D9A6E1BC2CEC71FE006123D1 /* ComposableArchitecture */; };
 		D9A70DBA2C850B78002F6583 /* PublicSectorApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A70DB92C850B78002F6583 /* PublicSectorApp.swift */; };
 		D9A70DBC2C850B78002F6583 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A70DBB2C850B78002F6583 /* ContentView.swift */; };
@@ -65,7 +61,6 @@
 		D9A70E042C85975D002F6583 /* DeveloperButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A70E032C85975D002F6583 /* DeveloperButtonView.swift */; };
 		D9A70E062C859977002F6583 /* SettingsFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A70E052C859977002F6583 /* SettingsFeature.swift */; };
 		D9A70E082C859D3F002F6583 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A70E072C859D3F002F6583 /* SettingsView.swift */; };
-		D9A70E0D2C859E1E002F6583 /* DayPrayerTimes.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A70E0C2C859E1E002F6583 /* DayPrayerTimes.swift */; };
 		D9A70E0F2C859E57002F6583 /* WeeklyPrayerTimesFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A70E0E2C859E57002F6583 /* WeeklyPrayerTimesFeature.swift */; };
 		D9A70E112C859E65002F6583 /* WeeklyPrayerTimesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A70E102C859E65002F6583 /* WeeklyPrayerTimesView.swift */; };
 		D9A70E132C859E83002F6583 /* DailyPrayerTimesFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A70E122C859E83002F6583 /* DailyPrayerTimesFeature.swift */; };
@@ -140,7 +135,6 @@
 		D9170D562CEFE557006E45D5 /* HelpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpView.swift; sourceTree = "<group>"; };
 		D9170D592CF0974B006E45D5 /* AdhkarFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdhkarFeature.swift; sourceTree = "<group>"; };
 		D9170D5B2CF09751006E45D5 /* AdhkarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdhkarView.swift; sourceTree = "<group>"; };
-		D9170D6C2CF0D1DA006E45D5 /* PrayerTimesOffset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrayerTimesOffset.swift; sourceTree = "<group>"; };
 		D9170D6E2CF0D5F1006E45D5 /* Prayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Prayer.swift; sourceTree = "<group>"; };
 		D91BF1222D3FDABD00BEB410 /* GoogleService-Info-Debug.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info-Debug.plist"; sourceTree = "<group>"; };
 		D91BF12D2D3FDC8000BEB410 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -148,8 +142,6 @@
 		D91BF1332D3FDF6D00BEB410 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		D91BF1392D3FED9400BEB410 /* IbadAnalytics */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = IbadAnalytics; sourceTree = "<group>"; };
 		D91BF19E2D45116400BEB410 /* Date+YMD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+YMD.swift"; sourceTree = "<group>"; };
-		D91D995F2D23C43C004AA72D /* DayEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayEvent.swift; sourceTree = "<group>"; };
-		D941B4232D16D876004FFF5C /* PrayerTimesSha1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrayerTimesSha1.swift; sourceTree = "<group>"; };
 		D95D31E92E3D4DC6006820F4 /* Permissions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Permissions.swift; sourceTree = "<group>"; };
 		D970CD7B2D03B885004D8E66 /* AppEntryFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppEntryFeature.swift; sourceTree = "<group>"; };
 		D970CD7D2D03B88D004D8E66 /* AppEntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppEntryView.swift; sourceTree = "<group>"; };
@@ -162,7 +154,6 @@
 		D98D2BDE2CA9B5140050F2A8 /* AppearanceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppearanceView.swift; sourceTree = "<group>"; };
 		D98D2BE02CA9B7260050F2A8 /* SettingsFeature+Destination.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SettingsFeature+Destination.swift"; sourceTree = "<group>"; };
 		D98D2BE22CA9B9310050F2A8 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
-		D9A40D5D2D7A6DE300C1BBF3 /* Hadith.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hadith.swift; sourceTree = "<group>"; };
 		D9A70DB62C850B78002F6583 /* PublicSector.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PublicSector.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D9A70DB92C850B78002F6583 /* PublicSectorApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublicSectorApp.swift; sourceTree = "<group>"; };
 		D9A70DBB2C850B78002F6583 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -185,7 +176,6 @@
 		D9A70E032C85975D002F6583 /* DeveloperButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeveloperButtonView.swift; sourceTree = "<group>"; };
 		D9A70E052C859977002F6583 /* SettingsFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsFeature.swift; sourceTree = "<group>"; };
 		D9A70E072C859D3F002F6583 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
-		D9A70E0C2C859E1E002F6583 /* DayPrayerTimes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayPrayerTimes.swift; sourceTree = "<group>"; };
 		D9A70E0E2C859E57002F6583 /* WeeklyPrayerTimesFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeeklyPrayerTimesFeature.swift; sourceTree = "<group>"; };
 		D9A70E102C859E65002F6583 /* WeeklyPrayerTimesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeeklyPrayerTimesView.swift; sourceTree = "<group>"; };
 		D9A70E122C859E83002F6583 /* DailyPrayerTimesFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyPrayerTimesFeature.swift; sourceTree = "<group>"; };
@@ -570,12 +560,7 @@
 			isa = PBXGroup;
 			children = (
 				B3A8430B2F60F0FF00506D4C /* DayInfo.swift */,
-				D9A40D5D2D7A6DE300C1BBF3 /* Hadith.swift */,
-				D91D995F2D23C43C004AA72D /* DayEvent.swift */,
-				D941B4232D16D876004FFF5C /* PrayerTimesSha1.swift */,
 				D9170D6E2CF0D5F1006E45D5 /* Prayer.swift */,
-				D9170D6C2CF0D1DA006E45D5 /* PrayerTimesOffset.swift */,
-				D9A70E0C2C859E1E002F6583 /* DayPrayerTimes.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -912,12 +897,9 @@
 				D97A9FE72D03ACC6000F3070 /* StartupView.swift in Sources */,
 				D9170D522CEFDE41006E45D5 /* WebLinks.swift in Sources */,
 				D9DA3AB32D1618B6001AB599 /* FeatureFlagFeature.swift in Sources */,
-				D9A40D5E2D7A6DE500C1BBF3 /* Hadith.swift in Sources */,
-				D941B4242D16D87F004FFF5C /* PrayerTimesSha1.swift in Sources */,
 				D9A70DFC2C8596FF002F6583 /* DeveloperMenuFeature.swift in Sources */,
 				D9A70E082C859D3F002F6583 /* SettingsView.swift in Sources */,
 				D98D2BDD2CA9B50D0050F2A8 /* AppearanceFeature.swift in Sources */,
-				D9170D6D2CF0D1E1006E45D5 /* PrayerTimesOffset.swift in Sources */,
 				D9170D572CEFE558006E45D5 /* HelpView.swift in Sources */,
 				D9A70E022C859748002F6583 /* DeveloperButton+Destination.swift in Sources */,
 				D98D2BD72CA9ACD20050F2A8 /* SharedState+Keys.swift in Sources */,
@@ -940,8 +922,6 @@
 				D98D2BE12CA9B7260050F2A8 /* SettingsFeature+Destination.swift in Sources */,
 				D91BF12E2D3FDC8100BEB410 /* AppDelegate.swift in Sources */,
 				D9A70E002C85972D002F6583 /* DeveloperButtonFeature.swift in Sources */,
-				D91D99602D23C442004AA72D /* DayEvent.swift in Sources */,
-				D9A70E0D2C859E1E002F6583 /* DayPrayerTimes.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
