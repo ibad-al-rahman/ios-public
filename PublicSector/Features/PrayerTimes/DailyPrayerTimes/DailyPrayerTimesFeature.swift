@@ -27,7 +27,8 @@ struct DailyPrayerTimesFeature {
             asr: .now,
             maghrib: .now,
             ishaa: .now,
-            hijri: ""
+            hijri: "",
+            gregorian: .now
         )
 
         var canResetDate: Bool {

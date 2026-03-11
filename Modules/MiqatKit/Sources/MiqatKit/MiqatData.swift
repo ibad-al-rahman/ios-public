@@ -10,6 +10,7 @@ import Foundation
 
 public struct MiqatData: Sendable, Equatable, Identifiable {
     public let id: String
+    public let gregorian: Date
     public let imsak: Date?
     public let fajr: Date
     public let sunrise: Date
@@ -21,6 +22,7 @@ public struct MiqatData: Sendable, Equatable, Identifiable {
     public let hijriDay: Int
     public let hijriMonth: Int
     public let hijriYear: Int
+
     public var hijriLocaleMonth: String? {
         let formatter = DateFormatter()
         formatter.calendar = Calendar(identifier: .islamicUmmAlQura)
@@ -35,6 +37,7 @@ public struct MiqatData: Sendable, Equatable, Identifiable {
 
     init(timestampSecs: TimeInterval, provider: Provider) {
         let date = Date(timeIntervalSince1970: timestampSecs)
+        self.gregorian = date
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyyMMdd"
         self.id = formatter.string(from: date)
