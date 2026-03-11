@@ -17,6 +17,7 @@ struct WeeklyPrayerTimesFeature {
     struct State: Equatable {
         var week: [DayInfo] = []
 
+        var hasImsak: Bool { week.contains(where: { $0.imsak != nil }) }
         var isLoading: Bool { week.isEmpty }
     }
 
