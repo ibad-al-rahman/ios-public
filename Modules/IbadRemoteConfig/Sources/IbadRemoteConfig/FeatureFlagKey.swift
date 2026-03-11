@@ -6,20 +6,20 @@
 //
 
 public enum FeatureFlagKey: String, Codable, CaseIterable, Sendable {
-    case prayerTimesOffset = "ff_apple_prayerTimes_offset"
     case adhkarScreen = "ff_apple_adhkar_screen"
+    case eventsScreen = "ff_apple_events_screen"
 
     public var display: String {
         switch self {
-        case .prayerTimesOffset: "Prayer times offset"
         case .adhkarScreen: "Adhkar screen"
+        case .eventsScreen: "Events screen"
         }
     }
 
     public var description: String {
         switch self {
-        case .prayerTimesOffset: "Enabled prayer times offset feature"
         case .adhkarScreen: "Enable adhkar screen"
+        case .eventsScreen: "Enable events screen"
         }
     }
 }
@@ -27,8 +27,8 @@ public enum FeatureFlagKey: String, Codable, CaseIterable, Sendable {
 public extension [FeatureFlagKey: Bool] {
     static var `default`: [FeatureFlagKey: Bool] {
         [
-            .prayerTimesOffset: false,
-            .adhkarScreen: false
+            .adhkarScreen: false,
+            .eventsScreen: false
         ]
     }
 }
