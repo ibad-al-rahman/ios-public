@@ -9,15 +9,18 @@ import MiqatKit
 import Foundation
 
 struct DayPrayerTimes: Equatable, Identifiable {
-    let id: Int
+    let id: String
+
     let gregorian: Date
-    let hijri: String
-    let hijriDay: String
-    let hijriMonth: String
-    let hijriYear: String
+
     let gregorianDay: String
     let gregorianMonth: String
     let gregorianYear: String
+
+    let hijriDay: Int
+    let hijriMonth: String
+    let hijriYear: Int
+
     var fajr: Date
     var sunrise: Date
     var dhuhr: Date
@@ -89,34 +92,24 @@ struct DayPrayerTimes: Equatable, Identifiable {
 
 extension DayPrayerTimes {
     init(from model: MiqatData) {
-        let gregorianFormatter = DateFormatter()
-        gregorianFormatter.locale = Locale(identifier: "en_US_POSIX")
-        gregorianFormatter.calendar = Calendar(identifier: .gregorian)
-        gregorianFormatter.dateFormat = "yyyyMMdd"
+        self.id = model.id
 
-        let gregorian = gregorianFormatter.date(from: model.id) ?? model.fajr
-        self.gregorian = gregorian
-        self.id = Int(model.id) ?? 0
+        self.gregorian = model.gregorian
 
-        gregorianFormatter.dateFormat = "d"
-        self.gregorianDay = gregorianFormatter.string(from: gregorian)
+        let dateFormatter = DateFormatter()
 
-        gregorianFormatter.dateFormat = "MMMM"
-        self.gregorianMonth = gregorianFormatter.string(from: gregorian)
+        dateFormatter.dateFormat = "d"
+        self.gregorianDay = dateFormatter.string(from: model.gregorian)
 
-        gregorianFormatter.dateFormat = "yyyy"
-        self.gregorianYear = gregorianFormatter.string(from: gregorian)
+        dateFormatter.dateFormat = "MMMM"
+        self.gregorianMonth = dateFormatter.string(from: model.gregorian)
 
-        self.hijriDay = "\(model.hijriDay)"
-        self.hijriYear = "\(model.hijriYear)"
+        dateFormatter.dateFormat = "yyyy"
+        self.gregorianYear = dateFormatter.string(from: model.gregorian)
 
-        if let localeMonth = model.hijriLocaleMonth {
-            self.hijriMonth = localeMonth
-            self.hijri = "\(model.hijriDay) \(localeMonth) \(model.hijriYear)"
-        } else {
-            self.hijriMonth = "\(model.hijriMonth)"
-            self.hijri = "\(model.hijriDay)/\(model.hijriMonth)/\(model.hijriYear)"
-        }
+        self.hijriDay = model.hijriDay
+        self.hijriMonth = model.hijriLocaleMonth ?? "\(model.hijriMonth)"
+        self.hijriYear = model.hijriYear
 
         self.fajr = model.fajr
         self.sunrise = model.sunrise
@@ -128,15 +121,14 @@ extension DayPrayerTimes {
 
     static func placeholder() -> DayPrayerTimes {
         DayPrayerTimes(
-            id: 0,
+            id: "20260101",
             gregorian: .now,
-            hijri: "1",
-            hijriDay: "January",
-            hijriMonth: "2024",
-            hijriYear: "1/1/1444",
             gregorianDay: "1",
-            gregorianMonth: "Muharram",
-            gregorianYear: "1444",
+            gregorianMonth: "January",
+            gregorianYear: "2026",
+            hijriDay: 1,
+            hijriMonth: "Muharram",
+            hijriYear: 1444,
             fajr: .now,
             sunrise: .now,
             dhuhr: .now,

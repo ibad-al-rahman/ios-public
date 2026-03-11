@@ -58,9 +58,9 @@ struct PrayerTimesWidgetView: View {
                            let gregorianYear = store.todaysPrayerTimes?.gregorianYear {
                             HStack {
                                 VStack {
-                                    Text(hijriDay)
+                                    Text("\(hijriDay)")
                                     Text(hijriMonth)
-                                    Text(hijriYear)
+                                    Text("\(hijriYear)")
                                 }
 
                                 Spacer()

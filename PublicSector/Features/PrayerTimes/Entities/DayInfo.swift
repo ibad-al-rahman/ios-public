@@ -19,6 +19,7 @@ struct DayInfo: Equatable, Identifiable {
     var ishaa: Date
 
     var hijri: String
+    var gregorian: Date
 }
 
 extension DayInfo {
@@ -37,5 +38,7 @@ extension DayInfo {
         } else {
             self.hijri = ""
         }
+
+        self.gregorian = miqatData.gregorian
     }
 }

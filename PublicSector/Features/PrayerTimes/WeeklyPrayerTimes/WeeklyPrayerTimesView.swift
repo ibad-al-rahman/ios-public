@@ -32,7 +32,7 @@ struct WeeklyPrayerTimesView: View {
                             Divider()
 
                             GridRow {
-                                Text(weekdayDate(from: day.id), format: .dateTime.weekday())
+                                Text(day.gregorian, format: .dateTime.weekday())
                                 dateText(date: day.fajr)
                                 dateText(date: day.sunrise)
                                 dateText(date: day.dhuhr)
@@ -50,15 +50,8 @@ struct WeeklyPrayerTimesView: View {
                     Text("Timings")
                 }
             }
-
         }
         .onAppear { store.send(.onAppear) }
-    }
-
-    private func weekdayDate(from id: String) -> Date {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyyMMdd"
-        return formatter.date(from: id) ?? .now
     }
 
     private func dateText(date: Date?) -> some View {
