@@ -18,6 +18,9 @@ struct WeeklyPrayerTimesView: View {
                     Grid(horizontalSpacing: .zero, verticalSpacing: .zero) {
                         GridRow {
                             Text("Week")
+                            if store.hasImsak {
+                                Text(Prayer.imsak.localizedStringKey)
+                            }
                             Text(Prayer.fajr.localizedStringKey)
                             Text(Prayer.sunrise.localizedStringKey)
                             Text(Prayer.dhuhr.localizedStringKey)
@@ -33,6 +36,9 @@ struct WeeklyPrayerTimesView: View {
 
                             GridRow {
                                 Text(day.gregorian, format: .dateTime.weekday())
+                                if store.hasImsak {
+                                    dateText(date: day.imsak)
+                                }
                                 dateText(date: day.fajr)
                                 dateText(date: day.sunrise)
                                 dateText(date: day.dhuhr)
