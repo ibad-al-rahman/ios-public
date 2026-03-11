@@ -8,7 +8,6 @@
 import ComposableArchitecture
 import Foundation
 import MiqatKit
-import IbadRepositories
 
 @Reducer
 struct PrayerTimesWidgetFeature {
@@ -31,22 +30,10 @@ struct PrayerTimesWidgetFeature {
         Reduce { state, action in
             switch action {
             case .onAppear:
-                let components = Calendar.current.dateComponents(
-                    [.year, .month, .day], from: state.date
-                )
-                guard let year = components.year,
-                      let month = components.month,
-                      let day = components.day
-                else { return .none }
-
-                @SharedReader(.localDayPrayerTimes(year: year)) var localDayPrayerTimes = .empty
-                guard let local = localDayPrayerTimes.getDayPrayerTimes(
-                    year: year, month: month, day: day
-                ),
-                      let prayerTimes = DayPrayerTimes(from: local)
-                else { return .none }
-
-                state.todaysPrayerTimes = prayerTimes
+                let tzOffset = TimeZone.current.secondsFromGMT()
+                let timestamp = state.date.timeIntervalSince1970 + TimeInterval(tzOffset)
+                let miqatData = miqatService.getMiqatData(timestampSecs: timestamp, provider: .darElFatwa(.beirut))
+                state.todaysPrayerTimes = DayPrayerTimes(from: miqatData)
                 return .none
             }
         }

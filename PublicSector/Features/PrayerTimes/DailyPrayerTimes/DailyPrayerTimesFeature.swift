@@ -9,7 +9,6 @@ import ComposableArchitecture
 import Foundation
 import IbadAnalytics
 import MiqatKit
-import IbadRepositories
 import WidgetKit
 
 @Reducer
