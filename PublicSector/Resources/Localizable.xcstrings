@@ -126,6 +126,7 @@
       }
     },
     "Clean cache" : {
+      "extractionState" : "stale",
       "localizations" : {
         "ar" : {
           "stringUnit" : {

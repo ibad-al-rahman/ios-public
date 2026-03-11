@@ -5,7 +5,7 @@
 //  Created by Hamza Jadid on 25/08/2024.
 //
 
-import IbadRepositories
+import MiqatKit
 import Foundation
 
 struct DayPrayerTimes: Equatable, Identifiable {
@@ -88,29 +88,15 @@ struct DayPrayerTimes: Equatable, Identifiable {
 }
 
 extension DayPrayerTimes {
-    init?(from model: DayPrayerTimesStorage) {
-        let calendar = Calendar.current
+    init(from model: MiqatData) {
         let gregorianFormatter = DateFormatter()
-        let hijriFormatter = DateFormatter()
-        let timeFormatter = DateFormatter()
-
-        gregorianFormatter.dateFormat = "dd/MM/yyyy"
-        // DON'T REMOVE THE LOCALE AND CALENDAR else day 30 of each month will fail
         gregorianFormatter.locale = Locale(identifier: "en_US_POSIX")
         gregorianFormatter.calendar = Calendar(identifier: .gregorian)
-        hijriFormatter.calendar = Calendar(identifier: .islamicUmmAlQura)
-        hijriFormatter.dateFormat = "dd/MM/yyyy"
-        // DON'T REMOVE THE LOCALE else 24-hour systems won't work
-        timeFormatter.locale = Locale(identifier: "en_US_POSIX")
-        timeFormatter.dateFormat = "h:mm a"
-        timeFormatter.amSymbol = "am"
-        timeFormatter.pmSymbol = "pm"
+        gregorianFormatter.dateFormat = "yyyyMMdd"
 
-        self.id = model.id
-
-        guard let gregorian = gregorianFormatter.date(from: model.gregorian)
-        else { return nil }
+        let gregorian = gregorianFormatter.date(from: model.id) ?? model.fajr
         self.gregorian = gregorian
+        self.id = Int(model.id) ?? 0
 
         gregorianFormatter.dateFormat = "d"
         self.gregorianDay = gregorianFormatter.string(from: gregorian)
@@ -121,113 +107,23 @@ extension DayPrayerTimes {
         gregorianFormatter.dateFormat = "yyyy"
         self.gregorianYear = gregorianFormatter.string(from: gregorian)
 
-        let gregorianComponents = calendar.dateComponents(
-            [.year, .month, .day],
-            from: gregorian
-        )
-        guard let year = gregorianComponents.year,
-              let month = gregorianComponents.month,
-              let day = gregorianComponents.day
-        else { return nil }
+        self.hijriDay = "\(model.hijriDay)"
+        self.hijriYear = "\(model.hijriYear)"
 
-        guard let hijriDate = hijriFormatter.date(from: model.hijri)
-        else { return nil }
+        if let localeMonth = model.hijriLocaleMonth {
+            self.hijriMonth = localeMonth
+            self.hijri = "\(model.hijriDay) \(localeMonth) \(model.hijriYear)"
+        } else {
+            self.hijriMonth = "\(model.hijriMonth)"
+            self.hijri = "\(model.hijriDay)/\(model.hijriMonth)/\(model.hijriYear)"
+        }
 
-        hijriFormatter.dateFormat = "d"
-        self.hijriDay = hijriFormatter.string(from: hijriDate)
-
-        hijriFormatter.dateFormat = "MMMM"
-        self.hijriMonth = hijriFormatter.string(from: hijriDate)
-
-        hijriFormatter.dateFormat = "yyyy"
-        self.hijriYear = hijriFormatter.string(from: hijriDate)
-
-        hijriFormatter.dateFormat = "d MMMM yyyy"
-        self.hijri = hijriFormatter.string(from: hijriDate)
-
-        guard let fajr = timeFormatter.date(from: model.prayerTimes.fajr)
-        else { return nil }
-
-        var fajrComponents = calendar.dateComponents(
-            [.year, .month, .day, .hour, .minute, .second],
-            from: fajr
-        )
-        fajrComponents.year = year
-        fajrComponents.month = month
-        fajrComponents.day = day
-        let fajrDate = calendar.date(from: fajrComponents)
-        guard let fajrDate else { return nil }
-        self.fajr = fajrDate
-
-        guard let sunrise = timeFormatter.date(from: model.prayerTimes.sunrise)
-        else { return nil }
-
-        var sunriseComponents = calendar.dateComponents(
-            [.year, .month, .day, .hour, .minute, .second],
-            from: sunrise
-        )
-        sunriseComponents.year = year
-        sunriseComponents.month = month
-        sunriseComponents.day = day
-        let sunriseDate = calendar.date(from: sunriseComponents)
-        guard let sunriseDate else { return nil }
-        self.sunrise = sunriseDate
-
-        guard let dhuhr = timeFormatter.date(from: model.prayerTimes.dhuhr)
-        else { return nil }
-
-        var dhuhrComponents = calendar.dateComponents(
-            [.year, .month, .day, .hour, .minute, .second],
-            from: dhuhr
-        )
-        dhuhrComponents.year = year
-        dhuhrComponents.month = month
-        dhuhrComponents.day = day
-        let dhuhrDate = calendar.date(from: dhuhrComponents)
-        guard let dhuhrDate else { return nil }
-        self.dhuhr = dhuhrDate
-
-        guard let asr = timeFormatter.date(from: model.prayerTimes.asr)
-        else { return nil }
-
-        var asrComponents = calendar.dateComponents(
-            [.year, .month, .day, .hour, .minute, .second],
-            from: asr
-        )
-        asrComponents.year = year
-        asrComponents.month = month
-        asrComponents.day = day
-        let asrDate = calendar.date(from: asrComponents)
-        guard let asrDate else { return nil }
-        self.asr = asrDate
-
-        guard let maghrib = timeFormatter.date(from: model.prayerTimes.maghrib)
-        else { return nil }
-
-        var maghribComponents = calendar.dateComponents(
-            [.year, .month, .day, .hour, .minute, .second],
-            from: maghrib
-        )
-        maghribComponents.year = year
-        maghribComponents.month = month
-        maghribComponents.day = day
-        let maghribDate = calendar.date(from: maghribComponents)
-        guard let maghribDate else { return nil }
-        self.maghrib = maghribDate
-
-        guard let ishaa = timeFormatter.date(from: model.prayerTimes.ishaa)
-        else { return nil }
-
-        var ishaaComponents = calendar.dateComponents(
-            [.year, .month, .day, .hour, .minute, .second],
-            from: ishaa
-        )
-        ishaaComponents.year = year
-        ishaaComponents.month = month
-        ishaaComponents.day = day
-        let ishaaDate = calendar.date(from: ishaaComponents)
-        guard let ishaaDate else { return nil }
-        self.ishaa = ishaaDate
+        self.fajr = model.fajr
+        self.sunrise = model.sunrise
+        self.dhuhr = model.dhuhr
+        self.asr = model.asr
+        self.maghrib = model.maghrib
+        self.ishaa = model.ishaa
     }
 
     static func placeholder() -> DayPrayerTimes {

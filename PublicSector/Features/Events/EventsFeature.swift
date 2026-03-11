@@ -8,7 +8,6 @@
 import ComposableArchitecture
 import Foundation
 import IbadAnalytics
-import IbadRepositories
 
 @Reducer
 struct EventsFeature {
@@ -87,7 +86,6 @@ struct EventsFeature {
     private func loadEvents() -> EffectOf<Self> {
         .run { send in
             guard let year = Date.now.ymd?.year else { return }
-            @SharedReader(.localDayPrayerTimes(year: year)) var storage = .empty
 
             let gregorianFormatter = DateFormatter()
             gregorianFormatter.dateFormat = "dd/MM/yyyy"
@@ -98,24 +96,7 @@ struct EventsFeature {
             hijriFormatter.calendar = Calendar(identifier: .islamicUmmAlQura)
             hijriFormatter.dateFormat = "dd/MM/yyyy"
 
-            let results: [EventSearchResult] = storage.year.compactMap { day in
-                guard let event = day.event,
-                      let gregorian = gregorianFormatter.date(from: day.gregorian),
-                      let hijriDate = hijriFormatter.date(from: day.hijri)
-                else { return nil }
-
-                hijriFormatter.dateFormat = "d MMMM yyyy"
-                let hijri = hijriFormatter.string(from: hijriDate)
-                hijriFormatter.dateFormat = "dd/MM/yyyy"
-
-                return EventSearchResult(
-                    id: day.id,
-                    gregorian: gregorian,
-                    hijri: hijri,
-                    ar: event.ar,
-                    en: event.en
-                )
-            }
+            let results: [EventSearchResult] = []
 
             await send(.reducer(.loadEvents(results)), animation: .default)
         }

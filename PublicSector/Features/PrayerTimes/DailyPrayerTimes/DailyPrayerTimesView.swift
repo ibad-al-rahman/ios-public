@@ -6,7 +6,6 @@
 //
 
 import ComposableArchitecture
-import IbadRepositories
 import SwiftUI
 
 struct DailyPrayerTimesView: View {

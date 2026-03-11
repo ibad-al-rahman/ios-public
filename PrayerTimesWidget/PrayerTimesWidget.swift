@@ -6,11 +6,13 @@
 //
 
 import ComposableArchitecture
-import IbadRepositories
+import MiqatKit
 import SwiftUI
 import WidgetKit
 
 struct PrayerTimeTimelineProvider: TimelineProvider {
+    @Dependency(\.miqatService) var miqatService
+
     func placeholder(in context: Context) -> PrayerTimeEntry {
         PrayerTimeEntry(
             date: .now,
@@ -42,41 +44,18 @@ struct PrayerTimeTimelineProvider: TimelineProvider {
     }
 
     func getPrayerTimesSequnce() -> [PrayerTimeEntry] {
-        let currentDate = Date.now
-        let components = Calendar.current.dateComponents(
-            [.year, .month, .day], from: currentDate
-        )
-        guard let year = components.year,
-              let month = components.month,
-              let day = components.day
-        else { return [] }
-
-        @SharedReader(.localDayPrayerTimes(year: year)) var localDayPrayerTimes = .empty
-        guard let dayPrayerTimes = localDayPrayerTimes.getDayPrayerTimes(
-            year: year, month: month, day: day
-        ),
-              let prayerTimes = DayPrayerTimes(from: dayPrayerTimes)
-        else { return [] }
-        let secondsPerDay = 60 * 60 * 24.0
-        let tomorrowMidnight = Calendar.current.startOfDay(
-            for: .now.addingTimeInterval(secondsPerDay)
-        )
-        let tomorrowComponents = Calendar.current.dateComponents(
-            [.year, .month, .day], from: tomorrowMidnight
-        )
-        guard let tomorrowYear = tomorrowComponents.year,
-              let tomorrowMonth = tomorrowComponents.month,
-              let tomorrowDay = tomorrowComponents.day
-        else { return [] }
-
-        @SharedReader(.localDayPrayerTimes(year: tomorrowYear)) var tomorrowsLocalDayPrayerTimes = .empty
-        guard let dayPrayerTimes = tomorrowsLocalDayPrayerTimes.getDayPrayerTimes(
-            year: tomorrowYear, month: tomorrowMonth, day: tomorrowDay
-        ),
-              let tomorrowPrayerTimes = DayPrayerTimes(from: dayPrayerTimes)
-        else { return [] }
-
         let now = Date.now
+        let tzOffset = TimeZone.current.secondsFromGMT()
+        let todayTimestamp = now.timeIntervalSince1970 + TimeInterval(tzOffset)
+
+        let todayData = miqatService.getMiqatData(timestampSecs: todayTimestamp, provider: .darElFatwa(.beirut))
+        let prayerTimes = DayPrayerTimes(from: todayData)
+
+        let tomorrowMidnight = Calendar.current.startOfDay(for: now.addingTimeInterval(86400))
+        let tomorrowTimestamp = tomorrowMidnight.timeIntervalSince1970 + TimeInterval(tzOffset)
+        let tomorrowData = miqatService.getMiqatData(timestampSecs: tomorrowTimestamp, provider: .darElFatwa(.beirut))
+        let tomorrowPrayerTimes = DayPrayerTimes(from: tomorrowData)
+
         return [
             [PrayerTimeEntry(
                 date: now,
@@ -89,7 +68,7 @@ struct PrayerTimeTimelineProvider: TimelineProvider {
             )],
             prayerTimes
                 .sorted
-                .filter { currentDate < $0 }
+                .filter { now < $0 }
                 .map {
                     PrayerTimeEntry(
                         date: $0,
@@ -113,7 +92,7 @@ struct PrayerTimeTimelineProvider: TimelineProvider {
                 )
             ]
         ]
-            .flatMap { $0 }
+        .flatMap { $0 }
     }
 }
 

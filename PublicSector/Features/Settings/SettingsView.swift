@@ -38,12 +38,6 @@ struct SettingsView: View {
                     }
                     .buttonStyle(.plain)
                 }
-
-                Section {
-                    Button(action: { store.send(.onTapCleanCache) }) {
-                        Text("Clean cache")
-                    }
-                }
             }
             .navigationDestination(
                 item: $store.scope(
