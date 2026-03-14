@@ -39,7 +39,20 @@
       }
     },
     "Anniversary of the Conquest of Mecca (8 AH)" : {
-
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ذكرى فتح مكة (٨ هـ)"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Anniversary of the Conquest of Mecca (8 AH)"
+          }
+        }
+      }
     },
     "Annual Prayer Times by Ibad" : {
       "extractionState" : "manual",
@@ -92,7 +105,14 @@
       }
     },
     "Ashura commemoration" : {
-
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ذكرى عاشوراء"
+          }
+        }
+      }
     },
     "Asr" : {
       "extractionState" : "manual",
@@ -127,17 +147,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "البنية"
-          }
-        }
-      }
-    },
-    "Clean cache" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "ar" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "مسح ذاكرة التخزين المؤقت"
           }
         }
       }
@@ -295,7 +304,14 @@
       }
     },
     "Eid" : {
-
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "العيد"
+          }
+        }
+      }
     },
     "Evening adhkar" : {
       "localizations" : {
@@ -335,15 +351,17 @@
       }
     },
     "First of Ramadan" : {
-
-    },
-    "Hadith of the Week" : {
-      "extractionState" : "stale",
       "localizations" : {
         "ar" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "حديث الأسبوع"
+            "value" : "أوّل أيّام شهر رمضان المبارك"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "First of Ramadan"
           }
         }
       }
@@ -437,7 +455,20 @@
       }
     },
     "Isra and Mi'raj" : {
-
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ذكرى الإسراء والمعراج"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Isra and Mi'raj"
+          }
+        }
+      }
     },
     "Language" : {
       "localizations" : {
@@ -456,7 +487,20 @@
       }
     },
     "Laylat-ul-Qadr" : {
-
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ليلة القدر"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Laylat-ul-Qadr"
+          }
+        }
+      }
     },
     "Light theme" : {
       "extractionState" : "manual",
@@ -532,6 +576,12 @@
             "state" : "translated",
             "value" : "قيمنا"
           }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rate us"
+          }
         }
       }
     },
@@ -541,6 +591,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "ابحث عن الأعياد والمناسبات"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Search events and holidays"
           }
         }
       }
@@ -580,7 +636,20 @@
       }
     },
     "Standing at Arafat" : {
-
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "الوقوف في عرفة"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Standing at Arafat"
+          }
+        }
+      }
     },
     "Sunrise" : {
       "extractionState" : "manual",
@@ -617,34 +686,164 @@
       }
     },
     "The anniversary of the Battle of Badr (2 AH)" : {
-
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ذكرى غزوة بدر الكبرى (٢ هـ)"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The anniversary of the Battle of Badr (2 AH)"
+          }
+        }
+      }
     },
     "The anniversary of the Battle of Hattin (583 AH)" : {
-
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ذكرى معركة حطّين (٥٨٣هـ)"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The anniversary of the Battle of Hattin (583 AH)"
+          }
+        }
+      }
     },
     "The anniversary of the Battle of Mu'tah (8 AH)" : {
-
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ذكرى غزوة مؤتة (٨ هـ)"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The anniversary of the Battle of Mu'tah (8 AH)"
+          }
+        }
+      }
     },
     "The anniversary of the Battle of Tabuk (9 AH)" : {
-
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ذكرى غزوة تبوك (٩ هـ)"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The anniversary of the Battle of Tabuk (9 AH)"
+          }
+        }
+      }
     },
     "The anniversary of the Battle of Uhud (3 AH)" : {
-
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ذكرى غزوة أُحُد (٣ هـ)"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The anniversary of the Battle of Uhud (3 AH)"
+          }
+        }
+      }
     },
     "The anniversary of the birth of the Prophet (peace be upon him)" : {
-
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ذكرى مولد الرسول ﷺ"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The anniversary of the birth of the Prophet (peace be upon him)"
+          }
+        }
+      }
     },
     "The beginning of the Hijri year" : {
-
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "بداية العام الهجري"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The beginning of the Hijri year"
+          }
+        }
+      }
     },
     "The first day of Eid al-Adha" : {
-
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "أوّل أيّام عيد الأضحى المبارك"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The first day of Eid al-Adha"
+          }
+        }
+      }
     },
     "The first day of Eid al-Fitr" : {
-
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "أوّل أيّام عيد الفطر المبارك"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The first day of Eid al-Fitr"
+          }
+        }
+      }
     },
     "The night of the middle of Sha'ban" : {
-
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ليلة النّصف من شعبان"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The night of the middle of Sha'ban"
+          }
+        }
+      }
     },
     "Theme" : {
       "extractionState" : "manual",
