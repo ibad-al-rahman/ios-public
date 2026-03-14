@@ -11,12 +11,17 @@ public struct MiqatService: Sendable {
     public var getMiqatData: @Sendable (
         _ timestampSecs: TimeInterval, _ provider: Provider
     ) -> MiqatData = { MiqatData(timestampSecs: $0, provider: $1) }
+
+    public var getIslamicEvents: @Sendable (_ year: Int) -> [MiqatEventOccurrence] = { _ in [] }
 }
 
 extension MiqatService: DependencyKey {
     public static var liveValue: MiqatService {
         return MiqatService(
-            getMiqatData: { MiqatData(timestampSecs: $0, provider: $1) }
+            getMiqatData: { MiqatData(timestampSecs: $0, provider: $1) },
+            getIslamicEvents: { year in
+                Miqat.eventsForGregorianYear(gregorianYear: Int32(year)).map(MiqatEventOccurrence.init)
+            }
         )
     }
 }

@@ -8,30 +8,19 @@
 import ComposableArchitecture
 import Foundation
 import IbadAnalytics
+import MiqatKit
 
 @Reducer
 struct EventsFeature {
-    struct EventSearchResult: Equatable, Identifiable {
-        let id: Int
-        let gregorian: Date
-        let hijri: String
-        let ar: String
-        let en: String?
-    }
+    @Dependency(\.miqatService) private var miqatService
 
     @ObservableState
     struct State: Equatable {
+        var year: Int = 2026
         var query: String = ""
-        var allEvents: [EventSearchResult] = []
-        var isLoading: Bool = false
-
-        var filteredResults: [EventSearchResult] {
-            let trimmed = query.trimmingCharacters(in: .whitespaces)
-            guard !trimmed.isEmpty else { return allEvents }
-            return allEvents.filter { result in
-                result.ar.localizedCaseInsensitiveContains(trimmed) ||
-                (result.en?.localizedCaseInsensitiveContains(trimmed) ?? false)
-            }
+        var events: [MiqatEventOccurrence] = []
+        var filteredEvents: [MiqatEventOccurrence] {
+            events
         }
     }
 
@@ -47,12 +36,13 @@ struct EventsFeature {
         }
 
         @CasePathable
-        enum ReducerAction {
-            case loadEvents([EventSearchResult])
-        }
+        enum ReducerAction { }
 
-        @CasePathable enum DelegateAction { }
-        @CasePathable enum DependentAction { }
+        @CasePathable
+        enum DelegateAction { }
+
+        @CasePathable
+        enum DependentAction { }
     }
 
     var body: some ReducerOf<Self> {
@@ -61,6 +51,7 @@ struct EventsFeature {
             switch action {
             case .view(.onAppear):
                 return .screen(name: "Events")
+
             default:
                 return .none
             }
@@ -68,37 +59,12 @@ struct EventsFeature {
         Reduce { state, action in
             switch action {
             case .view(.onAppear):
-                guard state.allEvents.isEmpty else { return .none }
-                state.isLoading = true
-                return loadEvents()
-
-            case .reducer(.loadEvents(let results)):
-                state.allEvents = results
-                state.isLoading = false
+                state.events = miqatService.getIslamicEvents(year: state.year)
                 return .none
 
             default:
                 return .none
             }
-        }
-    }
-
-    private func loadEvents() -> EffectOf<Self> {
-        .run { send in
-            guard let year = Date.now.ymd?.year else { return }
-
-            let gregorianFormatter = DateFormatter()
-            gregorianFormatter.dateFormat = "dd/MM/yyyy"
-            gregorianFormatter.locale = Locale(identifier: "en_US_POSIX")
-            gregorianFormatter.calendar = Calendar(identifier: .gregorian)
-
-            let hijriFormatter = DateFormatter()
-            hijriFormatter.calendar = Calendar(identifier: .islamicUmmAlQura)
-            hijriFormatter.dateFormat = "dd/MM/yyyy"
-
-            let results: [EventSearchResult] = []
-
-            await send(.reducer(.loadEvents(results)), animation: .default)
         }
     }
 }
