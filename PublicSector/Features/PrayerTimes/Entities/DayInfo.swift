@@ -43,7 +43,7 @@ extension DayInfo {
 }
 
 extension IslamicEvent {
-    var localizedStringKey: LocalizedStringKey {
+    var localizationKey: String {
         switch self {
         case .ashura: "Ashura commemoration"
         case .battleOfBadr: "The anniversary of the Battle of Badr (2 AH)"
@@ -62,5 +62,9 @@ extension IslamicEvent {
         case .mawlidAlNabi: "The anniversary of the birth of the Prophet (peace be upon him)"
         case .nisfShaban: "The night of the middle of Sha'ban"
         }
+    }
+
+    var localizedStringKey: LocalizedStringKey {
+        LocalizedStringKey(localizationKey)
     }
 }

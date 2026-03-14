@@ -12,21 +12,26 @@ struct EventsView: View {
     @Bindable var store: StoreOf<EventsFeature>
 
     var body: some View {
-        List {
-            if store.filteredEvents.isEmpty {
-                emptyState
-            } else {
+        content
+            .navigationTitle("Events")
+            .navigationBarTitleDisplayMode(.inline)
+            .searchable(
+                text: $store.query,
+                placement: .navigationBarDrawer(displayMode: .always),
+                prompt: Text("Search events and holidays")
+            )
+            .onAppear { store.send(.onAppear) }
+    }
+
+    @ViewBuilder
+    private var content: some View {
+        if store.filteredEvents.isEmpty {
+            emptyState
+        } else {
+            List {
                 eventRows
             }
         }
-        .navigationTitle("Events")
-        .navigationBarTitleDisplayMode(.inline)
-        .searchable(
-            text: $store.query,
-            placement: .navigationBarDrawer(displayMode: .always),
-            prompt: Text("Search events and holidays")
-        )
-        .onAppear { store.send(.onAppear) }
     }
 
     private var eventRows: some View {

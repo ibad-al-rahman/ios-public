@@ -20,7 +20,11 @@ struct EventsFeature {
         var query: String = ""
         var events: [MiqatEventOccurrence] = []
         var filteredEvents: [MiqatEventOccurrence] {
-            events
+            guard !query.isEmpty else { return events }
+            return events.filter { occurrence in
+                NSLocalizedString(occurrence.event.localizationKey, comment: "")
+                    .localizedCaseInsensitiveContains(query)
+            }
         }
     }
 
