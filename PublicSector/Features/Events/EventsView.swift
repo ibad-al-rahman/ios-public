@@ -13,12 +13,10 @@ struct EventsView: View {
 
     var body: some View {
         List {
-            if store.isLoading {
-                placeholderRows
-            } else if store.filteredResults.isEmpty {
+            if store.filteredEvents.isEmpty {
                 emptyState
             } else {
-                resultRows
+                eventRows
             }
         }
         .navigationTitle("Events")
@@ -31,31 +29,28 @@ struct EventsView: View {
         .onAppear { store.send(.onAppear) }
     }
 
-    private var resultRows: some View {
+    private var eventRows: some View {
         Section {
-            ForEach(store.filteredResults) { result in
-                resultRow(result)
+            ForEach(store.filteredEvents, id: \.event) { event in
+                VStack(alignment: .leading, spacing: Spacing.extraSmall.rawValue) {
+                    Text(event.event.localizedStringKey)
+                    HStack {
+                        Text(event.gregorianDate, format: .dateTime.day().month(.wide).year())
+                            .foregroundStyle(.secondary)
+                            .font(.footnote)
+                        Spacer()
+                        if let localeMonthName = event.hijriLocaleMonth {
+                            Text("\(event.hijriDay) \(localeMonthName) \(String(event.hijriYear))")
+                                .foregroundStyle(.secondary)
+                                .font(.footnote)
+                        }
+                    }
+                }
+                .padding(.vertical, Spacing.extraSmall.rawValue)
             }
         } header: {
-            Text(String(format: String(localized: "%lld results"), store.filteredResults.count))
+            Text(String(format: String(localized: "%lld results"), store.filteredEvents.count))
         }
-    }
-
-    private func resultRow(_ result: EventsFeature.EventSearchResult) -> some View {
-        VStack(alignment: .leading, spacing: Spacing.extraSmall.rawValue) {
-            Text(verbatim: eventName(result))
-                .environment(\.layoutDirection, eventLayoutDirection(result))
-            HStack {
-                Text(result.gregorian, format: .dateTime.day().month(.wide).year())
-                    .foregroundStyle(.secondary)
-                    .font(.footnote)
-                Spacer()
-                Text(verbatim: result.hijri)
-                    .foregroundStyle(.secondary)
-                    .font(.footnote)
-            }
-        }
-        .padding(.vertical, Spacing.extraSmall.rawValue)
     }
 
     @ViewBuilder
@@ -69,40 +64,6 @@ struct EventsView: View {
         } else {
             ContentUnavailableView.search(text: store.query)
         }
-    }
-
-    private var placeholderRows: some View {
-        Section {
-            ForEach(0 ..< 5, id: \.self) { _ in
-                VStack(alignment: .leading, spacing: Spacing.extraSmall.rawValue) {
-                    Text(verbatim: "Placeholder Event Name")
-                    Text(verbatim: "1 January 2026")
-                        .font(.footnote)
-                }
-                .padding(.vertical, Spacing.extraSmall.rawValue)
-                .redacted(reason: .placeholder)
-            }
-        }
-    }
-
-    private func eventName(_ result: EventsFeature.EventSearchResult) -> String {
-        if result.en != nil {
-            switch Locale.current.language.languageCode?.identifier {
-            case "en": return result.en ?? result.ar
-            case "ar": return result.ar
-            default: return result.ar
-            }
-        } else {
-            return result.ar
-        }
-    }
-
-    private func eventLayoutDirection(_ result: EventsFeature.EventSearchResult) -> LayoutDirection {
-        if result.en != nil,
-           Locale.current.language.languageCode?.identifier == "en" {
-            return .leftToRight
-        }
-        return .rightToLeft
     }
 }
 
