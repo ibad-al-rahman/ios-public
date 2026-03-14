@@ -28,8 +28,7 @@ struct DailyPrayerTimesView: View {
     var content: some View {
         Group {
             dayPrayerTimes(store.dayInfo)
-//            todaysEvents
-//            weeklyHadith
+            todaysEvents
         }
     }
 
@@ -80,6 +79,13 @@ struct DailyPrayerTimesView: View {
                     time: dayInfo.sunrise,
                     systemImage: "sunrise"
                 )
+                if let eid = dayInfo.eid {
+                    prayerTime(
+                        .eid,
+                        time: eid,
+                        systemImage: "fireworks"
+                    )
+                }
                 prayerTime(
                     .dhuhr,
                     time: dayInfo.dhuhr,
@@ -114,35 +120,20 @@ struct DailyPrayerTimesView: View {
         }
     }
 
-//    @ViewBuilder
-//    private var todaysEvents: some View {
-//        if let event = store.event {
-//            Section {
-//                Text(event)
-//            } header: {
-//                Text("Holidays and Events")
-//            }
-//        } else {
-//            EmptyView()
-//        }
-//    }
-
-//    @ViewBuilder
-//    private var weeklyHadith: some View {
-//        if let hadith = store.weeklyHadith {
-//            Section {
-//                Text(verbatim: hadith.hadith)
-//                    .environment(\.layoutDirection, .rightToLeft)
-//            } header: {
-//                Text("Hadith of the Week")
-//            } footer: {
-//                if let hadithNote = hadith.note {
-//                    Text(verbatim: hadithNote)
-//                        .environment(\.layoutDirection, .rightToLeft)
-//                }
-//            }
-//        }
-//    }
+    @ViewBuilder
+    private var todaysEvents: some View {
+        if store.dayInfo.islamicEvents.isEmpty {
+            EmptyView()
+        } else {
+            Section {
+                ForEach(store.dayInfo.islamicEvents, id: \.self) { event in
+                    Text(event.localizedStringKey)
+                }
+            } header: {
+                Text("Holidays and Events")
+            }
+        }
+    }
 
     @ViewBuilder
     private func prayerTime(

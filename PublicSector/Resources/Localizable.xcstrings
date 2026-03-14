@@ -38,6 +38,9 @@
         }
       }
     },
+    "Anniversary of the Conquest of Mecca (8 AH)" : {
+
+    },
     "Annual Prayer Times by Ibad" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -87,6 +90,9 @@
           }
         }
       }
+    },
+    "Ashura commemoration" : {
+
     },
     "Asr" : {
       "extractionState" : "manual",
@@ -288,6 +294,9 @@
         }
       }
     },
+    "Eid" : {
+
+    },
     "Evening adhkar" : {
       "localizations" : {
         "ar" : {
@@ -324,6 +333,9 @@
           }
         }
       }
+    },
+    "First of Ramadan" : {
+
     },
     "Hadith of the Week" : {
       "extractionState" : "stale",
@@ -424,6 +436,9 @@
         }
       }
     },
+    "Isra and Mi'raj" : {
+
+    },
     "Language" : {
       "localizations" : {
         "ar" : {
@@ -439,6 +454,9 @@
           }
         }
       }
+    },
+    "Laylat-ul-Qadr" : {
+
     },
     "Light theme" : {
       "extractionState" : "manual",
@@ -561,6 +579,9 @@
         }
       }
     },
+    "Standing at Arafat" : {
+
+    },
     "Sunrise" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -594,6 +615,36 @@
           }
         }
       }
+    },
+    "The anniversary of the Battle of Badr (2 AH)" : {
+
+    },
+    "The anniversary of the Battle of Hattin (583 AH)" : {
+
+    },
+    "The anniversary of the Battle of Mu'tah (8 AH)" : {
+
+    },
+    "The anniversary of the Battle of Tabuk (9 AH)" : {
+
+    },
+    "The anniversary of the Battle of Uhud (3 AH)" : {
+
+    },
+    "The anniversary of the birth of the Prophet (peace be upon him)" : {
+
+    },
+    "The beginning of the Hijri year" : {
+
+    },
+    "The first day of Eid al-Adha" : {
+
+    },
+    "The first day of Eid al-Fitr" : {
+
+    },
+    "The night of the middle of Sha'ban" : {
+
     },
     "Theme" : {
       "extractionState" : "manual",

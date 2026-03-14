@@ -1,5 +1,5 @@
 {
-  "originHash" : "f3c35d8fdf543b22fddb3204933b044a745d680072efa1de96b3e64f479868b3",
+  "originHash" : "9dfc5320ab86f4c10f1c560260170829841d0737b17c79ec748d4ca1907a515c",
   "pins" : [
     {
       "identity" : "abseil-cpp-binary",
@@ -105,8 +105,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/ibad-al-rahman/miqat",
       "state" : {
-        "revision" : "02d41879b7e4ba1df70faf260fd576a11efa258c",
-        "version" : "0.4.0"
+        "revision" : "c3f78a310311b99a8a235b87bae883bc4bf1accf",
+        "version" : "0.5.0"
       }
     },
     {

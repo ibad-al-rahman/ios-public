@@ -10,7 +10,7 @@ let package = Package(
         .library(name: "MiqatKit", targets: ["MiqatKit"]),
     ],
     dependencies: [
-        .package(url: "https://github.com/ibad-al-rahman/miqat", from: "0.4.0"),
+        .package(url: "https://github.com/ibad-al-rahman/miqat", from: "0.5.0"),
         .package(
             url: "https://github.com/pointfreeco/swift-dependencies",
             .upToNextMajor(from: "1.6.1")
