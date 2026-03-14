@@ -16,7 +16,7 @@ struct EventsFeature {
 
     @ObservableState
     struct State: Equatable {
-        var year: Int = 2026
+        var year: Int = Calendar.current.component(.year, from: Date())
         var query: String = ""
         var events: [MiqatEventOccurrence] = []
         var filteredEvents: [MiqatEventOccurrence] {
