@@ -11,9 +11,11 @@ import Foundation
 public struct MiqatData: Sendable, Equatable, Identifiable {
     public let id: String
     public let gregorian: Date
+
     public let imsak: Date?
     public let fajr: Date
     public let sunrise: Date
+    public let eid: Date?
     public let dhuhr: Date
     public let asr: Date
     public let maghrib: Date
@@ -22,6 +24,8 @@ public struct MiqatData: Sendable, Equatable, Identifiable {
     public let hijriDay: Int
     public let hijriMonth: Int
     public let hijriYear: Int
+
+    public let islamicEvents: [IslamicEvent]
 
     public var hijriLocaleMonth: String? {
         let formatter = DateFormatter()
@@ -54,14 +58,24 @@ public struct MiqatData: Sendable, Equatable, Identifiable {
         self.maghrib = Date(timeIntervalSince1970: TimeInterval(prayerTimes.maghrib()))
         self.ishaa = Date(timeIntervalSince1970: TimeInterval(prayerTimes.ishaa()))
 
-        let hijriDate = hijriDateFromTimestamp(timestampSecs: Int64(timestampSecs))
+        let hijriDateInfo = HijriDateInfo.fromTimestamp(timestampSecs: Int64(timestampSecs))
+        let hijriDate = hijriDateInfo.date()
         self.hijriDay = Int(hijriDate.day)
         self.hijriMonth = Int(hijriDate.month)
         self.hijriYear = Int(hijriDate.year)
 
-        // if ramadan then fill imsak
+        self.islamicEvents = hijriDateInfo.events()
+
+        // if ramadan then fill imsak (fajr - 20mins)
         self.imsak = if hijriDate.month == 9 {
             Calendar.current.date(byAdding: .minute, value: -20, to: self.fajr)
+        } else {
+            nil
+        }
+
+        // if eid then fill eid prayer time (sunrise + 45mins)
+        self.eid = if self.islamicEvents.contains(where: { $0 == .eidAlAdha || $0 == .eidAlFitr }) {
+            Calendar.current.date(byAdding: .minute, value: 45, to: self.sunrise)
         } else {
             nil
         }

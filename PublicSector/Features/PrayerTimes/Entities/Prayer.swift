@@ -11,6 +11,7 @@ enum Prayer: Equatable {
     case imsak
     case fajr
     case sunrise
+    case eid
     case dhuhr
     case asr
     case maghrib
@@ -21,6 +22,7 @@ enum Prayer: Equatable {
         case .imsak: "Imsak"
         case .fajr: "Fajr"
         case .sunrise: "Sunrise"
+        case .eid: "Eid"
         case .dhuhr: "Dhuhr"
         case .asr: "Asr"
         case .maghrib: "Maghrib"
