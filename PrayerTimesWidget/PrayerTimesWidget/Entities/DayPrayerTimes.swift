@@ -91,32 +91,32 @@ struct DayPrayerTimes: Equatable, Identifiable {
 }
 
 extension DayPrayerTimes {
-    init(from model: MiqatData) {
-        self.id = model.id
+    init(from data: MiqatData) {
+        self.id = data.id
 
-        self.gregorian = model.gregorian
+        self.gregorian = data.gregorian
 
         let dateFormatter = DateFormatter()
 
         dateFormatter.dateFormat = "d"
-        self.gregorianDay = dateFormatter.string(from: model.gregorian)
+        self.gregorianDay = dateFormatter.string(from: data.gregorian)
 
         dateFormatter.dateFormat = "MMMM"
-        self.gregorianMonth = dateFormatter.string(from: model.gregorian)
+        self.gregorianMonth = dateFormatter.string(from: data.gregorian)
 
         dateFormatter.dateFormat = "yyyy"
-        self.gregorianYear = dateFormatter.string(from: model.gregorian)
+        self.gregorianYear = dateFormatter.string(from: data.gregorian)
 
-        self.hijriDay = model.hijriDay
-        self.hijriMonth = model.hijriLocaleMonth ?? "\(model.hijriMonth)"
-        self.hijriYear = model.hijriYear
+        self.hijriDay = data.hijriDate.day
+        self.hijriMonth = data.hijriDate.localeMonth ?? "\(data.hijriDate.month)"
+        self.hijriYear = data.hijriDate.year
 
-        self.fajr = model.fajr
-        self.sunrise = model.sunrise
-        self.dhuhr = model.dhuhr
-        self.asr = model.asr
-        self.maghrib = model.maghrib
-        self.ishaa = model.ishaa
+        self.fajr = data.fajr
+        self.sunrise = data.sunrise
+        self.dhuhr = data.dhuhr
+        self.asr = data.asr
+        self.maghrib = data.maghrib
+        self.ishaa = data.ishaa
     }
 
     static func placeholder() -> DayPrayerTimes {

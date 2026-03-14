@@ -21,23 +21,9 @@ public struct MiqatData: Sendable, Equatable, Identifiable {
     public let maghrib: Date
     public let ishaa: Date
 
-    public let hijriDay: Int
-    public let hijriMonth: Int
-    public let hijriYear: Int
+    public let hijriDate: MiqatHijriDate
 
     public let islamicEvents: [IslamicEvent]
-
-    public var hijriLocaleMonth: String? {
-        let formatter = DateFormatter()
-        formatter.calendar = Calendar(identifier: .islamicUmmAlQura)
-        formatter.dateFormat = "M"
-
-        guard let date = formatter.date(from: "\(self.hijriMonth)")
-        else { return nil }
-
-        formatter.dateFormat = "MMMM"
-        return formatter.string(from: date)
-    }
 
     init(timestampSecs: TimeInterval, provider: Provider) {
         let date = Date(timeIntervalSince1970: timestampSecs)
@@ -60,9 +46,7 @@ public struct MiqatData: Sendable, Equatable, Identifiable {
 
         let hijriDateInfo = HijriDateInfo.fromTimestamp(timestampSecs: Int64(timestampSecs))
         let hijriDate = hijriDateInfo.date()
-        self.hijriDay = Int(hijriDate.day)
-        self.hijriMonth = Int(hijriDate.month)
-        self.hijriYear = Int(hijriDate.year)
+        self.hijriDate = MiqatHijriDate(from: hijriDate)
 
         self.islamicEvents = hijriDateInfo.events()
 

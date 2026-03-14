@@ -39,8 +39,8 @@ struct EventsView: View {
                             .foregroundStyle(.secondary)
                             .font(.footnote)
                         Spacer()
-                        if let localeMonthName = event.hijriLocaleMonth {
-                            Text("\(event.hijriDay) \(localeMonthName) \(String(event.hijriYear))")
+                        if let formattedHijriDate = event.hijriDate.formatted {
+                            Text(formattedHijriDate)
                                 .foregroundStyle(.secondary)
                                 .font(.footnote)
                         }
