@@ -39,6 +39,7 @@
       }
     },
     "Anniversary of the Conquest of Mecca (8 AH)" : {
+      "extractionState" : "stale",
       "localizations" : {
         "ar" : {
           "stringUnit" : {
@@ -105,6 +106,7 @@
       }
     },
     "Ashura commemoration" : {
+      "extractionState" : "stale",
       "localizations" : {
         "ar" : {
           "stringUnit" : {
@@ -351,6 +353,7 @@
       }
     },
     "First of Ramadan" : {
+      "extractionState" : "stale",
       "localizations" : {
         "ar" : {
           "stringUnit" : {
@@ -455,6 +458,7 @@
       }
     },
     "Isra and Mi'raj" : {
+      "extractionState" : "stale",
       "localizations" : {
         "ar" : {
           "stringUnit" : {
@@ -487,6 +491,7 @@
       }
     },
     "Laylat-ul-Qadr" : {
+      "extractionState" : "stale",
       "localizations" : {
         "ar" : {
           "stringUnit" : {
@@ -636,6 +641,7 @@
       }
     },
     "Standing at Arafat" : {
+      "extractionState" : "stale",
       "localizations" : {
         "ar" : {
           "stringUnit" : {
@@ -686,6 +692,7 @@
       }
     },
     "The anniversary of the Battle of Badr (2 AH)" : {
+      "extractionState" : "stale",
       "localizations" : {
         "ar" : {
           "stringUnit" : {
@@ -702,6 +709,7 @@
       }
     },
     "The anniversary of the Battle of Hattin (583 AH)" : {
+      "extractionState" : "stale",
       "localizations" : {
         "ar" : {
           "stringUnit" : {
@@ -718,6 +726,7 @@
       }
     },
     "The anniversary of the Battle of Mu'tah (8 AH)" : {
+      "extractionState" : "stale",
       "localizations" : {
         "ar" : {
           "stringUnit" : {
@@ -734,6 +743,7 @@
       }
     },
     "The anniversary of the Battle of Tabuk (9 AH)" : {
+      "extractionState" : "stale",
       "localizations" : {
         "ar" : {
           "stringUnit" : {
@@ -750,6 +760,7 @@
       }
     },
     "The anniversary of the Battle of Uhud (3 AH)" : {
+      "extractionState" : "stale",
       "localizations" : {
         "ar" : {
           "stringUnit" : {
@@ -766,6 +777,7 @@
       }
     },
     "The anniversary of the birth of the Prophet (peace be upon him)" : {
+      "extractionState" : "stale",
       "localizations" : {
         "ar" : {
           "stringUnit" : {
@@ -782,6 +794,7 @@
       }
     },
     "The beginning of the Hijri year" : {
+      "extractionState" : "stale",
       "localizations" : {
         "ar" : {
           "stringUnit" : {
@@ -798,6 +811,7 @@
       }
     },
     "The first day of Eid al-Adha" : {
+      "extractionState" : "stale",
       "localizations" : {
         "ar" : {
           "stringUnit" : {
@@ -814,6 +828,7 @@
       }
     },
     "The first day of Eid al-Fitr" : {
+      "extractionState" : "stale",
       "localizations" : {
         "ar" : {
           "stringUnit" : {
@@ -830,6 +845,7 @@
       }
     },
     "The night of the middle of Sha'ban" : {
+      "extractionState" : "stale",
       "localizations" : {
         "ar" : {
           "stringUnit" : {
