@@ -12,6 +12,7 @@
 		B3A843082F60D0B300506D4C /* MiqatKit in Frameworks */ = {isa = PBXBuildFile; productRef = B3A843072F60D0B300506D4C /* MiqatKit */; };
 		B3A8430A2F60D14D00506D4C /* MiqatKit in Frameworks */ = {isa = PBXBuildFile; productRef = B3A843092F60D14D00506D4C /* MiqatKit */; };
 		B3A8430C2F60F11000506D4C /* DayInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A8430B2F60F0FF00506D4C /* DayInfo.swift */; };
+		B3C05E572F65BA0800E63246 /* MiqatHijriDate+Formatted.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3C05E562F65B9F000E63246 /* MiqatHijriDate+Formatted.swift */; };
 		D9170D522CEFDE41006E45D5 /* WebLinks.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9170D512CEFDE15006E45D5 /* WebLinks.swift */; };
 		D9170D552CEFE554006E45D5 /* HelpFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9170D542CEFE552006E45D5 /* HelpFeature.swift */; };
 		D9170D572CEFE558006E45D5 /* HelpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9170D562CEFE557006E45D5 /* HelpView.swift */; };
@@ -127,6 +128,7 @@
 /* Begin PBXFileReference section */
 		B3A843052F60D02F00506D4C /* MiqatKit */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = MiqatKit; sourceTree = "<group>"; };
 		B3A8430B2F60F0FF00506D4C /* DayInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayInfo.swift; sourceTree = "<group>"; };
+		B3C05E562F65B9F000E63246 /* MiqatHijriDate+Formatted.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MiqatHijriDate+Formatted.swift"; sourceTree = "<group>"; };
 		D9170D512CEFDE15006E45D5 /* WebLinks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebLinks.swift; sourceTree = "<group>"; };
 		D9170D542CEFE552006E45D5 /* HelpFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpFeature.swift; sourceTree = "<group>"; };
 		D9170D562CEFE557006E45D5 /* HelpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpView.swift; sourceTree = "<group>"; };
@@ -322,6 +324,7 @@
 		D98D2BD52CA9ACA90050F2A8 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				B3C05E562F65B9F000E63246 /* MiqatHijriDate+Formatted.swift */,
 				D9E13FCF2D6267FE00D74C66 /* Date+Time.swift */,
 				D91BF19E2D45116400BEB410 /* Date+YMD.swift */,
 				D98D2BD62CA9ACD20050F2A8 /* SharedState+Keys.swift */,
@@ -880,6 +883,7 @@
 				D970CD7C2D03B888004D8E66 /* AppEntryFeature.swift in Sources */,
 				D9A70E152C859EA9002F6583 /* DailyPrayerTimesView.swift in Sources */,
 				D9DA3AB52D161C2D001AB599 /* DeveloperMenuFeature+Destination.swift in Sources */,
+				B3C05E572F65BA0800E63246 /* MiqatHijriDate+Formatted.swift in Sources */,
 				D9170D5A2CF0974E006E45D5 /* AdhkarFeature.swift in Sources */,
 				D95D31EA2E3D4DCA006820F4 /* Permissions.swift in Sources */,
 				D9A70E062C859977002F6583 /* SettingsFeature.swift in Sources */,

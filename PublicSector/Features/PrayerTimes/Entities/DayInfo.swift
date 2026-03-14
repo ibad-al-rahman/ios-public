@@ -36,13 +36,7 @@ extension DayInfo {
         self.asr = miqatData.asr
         self.maghrib = miqatData.maghrib
         self.ishaa = miqatData.ishaa
-
-        if let localeMonthName = miqatData.hijriLocaleMonth {
-            self.hijri = "\(miqatData.hijriDay) \(localeMonthName) \(miqatData.hijriYear)"
-        } else {
-            self.hijri = ""
-        }
-
+        self.hijri = miqatData.hijriDate.formatted ?? ""
         self.gregorian = miqatData.gregorian
         self.islamicEvents = miqatData.islamicEvents
     }
