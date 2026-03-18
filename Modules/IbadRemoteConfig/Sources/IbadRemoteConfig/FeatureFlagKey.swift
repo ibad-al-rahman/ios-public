@@ -29,10 +29,6 @@ public enum FeatureFlagKey: String, Codable, CaseIterable, Sendable {
 
 public extension [FeatureFlagKey: Bool] {
     static var `default`: [FeatureFlagKey: Bool] {
-        [
-            .adhkarScreen: false,
-            .eventsScreen: false,
-            .forceUpdate: false
-        ]
+        [:]
     }
 }

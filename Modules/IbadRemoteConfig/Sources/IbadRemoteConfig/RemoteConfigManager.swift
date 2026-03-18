@@ -21,11 +21,18 @@ struct RemoteConfigManager {
     }
 
     func isFlagEnabled(key: FeatureFlagKey) -> Bool {
-        self.pmffClient.isEnabled(key.rawValue)
+        if let enablement = featureFlags[key] {
+            return enablement
+        }
+        return self.pmffClient.isEnabled(key.rawValue)
     }
 
     func setFlag(key: FeatureFlagKey, newValue: Bool) {
-        $featureFlags.withLock { $0[key] = newValue }
+        if newValue == self.pmffClient.isEnabled(key.rawValue) {
+            _ = $featureFlags.withLock { $0.removeValue(forKey: key) }
+        } else {
+            $featureFlags.withLock { $0[key] = newValue }
+        }
     }
 
     func resetFlags() {
@@ -33,6 +40,6 @@ struct RemoteConfigManager {
     }
 
     func allFeatureFlags() -> [FeatureFlag] {
-        featureFlags.map { FeatureFlag(key: $0.key, value: $0.value) }
+        FeatureFlagKey.allCases.map { FeatureFlag(key: $0, value: isFlagEnabled(key: $0)) }
     }
 }
