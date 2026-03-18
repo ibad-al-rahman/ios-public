@@ -11,6 +11,10 @@ let package = Package(
     ],
     dependencies: [
         .package(
+            url: "https://github.com/ibad-al-rahman/swift-pmff",
+            .upToNextMajor(from: "0.5.0")
+        ),
+        .package(
             url: "https://github.com/pointfreeco/swift-dependencies",
             .upToNextMajor(from: "1.6.1")
         ),
@@ -21,6 +25,7 @@ let package = Package(
     ],
     targets: [
         .target(name: "IbadRemoteConfig", dependencies: [
+            .product(name: "Pmff", package: "swift-pmff"),
             .product(name: "Dependencies", package: "swift-dependencies"),
             .product(name: "DependenciesMacros", package: "swift-dependencies"),
             .product(name: "Sharing", package: "swift-sharing")

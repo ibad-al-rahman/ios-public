@@ -1,5 +1,5 @@
 {
-  "originHash" : "9dfc5320ab86f4c10f1c560260170829841d0737b17c79ec748d4ca1907a515c",
+  "originHash" : "9fe6e5cc1cbf0458eefee801273f62de50ea6531c12236c6f041ffe68ba300a3",
   "pins" : [
     {
       "identity" : "abseil-cpp-binary",
@@ -215,6 +215,15 @@
       "state" : {
         "revision" : "8d52279b9809ef27eabe7d5420f03734528f19da",
         "version" : "1.4.1"
+      }
+    },
+    {
+      "identity" : "swift-pmff",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/ibad-al-rahman/swift-pmff",
+      "state" : {
+        "revision" : "5d2d4beabd7e92eb96ed155e9f4c1ebf78f4c377",
+        "version" : "0.5.0"
       }
     },
     {
