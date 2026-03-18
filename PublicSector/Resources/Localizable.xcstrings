@@ -169,6 +169,9 @@
         }
       }
     },
+    "Cancel" : {
+
+    },
     "Contact us" : {
       "localizations" : {
         "ar" : {
@@ -330,6 +333,9 @@
           }
         }
       }
+    },
+    "Enable Notifications" : {
+
     },
     "Evening adhkar" : {
       "localizations" : {
@@ -571,6 +577,21 @@
 
     },
     "No events or holidays found for this year." : {
+
+    },
+    "Notifications" : {
+
+    },
+    "Notifications Disabled" : {
+
+    },
+    "Open Settings" : {
+
+    },
+    "Please enable notifications in Settings to receive prayer time alerts." : {
+
+    },
+    "Prayer Notifications" : {
 
     },
     "Prayer Times" : {
