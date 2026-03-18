@@ -13,6 +13,7 @@ import UIKit
 struct ExternalDeepLinks: Sendable {
     var appSettings: @Sendable () async -> Void
     var appStoreRatePage: @Sendable () async -> Void
+    var appStorePage: @Sendable () async -> Void
 }
 
 extension ExternalDeepLinks: DependencyKey {
@@ -25,6 +26,11 @@ extension ExternalDeepLinks: DependencyKey {
             },
             appStoreRatePage: { @MainActor in
                 if let url = URL(string: "itms-apps://apple.com/app/id6739705601?action=write-review&mt=8") {
+                    await UIApplication.shared.open(url)
+                }
+            },
+            appStorePage: { @MainActor in
+                if let url = URL(string: "itms-apps://apple.com/app/id6739705601") {
                     await UIApplication.shared.open(url)
                 }
             }
