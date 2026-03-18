@@ -12,7 +12,14 @@
       }
     },
     "A new version is available. Update the app to continue." : {
-
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "يتوفر إصدار جديد. يرجى تحديث التطبيق للمتابعة."
+          }
+        }
+      }
     },
     "Adhkar" : {
       "localizations" : {
@@ -115,6 +122,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "ذكرى عاشوراء"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ashura commemoration"
           }
         }
       }
@@ -899,7 +912,14 @@
       }
     },
     "Update Now" : {
-
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "حدّث الآن"
+          }
+        }
+      }
     },
     "Version" : {
       "extractionState" : "manual",
