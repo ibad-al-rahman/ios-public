@@ -132,6 +132,7 @@
 		B3A8430B2F60F0FF00506D4C /* DayInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayInfo.swift; sourceTree = "<group>"; };
 		B3BFBDA02F6A473600945455 /* ForceUpdateFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForceUpdateFeature.swift; sourceTree = "<group>"; };
 		B3BFBDA22F6A474000945455 /* ForceUpdateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForceUpdateView.swift; sourceTree = "<group>"; };
+		B3BFBDA42F6AE2E600945455 /* IbadEnvironment */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = IbadEnvironment; sourceTree = "<group>"; };
 		B3C05E562F65B9F000E63246 /* MiqatHijriDate+Formatted.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MiqatHijriDate+Formatted.swift"; sourceTree = "<group>"; };
 		D9170D512CEFDE15006E45D5 /* WebLinks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebLinks.swift; sourceTree = "<group>"; };
 		D9170D542CEFE552006E45D5 /* HelpFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpFeature.swift; sourceTree = "<group>"; };
@@ -280,6 +281,7 @@
 		D9089CE02CFDAC0200881BB6 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				B3BFBDA42F6AE2E600945455 /* IbadEnvironment */,
 				B3A843052F60D02F00506D4C /* MiqatKit */,
 				D91BF1392D3FED9400BEB410 /* IbadAnalytics */,
 				D9DA3AAB2D160B89001AB599 /* IbadRemoteConfig */,
