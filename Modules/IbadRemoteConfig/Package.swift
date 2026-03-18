@@ -21,15 +21,21 @@ let package = Package(
         .package(
             url: "https://github.com/pointfreeco/swift-sharing",
             .upToNextMajor(from: "2.1.0")
-        )
+        ),
+        .package(path: "../IbadEnvironment")
     ],
     targets: [
-        .target(name: "IbadRemoteConfig", dependencies: [
-            .product(name: "Pmff", package: "swift-pmff"),
-            .product(name: "Dependencies", package: "swift-dependencies"),
-            .product(name: "DependenciesMacros", package: "swift-dependencies"),
-            .product(name: "Sharing", package: "swift-sharing")
-        ]),
+        .target(
+            name: "IbadRemoteConfig",
+            dependencies: [
+                .product(name: "Pmff", package: "swift-pmff"),
+                .product(name: "Dependencies", package: "swift-dependencies"),
+                .product(name: "DependenciesMacros", package: "swift-dependencies"),
+                .product(name: "Sharing", package: "swift-sharing"),
+                .product(name: "IbadEnvironment", package: "IbadEnvironment")
+            ],
+            swiftSettings: [.define("RELEASE", .when(configuration: .release))]
+        ),
         .testTarget(
             name: "IbadRemoteConfigTests",
             dependencies: ["IbadRemoteConfig"]

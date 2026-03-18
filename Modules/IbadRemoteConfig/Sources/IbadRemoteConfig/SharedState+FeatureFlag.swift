@@ -8,7 +8,7 @@
 import Foundation
 import Sharing
 
-extension SharedKey where Self == FileStorageKey<[FeatureFlagKey: Bool]> {
+extension SharedKey where Self == FileStorageKey<FeatureFlagDict> {
     static var featureFlags: Self {
         fileStorage(
             .documentsDirectory.appending(component: "featureFlags.json")
