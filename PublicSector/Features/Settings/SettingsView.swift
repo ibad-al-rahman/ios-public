@@ -26,6 +26,7 @@ struct SettingsView: View {
                     NavigationRowView("Notifications", systemName: "app.badge")
                         .onTapGesture { store.send(.onTapNotifications) }
                 }
+                .featureFlagged(.prayerTimesNotifications)
 
                 displaySection
 

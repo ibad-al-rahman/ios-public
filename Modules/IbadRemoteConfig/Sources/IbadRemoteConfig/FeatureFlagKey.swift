@@ -6,23 +6,26 @@
 //
 
 public enum FeatureFlagKey: String, Codable, CaseIterable, Sendable {
+    case forceUpdate = "ff_mobile_forceUpdate"
     case adhkarScreen = "ff_apple_adhkar_screen"
     case eventsScreen = "ff_apple_events_screen"
-    case forceUpdate = "ff_mobile_forceUpdate"
+    case prayerTimesNotifications = "ff_apple_prayerTimes_notifications"
 
     public var display: String {
         switch self {
+        case .forceUpdate: "Force update"
         case .adhkarScreen: "Adhkar screen"
         case .eventsScreen: "Events screen"
-        case .forceUpdate: "Force update"
+        case .prayerTimesNotifications: "Prayer time notifications"
         }
     }
 
     public var description: String {
         switch self {
+        case .forceUpdate: "Enable force update screen"
         case .adhkarScreen: "Enable adhkar screen"
         case .eventsScreen: "Enable events screen"
-        case .forceUpdate: "Enable force update screen"
+        case .prayerTimesNotifications: "Enable prayer times notifications"
         }
     }
 }
