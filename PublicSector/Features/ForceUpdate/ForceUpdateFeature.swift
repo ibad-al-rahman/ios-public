@@ -9,6 +9,8 @@ import ComposableArchitecture
 
 @Reducer
 struct ForceUpdateFeature {
+    @Dependency(\.externalDeepLinks.appStorePage) private var openAppStore
+
     @ObservableState
     struct State: Equatable { }
 
@@ -33,6 +35,16 @@ struct ForceUpdateFeature {
     }
 
     var body: some ReducerOf<Self> {
-        EmptyReducer()
+        Reduce { state, action in
+            switch action {
+            case .view(.onTapUpdate):
+                return .run { _ in
+                    await openAppStore()
+                }
+
+            default:
+                return .none
+            }
+        }
     }
 }

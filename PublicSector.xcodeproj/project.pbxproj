@@ -14,6 +14,7 @@
 		B3A8430C2F60F11000506D4C /* DayInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A8430B2F60F0FF00506D4C /* DayInfo.swift */; };
 		B3BFBDA12F6A473C00945455 /* ForceUpdateFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3BFBDA02F6A473600945455 /* ForceUpdateFeature.swift */; };
 		B3BFBDA32F6A474400945455 /* ForceUpdateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3BFBDA22F6A474000945455 /* ForceUpdateView.swift */; };
+		B3BFBDA72F6AED5500945455 /* IbadEnvironment in Frameworks */ = {isa = PBXBuildFile; productRef = B3BFBDA62F6AED5500945455 /* IbadEnvironment */; };
 		B3C05E572F65BA0800E63246 /* MiqatHijriDate+Formatted.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3C05E562F65B9F000E63246 /* MiqatHijriDate+Formatted.swift */; };
 		D9170D522CEFDE41006E45D5 /* WebLinks.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9170D512CEFDE15006E45D5 /* WebLinks.swift */; };
 		D9170D552CEFE554006E45D5 /* HelpFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9170D542CEFE552006E45D5 /* HelpFeature.swift */; };
@@ -75,7 +76,6 @@
 		D9B34CE22CDFBA1B00C07BA7 /* DebugSettings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D9B34CE02CDFBA1B00C07BA7 /* DebugSettings.bundle */; };
 		D9B34CE32CDFBA1B00C07BA7 /* ReleaseSettings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D9B34CE12CDFBA1B00C07BA7 /* ReleaseSettings.bundle */; };
 		D9B4AB502D24B1E300E201CA /* InfoPlist.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = D9B4AB4F2D24B1E300E201CA /* InfoPlist.xcstrings */; };
-		D9B4AB562D24B8B500E201CA /* AppInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9B4AB552D24B8B100E201CA /* AppInfo.swift */; };
 		D9C85AC62CF38EEC00730F12 /* NavigationRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9C85AC52CF38EE000730F12 /* NavigationRowView.swift */; };
 		D9DA3AAE2D161431001AB599 /* IbadRemoteConfig in Frameworks */ = {isa = PBXBuildFile; productRef = D9DA3AAD2D161431001AB599 /* IbadRemoteConfig */; };
 		D9DA3AB12D1618AF001AB599 /* FeatureFlagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9DA3AB02D1618A6001AB599 /* FeatureFlagView.swift */; };
@@ -192,7 +192,6 @@
 		D9B34CE02CDFBA1B00C07BA7 /* DebugSettings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = DebugSettings.bundle; sourceTree = "<group>"; };
 		D9B34CE12CDFBA1B00C07BA7 /* ReleaseSettings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = ReleaseSettings.bundle; sourceTree = "<group>"; };
 		D9B4AB4F2D24B1E300E201CA /* InfoPlist.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = InfoPlist.xcstrings; sourceTree = "<group>"; };
-		D9B4AB552D24B8B100E201CA /* AppInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppInfo.swift; sourceTree = "<group>"; };
 		D9C85AC52CF38EE000730F12 /* NavigationRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationRowView.swift; sourceTree = "<group>"; };
 		D9DA3AA52D15FC88001AB599 /* ci_post_clone.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = ci_post_clone.sh; sourceTree = "<group>"; };
 		D9DA3AAB2D160B89001AB599 /* IbadRemoteConfig */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = IbadRemoteConfig; sourceTree = "<group>"; };
@@ -232,6 +231,7 @@
 				D9DA3AAE2D161431001AB599 /* IbadRemoteConfig in Frameworks */,
 				D91BF1282D3FDB9800BEB410 /* FirebaseCore in Frameworks */,
 				D91BF12C2D3FDB9800BEB410 /* FirebaseRemoteConfig in Frameworks */,
+				B3BFBDA72F6AED5500945455 /* IbadEnvironment in Frameworks */,
 				D91BF12A2D3FDB9800BEB410 /* FirebaseCrashlytics in Frameworks */,
 				D91BF13C2D4019B500BEB410 /* IbadAnalytics in Frameworks */,
 				B3A843082F60D0B300506D4C /* MiqatKit in Frameworks */,
@@ -329,7 +329,6 @@
 			isa = PBXGroup;
 			children = (
 				D95D31E92E3D4DC6006820F4 /* Permissions.swift */,
-				D9B4AB552D24B8B100E201CA /* AppInfo.swift */,
 				D9170D512CEFDE15006E45D5 /* WebLinks.swift */,
 				D98903AA2CDE347800717646 /* ExternalDeepLinks.swift */,
 			);
@@ -654,6 +653,7 @@
 				719899CF2F59F76500BC65FB /* SwiftNavigation */,
 				719899D12F59F76500BC65FB /* SwiftUINavigation */,
 				B3A843072F60D0B300506D4C /* MiqatKit */,
+				B3BFBDA62F6AED5500945455 /* IbadEnvironment */,
 			);
 			productName = PublicSector;
 			productReference = D9A70DB62C850B78002F6583 /* PublicSector.app */;
@@ -762,6 +762,7 @@
 				D91BF13A2D4019B500BEB410 /* XCLocalSwiftPackageReference "Modules/IbadAnalytics" */,
 				719899CE2F59F76500BC65FB /* XCRemoteSwiftPackageReference "swift-navigation" */,
 				B3A843062F60D0B300506D4C /* XCLocalSwiftPackageReference "Modules/MiqatKit" */,
+				B3BFBDA52F6AED5500945455 /* XCLocalSwiftPackageReference "Modules/IbadEnvironment" */,
 			);
 			productRefGroup = D9A70DB72C850B78002F6583 /* Products */;
 			projectDirPath = "";
@@ -895,7 +896,6 @@
 				D970CD7E2D03B890004D8E66 /* AppEntryView.swift in Sources */,
 				D91BF19F2D45116B00BEB410 /* Date+YMD.swift in Sources */,
 				B3BFBDA32F6A474400945455 /* ForceUpdateView.swift in Sources */,
-				D9B4AB562D24B8B500E201CA /* AppInfo.swift in Sources */,
 				D98D2BDA2CA9B14A0050F2A8 /* View+ControlFlow.swift in Sources */,
 				D970CD7C2D03B888004D8E66 /* AppEntryFeature.swift in Sources */,
 				D9A70E152C859EA9002F6583 /* DailyPrayerTimesView.swift in Sources */,
@@ -1114,7 +1114,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"PublicSector/Preview Content\"";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = AV5475SLZ7;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = NO;
@@ -1153,7 +1153,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"PublicSector/Preview Content\"";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = AV5475SLZ7;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = NO;
@@ -1371,6 +1371,10 @@
 			isa = XCLocalSwiftPackageReference;
 			relativePath = Modules/MiqatKit;
 		};
+		B3BFBDA52F6AED5500945455 /* XCLocalSwiftPackageReference "Modules/IbadEnvironment" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = Modules/IbadEnvironment;
+		};
 		D91BF13A2D4019B500BEB410 /* XCLocalSwiftPackageReference "Modules/IbadAnalytics" */ = {
 			isa = XCLocalSwiftPackageReference;
 			relativePath = Modules/IbadAnalytics;
@@ -1426,6 +1430,10 @@
 		B3A843092F60D14D00506D4C /* MiqatKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = MiqatKit;
+		};
+		B3BFBDA62F6AED5500945455 /* IbadEnvironment */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = IbadEnvironment;
 		};
 		D91BF1252D3FDB9800BEB410 /* FirebaseAnalytics */ = {
 			isa = XCSwiftPackageProductDependency;
