@@ -12,6 +12,12 @@ struct AppEntryView: View {
     let store: StoreOf<AppEntryFeature>
 
     var body: some View {
+        content
+            .onAppear { store.send(.onAppear) }
+    }
+
+    @ViewBuilder
+    private var content: some View {
         switch store.state {
         case .app:
             if let scopedStore = store.scope(
@@ -26,6 +32,14 @@ struct AppEntryView: View {
                 action: \.startup
             ) {
                 StartupView(store: scopedStore)
+            }
+
+        case .forceUpdate:
+            if let scopedStore = store.scope(
+                state: \.forceUpdate,
+                action: \.forceUpdate
+            ) {
+                ForceUpdateView(store: scopedStore)
             }
         }
     }

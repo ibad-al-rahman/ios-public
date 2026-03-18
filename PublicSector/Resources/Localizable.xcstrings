@@ -11,6 +11,9 @@
         }
       }
     },
+    "A new version is available. Update the app to continue." : {
+
+    },
     "Adhkar" : {
       "localizations" : {
         "ar" : {
@@ -894,6 +897,9 @@
           }
         }
       }
+    },
+    "Update Now" : {
+
     },
     "Version" : {
       "extractionState" : "manual",
