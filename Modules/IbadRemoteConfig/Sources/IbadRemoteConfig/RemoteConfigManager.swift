@@ -5,14 +5,24 @@
 //  Created by Hamza Jadid on 20/12/2024.
 //
 
+import Foundation
+import Pmff
 import Sharing
 
 struct RemoteConfigManager {
     @Shared(.featureFlags) private var featureFlags = .default
+    private let pmffClient: RemoteFeatureFlagClient
+
+    init() {
+        self.pmffClient = RemoteFeatureFlagClient(
+            url: URL(string: "https://ibad-al-rahman.github.io/remote-config/flags.json")!,
+            refreshInterval: 10
+        )
+        self.pmffClient.start()
+    }
 
     func isFlagEnabled(key: FeatureFlagKey) -> Bool {
-        guard let value = featureFlags[key] else { return false }
-        return value
+        self.pmffClient.isEnabled(key.rawValue)
     }
 
     func setFlag(key: FeatureFlagKey, newValue: Bool) {
