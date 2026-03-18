@@ -8,11 +8,13 @@
 public enum FeatureFlagKey: String, Codable, CaseIterable, Sendable {
     case adhkarScreen = "ff_apple_adhkar_screen"
     case eventsScreen = "ff_apple_events_screen"
+    case forceUpdate = "ff_mobile_forceUpdate"
 
     public var display: String {
         switch self {
         case .adhkarScreen: "Adhkar screen"
         case .eventsScreen: "Events screen"
+        case .forceUpdate: "Force update"
         }
     }
 
@@ -20,6 +22,7 @@ public enum FeatureFlagKey: String, Codable, CaseIterable, Sendable {
         switch self {
         case .adhkarScreen: "Enable adhkar screen"
         case .eventsScreen: "Enable events screen"
+        case .forceUpdate: "Enable force update screen"
         }
     }
 }
@@ -28,7 +31,8 @@ public extension [FeatureFlagKey: Bool] {
     static var `default`: [FeatureFlagKey: Bool] {
         [
             .adhkarScreen: false,
-            .eventsScreen: false
+            .eventsScreen: false,
+            .forceUpdate: false
         ]
     }
 }

@@ -12,7 +12,7 @@ let package = Package(
     dependencies: [
         .package(
             url: "https://github.com/ibad-al-rahman/swift-pmff",
-            .upToNextMajor(from: "0.5.0")
+            .upToNextMajor(from: "0.5.1")
         ),
         .package(
             url: "https://github.com/pointfreeco/swift-dependencies",

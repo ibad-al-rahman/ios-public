@@ -19,7 +19,7 @@ struct ContentView: View {
 
     private var appEntry: some View {
         AppEntryView(store: Store(
-            initialState: .app(AppFeature.State()),
+            initialState: .startup(StartupFeature.State()),
             reducer: AppEntryFeature.init
         ))
     }

@@ -16,9 +16,8 @@ struct RemoteConfigManager {
     init() {
         self.pmffClient = RemoteFeatureFlagClient(
             url: URL(string: "https://ibad-al-rahman.github.io/remote-config/flags.json")!,
-            refreshInterval: 10
+            refreshInterval: 60
         )
-        self.pmffClient.start()
     }
 
     func isFlagEnabled(key: FeatureFlagKey) -> Bool {

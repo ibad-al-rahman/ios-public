@@ -13,7 +13,7 @@ struct StartupView: View {
 
     var body: some View {
         ZStack {
-            Image("Logo")
+            Image("MultiColorLogo")
                 .resizable()
                 .frame(maxWidth: 250, maxHeight: 250)
                 .scaledToFit()

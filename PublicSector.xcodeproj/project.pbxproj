@@ -12,6 +12,8 @@
 		B3A843082F60D0B300506D4C /* MiqatKit in Frameworks */ = {isa = PBXBuildFile; productRef = B3A843072F60D0B300506D4C /* MiqatKit */; };
 		B3A8430A2F60D14D00506D4C /* MiqatKit in Frameworks */ = {isa = PBXBuildFile; productRef = B3A843092F60D14D00506D4C /* MiqatKit */; };
 		B3A8430C2F60F11000506D4C /* DayInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A8430B2F60F0FF00506D4C /* DayInfo.swift */; };
+		B3BFBDA12F6A473C00945455 /* ForceUpdateFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3BFBDA02F6A473600945455 /* ForceUpdateFeature.swift */; };
+		B3BFBDA32F6A474400945455 /* ForceUpdateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3BFBDA22F6A474000945455 /* ForceUpdateView.swift */; };
 		B3C05E572F65BA0800E63246 /* MiqatHijriDate+Formatted.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3C05E562F65B9F000E63246 /* MiqatHijriDate+Formatted.swift */; };
 		D9170D522CEFDE41006E45D5 /* WebLinks.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9170D512CEFDE15006E45D5 /* WebLinks.swift */; };
 		D9170D552CEFE554006E45D5 /* HelpFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9170D542CEFE552006E45D5 /* HelpFeature.swift */; };
@@ -128,6 +130,8 @@
 /* Begin PBXFileReference section */
 		B3A843052F60D02F00506D4C /* MiqatKit */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = MiqatKit; sourceTree = "<group>"; };
 		B3A8430B2F60F0FF00506D4C /* DayInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayInfo.swift; sourceTree = "<group>"; };
+		B3BFBDA02F6A473600945455 /* ForceUpdateFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForceUpdateFeature.swift; sourceTree = "<group>"; };
+		B3BFBDA22F6A474000945455 /* ForceUpdateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForceUpdateView.swift; sourceTree = "<group>"; };
 		B3C05E562F65B9F000E63246 /* MiqatHijriDate+Formatted.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MiqatHijriDate+Formatted.swift"; sourceTree = "<group>"; };
 		D9170D512CEFDE15006E45D5 /* WebLinks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebLinks.swift; sourceTree = "<group>"; };
 		D9170D542CEFE552006E45D5 /* HelpFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpFeature.swift; sourceTree = "<group>"; };
@@ -264,6 +268,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B3BFBD9F2F6A472300945455 /* ForceUpdate */ = {
+			isa = PBXGroup;
+			children = (
+				B3BFBDA22F6A474000945455 /* ForceUpdateView.swift */,
+				B3BFBDA02F6A473600945455 /* ForceUpdateFeature.swift */,
+			);
+			path = ForceUpdate;
+			sourceTree = "<group>";
+		};
 		D9089CE02CFDAC0200881BB6 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
@@ -457,6 +470,7 @@
 		D9A70DEA2C8595D6002F6583 /* Features */ = {
 			isa = PBXGroup;
 			children = (
+				B3BFBD9F2F6A472300945455 /* ForceUpdate */,
 				717FBF6F2F5B49DD005D5D48 /* Events */,
 				D970CD7A2D03B873004D8E66 /* AppEntry */,
 				D97A9FE32D03AC98000F3070 /* Startup */,
@@ -878,6 +892,7 @@
 				D9A70DEC2C8595E5002F6583 /* Spacing.swift in Sources */,
 				D970CD7E2D03B890004D8E66 /* AppEntryView.swift in Sources */,
 				D91BF19F2D45116B00BEB410 /* Date+YMD.swift in Sources */,
+				B3BFBDA32F6A474400945455 /* ForceUpdateView.swift in Sources */,
 				D9B4AB562D24B8B500E201CA /* AppInfo.swift in Sources */,
 				D98D2BDA2CA9B14A0050F2A8 /* View+ControlFlow.swift in Sources */,
 				D970CD7C2D03B888004D8E66 /* AppEntryFeature.swift in Sources */,
@@ -900,6 +915,7 @@
 				D9A70DF42C859684002F6583 /* Preview+Arabic.swift in Sources */,
 				D98903AB2CDE348C00717646 /* ExternalDeepLinks.swift in Sources */,
 				D9A70E172C859ED5002F6583 /* PrayerTimesFeature.swift in Sources */,
+				B3BFBDA12F6A473C00945455 /* ForceUpdateFeature.swift in Sources */,
 				D9170D5C2CF09754006E45D5 /* AdhkarView.swift in Sources */,
 				D9A70E0F2C859E57002F6583 /* WeeklyPrayerTimesFeature.swift in Sources */,
 				D9A70E132C859E83002F6583 /* DailyPrayerTimesFeature.swift in Sources */,
