@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		719899D02F59F76500BC65FB /* SwiftNavigation in Frameworks */ = {isa = PBXBuildFile; productRef = 719899CF2F59F76500BC65FB /* SwiftNavigation */; };
 		719899D22F59F76500BC65FB /* SwiftUINavigation in Frameworks */ = {isa = PBXBuildFile; productRef = 719899D12F59F76500BC65FB /* SwiftUINavigation */; };
+		B30CB8D22F6B551800F92DDF /* NotificationsFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = B30CB8D12F6B551500F92DDF /* NotificationsFeature.swift */; };
+		B30CB8D42F6B558A00F92DDF /* NotificationsFeature+Destination.swift in Sources */ = {isa = PBXBuildFile; fileRef = B30CB8D32F6B558400F92DDF /* NotificationsFeature+Destination.swift */; };
+		B30CB8D62F6B55BB00F92DDF /* AlertState+Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = B30CB8D52F6B55BA00F92DDF /* AlertState+Notifications.swift */; };
+		B30CB8D82F6B560B00F92DDF /* NotificationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B30CB8D72F6B560700F92DDF /* NotificationsView.swift */; };
 		B3A843082F60D0B300506D4C /* MiqatKit in Frameworks */ = {isa = PBXBuildFile; productRef = B3A843072F60D0B300506D4C /* MiqatKit */; };
 		B3A8430A2F60D14D00506D4C /* MiqatKit in Frameworks */ = {isa = PBXBuildFile; productRef = B3A843092F60D14D00506D4C /* MiqatKit */; };
 		B3A8430C2F60F11000506D4C /* DayInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A8430B2F60F0FF00506D4C /* DayInfo.swift */; };
@@ -128,6 +132,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		B30CB8D12F6B551500F92DDF /* NotificationsFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsFeature.swift; sourceTree = "<group>"; };
+		B30CB8D32F6B558400F92DDF /* NotificationsFeature+Destination.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NotificationsFeature+Destination.swift"; sourceTree = "<group>"; };
+		B30CB8D52F6B55BA00F92DDF /* AlertState+Notifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AlertState+Notifications.swift"; sourceTree = "<group>"; };
+		B30CB8D72F6B560700F92DDF /* NotificationsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsView.swift; sourceTree = "<group>"; };
 		B3A843052F60D02F00506D4C /* MiqatKit */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = MiqatKit; sourceTree = "<group>"; };
 		B3A8430B2F60F0FF00506D4C /* DayInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayInfo.swift; sourceTree = "<group>"; };
 		B3BFBDA02F6A473600945455 /* ForceUpdateFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForceUpdateFeature.swift; sourceTree = "<group>"; };
@@ -269,6 +277,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B30CB8D02F6B550300F92DDF /* Notifications */ = {
+			isa = PBXGroup;
+			children = (
+				B30CB8D72F6B560700F92DDF /* NotificationsView.swift */,
+				B30CB8D52F6B55BA00F92DDF /* AlertState+Notifications.swift */,
+				B30CB8D32F6B558400F92DDF /* NotificationsFeature+Destination.swift */,
+				B30CB8D12F6B551500F92DDF /* NotificationsFeature.swift */,
+			);
+			path = Notifications;
+			sourceTree = "<group>";
+		};
 		B3BFBD9F2F6A472300945455 /* ForceUpdate */ = {
 			isa = PBXGroup;
 			children = (
@@ -496,6 +515,7 @@
 		D9A70DF62C8596C4002F6583 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
+				B30CB8D02F6B550300F92DDF /* Notifications */,
 				D9170D532CEFE54A006E45D5 /* Help */,
 				D98D2BDB2CA9B5000050F2A8 /* Appearance */,
 				D9A70E052C859977002F6583 /* SettingsFeature.swift */,
@@ -887,6 +907,7 @@
 				D9A70E042C85975D002F6583 /* DeveloperButtonView.swift in Sources */,
 				D9A70E1B2C859F1F002F6583 /* AppFeature.swift in Sources */,
 				D98D2BDF2CA9B5140050F2A8 /* AppearanceView.swift in Sources */,
+				B30CB8D82F6B560B00F92DDF /* NotificationsView.swift in Sources */,
 				D9A70DBC2C850B78002F6583 /* ContentView.swift in Sources */,
 				D9170D6F2CF0D5F7006E45D5 /* Prayer.swift in Sources */,
 				D9A70E1D2C859F31002F6583 /* AppView.swift in Sources */,
@@ -896,6 +917,7 @@
 				D970CD7E2D03B890004D8E66 /* AppEntryView.swift in Sources */,
 				D91BF19F2D45116B00BEB410 /* Date+YMD.swift in Sources */,
 				B3BFBDA32F6A474400945455 /* ForceUpdateView.swift in Sources */,
+				B30CB8D62F6B55BB00F92DDF /* AlertState+Notifications.swift in Sources */,
 				D98D2BDA2CA9B14A0050F2A8 /* View+ControlFlow.swift in Sources */,
 				D970CD7C2D03B888004D8E66 /* AppEntryFeature.swift in Sources */,
 				D9A70E152C859EA9002F6583 /* DailyPrayerTimesView.swift in Sources */,
@@ -903,6 +925,7 @@
 				B3C05E572F65BA0800E63246 /* MiqatHijriDate+Formatted.swift in Sources */,
 				D9170D5A2CF0974E006E45D5 /* AdhkarFeature.swift in Sources */,
 				D95D31EA2E3D4DCA006820F4 /* Permissions.swift in Sources */,
+				B30CB8D42F6B558A00F92DDF /* NotificationsFeature+Destination.swift in Sources */,
 				D9A70E062C859977002F6583 /* SettingsFeature.swift in Sources */,
 				D97A9FE72D03ACC6000F3070 /* StartupView.swift in Sources */,
 				D9170D522CEFDE41006E45D5 /* WebLinks.swift in Sources */,
@@ -911,6 +934,7 @@
 				D9A70E082C859D3F002F6583 /* SettingsView.swift in Sources */,
 				D98D2BDD2CA9B50D0050F2A8 /* AppearanceFeature.swift in Sources */,
 				D9170D572CEFE558006E45D5 /* HelpView.swift in Sources */,
+				B30CB8D22F6B551800F92DDF /* NotificationsFeature.swift in Sources */,
 				D9A70E022C859748002F6583 /* DeveloperButton+Destination.swift in Sources */,
 				D98D2BD72CA9ACD20050F2A8 /* SharedState+Keys.swift in Sources */,
 				D9A70DEE2C85960B002F6583 /* BaseFeature.swift in Sources */,

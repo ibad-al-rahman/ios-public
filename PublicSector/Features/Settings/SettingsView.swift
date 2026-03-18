@@ -22,6 +22,11 @@ struct SettingsView: View {
                     Spacer(minLength: Spacing.small)
                 }
 
+                Section {
+                    NavigationRowView("Notifications", systemName: "app.badge")
+                        .onTapGesture { store.send(.onTapNotifications) }
+                }
+
                 displaySection
 
                 Section {
@@ -45,6 +50,13 @@ struct SettingsView: View {
                     action: \.dependent.destination.appearance
                 ),
                 destination: { AppearanceView(store: $0) }
+            )
+            .navigationDestination(
+                item: $store.scope(
+                    state: \.destination?.notifications,
+                    action: \.dependent.destination.notifications
+                ),
+                destination: { NotificationsView(store: $0) }
             )
             .sheet(
                 item: $store.scope(
