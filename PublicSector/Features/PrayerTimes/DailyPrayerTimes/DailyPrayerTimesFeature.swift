@@ -9,7 +9,6 @@ import ComposableArchitecture
 import Foundation
 import IbadAnalytics
 import MiqatKit
-import WidgetKit
 
 @Reducer
 struct DailyPrayerTimesFeature {
@@ -101,7 +100,6 @@ struct DailyPrayerTimesFeature {
                     state.date = .now
                 }
                 fillPrayerTimes(state: &state)
-                WidgetCenter.shared.reloadAllTimelines()
                 return .none
 
             case .binding(\.date):
