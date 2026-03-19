@@ -13,6 +13,7 @@ import UserNotifications
 struct NotificationsFeature {
     @Dependency(\.permissions) var permissions
     @Dependency(\.externalDeepLinks) var externalDeepLinks
+    @Dependency(\.prayerTimesNotificationScheduler.scheduleNotifications) private var scheduleNotifications
 
     @ObservableState
     struct State: Equatable {
@@ -65,31 +66,6 @@ struct NotificationsFeature {
         BindingReducer()
         Reduce { state, action in
             switch action {
-            case .binding(\.notificationsEnabled):
-                guard state.notificationsEnabled else {
-                    return .none
-                }
-
-                return .run { send in
-                    let status = await permissions.getPushNotificationPermissionStatus()
-
-                    switch status {
-                    case .authorized:
-                        return
-
-                    case .notDetermined, .provisional, .ephemeral:
-                        await send(.reducer(.permissionResponse(Result {
-                            try await permissions.requestPushNotificationPermission()
-                        })))
-
-                    case .denied:
-                        await send(.reducer(.permissionResponse(.success(false))))
-
-                    @unknown default:
-                        return
-                    }
-                }
-
             case let .reducer(.permissionResponse(.success(granted))):
                 if !granted {
                     state.$notificationsEnabled.withLock { $0 = false }
@@ -108,6 +84,41 @@ struct NotificationsFeature {
 
             case .dependent(.destination(.presented(.alert(.cancel)))):
                 return .none
+
+            case .binding(\.notificationsEnabled):
+                guard state.notificationsEnabled else {
+                    return .none
+                }
+
+                return .merge(
+                    .run { send in
+                        let status = await permissions.getPushNotificationPermissionStatus()
+
+                        switch status {
+                        case .authorized:
+                            return
+
+                        case .notDetermined, .provisional, .ephemeral:
+                            await send(.reducer(.permissionResponse(Result {
+                                try await permissions.requestPushNotificationPermission()
+                            })))
+
+                        case .denied:
+                            await send(.reducer(.permissionResponse(.success(false))))
+
+                        @unknown default:
+                            return
+                        }
+                    },
+                    .run { _ in await scheduleNotifications() }
+                )
+
+            case .binding(\.fajrNotificationEnabled),
+                    .binding(\.dhuhrNotificationEnabled),
+                    .binding(\.asrNotificationEnabled),
+                    .binding(\.maghribNotificationEnabled),
+                    .binding(\.ishaaNotificationEnabled):
+                return .run { _ in await scheduleNotifications() }
 
             default:
                 return .none
