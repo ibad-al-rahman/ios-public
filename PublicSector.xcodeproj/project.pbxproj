@@ -14,6 +14,7 @@
 		B30CB8D62F6B55BB00F92DDF /* AlertState+Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = B30CB8D52F6B55BA00F92DDF /* AlertState+Notifications.swift */; };
 		B30CB8D82F6B560B00F92DDF /* NotificationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B30CB8D72F6B560700F92DDF /* NotificationsView.swift */; };
 		B30CB8DB2F6B82A200F92DDF /* PrayerTimesNotificationScheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = B30CB8DA2F6B828D00F92DDF /* PrayerTimesNotificationScheduler.swift */; };
+		B30CB8DE2F6B999200F92DDF /* azan.caf in Resources */ = {isa = PBXBuildFile; fileRef = B30CB8DD2F6B999200F92DDF /* azan.caf */; };
 		B3A843082F60D0B300506D4C /* MiqatKit in Frameworks */ = {isa = PBXBuildFile; productRef = B3A843072F60D0B300506D4C /* MiqatKit */; };
 		B3A8430A2F60D14D00506D4C /* MiqatKit in Frameworks */ = {isa = PBXBuildFile; productRef = B3A843092F60D14D00506D4C /* MiqatKit */; };
 		B3A8430C2F60F11000506D4C /* DayInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A8430B2F60F0FF00506D4C /* DayInfo.swift */; };
@@ -138,6 +139,7 @@
 		B30CB8D52F6B55BA00F92DDF /* AlertState+Notifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AlertState+Notifications.swift"; sourceTree = "<group>"; };
 		B30CB8D72F6B560700F92DDF /* NotificationsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsView.swift; sourceTree = "<group>"; };
 		B30CB8DA2F6B828D00F92DDF /* PrayerTimesNotificationScheduler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrayerTimesNotificationScheduler.swift; sourceTree = "<group>"; };
+		B30CB8DD2F6B999200F92DDF /* azan.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = azan.caf; sourceTree = "<group>"; };
 		B3A843052F60D02F00506D4C /* MiqatKit */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = MiqatKit; sourceTree = "<group>"; };
 		B3A8430B2F60F0FF00506D4C /* DayInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayInfo.swift; sourceTree = "<group>"; };
 		B3BFBDA02F6A473600945455 /* ForceUpdateFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForceUpdateFeature.swift; sourceTree = "<group>"; };
@@ -296,6 +298,14 @@
 				B30CB8DA2F6B828D00F92DDF /* PrayerTimesNotificationScheduler.swift */,
 			);
 			path = Services;
+			sourceTree = "<group>";
+		};
+		B30CB8DC2F6B997600F92DDF /* Sounds */ = {
+			isa = PBXGroup;
+			children = (
+				B30CB8DD2F6B999200F92DDF /* azan.caf */,
+			);
+			path = Sounds;
 			sourceTree = "<group>";
 		};
 		B3BFBD9F2F6A472300945455 /* ForceUpdate */ = {
@@ -484,6 +494,7 @@
 		D9A70DE92C8595CD002F6583 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				B30CB8DC2F6B997600F92DDF /* Sounds */,
 				D9B34CDE2CDFA52400C07BA7 /* SettingsBundle */,
 				D9A70DBD2C850B79002F6583 /* Assets.xcassets */,
 				D9A70E1E2C85A261002F6583 /* Localizable.xcstrings */,
@@ -816,6 +827,7 @@
 				D9B4AB502D24B1E300E201CA /* InfoPlist.xcstrings in Resources */,
 				D9B34CE32CDFBA1B00C07BA7 /* ReleaseSettings.bundle in Resources */,
 				D9A70DC12C850B79002F6583 /* Preview Assets.xcassets in Resources */,
+				B30CB8DE2F6B999200F92DDF /* azan.caf in Resources */,
 				D91BF1342D3FDF6D00BEB410 /* GoogleService-Info.plist in Resources */,
 				D91BF1302D3FDDF700BEB410 /* GoogleService-Info-Release.plist in Resources */,
 				D9EE4FD92CE10E6000C5AEE4 /* LaunchScreen.storyboard in Resources */,
