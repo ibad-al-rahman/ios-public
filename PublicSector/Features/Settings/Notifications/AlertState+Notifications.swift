@@ -10,16 +10,16 @@ import ComposableArchitecture
 extension AlertState where Action == NotificationsFeature.Destination.Action.Alert {
     static var unauthorizedNotificationPermission: Self {
         AlertState {
-            TextState("Notifications Disabled")
+            TextState("notifications_disabled")
         } actions: {
             ButtonState(role: .cancel, action: .cancel) {
-                TextState("Cancel")
+                TextState("cancel")
             }
             ButtonState(action: .openSettings) {
-                TextState("Open Settings")
+                TextState("open_settings")
             }
         } message: {
-            TextState("Please enable notifications in Settings to receive prayer time alerts.")
+            TextState("enable_notifications_prayer_alert")
         }
     }
 }

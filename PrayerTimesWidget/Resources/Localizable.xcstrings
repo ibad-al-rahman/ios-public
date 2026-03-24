@@ -4,7 +4,7 @@
     "%lld" : {
 
     },
-    "after:" : {
+    "after_label" : {
       "localizations" : {
         "ar" : {
           "stringUnit" : {
@@ -20,7 +20,7 @@
         }
       }
     },
-    "After:" : {
+    "after_label_capitalized" : {
       "extractionState" : "manual",
       "localizations" : {
         "ar" : {
@@ -37,7 +37,7 @@
         }
       }
     },
-    "Asr" : {
+    "asr" : {
       "extractionState" : "manual",
       "localizations" : {
         "ar" : {
@@ -54,7 +54,7 @@
         }
       }
     },
-    "Dhuhr" : {
+    "dhuhr" : {
       "extractionState" : "manual",
       "localizations" : {
         "ar" : {
@@ -71,7 +71,7 @@
         }
       }
     },
-    "Fajr" : {
+    "fajr" : {
       "extractionState" : "manual",
       "localizations" : {
         "ar" : {
@@ -88,7 +88,7 @@
         }
       }
     },
-    "Ishaa" : {
+    "ishaa" : {
       "extractionState" : "manual",
       "localizations" : {
         "ar" : {
@@ -105,7 +105,7 @@
         }
       }
     },
-    "Maghrib" : {
+    "maghrib" : {
       "extractionState" : "manual",
       "localizations" : {
         "ar" : {
@@ -122,7 +122,18 @@
         }
       }
     },
-    "Prayer Times" : {
+    "minutes_count" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld"
+          }
+        }
+      }
+    },
+    "prayer_times" : {
       "localizations" : {
         "ar" : {
           "stringUnit" : {
@@ -138,7 +149,7 @@
         }
       }
     },
-    "Sunrise" : {
+    "sunrise" : {
       "extractionState" : "manual",
       "localizations" : {
         "ar" : {
@@ -155,7 +166,7 @@
         }
       }
     },
-    "View prayer times" : {
+    "view_prayer_times" : {
       "localizations" : {
         "ar" : {
           "stringUnit" : {

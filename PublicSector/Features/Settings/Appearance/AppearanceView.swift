@@ -13,7 +13,7 @@ struct AppearanceView: View {
 
     var body: some View {
         Form {
-            Picker("Theme", selection: $store.appearance) {
+            Picker("theme", selection: $store.appearance) {
                 ForEach(Settings.Appearance.allCases) {
                     Text($0.localizedStringKey).tag($0)
                 }

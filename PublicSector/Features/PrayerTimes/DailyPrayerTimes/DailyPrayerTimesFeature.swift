@@ -37,25 +37,25 @@ struct DailyPrayerTimesFeature {
 
         var shareableText: String {
             """
-            \(String(localized: "Annual Prayer Times by Ibad"))
+            \(String(localized: "annual_prayer_times_title"))
             \(dayInfo.hijri)
             \(date.stringDate)
 
-            🌌 \(String(localized: "Fajr")): \(dayInfo.fajr.time) 🌌
+            🌌 \(String(localized: "fajr")): \(dayInfo.fajr.time) 🌌
 
-            🌄 \(String(localized: "Sunrise")): \(dayInfo.sunrise.time) 🌄
+            🌄 \(String(localized: "sunrise")): \(dayInfo.sunrise.time) 🌄
 
-            ☀️ \(String(localized: "Dhuhr")): \(dayInfo.dhuhr.time) ☀️
+            ☀️ \(String(localized: "dhuhr")): \(dayInfo.dhuhr.time) ☀️
 
-            🌆 \(String(localized: "Asr")): \(dayInfo.asr.time) 🌆
+            🌆 \(String(localized: "asr")): \(dayInfo.asr.time) 🌆
 
-            🌅 \(String(localized: "Maghrib")): \(dayInfo.maghrib.time) 🌅
+            🌅 \(String(localized: "maghrib")): \(dayInfo.maghrib.time) 🌅
 
-            🌃 \(String(localized: "Ishaa")): \(dayInfo.ishaa.time) 🌃
+            🌃 \(String(localized: "ishaa")): \(dayInfo.ishaa.time) 🌃
 
-            \(String(localized: "Download app"))
-            \(String(localized: "Android")): https://play.google.com/store/apps/details?id=org.ibadalrahman.publicsector
-            \(String(localized: "iOS")): https://apps.apple.com/lb/app/ibad-al-rahman/id6739705601
+            \(String(localized: "download_app"))
+            \(String(localized: "android")): https://play.google.com/store/apps/details?id=org.ibadalrahman.publicsector
+            \(String(localized: "ios")): https://apps.apple.com/lb/app/ibad-al-rahman/id6739705601
             """
         }
     }

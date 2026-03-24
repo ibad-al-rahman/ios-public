@@ -18,7 +18,7 @@ struct PrayerTimesView: View {
                 picker
                 content
             }
-            .navigationTitle("Prayer Times")
+            .navigationTitle("prayer_times")
             .navigationBarTitleDisplayMode(.inline)
         }
     }
@@ -64,8 +64,8 @@ struct PrayerTimesView: View {
 extension PrayerTimesFeature.PrayerTimesPicker {
     var localizedStringKey: LocalizedStringKey {
         switch self {
-        case .daily: "Daily"
-        case .weekly: "Weekly"
+        case .daily: "daily"
+        case .weekly: "weekly"
         }
     }
 }

@@ -15,13 +15,13 @@ struct AdhkarView: View {
         NavigationView {
             Form {
                 Section {
-                    NavigationRowView("Morning adhkar", systemName: "sun.horizon")
-                    NavigationRowView("Evening adhkar", systemName: "moon.stars")
+                    NavigationRowView("morning_adhkar", systemName: "sun.horizon")
+                    NavigationRowView("evening_adhkar", systemName: "moon.stars")
                 } header: {
                     Spacer(minLength: Spacing.small)
                 }
             }
-            .navigationTitle("Adhkar")
+            .navigationTitle("adhkar")
         }
     }
 }

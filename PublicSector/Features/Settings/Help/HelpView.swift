@@ -18,17 +18,17 @@ struct HelpView: View {
         NavigationView {
             List {
                 Section {
-                    NavigationRowView("Contact us", systemName: "text.bubble")
+                    NavigationRowView("contact_us", systemName: "text.bubble")
                         .onTapGesture { store.send(.onTapContactUs) }
                 }
 
-                Section("App Info") {
-                    Text("Version").badge(Text(verbatim: appDetails.versionString))
-                    Text("Build number")
+                Section("app_info") {
+                    Text("version").badge(Text(verbatim: appDetails.versionString))
+                    Text("build_number")
                         .badge(Text(verbatim: appDetails.buildString))
                 }
             }
-            .navigationTitle("Help")
+            .navigationTitle("help")
             .navigationBarTitleDisplayMode(.inline)
         }
     }

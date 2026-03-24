@@ -17,7 +17,7 @@ struct WeeklyPrayerTimesView: View {
                 ScrollView(.horizontal) {
                     Grid(horizontalSpacing: .zero, verticalSpacing: .zero) {
                         GridRow {
-                            Text("Week")
+                            Text("week")
                             if store.hasImsak {
                                 Text(Prayer.imsak.localizedStringKey)
                             }
@@ -53,7 +53,7 @@ struct WeeklyPrayerTimesView: View {
                 .scrollIndicators(.hidden)
             } header: {
                 HStack {
-                    Text("Timings")
+                    Text("timings")
                 }
             }
         }

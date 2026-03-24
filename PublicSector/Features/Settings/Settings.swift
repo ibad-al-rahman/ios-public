@@ -28,9 +28,9 @@ extension Settings {
 
         var localizedStringKey: LocalizedStringKey {
             switch self {
-            case .system: "System"
-            case .dark: "Dark theme"
-            case .light: "Light theme"
+            case .system: "system"
+            case .dark: "dark_theme"
+            case .light: "light_theme"
             }
         }
     }

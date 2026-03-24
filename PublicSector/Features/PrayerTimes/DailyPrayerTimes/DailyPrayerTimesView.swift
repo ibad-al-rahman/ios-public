@@ -35,7 +35,7 @@ struct DailyPrayerTimesView: View {
     private var datePicker: some View {
         Section {
             DatePicker(
-                "Date",
+                "date",
                 selection: $store.date,
                 displayedComponents: [.date]
             )
@@ -47,7 +47,7 @@ struct DailyPrayerTimesView: View {
                 if store.canResetDate {
                     Button(action: { store.date = .now }) {
                         Label(
-                            "Back to today",
+                            "back_to_today",
                             systemImage: "clock.arrow.trianglehead.counterclockwise.rotate.90"
                         )
                     }
@@ -110,10 +110,10 @@ struct DailyPrayerTimesView: View {
             .foregroundStyle(.primary)
         } header: {
             HStack {
-                Text("Timings")
+                Text("timings")
                 Spacer()
                 ShareLink(item: store.shareableText) {
-                    Label("Share", systemImage: "square.and.arrow.up")
+                    Label("share", systemImage: "square.and.arrow.up")
                 }
                 .textCase(nil)
             }
@@ -130,7 +130,7 @@ struct DailyPrayerTimesView: View {
                     Text(event.string)
                 }
             } header: {
-                Text("Holidays and Events")
+                Text("holidays_and_events")
             }
         }
     }

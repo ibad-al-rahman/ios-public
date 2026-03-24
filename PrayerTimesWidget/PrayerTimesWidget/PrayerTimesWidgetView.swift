@@ -90,7 +90,7 @@ struct PrayerTimesWidgetView: View {
                     Text(store.nextPrayer.localizedStringKey)
                         .bold()
                     Text(verbatim: " ")
-                    Text("after:")
+                    Text("after_label")
                 }
                 Text(store.nextPrayerDate, style: .timer)
                     .bold()
@@ -153,7 +153,7 @@ struct PrayerTimesWidgetView: View {
                 )
                 .bold()
                 HStack(spacing: 0) {
-                    Text("After:")
+                    Text("after_label_capitalized")
                     Text(verbatim: " ")
                     Text(store.nextPrayerDate, style: .timer)
                         .monospacedDigit()
