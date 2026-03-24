@@ -5,6 +5,7 @@
 //  Created by Hamza Jadid on 19/03/2026.
 //
 
+@preconcurrency import BackgroundTasks
 import Dependencies
 import DependenciesMacros
 import IbadRemoteConfig
@@ -14,7 +15,37 @@ import Sharing
 import UserNotifications
 
 struct PrayerTimesNotificationService {
-    public func scheduleNotifications() async {
+    private static let taskIdentifier = "com.ibadalrahman.PublicSector.azan_notification_scheduler"
+
+    func registerBackgroundTask() {
+        BGTaskScheduler.shared.register(
+            forTaskWithIdentifier: Self.taskIdentifier,
+            using: nil
+        ) { task in
+            guard let refreshTask = task as? BGAppRefreshTask else { return }
+
+            let workTask = Task {
+                await self.scheduleNotifications()
+                self.submitBackgroundTaskRequest()
+                refreshTask.setTaskCompleted(success: true)
+            }
+
+            refreshTask.expirationHandler = {
+                workTask.cancel()
+                refreshTask.setTaskCompleted(success: false)
+            }
+        }
+
+        submitBackgroundTaskRequest()
+    }
+
+    private func submitBackgroundTaskRequest() {
+        let request = BGAppRefreshTaskRequest(identifier: Self.taskIdentifier)
+        request.earliestBeginDate = Date(timeIntervalSinceNow: 24 * 60 * 60)
+        try? BGTaskScheduler.shared.submit(request)
+    }
+
+    func scheduleNotifications() async {
         @Shared(.notificationsEnabled) var notificationsEnabled = false
         @Dependency(\.miqatService) var miqatService
         @Dependency(\.remoteConfig) var remoteConfig
@@ -77,7 +108,7 @@ struct PrayerTimesNotificationService {
 @DependencyClient
 struct PrayerTimesNotificationScheduler: Sendable {
     var scheduleNotifications: @Sendable () async -> Void
-    var bgScheduleNotifications: @Sendable () async -> Void
+    var registerBackgroundTask: @Sendable () -> Void
 }
 
 extension PrayerTimesNotificationScheduler: DependencyKey {
@@ -85,7 +116,7 @@ extension PrayerTimesNotificationScheduler: DependencyKey {
         let service = PrayerTimesNotificationService()
         return PrayerTimesNotificationScheduler(
             scheduleNotifications: { await service.scheduleNotifications() },
-            bgScheduleNotifications: {}
+            registerBackgroundTask: { service.registerBackgroundTask() }
         )
     }()
 }
