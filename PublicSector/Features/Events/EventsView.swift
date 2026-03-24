@@ -38,7 +38,7 @@ struct EventsView: View {
         Section {
             ForEach(store.filteredEvents, id: \.event) { event in
                 VStack(alignment: .leading, spacing: Spacing.extraSmall.rawValue) {
-                    Text(event.event.localizedStringKey)
+                    Text(event.event.string)
                     HStack {
                         Text(event.gregorianDate, format: .dateTime.day().month(.wide).year())
                             .foregroundStyle(.secondary)

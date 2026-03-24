@@ -22,7 +22,9 @@ struct EventsFeature {
         var filteredEvents: [MiqatEventOccurrence] {
             guard !query.isEmpty else { return events }
             return events.filter { occurrence in
-                NSLocalizedString(occurrence.event.localizationKey, comment: "")
+                occurrence
+                    .event
+                    .string
                     .localizedCaseInsensitiveContains(query)
             }
         }
