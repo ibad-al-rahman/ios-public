@@ -43,28 +43,24 @@ extension DayInfo {
 }
 
 extension IslamicEvent {
-    var localizationKey: String {
+    var string: String {
         switch self {
-        case .ashura: "Ashura commemoration"
-        case .battleOfBadr: "The anniversary of the Battle of Badr (2 AH)"
-        case .battleOfUhud: "The anniversary of the Battle of Uhud (3 AH)"
-        case .battleOfMutah: "The anniversary of the Battle of Mu'tah (8 AH)"
-        case .battleOfTabuk: "The anniversary of the Battle of Tabuk (9 AH)"
-        case .battleOfHattin: "The anniversary of the Battle of Hattin (583 AH)"
-        case .conquestOfMecca: "Anniversary of the Conquest of Mecca (8 AH)"
-        case .dayOfArafah: "Standing at Arafat"
-        case .eidAlAdha: "The first day of Eid al-Adha"
-        case .eidAlFitr: "The first day of Eid al-Fitr"
-        case .firstOfRamadan: "First of Ramadan"
-        case .islamicNewYear: "The beginning of the Hijri year"
-        case .israAndMiraj: "Isra and Mi'raj"
-        case .laylatAlQadr: "Laylat-ul-Qadr"
-        case .mawlidAlNabi: "The anniversary of the birth of the Prophet (peace be upon him)"
-        case .nisfShaban: "The night of the middle of Sha'ban"
+        case .ashura: String(localized: "ashura", table: "Events")
+        case .battleOfBadr: String(localized: "battle_of_badr", table: "Events")
+        case .islamicNewYear: String(localized: "islamic_new_year", table: "Events")
+        case .mawlidAlNabi: String(localized: "mawlid_al_nabi", table: "Events")
+        case .battleOfHattin: String(localized: "battle_of_hattin", table: "Events")
+        case .battleOfMutah: String(localized: "battle_of_mutah", table: "Events")
+        case .battleOfTabuk: String(localized: "battle_of_tabuk", table: "Events")
+        case .israAndMiraj: String(localized: "isra_and_miraj", table: "Events")
+        case .nisfShaban: String(localized: "nisf_shaban", table: "Events")
+        case .firstOfRamadan: String(localized: "first_of_ramadan", table: "Events")
+        case .conquestOfMecca: String(localized: "conquest_of_mecca", table: "Events")
+        case .laylatAlQadr: String(localized: "laylat_al_qadr", table: "Events")
+        case .eidAlFitr: String(localized: "eid_al_fitr", table: "Events")
+        case .battleOfUhud: String(localized: "battle_of_uhud", table: "Events")
+        case .dayOfArafah: String(localized: "day_of_arafah", table: "Events")
+        case .eidAlAdha: String(localized: "eid_al_adha", table: "Events")
         }
-    }
-
-    var localizedStringKey: LocalizedStringKey {
-        LocalizedStringKey(localizationKey)
     }
 }

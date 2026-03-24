@@ -127,7 +127,7 @@ struct DailyPrayerTimesView: View {
         } else {
             Section {
                 ForEach(store.dayInfo.islamicEvents, id: \.self) { event in
-                    Text(event.localizedStringKey)
+                    Text(event.string)
                 }
             } header: {
                 Text("Holidays and Events")
