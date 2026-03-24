@@ -18,10 +18,10 @@ struct ForceUpdateView: View {
                 .frame(maxWidth: 250, maxHeight: 250)
                 .scaledToFit()
 
-            Text("A new version is available. Update the app to continue.")
+            Text("update_available_message")
                 .multilineTextAlignment(.center)
 
-            Button("Update Now") {
+            Button("update_now") {
                 store.send(.onTapUpdate)
             }
         }

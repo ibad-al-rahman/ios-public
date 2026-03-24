@@ -13,12 +13,12 @@ struct EventsView: View {
 
     var body: some View {
         content
-            .navigationTitle("Events")
+            .navigationTitle("events")
             .navigationBarTitleDisplayMode(.inline)
             .searchable(
                 text: $store.query,
                 placement: .navigationBarDrawer(displayMode: .always),
-                prompt: Text("Search events and holidays")
+                prompt: Text("search_events_holidays")
             )
             .onAppear { store.send(.onAppear) }
     }
@@ -54,7 +54,7 @@ struct EventsView: View {
                 .padding(.vertical, Spacing.extraSmall.rawValue)
             }
         } header: {
-            Text(String(format: String(localized: "%lld results"), store.filteredEvents.count))
+            Text(String(format: String(localized: "search_results_count"), store.filteredEvents.count))
         }
     }
 
@@ -62,9 +62,9 @@ struct EventsView: View {
     private var emptyState: some View {
         if store.query.trimmingCharacters(in: .whitespaces).isEmpty {
             ContentUnavailableView(
-                "No Events",
+                "no_events",
                 systemImage: "calendar.badge.exclamationmark",
-                description: Text("No events or holidays found for this year.")
+                description: Text("no_events_for_year")
             )
         } else {
             ContentUnavailableView.search(text: store.query)

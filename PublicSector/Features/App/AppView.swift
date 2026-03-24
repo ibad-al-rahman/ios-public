@@ -94,10 +94,10 @@ struct AppView: View {
 extension AppFeature.Tab {
     var localizedStringKey: LocalizedStringKey {
         switch self {
-        case .prayerTimes: "Prayer Times"
-        case .events: "Events"
-        case .settings: "Settings"
-        case .adhkar: "Adhkar"
+        case .prayerTimes: "prayer_times"
+        case .events: "events"
+        case .settings: "settings"
+        case .adhkar: "adhkar"
         }
     }
 }

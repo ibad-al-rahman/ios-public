@@ -17,7 +17,7 @@ struct DeveloperMenuView: View {
                 configurationSection
                 actionsSection
             }
-            .navigationTitle("Developer Menu")
+            .navigationTitle("developer_menu")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar { toolBarItem }
             .navigationDestination(
@@ -36,7 +36,7 @@ struct DeveloperMenuView: View {
             Button {
                 store.send(.onTapDone)
             } label: {
-                Text("Done")
+                Text("done")
             }
         }
     }

@@ -19,14 +19,14 @@ enum Prayer: Equatable {
 
     var localizedStringKey: LocalizedStringKey {
         switch self {
-        case .imsak: "Imsak"
-        case .fajr: "Fajr"
-        case .sunrise: "Sunrise"
-        case .eid: "Eid"
-        case .dhuhr: "Dhuhr"
-        case .asr: "Asr"
-        case .maghrib: "Maghrib"
-        case .ishaa: "Ishaa"
+        case .imsak: "imsak"
+        case .fajr: "fajr"
+        case .sunrise: "sunrise"
+        case .eid: "eid"
+        case .dhuhr: "dhuhr"
+        case .asr: "asr"
+        case .maghrib: "maghrib"
+        case .ishaa: "ishaa"
         }
     }
 }

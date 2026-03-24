@@ -16,14 +16,14 @@ struct SettingsView: View {
         NavigationStack {
             List {
                 Section {
-                    NavigationRowView("Donate", systemName: "heart")
+                    NavigationRowView("donate", systemName: "heart")
                         .onTapGesture { store.send(.onTapDonate) }
                 } header: {
                     Spacer(minLength: Spacing.small)
                 }
 
                 Section {
-                    NavigationRowView("Notifications", systemName: "app.badge")
+                    NavigationRowView("notifications", systemName: "app.badge")
                         .onTapGesture { store.send(.onTapNotifications) }
                 }
                 .featureFlagged(.prayerTimesNotifications)
@@ -31,15 +31,15 @@ struct SettingsView: View {
                 displaySection
 
                 Section {
-                    NavigationRowView("Help", systemName: "questionmark.circle")
+                    NavigationRowView("help", systemName: "questionmark.circle")
                         .onTapGesture { store.send(.onTapHelp) }
 
-                    Label("Rate us", systemImage: "star")
+                    Label("rate_us", systemImage: "star")
                         .foregroundStyle(.primary, .primary)
                         .onTapGesture { store.send(.onTapRateUs) }
 
                     ShareLink(item: store.inviteFriendsShareContent) {
-                        Label("Invite your friends", systemImage: "paperplane")
+                        Label("invite_friends", systemImage: "paperplane")
                             .foregroundStyle(.primary, .primary)
                     }
                     .buttonStyle(.plain)
@@ -66,17 +66,17 @@ struct SettingsView: View {
                 ),
                 content: { HelpView(store: $0) }
             )
-            .navigationTitle("Settings")
+            .navigationTitle("settings")
         }
         .onAppear { store.send(.onAppear) }
     }
 
     private var displaySection: some View {
-        Section("Display") {
-            NavigationRowView("Appearance", systemName: "circle.lefthalf.filled")
+        Section("display") {
+            NavigationRowView("appearance", systemName: "circle.lefthalf.filled")
                 .onTapGesture { store.send(.onTapAppearance) }
 
-            NavigationRowView("Language", systemName: "a.square")
+            NavigationRowView("language", systemName: "a.square")
                 .onTapGesture { store.send(.onTapLanguage) }
         }
     }

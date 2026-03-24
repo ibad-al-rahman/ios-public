@@ -14,29 +14,29 @@ struct NotificationsView: View {
     var body: some View {
         Form {
             Section {
-                Toggle("Enable Notifications", isOn: $store.notificationsEnabled)
+                Toggle("enable_notifications", isOn: $store.notificationsEnabled)
             }
 
             Section {
-                Toggle("Fajr", isOn: $store.fajrNotificationEnabled)
+                Toggle("fajr", isOn: $store.fajrNotificationEnabled)
                     .disabled(store.notificationsDisabled)
 
-                Toggle("Dhuhr", isOn: $store.dhuhrNotificationEnabled)
+                Toggle("dhuhr", isOn: $store.dhuhrNotificationEnabled)
                     .disabled(store.notificationsDisabled)
 
-                Toggle("Asr", isOn: $store.asrNotificationEnabled)
+                Toggle("asr", isOn: $store.asrNotificationEnabled)
                     .disabled(store.notificationsDisabled)
 
-                Toggle("Maghrib", isOn: $store.maghribNotificationEnabled)
+                Toggle("maghrib", isOn: $store.maghribNotificationEnabled)
                     .disabled(store.notificationsDisabled)
 
-                Toggle("Ishaa", isOn: $store.ishaaNotificationEnabled)
+                Toggle("ishaa", isOn: $store.ishaaNotificationEnabled)
                     .disabled(store.notificationsDisabled)
             } header: {
-                Text("Prayer Notifications")
+                Text("prayer_notifications")
             }
         }
-        .navigationTitle("Notifications")
+        .navigationTitle("notifications")
         .onAppear {
             store.send(.view(.onAppear))
         }

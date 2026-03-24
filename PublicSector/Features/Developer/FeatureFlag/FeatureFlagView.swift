@@ -31,7 +31,7 @@ struct FeatureFlagView: View {
         }
         .toolbar { toolbarItems }
         .onAppear { store.send(.onAppear) }
-        .navigationTitle("Feature Flags")
+        .navigationTitle("feature_flags")
     }
 
     @ToolbarContentBuilder
