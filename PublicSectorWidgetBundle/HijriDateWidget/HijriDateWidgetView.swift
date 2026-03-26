@@ -1,5 +1,5 @@
 //
-//  PrayerTimesWidgetView.swift
+//  HijriDateWidgetView.swift
 //  PublicSector
 //
 //  Created by Hamza Jadid on 04/01/2025.
@@ -9,7 +9,7 @@ import ComposableArchitecture
 import SwiftUI
 import WidgetKit
 
-struct PrayerTimesWidgetView: View {
+struct HijriDateWidgetView: View {
     let store: StoreOf<WidgetFeature>
     @Environment(\.widgetFamily) var widgetFamily
 
@@ -24,9 +24,6 @@ struct PrayerTimesWidgetView: View {
         case .systemSmall:
             smallContent
 
-        case .systemMedium:
-            mediumContent
-
         case .accessoryRectangular:
             accessoryRectangularContent
 
@@ -37,13 +34,11 @@ struct PrayerTimesWidgetView: View {
 
     private var smallContent: some View {
         ZStack {
-            logo
-            prayerTimes
-        }
-    }
+            Image("Logo")
+                .resizable()
+                .scaledToFit()
+                .opacity(0.15)
 
-    private var dateAndUpcoming: some View {
-        ZStack {
             VStack(alignment: .leading, spacing: 0) {
                 HStack(alignment: .center) {
                     VStack {
@@ -79,57 +74,18 @@ struct PrayerTimesWidgetView: View {
         }
     }
 
-    private var prayerTimes: some View {
-        VStack(alignment: .leading, spacing: 0) {
-            prayerTime(.fajr, time: store.prayerTimes.fajr)
-            prayerTime(.sunrise, time: store.prayerTimes.sunrise)
-            prayerTime(.dhuhr, time: store.prayerTimes.dhuhr)
-            prayerTime(.asr, time: store.prayerTimes.asr)
-            prayerTime(.maghrib, time: store.prayerTimes.maghrib)
-            prayerTime(.ishaa, time: store.prayerTimes.ishaa)
-        }
-    }
-
-    private var mediumContent: some View {
-        HStack {
-            ZStack {
-                logo
-                dateAndUpcoming
-            }
-            Divider()
-            prayerTimes
-        }
-    }
-
     private var accessoryRectangularContent: some View {
         HStack {
-            Image(systemName: store.upcomingPrayer.symbol)
-            Spacer()
+            Image(systemName: "moon")
             VStack(alignment: .leading) {
-                Text(store.upcomingPrayer.localizedStringKey)
-                    .bold()
-
-                Text(
-                    store.upcomingPrayerDate,
-                    format: .dateTime.hour().minute()
-                )
-                .bold()
-
-                HStack(spacing: 0) {
-                    Text("after_label_capitalized")
-                    Text(verbatim: " ")
-                    Text(store.upcomingPrayerDate, style: .timer)
-                        .monospacedDigit()
+                HStack {
+                    Text(store.prayerTimes.hijriDay)
+                    Text(store.prayerTimes.hijriMonth)
+                        .bold()
                 }
+                Text(store.prayerTimes.hijriYear)
             }
         }
-    }
-
-    private var logo: some View {
-        Image("Logo")
-            .resizable()
-            .scaledToFit()
-            .opacity(0.15)
     }
 
     @ViewBuilder
