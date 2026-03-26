@@ -28,6 +28,14 @@ struct SettingsView: View {
                 }
                 .featureFlagged(.prayerTimesNotifications)
 
+                Section {
+                    NavigationRowView("prayer_times_calculation_method", systemName: "slider.horizontal.3")
+                        .onTapGesture { store.send(.onTapPrayerTimesCalculationMethod) }
+                } header: {
+                    Text("prayer_times")
+                }
+                .featureFlagged(.prayerTimesCalculationMethod)
+
                 displaySection
 
                 Section {
@@ -58,6 +66,13 @@ struct SettingsView: View {
                     action: \.dependent.destination.notifications
                 ),
                 destination: { NotificationsView(store: $0) }
+            )
+            .navigationDestination(
+                item: $store.scope(
+                    state: \.destination?.prayerTimesCalculationMethod,
+                    action: \.dependent.destination.prayerTimesCalculationMethod
+                ),
+                destination: { PrayerTimesCalculationMethodView(store: $0) }
             )
             .sheet(
                 item: $store.scope(

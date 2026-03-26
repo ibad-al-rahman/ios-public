@@ -34,6 +34,7 @@ struct SettingsFeature {
             case onTapAppearance
             case onTapLanguage
             case onTapNotifications
+            case onTapPrayerTimesCalculationMethod
             case onTapDonate
             case onTapHelp
             case onTapRateUs
@@ -73,6 +74,10 @@ struct SettingsFeature {
 
             case .view(.onTapNotifications):
                 state.destination = .notifications(NotificationsFeature.State())
+                return .none
+
+            case .view(.onTapPrayerTimesCalculationMethod):
+                state.destination = .prayerTimesCalculationMethod(PrayerTimesCalculationMethodFeature.State())
                 return .none
 
             case .view(.onTapDonate):
