@@ -11,31 +11,62 @@ import MiqatKit
 
 @Reducer
 struct PrayerTimesWidgetFeature {
-    @Dependency(\.miqatService) private var miqatService
-
     @ObservableState
     struct State: Equatable {
-        let date: Date
+        let prayerTimes: DayPrayerTimes
         let currentPrayer: Prayer
-        let nextPrayer: Prayer
-        let nextPrayerDate: Date
-        var todaysPrayerTimes: DayPrayerTimes?
-    }
+        let upcomingPrayer: Prayer
+        let upcomingPrayerDate: Date
 
-    enum Action {
-        case onAppear
-    }
+        init(date: Date) {
+            @Dependency(\.miqatService) var miqatService
+            let tzOffset = TimeZone.current.secondsFromGMT()
+            let timestamp = date.timeIntervalSince1970 + TimeInterval(tzOffset)
 
-    var body: some ReducerOf<Self> {
-        Reduce { state, action in
-            switch action {
-            case .onAppear:
-                let tzOffset = TimeZone.current.secondsFromGMT()
-                let timestamp = state.date.timeIntervalSince1970 + TimeInterval(tzOffset)
-                let miqatData = miqatService.getMiqatData(timestampSecs: timestamp, provider: .darElFatwa(.beirut))
-                state.todaysPrayerTimes = DayPrayerTimes(from: miqatData)
-                return .none
+            let data = miqatService.getMiqatData(timestampSecs: timestamp, provider: .darElFatwa(.beirut))
+            let prayerTimes = DayPrayerTimes(from: data)
+            self.prayerTimes = prayerTimes
+
+            let tomorrowDate = Calendar.current.startOfDay(for: date.addingTimeInterval(86400))
+            let tomorrowTimestamp = tomorrowDate.timeIntervalSince1970 + TimeInterval(tzOffset)
+            let tomorrowData = miqatService.getMiqatData(timestampSecs: tomorrowTimestamp, provider: .darElFatwa(.beirut))
+            let tomorrowPrayerTimes = DayPrayerTimes(from: tomorrowData)
+
+            if date < prayerTimes.fajr {
+                self.currentPrayer = .ishaa
+                self.upcomingPrayer = .fajr
+                self.upcomingPrayerDate = prayerTimes.fajr
+            } else if date < prayerTimes.sunrise {
+                self.currentPrayer = .fajr
+                self.upcomingPrayer = .sunrise
+                self.upcomingPrayerDate = prayerTimes.sunrise
+            } else if date < prayerTimes.dhuhr {
+                self.currentPrayer = .sunrise
+                self.upcomingPrayer = .dhuhr
+                self.upcomingPrayerDate = prayerTimes.dhuhr
+            } else if date < prayerTimes.asr {
+                self.currentPrayer = .dhuhr
+                self.upcomingPrayer = .asr
+                self.upcomingPrayerDate = prayerTimes.asr
+            } else if date < prayerTimes.maghrib {
+                self.currentPrayer = .asr
+                self.upcomingPrayer = .maghrib
+                self.upcomingPrayerDate = prayerTimes.maghrib
+            } else if date < prayerTimes.ishaa {
+                self.currentPrayer = .maghrib
+                self.upcomingPrayer = .ishaa
+                self.upcomingPrayerDate = prayerTimes.ishaa
+            } else {
+                self.currentPrayer = .fajr
+                self.upcomingPrayer = .fajr
+                self.upcomingPrayerDate = tomorrowPrayerTimes.fajr
             }
         }
+    }
+
+    enum Action { }
+
+    var body: some ReducerOf<Self> {
+        EmptyReducer()
     }
 }
