@@ -1,8 +1,8 @@
 //
-//  PrayerTimesWidgetFeature.swift
+//  WidgetFeature.swift
 //  PublicSector
 //
-//  Created by Hamza Jadid on 04/01/2025.
+//  Created by Hamza Jadid on 26/03/2025.
 //
 
 import ComposableArchitecture
@@ -10,7 +10,7 @@ import Foundation
 import MiqatKit
 
 @Reducer
-struct PrayerTimesWidgetFeature {
+struct WidgetFeature {
     @ObservableState
     struct State: Equatable {
         let prayerTimes: DayPrayerTimes

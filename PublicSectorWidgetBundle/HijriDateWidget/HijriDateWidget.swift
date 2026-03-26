@@ -1,5 +1,5 @@
 //
-//  PrayerTimesWidget.swift
+//  HijriDateWidget.swift
 //  PublicSector
 //
 //  Created by Hamza Jadid on 04/01/2025.
@@ -10,28 +10,28 @@ import MiqatKit
 import SwiftUI
 import WidgetKit
 
-struct PrayerTimeTimelineProvider: TimelineProvider {
+struct HijriDateTimelineProvider: TimelineProvider {
     @Dependency(\.miqatService) var miqatService
 
-    func placeholder(in context: Context) -> PrayerTimeEntry {
-        PrayerTimeEntry(date: .now)
+    func placeholder(in context: Context) -> HijriDateEntry {
+        HijriDateEntry(date: .now)
     }
 
     func getSnapshot(
-        in context: Context, completion: @escaping (PrayerTimeEntry) -> ()
+        in context: Context, completion: @escaping (HijriDateEntry) -> ()
     ) {
-        completion(PrayerTimeEntry(date: .now))
+        completion(HijriDateEntry(date: .now))
     }
 
     func getTimeline(
         in context: Context,
-        completion: @escaping (Timeline<PrayerTimeEntry>) -> ()
+        completion: @escaping (Timeline<HijriDateEntry>) -> ()
     ) {
         let timeline = Timeline(entries: getPrayerTimesSequnce(), policy: .atEnd)
         completion(timeline)
     }
 
-    func getPrayerTimesSequnce() -> [PrayerTimeEntry] {
+    func getPrayerTimesSequnce() -> [HijriDateEntry] {
         let now = Date.now
         let tzOffset = TimeZone.current.secondsFromGMT()
         let todayTimestamp = now.timeIntervalSince1970 + TimeInterval(tzOffset)
@@ -42,33 +42,33 @@ struct PrayerTimeTimelineProvider: TimelineProvider {
         let tomorrowMidnight = Calendar.current.startOfDay(for: now.addingTimeInterval(86400))
 
         return [
-            [PrayerTimeEntry(date: now)],
-            prayerTimes.sorted.filter { now < $0 }.map(PrayerTimeEntry.init),
-            [PrayerTimeEntry(date: tomorrowMidnight)]
+            [HijriDateEntry(date: now)],
+            prayerTimes.sorted.filter { now < $0 }.map(HijriDateEntry.init),
+            [HijriDateEntry(date: tomorrowMidnight)]
         ]
         .flatMap { $0 }
     }
 }
 
-struct PrayerTimeEntry: TimelineEntry {
+struct HijriDateEntry: TimelineEntry {
     let date: Date
 }
 
-struct PrayerTimesWidget: Widget {
-    let kind: String = "PrayerTimesWidget"
+struct HijriDateWidget: Widget {
+    let kind: String = "HijriDateWidgetWidget"
 
     var body: some WidgetConfiguration {
         StaticConfiguration(
-            kind: kind, provider: PrayerTimeTimelineProvider()
+            kind: kind, provider: HijriDateTimelineProvider()
         ) { entry in
             if #available(iOS 17.0, *) {
-                PrayerTimesWidgetView(store: Store(
+                HijriDateWidgetView(store: Store(
                     initialState: WidgetFeature.State(date: entry.date),
                     reducer: WidgetFeature.init
                 ))
                 .containerBackground(.fill.tertiary, for: .widget)
             } else {
-                PrayerTimesWidgetView(store: Store(
+                HijriDateWidgetView(store: Store(
                     initialState: WidgetFeature.State(date: entry.date),
                     reducer: WidgetFeature.init
                 ))
@@ -78,12 +78,12 @@ struct PrayerTimesWidget: Widget {
         }
         .configurationDisplayName("prayer_times")
         .description("view_prayer_times")
-        .supportedFamilies([.systemSmall, .systemMedium, .accessoryRectangular])
+        .supportedFamilies([.systemSmall, .accessoryRectangular])
     }
 }
 
-#Preview(as: .systemMedium) {
-    PrayerTimesWidget()
+#Preview(as: .systemSmall) {
+    HijriDateWidget()
 } timeline: {
-    PrayerTimeEntry(date: .now)
+    HijriDateEntry(date: .now)
 }

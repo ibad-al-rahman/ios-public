@@ -12,5 +12,6 @@ import SwiftUI
 struct PublicSectorWidgetBundle: WidgetBundle {
     var body: some Widget {
         PrayerTimesWidget()
+        HijriDateWidget()
     }
 }
