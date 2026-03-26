@@ -634,6 +634,91 @@
         }
       }
     },
+    "notification_body_asr": {
+      "extractionState": "manual",
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "حان الان موعد اذان العصر"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "It's time for Asr prayer"
+          }
+        }
+      }
+    },
+    "notification_body_dhuhr": {
+      "extractionState": "manual",
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "حان الان موعد اذان الظهر"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "It's time for Dhuhr prayer"
+          }
+        }
+      }
+    },
+    "notification_body_fajr": {
+      "extractionState": "manual",
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "حان الان موعد اذان الفجر"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "It's time for Fajr prayer"
+          }
+        }
+      }
+    },
+    "notification_body_ishaa": {
+      "extractionState": "manual",
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "حان الان موعد اذان العشاء"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "It's time for Ishaa prayer"
+          }
+        }
+      }
+    },
+    "notification_body_maghrib": {
+      "extractionState": "manual",
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "حان الان موعد اذان المغرب"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "It's time for Maghrib prayer"
+          }
+        }
+      }
+    },
     "notifications": {
       "localizations": {
         "ar": {
