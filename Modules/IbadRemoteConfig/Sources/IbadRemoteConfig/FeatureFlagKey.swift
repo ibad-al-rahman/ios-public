@@ -10,6 +10,7 @@ public enum FeatureFlagKey: String, Codable, CaseIterable, Sendable {
     case adhkarScreen = "ff_apple_adhkar_screen"
     case eventsScreen = "ff_apple_events_screen"
     case prayerTimesNotifications = "ff_apple_prayerTimes_notifications"
+    case prayerTimesCalculationMethod = "ff_apple_settings_prayerTimesCalcuationMethod"
 
     public var display: String {
         switch self {
@@ -17,6 +18,7 @@ public enum FeatureFlagKey: String, Codable, CaseIterable, Sendable {
         case .adhkarScreen: "Adhkar screen"
         case .eventsScreen: "Events screen"
         case .prayerTimesNotifications: "Prayer time notifications"
+        case .prayerTimesCalculationMethod: "Prayer time calculation method"
         }
     }
 
@@ -26,6 +28,7 @@ public enum FeatureFlagKey: String, Codable, CaseIterable, Sendable {
         case .adhkarScreen: "Enable adhkar screen"
         case .eventsScreen: "Enable events screen"
         case .prayerTimesNotifications: "Enable prayer times notifications"
+        case .prayerTimesCalculationMethod: "Enable the ability to configure prayer times calculation method"
         }
     }
 }

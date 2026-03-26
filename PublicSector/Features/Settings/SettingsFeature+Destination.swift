@@ -14,12 +14,14 @@ extension SettingsFeature {
             case help(HelpFeature.State)
             case appearance(AppearanceFeature.State)
             case notifications(NotificationsFeature.State)
+            case prayerTimesCalculationMethod(PrayerTimesCalculationMethodFeature.State)
 
             var id: AnyHashable {
                 switch self {
                 case .help: "help"
                 case .appearance: "appearance"
                 case .notifications: "notifications"
+                case .prayerTimesCalculationMethod: "prayer-time-calculation-method"
                 }
             }
         }
@@ -28,6 +30,7 @@ extension SettingsFeature {
             case help(HelpFeature.Action)
             case appearance(AppearanceFeature.Action)
             case notifications(NotificationsFeature.Action)
+            case prayerTimesCalculationMethod(PrayerTimesCalculationMethodFeature.Action)
         }
 
         var body: some ReducerOf<Self> {
@@ -41,6 +44,10 @@ extension SettingsFeature {
 
             Scope(state: \.notifications, action: \.notifications) {
                 NotificationsFeature()
+            }
+
+            Scope(state: \.prayerTimesCalculationMethod, action: \.prayerTimesCalculationMethod) {
+                PrayerTimesCalculationMethodFeature()
             }
         }
     }
