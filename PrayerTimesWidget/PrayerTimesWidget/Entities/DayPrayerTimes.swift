@@ -17,9 +17,9 @@ struct DayPrayerTimes: Equatable, Identifiable {
     let gregorianMonth: String
     let gregorianYear: String
 
-    let hijriDay: Int
+    let hijriDay: String
     let hijriMonth: String
-    let hijriYear: Int
+    let hijriYear: String
 
     var fajr: Date
     var sunrise: Date
@@ -30,63 +30,6 @@ struct DayPrayerTimes: Equatable, Identifiable {
 
     var sorted: [Date] {
         [fajr, sunrise, dhuhr, asr, maghrib, ishaa]
-    }
-
-    func getPrayer(time: Date) -> Prayer {
-        return if time < fajr {
-            .ishaa
-        } else if time < sunrise {
-            .fajr
-        } else if time < dhuhr {
-            .sunrise
-        } else if time < asr {
-            .dhuhr
-        } else if time < maghrib {
-            .asr
-        } else if time < ishaa {
-            .maghrib
-        } else {
-            .ishaa
-        }
-    }
-
-    func getNextPrayer(time: Date) -> Prayer {
-        return if time < fajr {
-            .fajr
-        } else if time < sunrise {
-            .sunrise
-        } else if time < dhuhr {
-            .dhuhr
-        } else if time < asr {
-            .asr
-        } else if time < maghrib {
-            .maghrib
-        } else if time < ishaa {
-            .ishaa
-        } else {
-            .fajr
-        }
-    }
-
-    func getNextPrayerTime(
-        time: Date,
-        tomorrowPrayerTimes: DayPrayerTimes
-    ) -> Date {
-        return if time < fajr {
-            fajr
-        } else if time < sunrise {
-            sunrise
-        } else if time < dhuhr {
-            dhuhr
-        } else if time < asr {
-            asr
-        } else if time < maghrib {
-            maghrib
-        } else if time < ishaa {
-            ishaa
-        } else {
-            tomorrowPrayerTimes.fajr
-        }
     }
 }
 
@@ -107,9 +50,12 @@ extension DayPrayerTimes {
         dateFormatter.dateFormat = "yyyy"
         self.gregorianYear = dateFormatter.string(from: data.gregorian)
 
-        self.hijriDay = data.hijriDate.day
+        let numberFormatter = NumberFormatter()
+        numberFormatter.numberStyle = .none
+
+        self.hijriDay = numberFormatter.string(from: NSNumber(value: data.hijriDate.day)) ?? "\(data.hijriDate.day)"
         self.hijriMonth = data.hijriDate.localeMonth ?? "\(data.hijriDate.month)"
-        self.hijriYear = data.hijriDate.year
+        self.hijriYear = numberFormatter.string(from: NSNumber(value: data.hijriDate.year)) ?? "\(data.hijriDate.year)"
 
         self.fajr = data.fajr
         self.sunrise = data.sunrise
@@ -117,24 +63,5 @@ extension DayPrayerTimes {
         self.asr = data.asr
         self.maghrib = data.maghrib
         self.ishaa = data.ishaa
-    }
-
-    static func placeholder() -> DayPrayerTimes {
-        DayPrayerTimes(
-            id: "20260101",
-            gregorian: .now,
-            gregorianDay: "1",
-            gregorianMonth: "January",
-            gregorianYear: "2026",
-            hijriDay: 1,
-            hijriMonth: "Muharram",
-            hijriYear: 1444,
-            fajr: .now,
-            sunrise: .now,
-            dhuhr: .now,
-            asr: .now,
-            maghrib: .now,
-            ishaa: .now
-        )
     }
 }

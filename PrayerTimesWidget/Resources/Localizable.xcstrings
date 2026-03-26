@@ -1,9 +1,6 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
-    "%lld" : {
-
-    },
     "after_label" : {
       "localizations" : {
         "ar" : {
@@ -118,17 +115,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Maghrib"
-          }
-        }
-      }
-    },
-    "minutes_count" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%lld"
           }
         }
       }

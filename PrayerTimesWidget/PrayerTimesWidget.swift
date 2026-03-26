@@ -14,25 +14,13 @@ struct PrayerTimeTimelineProvider: TimelineProvider {
     @Dependency(\.miqatService) var miqatService
 
     func placeholder(in context: Context) -> PrayerTimeEntry {
-        PrayerTimeEntry(
-            date: .now,
-            currentPrayer: .maghrib,
-            nextPrayer: .ishaa,
-            nextPrayerDate: .now
-        )
+        PrayerTimeEntry(date: .now)
     }
 
     func getSnapshot(
         in context: Context, completion: @escaping (PrayerTimeEntry) -> ()
     ) {
-        let prayerTimes = getPrayerTimesSequnce()
-        let entry = prayerTimes.first ?? PrayerTimeEntry(
-            date: .now,
-            currentPrayer: .maghrib,
-            nextPrayer: .ishaa,
-            nextPrayerDate: .now
-        )
-        completion(entry)
+        completion(PrayerTimeEntry(date: .now))
     }
 
     func getTimeline(
@@ -52,45 +40,11 @@ struct PrayerTimeTimelineProvider: TimelineProvider {
         let prayerTimes = DayPrayerTimes(from: todayData)
 
         let tomorrowMidnight = Calendar.current.startOfDay(for: now.addingTimeInterval(86400))
-        let tomorrowTimestamp = tomorrowMidnight.timeIntervalSince1970 + TimeInterval(tzOffset)
-        let tomorrowData = miqatService.getMiqatData(timestampSecs: tomorrowTimestamp, provider: .darElFatwa(.beirut))
-        let tomorrowPrayerTimes = DayPrayerTimes(from: tomorrowData)
 
         return [
-            [PrayerTimeEntry(
-                date: now,
-                currentPrayer: prayerTimes.getPrayer(time: now),
-                nextPrayer: prayerTimes.getNextPrayer(time: now),
-                nextPrayerDate: prayerTimes.getNextPrayerTime(
-                    time: now,
-                    tomorrowPrayerTimes: tomorrowPrayerTimes
-                )
-            )],
-            prayerTimes
-                .sorted
-                .filter { now < $0 }
-                .map {
-                    PrayerTimeEntry(
-                        date: $0,
-                        currentPrayer: prayerTimes.getPrayer(time: $0),
-                        nextPrayer: prayerTimes.getNextPrayer(time: $0),
-                        nextPrayerDate: prayerTimes.getNextPrayerTime(
-                            time: $0,
-                            tomorrowPrayerTimes: tomorrowPrayerTimes
-                        )
-                    )
-                },
-            [
-                PrayerTimeEntry(
-                    date: tomorrowMidnight,
-                    currentPrayer: tomorrowPrayerTimes.getPrayer(time: tomorrowMidnight),
-                    nextPrayer: tomorrowPrayerTimes.getNextPrayer(time: tomorrowMidnight),
-                    nextPrayerDate: tomorrowPrayerTimes.getNextPrayerTime(
-                        time: tomorrowMidnight,
-                        tomorrowPrayerTimes: tomorrowPrayerTimes
-                    )
-                )
-            ]
+            [PrayerTimeEntry(date: now)],
+            prayerTimes.sorted.filter { now < $0 }.map(PrayerTimeEntry.init),
+            [PrayerTimeEntry(date: tomorrowMidnight)]
         ]
         .flatMap { $0 }
     }
@@ -98,9 +52,6 @@ struct PrayerTimeTimelineProvider: TimelineProvider {
 
 struct PrayerTimeEntry: TimelineEntry {
     let date: Date
-    let currentPrayer: Prayer
-    let nextPrayer: Prayer
-    let nextPrayerDate: Date
 }
 
 struct PrayerTimesWidget: Widget {
@@ -112,23 +63,13 @@ struct PrayerTimesWidget: Widget {
         ) { entry in
             if #available(iOS 17.0, *) {
                 PrayerTimesWidgetView(store: Store(
-                    initialState: PrayerTimesWidgetFeature.State(
-                        date: entry.date,
-                        currentPrayer: entry.currentPrayer,
-                        nextPrayer: entry.nextPrayer,
-                        nextPrayerDate: entry.nextPrayerDate
-                    ),
+                    initialState: PrayerTimesWidgetFeature.State(date: entry.date),
                     reducer: PrayerTimesWidgetFeature.init
                 ))
                 .containerBackground(.fill.tertiary, for: .widget)
             } else {
                 PrayerTimesWidgetView(store: Store(
-                    initialState: PrayerTimesWidgetFeature.State(
-                        date: entry.date,
-                        currentPrayer: entry.currentPrayer,
-                        nextPrayer: entry.nextPrayer,
-                        nextPrayerDate: entry.nextPrayerDate
-                    ),
+                    initialState: PrayerTimesWidgetFeature.State(date: entry.date),
                     reducer: PrayerTimesWidgetFeature.init
                 ))
                 .padding()
@@ -144,10 +85,5 @@ struct PrayerTimesWidget: Widget {
 #Preview(as: .systemMedium) {
     PrayerTimesWidget()
 } timeline: {
-    PrayerTimeEntry(
-        date: .now,
-        currentPrayer: .maghrib,
-        nextPrayer: .ishaa,
-        nextPrayerDate: .now
-    )
+    PrayerTimeEntry(date: .now)
 }
