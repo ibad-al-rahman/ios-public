@@ -8,13 +8,13 @@
         "ar" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "PrayerTimesWidget"
+            "value" : "PublicSectorWidgetBundle"
           }
         },
         "en" : {
           "stringUnit" : {
             "state" : "new",
-            "value" : "PrayerTimesWidget"
+            "value" : "PublicSectorWidgetBundle"
           }
         }
       }
@@ -26,13 +26,13 @@
         "ar" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "PrayerTimesWidgetExtension"
+            "value" : "PublicSectorWidgetBundle"
           }
         },
         "en" : {
           "stringUnit" : {
             "state" : "new",
-            "value" : "PrayerTimesWidgetExtension"
+            "value" : "PublicSectorWidgetBundle"
           }
         }
       }
