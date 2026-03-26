@@ -1,5 +1,5 @@
 //
-//  WidgetConfig.swift
+//  PrayerTimesWidget.swift
 //  PublicSector
 //
 //  Created by Hamza Jadid on 04/01/2025.
