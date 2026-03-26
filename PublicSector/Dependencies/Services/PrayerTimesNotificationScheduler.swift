@@ -76,12 +76,42 @@ struct PrayerTimesNotificationService {
             let timestamp = date.timeIntervalSince1970 + TimeInterval(tzOffset)
             let miqatData = miqatService.getMiqatData(timestampSecs: timestamp, provider: .darElFatwa(.beirut))
 
-            let prayers: [(name: String, date: Date, enabled: Bool)] = [
-                ("Fajr", miqatData.fajr, fajrEnabled),
-                ("Dhuhr", miqatData.dhuhr, dhuhrEnabled),
-                ("Asr", miqatData.asr, asrEnabled),
-                ("Maghrib", miqatData.maghrib, maghribEnabled),
-                ("Ishaa", miqatData.ishaa, ishaaEnabled),
+            let prayers: [(name: String, title: String, body: String, date: Date, enabled: Bool)] = [
+                (
+                    "fajr",
+                    String(localized: "fajr"),
+                    String(localized: "notification_body_fajr"),
+                    miqatData.fajr,
+                    fajrEnabled
+                ),
+                (
+                    "dhuhr",
+                    String(localized: "dhuhr"),
+                    String(localized: "notification_body_dhuhr"),
+                    miqatData.dhuhr,
+                    dhuhrEnabled
+                ),
+                (
+                    "asr",
+                    String(localized: "asr"),
+                    String(localized: "notification_body_asr"),
+                    miqatData.asr,
+                    asrEnabled
+                ),
+                (
+                    "maghrib",
+                    String(localized: "maghrib"),
+                    String(localized: "notification_body_maghrib"),
+                    miqatData.maghrib,
+                    maghribEnabled
+                ),
+                (
+                    "ishaa",
+                    String(localized: "ishaa"),
+                    String(localized: "notification_body_ishaa"),
+                    miqatData.ishaa,
+                    ishaaEnabled
+                ),
             ]
 
             let dateFormatter = DateFormatter()
@@ -90,8 +120,8 @@ struct PrayerTimesNotificationService {
 
             for prayer in prayers where prayer.enabled && prayer.date > .now {
                 let content = UNMutableNotificationContent()
-                content.title = prayer.name
-                content.body = "It's time for \(prayer.name) prayer"
+                content.title = prayer.title
+                content.body = prayer.body
                 content.sound = UNNotificationSound(named: UNNotificationSoundName("azan.caf"))
 
                 let components = calendar.dateComponents([.year, .month, .day, .hour, .minute], from: prayer.date)
