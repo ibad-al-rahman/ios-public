@@ -11,6 +11,16 @@ import SwiftUI
 struct Settings { }
 
 extension Settings {
+    struct PrayerTimesNotifications: Codable, Equatable {
+        var fajr: Bool = false
+        var dhuhr: Bool = false
+        var asr: Bool = false
+        var maghrib: Bool = false
+        var ishaa: Bool = false
+    }
+}
+
+extension Settings {
     enum Appearance: String, CaseIterable, Identifiable {
         case system
         case light

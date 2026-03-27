@@ -18,11 +18,7 @@ struct NotificationsFeature {
     @ObservableState
     struct State: Equatable {
         @Shared(.notificationsEnabled) var notificationsEnabled = false
-        @Shared(.fajrNotificationEnabled) var fajrNotificationEnabled = false
-        @Shared(.dhuhrNotificationEnabled) var dhuhrNotificationEnabled = false
-        @Shared(.asrNotificationEnabled) var asrNotificationEnabled = false
-        @Shared(.maghribNotificationEnabled) var maghribNotificationEnabled = false
-        @Shared(.ishaaNotificationEnabled) var ishaaNotificationEnabled = false
+        @Shared(.prayerTimesNotifications) var prayerTimesNotifications = Settings.PrayerTimesNotifications()
 
         @Presents var destination: Destination.State?
 
@@ -113,11 +109,7 @@ struct NotificationsFeature {
                     .run { _ in await scheduleNotifications() }
                 )
 
-            case .binding(\.fajrNotificationEnabled),
-                    .binding(\.dhuhrNotificationEnabled),
-                    .binding(\.asrNotificationEnabled),
-                    .binding(\.maghribNotificationEnabled),
-                    .binding(\.ishaaNotificationEnabled):
+            case .binding(\.prayerTimesNotifications):
                 return .run { _ in await scheduleNotifications() }
 
             default:

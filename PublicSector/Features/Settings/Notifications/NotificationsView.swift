@@ -18,20 +18,14 @@ struct NotificationsView: View {
             }
 
             Section {
-                Toggle("fajr", isOn: $store.fajrNotificationEnabled)
-                    .disabled(store.notificationsDisabled)
-
-                Toggle("dhuhr", isOn: $store.dhuhrNotificationEnabled)
-                    .disabled(store.notificationsDisabled)
-
-                Toggle("asr", isOn: $store.asrNotificationEnabled)
-                    .disabled(store.notificationsDisabled)
-
-                Toggle("maghrib", isOn: $store.maghribNotificationEnabled)
-                    .disabled(store.notificationsDisabled)
-
-                Toggle("ishaa", isOn: $store.ishaaNotificationEnabled)
-                    .disabled(store.notificationsDisabled)
+                Group {
+                    Toggle("fajr", isOn: $store.prayerTimesNotifications.fajr)
+                    Toggle("dhuhr", isOn: $store.prayerTimesNotifications.dhuhr)
+                    Toggle("asr", isOn: $store.prayerTimesNotifications.asr)
+                    Toggle("maghrib", isOn: $store.prayerTimesNotifications.maghrib)
+                    Toggle("ishaa", isOn: $store.prayerTimesNotifications.ishaa)
+                }
+                .disabled(store.notificationsDisabled)
             } header: {
                 Text("prayer_notifications")
             }
