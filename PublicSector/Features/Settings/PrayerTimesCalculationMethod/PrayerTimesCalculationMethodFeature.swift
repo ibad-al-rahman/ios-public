@@ -32,6 +32,8 @@ struct PrayerTimesCalculationMethodFeature {
     @ObservableState
     struct State: Equatable {
         var calculationMethod: CalculationMethod = .astronomical
+
+        @Presents var destination: Destination.State?
     }
 
     enum Action: BaseAction, BindableAction {
@@ -41,7 +43,9 @@ struct PrayerTimesCalculationMethodFeature {
         case dependent(DependentAction)
         case binding(BindingAction<State>)
 
-        enum ViewAction { }
+        enum ViewAction {
+            case locationSearchTapped
+        }
 
         @CasePathable
         enum ReducerAction { }
@@ -50,16 +54,25 @@ struct PrayerTimesCalculationMethodFeature {
         enum DelegateAction { }
 
         @CasePathable
-        enum DependentAction { }
+        enum DependentAction {
+            case destination(PresentationAction<Destination.Action>)
+        }
     }
 
     var body: some ReducerOf<Self> {
         BindingReducer()
-        Reduce { _, action in
+        Reduce { state, action in
             switch action {
+            case .view(.locationSearchTapped):
+                state.destination = .locationSearch(LocationSearchFeature.State())
+                return .none
+
             default:
                 return .none
             }
+        }
+        .ifLet(\.$destination, action: \.dependent.destination) {
+            Destination()
         }
     }
 }

@@ -14,16 +14,52 @@ struct PrayerTimesCalculationMethodView: View {
 
     var body: some View {
         Form {
-            Picker(selection: $store.calculationMethod) {
-                ForEach(PrayerTimesCalculationMethodFeature.CalculationMethod.allCases) {
-                    Text($0.string).tag($0)
-                }
-            } label: {
-                Spacer(minLength: Spacing.small)
+            calculationMethodPicker
+
+            switch store.calculationMethod {
+            case .astronomical:
+                astronomicalMethodPicker
+
+            case .precomputed:
+                precomputedMethodPicker
             }
-            .pickerStyle(.inline)
         }
         .navigationTitle("prayer_times_calculation_method")
+        .sheet(item: $store.scope(
+            state: \.destination?.locationSearch,
+            action: \.dependent.destination.locationSearch
+        )) { store in
+            NavigationStack {
+                LocationSearchView(store: store)
+            }
+        }
+    }
+
+    private var calculationMethodPicker: some View {
+        Picker(selection: $store.calculationMethod) {
+            ForEach(PrayerTimesCalculationMethodFeature.CalculationMethod.allCases) {
+                Text($0.string).tag($0)
+            }
+        } label: {
+            Spacer(minLength: Spacing.small)
+        }
+        .pickerStyle(.inline)
+    }
+
+    private var astronomicalMethodPicker: some View {
+        Group {
+            Button {
+                store.send(.view(.locationSearchTapped))
+            } label: {
+                Text(verbatim: "Location")
+                    .foregroundStyle(.primary)
+            }
+            Text(verbatim: "Astronomical")
+        }
+    }
+
+    private var precomputedMethodPicker: some View {
+        Text(verbatim: "Precomputed")
     }
 }
 
