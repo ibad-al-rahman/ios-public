@@ -47,6 +47,7 @@ struct PrayerTimesNotificationService {
 
     func scheduleNotifications() async {
         @Shared(.notificationsEnabled) var notificationsEnabled = false
+        @Shared(.prayerTimesNotifications) var prayerTimes = Settings.PrayerTimesNotifications()
         @Dependency(\.miqatService) var miqatService
         @Dependency(\.remoteConfig) var remoteConfig
 
@@ -60,12 +61,6 @@ struct PrayerTimesNotificationService {
         center.removePendingNotificationRequests(withIdentifiers: prayerIdentifiers)
 
         guard notificationsEnabled else { return }
-
-        @Shared(.fajrNotificationEnabled) var fajrEnabled = false
-        @Shared(.dhuhrNotificationEnabled) var dhuhrEnabled = false
-        @Shared(.asrNotificationEnabled) var asrEnabled = false
-        @Shared(.maghribNotificationEnabled) var maghribEnabled = false
-        @Shared(.ishaaNotificationEnabled) var ishaaEnabled = false
 
         let tzOffset = TimeZone.current.secondsFromGMT()
         let calendar = Calendar.current
@@ -82,35 +77,35 @@ struct PrayerTimesNotificationService {
                     String(localized: "fajr"),
                     String(localized: "notification_body_fajr"),
                     miqatData.fajr,
-                    fajrEnabled
+                    prayerTimes.fajr
                 ),
                 (
                     "dhuhr",
                     String(localized: "dhuhr"),
                     String(localized: "notification_body_dhuhr"),
                     miqatData.dhuhr,
-                    dhuhrEnabled
+                    prayerTimes.dhuhr
                 ),
                 (
                     "asr",
                     String(localized: "asr"),
                     String(localized: "notification_body_asr"),
                     miqatData.asr,
-                    asrEnabled
+                    prayerTimes.asr
                 ),
                 (
                     "maghrib",
                     String(localized: "maghrib"),
                     String(localized: "notification_body_maghrib"),
                     miqatData.maghrib,
-                    maghribEnabled
+                    prayerTimes.maghrib
                 ),
                 (
                     "ishaa",
                     String(localized: "ishaa"),
                     String(localized: "notification_body_ishaa"),
                     miqatData.ishaa,
-                    ishaaEnabled
+                    prayerTimes.ishaa
                 ),
             ]
 
