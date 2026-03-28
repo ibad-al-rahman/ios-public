@@ -32,6 +32,7 @@ struct PrayerTimesCalculationMethodFeature {
     @ObservableState
     struct State: Equatable {
         var calculationMethod: CalculationMethod = .astronomical
+        @Shared(.selectedLocation) var selectedLocation: Settings.SelectedLocation? = nil
 
         @Presents var destination: Destination.State?
     }
@@ -65,6 +66,10 @@ struct PrayerTimesCalculationMethodFeature {
             switch action {
             case .view(.locationSearchTapped):
                 state.destination = .locationSearch(LocationSearchFeature.State())
+                return .none
+
+            case let .dependent(.destination(.presented(.locationSearch(.delegate(.didSelectLocation(location)))))):
+                state.$selectedLocation.withLock { $0 = location }
                 return .none
 
             default:

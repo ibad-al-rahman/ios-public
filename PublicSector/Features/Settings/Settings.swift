@@ -21,6 +21,14 @@ extension Settings {
 }
 
 extension Settings {
+    struct SelectedLocation: Codable, Equatable {
+        var name: String
+        var latitude: Double
+        var longitude: Double
+    }
+}
+
+extension Settings {
     enum Appearance: String, CaseIterable, Identifiable {
         case system
         case light

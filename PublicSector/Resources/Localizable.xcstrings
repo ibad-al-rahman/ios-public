@@ -552,9 +552,6 @@
         }
       }
     },
-    "latitude" : {
-
-    },
     "light_theme" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -572,13 +569,7 @@
         }
       }
     },
-    "location_coordinates" : {
-
-    },
-    "location_search" : {
-
-    },
-    "longitude" : {
+    "location" : {
 
     },
     "maghrib" : {
@@ -875,6 +866,12 @@
           }
         }
       }
+    },
+    "search_for_location" : {
+
+    },
+    "search_for_location_description" : {
+
     },
     "search_results_count" : {
       "localizations" : {
