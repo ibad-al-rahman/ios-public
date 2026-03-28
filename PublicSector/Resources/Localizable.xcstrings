@@ -570,7 +570,20 @@
       }
     },
     "location" : {
-
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "الموقع"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Location"
+          }
+        }
+      }
     },
     "maghrib" : {
       "extractionState" : "manual",
@@ -868,10 +881,36 @@
       }
     },
     "search_for_location" : {
-
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ابحث عن موقع"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Search for a Location"
+          }
+        }
+      }
     },
     "search_for_location_description" : {
-
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "اكتب اسم مدينة أو مكان للبدء."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Type a city or place name to get started."
+          }
+        }
+      }
     },
     "search_results_count" : {
       "localizations" : {
