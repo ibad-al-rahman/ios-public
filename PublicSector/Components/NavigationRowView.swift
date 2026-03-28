@@ -9,6 +9,7 @@ import SwiftUI
 
 struct NavigationRowView: View {
     let label: LocalizedStringKey
+    let badge: String?
     let systemName: String
 
     var body: some View {
@@ -16,13 +17,21 @@ struct NavigationRowView: View {
             Label(label, systemImage: systemName)
                 .foregroundStyle(.primary, .primary)
             Spacer()
+
+            if let badge {
+                Text(badge)
+                    .foregroundStyle(.secondary)
+            }
+
             Image(systemName: "chevron.forward")
+                .foregroundStyle(.secondary)
         }
         .contentShape(Rectangle())
     }
 
-    init(_ label: LocalizedStringKey, systemName: String) {
+    init(_ label: LocalizedStringKey, badge: String? = nil, systemName: String) {
         self.label = label
+        self.badge = badge
         self.systemName = systemName
     }
 }

@@ -12,49 +12,39 @@ struct LocationSearchView: View {
     @Bindable var store: StoreOf<LocationSearchFeature>
 
     var body: some View {
-        List {
-            if let coordinate = store.resolvedCoordinate {
-                Section("location_coordinates") {
-                    LabeledContent(
-                        String(localized: "latitude"),
-                        value: coordinate.latitude.formatted(.number.precision(.fractionLength(6)))
-                    )
-                    LabeledContent(
-                        String(localized: "longitude"),
-                        value: coordinate.longitude.formatted(.number.precision(.fractionLength(6)))
-                    )
-                }
-            }
-
-            Section {
-                if store.isLoading {
-                    HStack {
-                        Spacer()
-                        ProgressView()
-                        Spacer()
-                    }
-                } else {
-                    ForEach(store.completions) { completion in
-                        Button {
-                            store.send(.view(.completionTapped(completion)))
-                        } label: {
-                            VStack(alignment: .leading, spacing: 2) {
-                                Text(completion.title)
-                                    .foregroundStyle(.primary)
-                                if !completion.subtitle.isEmpty {
-                                    Text(completion.subtitle)
-                                        .font(.caption)
-                                        .foregroundStyle(.secondary)
+        Group {
+            if store.query.isEmpty {
+                ContentUnavailableView(
+                    "search_for_location",
+                    systemImage: "magnifyingglass",
+                    description: Text("search_for_location_description")
+                )
+            } else if store.completions.isEmpty && !store.isLoading {
+                ContentUnavailableView.search(text: store.query)
+            } else {
+                List {
+                    Section {
+                        ForEach(store.completions) { completion in
+                            Button {
+                                store.send(.onCompletionTapped(completion))
+                            } label: {
+                                VStack(alignment: .leading, spacing: 2) {
+                                    Text(completion.title)
+                                    if !completion.subtitle.isEmpty {
+                                        Text(completion.subtitle)
+                                            .font(.caption)
+                                    }
                                 }
                             }
                         }
                     }
+                    .redacted(reason: store.isLoading ? .placeholder : [])
                 }
             }
         }
-        .searchable(text: $store.query)
-        .navigationTitle("location_search")
-        .onAppear { store.send(.view(.onAppear)) }
+        .searchable(text: $store.query, placement: .navigationBarDrawer(displayMode: .always))
+        .navigationTitle("location")
+        .onAppear { store.send(.onAppear) }
     }
 }
 

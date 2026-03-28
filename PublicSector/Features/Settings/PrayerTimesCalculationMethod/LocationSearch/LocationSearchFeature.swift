@@ -10,7 +10,9 @@ import ComposableArchitecture
 
 @Reducer
 struct LocationSearchFeature {
-    @Dependency(\.locationSearch) var locationSearch
+    @Dependency(\.uuid) private var uuid
+    @Dependency(\.dismiss) private var dismiss
+    @Dependency(\.locationSearch) private var locationSearch
 
     @ObservableState
     struct State: Equatable {
@@ -18,6 +20,7 @@ struct LocationSearchFeature {
         var completions: [LocationCompletion] = []
         var resolvedCoordinate: ResolvedCoordinate?
         var isLoading: Bool = false
+        var pendingLocationName: String?
     }
 
     struct LocationCompletion: Equatable, Identifiable, Sendable {
@@ -45,7 +48,7 @@ struct LocationSearchFeature {
 
         enum ViewAction {
             case onAppear
-            case completionTapped(LocationCompletion)
+            case onCompletionTapped(LocationCompletion)
         }
 
         @CasePathable
@@ -55,7 +58,9 @@ struct LocationSearchFeature {
         }
 
         @CasePathable
-        enum DelegateAction { }
+        enum DelegateAction {
+            case didSelectLocation(Settings.SelectedLocation)
+        }
 
         @CasePathable
         enum DependentAction { }
@@ -68,16 +73,20 @@ struct LocationSearchFeature {
             case .view(.onAppear):
                 return .none
 
-            case let .view(.completionTapped(completion)):
+            case let .view(.onCompletionTapped(completion)):
                 state.isLoading = true
-                return .run { [completion] send in
-                    let coordinate = await locationSearch.resolve(completion.completion)
-                    await send(.reducer(.coordinateResolved(coordinate)))
-                }
+                state.pendingLocationName = completion.title
+                return .concatenate(
+                    .run { [completion] send in
+                        let coordinate = await locationSearch.resolve(completion.completion)
+                        await send(.reducer(.coordinateResolved(coordinate)))
+                    },
+                    .run { _ in await dismiss() }
+                )
 
             case let .reducer(.completionsUpdated(completions)):
                 state.completions = completions.map {
-                    LocationCompletion(id: UUID(), title: $0.title, subtitle: $0.subtitle, completion: $0)
+                    LocationCompletion(id: uuid(), title: $0.title, subtitle: $0.subtitle, completion: $0)
                 }
                 return .none
 
@@ -85,6 +94,15 @@ struct LocationSearchFeature {
                 state.isLoading = false
                 state.resolvedCoordinate = coordinate.map {
                     ResolvedCoordinate(latitude: $0.latitude, longitude: $0.longitude)
+                }
+                let pendingName = state.pendingLocationName
+                state.pendingLocationName = nil
+                if let coordinate, let name = pendingName {
+                    return .send(.delegate(.didSelectLocation(Settings.SelectedLocation(
+                        name: name,
+                        latitude: coordinate.latitude,
+                        longitude: coordinate.longitude
+                    ))))
                 }
                 return .none
 

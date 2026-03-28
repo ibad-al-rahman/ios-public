@@ -48,12 +48,14 @@ struct PrayerTimesCalculationMethodView: View {
 
     private var astronomicalMethodPicker: some View {
         Group {
-            Button {
-                store.send(.view(.locationSearchTapped))
-            } label: {
-                Text(verbatim: "Location")
-                    .foregroundStyle(.primary)
+            if let location = store.selectedLocation?.name {
+                NavigationRowView("location", badge: location, systemName: "location")
+                    .onTapGesture { store.send(.locationSearchTapped) }
+            } else {
+                NavigationRowView("location", systemName: "location")
+                    .onTapGesture { store.send(.locationSearchTapped) }
             }
+
             Text(verbatim: "Astronomical")
         }
     }
