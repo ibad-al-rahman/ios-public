@@ -9,6 +9,7 @@ import ComposableArchitecture
 import Testing
 @testable import PublicSector
 
+@MainActor
 @Suite
 struct NotificationsFeatureTests {
     @Test
@@ -81,7 +82,7 @@ struct NotificationsFeatureTests {
 
     @Test
     func toggleOffSkipsEffects() async {
-        var state = NotificationsFeature.State()
+        let state = NotificationsFeature.State()
         state.$notificationsEnabled.withLock { $0 = true }
 
         let store = TestStore(initialState: state) {
@@ -102,18 +103,20 @@ struct NotificationsFeatureTests {
         var state = NotificationsFeature.State()
         state.destination = .alert(.unauthorizedNotificationPermission)
 
-        var didOpenSettings = false
+        let didOpenSettings = LockIsolated(false)
         let store = TestStore(initialState: state) {
             NotificationsFeature()
         } withDependencies: {
-            $0.externalDeepLinks.appSettings = { didOpenSettings = true }
+            $0.externalDeepLinks.appSettings = {
+                didOpenSettings.withValue { val in val = true }
+            }
         }
 
         await store.send(.dependent(.destination(.presented(.alert(.openSettings))))) {
             $0.destination = nil
         }
 
-        #expect(didOpenSettings)
+        #expect(didOpenSettings.value)
     }
 
     @Test
@@ -136,7 +139,7 @@ struct NotificationsFeatureTests {
 
     @Test
     func prayerTimesNotificationsBindingSchedules() async {
-        var state = NotificationsFeature.State()
+        let state = NotificationsFeature.State()
         state.$notificationsEnabled.withLock { $0 = true }
 
         let scheduleCallCount = LockIsolated(0)
