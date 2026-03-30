@@ -19,7 +19,6 @@ struct LocationSearchFeature {
         var query: String = ""
         var completions: [LocationCompletion] = []
         var resolvedCoordinate: ResolvedCoordinate?
-        var isLoading: Bool = false
         var pendingLocationName: String?
     }
 
@@ -74,7 +73,6 @@ struct LocationSearchFeature {
                 return .none
 
             case let .view(.onCompletionTapped(completion)):
-                state.isLoading = true
                 state.pendingLocationName = completion.title
                 return .concatenate(
                     .run { [completion] send in
@@ -91,7 +89,6 @@ struct LocationSearchFeature {
                 return .none
 
             case let .reducer(.coordinateResolved(coordinate)):
-                state.isLoading = false
                 state.resolvedCoordinate = coordinate.map {
                     ResolvedCoordinate(latitude: $0.latitude, longitude: $0.longitude)
                 }
