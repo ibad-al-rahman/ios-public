@@ -38,7 +38,6 @@ struct LocationSearchView: View {
                             }
                         }
                     }
-                    .redacted(reason: store.isLoading ? .placeholder : [])
                 }
             }
         }
