@@ -19,7 +19,7 @@ struct LocationSearchView: View {
                     systemImage: "magnifyingglass",
                     description: Text("search_for_location_description")
                 )
-            } else if store.completions.isEmpty && !store.isLoading {
+            } else if store.completions.isEmpty {
                 ContentUnavailableView.search(text: store.query)
             } else {
                 List {
