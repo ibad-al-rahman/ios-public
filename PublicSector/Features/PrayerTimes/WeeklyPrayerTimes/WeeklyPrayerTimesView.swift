@@ -54,6 +54,11 @@ struct WeeklyPrayerTimesView: View {
             } header: {
                 HStack {
                     Text("timings")
+                    Spacer()
+                    ShareLink(item: "") {
+                        Label("share", systemImage: "square.and.arrow.up")
+                    }
+                    .textCase(nil)
                 }
             }
         }
