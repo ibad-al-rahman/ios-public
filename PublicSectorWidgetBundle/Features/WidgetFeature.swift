@@ -57,7 +57,7 @@ struct WidgetFeature {
                 self.upcomingPrayer = .ishaa
                 self.upcomingPrayerDate = prayerTimes.ishaa
             } else {
-                self.currentPrayer = .fajr
+                self.currentPrayer = .ishaa
                 self.upcomingPrayer = .fajr
                 self.upcomingPrayerDate = tomorrowPrayerTimes.fajr
             }
