@@ -65,7 +65,7 @@ struct BrandedWeeklyPrayerTimesView: View {
                 }
             }
             ForEach(week) { day in
-                dayCell(width: weekColumnWidth, background: Color.accentColor) {
+                dayCell(width: weekColumnWidth, background: Color("AccentColor")) {
                     Text(day.gregorian, format: .dateTime.weekday(.wide))
                         .font(.headline)
                         .foregroundStyle(Color(.systemBackground))
@@ -84,7 +84,7 @@ struct BrandedWeeklyPrayerTimesView: View {
             Image(systemName: "hexagon.fill")
                 .resizable()
                 .scaledToFit()
-                .foregroundStyle(Color.accentColor)
+                .foregroundStyle(Color("AccentColor"))
                 .frame(width: 40, height: 40)
             if let weekNumber {
                 Text(weekNumber.localizedNumber(locale: locale))
@@ -135,7 +135,11 @@ struct BrandedWeeklyPrayerTimesView: View {
         )
     }
 
-    /// Shared two-sub-column date block for Hijri and Gregorian calendars.
+    /// Shared single-column date block for Hijri and Gregorian calendars.
+    ///
+    /// The block is one `dateColumnWidth` wide. When the week spans two months
+    /// the month labels are stacked vertically (earlier month on top, per the
+    /// chronological order of `groups`), and all day numbers share one column.
     private func dateBlock(
         yearLabel: String,
         groups: [MonthGroup],
@@ -143,26 +147,27 @@ struct BrandedWeeklyPrayerTimesView: View {
         monthNumber: @escaping (Int) -> Int,
         dayNumber: @escaping (Int) -> Int
     ) -> some View {
-        let blockWidth = dateColumnWidth * 2
+        let blockWidth = dateColumnWidth
+        let monthAreaHeight = headerHeight * 2 / 3
+        let monthCellHeight = monthAreaHeight / CGFloat(groups.count)
         return VStack(spacing: 0) {
-            // Header: year band across the full block, then month cells.
+            // Header: year band on top, then the month label(s) stacked.
             VStack(spacing: 0) {
                 headerCell(height: headerHeight / 3, width: blockWidth) {
                     Text(verbatim: yearLabel)
                         .font(.headline)
+                        .minimumScaleFactor(0.5)
+                        .lineLimit(1)
                 }
                 horizontalRule(width: blockWidth)
-                HStack(spacing: 0) {
+                VStack(spacing: 0) {
                     ForEach(groups) { group in
-                        headerCell(
-                            height: headerHeight * 2 / 3,
-                            width: dateColumnWidth * CGFloat(groups.count == 1 ? 2 : 1)
-                        ) {
+                        headerCell(height: monthCellHeight, width: blockWidth) {
                             VStack(spacing: Spacing.extraExtraSmall.rawValue) {
                                 Text(verbatim: monthName(group.representativeIndex))
                                     .font(.subheadline.bold())
                                     .minimumScaleFactor(0.5)
-                                    .lineLimit(2)
+                                    .lineLimit(1)
                                     .multilineTextAlignment(.center)
                                 Text(verbatim: monthNumber(group.representativeIndex)
                                     .localizedNumber(locale: locale))
@@ -170,7 +175,7 @@ struct BrandedWeeklyPrayerTimesView: View {
                             }
                         }
                         if group.id != groups.last?.id {
-                            divider(height: headerHeight * 2 / 3)
+                            horizontalRule(width: blockWidth)
                         }
                     }
                 }
@@ -178,33 +183,14 @@ struct BrandedWeeklyPrayerTimesView: View {
             .frame(width: blockWidth, height: headerHeight)
             .background(headerBackground)
 
-            // Day rows: number rendered under the sub-column of its month group.
+            // Day rows: one number per row in a single column.
             ForEach(Array(week.enumerated()), id: \.element.id) { index, _ in
-                let groupIndex = groups.firstIndex { $0.range.contains(index) } ?? 0
-                dayRowContainer {
-                    HStack(spacing: 0) {
-                        ForEach(0..<subColumnCount(groups), id: \.self) { column in
-                            Text(verbatim: shouldRender(column: column, groupIndex: groupIndex, groups: groups)
-                                ? dayNumber(index).localizedNumber(locale: locale)
-                                : "")
-                                .font(.title3.bold())
-                                .frame(width: dateColumnWidth, height: rowHeight)
-                            if column == 0 && subColumnCount(groups) == 2 {
-                                divider(height: rowHeight)
-                            }
-                        }
-                    }
+                dayCell(width: blockWidth) {
+                    Text(verbatim: dayNumber(index).localizedNumber(locale: locale))
+                        .font(.title3.bold())
                 }
             }
         }
-    }
-
-    private func subColumnCount(_ groups: [MonthGroup]) -> Int {
-        groups.count == 1 ? 1 : 2
-    }
-
-    private func shouldRender(column: Int, groupIndex: Int, groups: [MonthGroup]) -> Bool {
-        groups.count == 1 ? column == 0 : column == groupIndex
     }
 
     // MARK: - Prayer block
@@ -228,7 +214,7 @@ struct BrandedWeeklyPrayerTimesView: View {
                         headerCell(
                             height: headerHeight / 3,
                             width: timeColumnWidth * 2,
-                            background: Color.accentColor
+                            background: Color("AccentColor")
                         ) {
                             Text(entry.prayer.localizedStringKey)
                                 .font(.subheadline.bold())
@@ -293,16 +279,33 @@ struct BrandedWeeklyPrayerTimesView: View {
         // Pinned LTR so the hour column stays on the left and the minute
         // column on the right in every locale.
         return HStack(spacing: 0) {
-            Text(verbatim: components?.hour?.localizedNumber(locale: locale) ?? "-")
+            Text(verbatim: hourString(from: date))
                 .foregroundStyle(Color(.systemBackground))
                 .frame(width: timeColumnWidth, height: rowHeight)
-                .background(Color.accentColor)
+                .background(Color("AccentColor"))
             divider(height: rowHeight)
             Text(verbatim: components?.minute?.localizedNumber(locale: locale, minimumDigits: 2) ?? "-")
                 .frame(width: timeColumnWidth, height: rowHeight)
         }
         .font(.title3.bold())
         .environment(\.layoutDirection, .leftToRight)
+    }
+
+    /// The hour digits only, following the locale's own clock convention
+    /// (12-hour or 24-hour per the system) without any AM/PM text.
+    private func hourString(from date: Date?) -> String {
+        guard let date else { return "-" }
+        let formatter = DateFormatter()
+        formatter.locale = locale
+        // "j" resolves to the locale's preferred hour field (12h or 24h);
+        // the localized digits follow the locale's numbering system.
+        formatter.setLocalizedDateFormatFromTemplate("j")
+        let string = formatter.string(from: date)
+        // Strip any AM/PM symbols the "j" template may add, keeping just the hour.
+        return string
+            .replacingOccurrences(of: formatter.amSymbol ?? "", with: "")
+            .replacingOccurrences(of: formatter.pmSymbol ?? "", with: "")
+            .trimmingCharacters(in: .whitespaces)
     }
 
     // MARK: - Events column
