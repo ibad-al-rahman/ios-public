@@ -27,6 +27,10 @@ struct DailyPrayerTimesFeature {
             maghrib: .now,
             ishaa: .now,
             hijri: "",
+            hijriDay: 0,
+            hijriMonth: 0,
+            hijriYear: 0,
+            hijriMonthName: nil,
             gregorian: .now,
             islamicEvents: []
         )
