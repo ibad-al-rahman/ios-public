@@ -8,6 +8,7 @@
 import ComposableArchitecture
 import Foundation
 import MiqatKit
+import UIKit
 
 @Reducer
 struct WeeklyPrayerTimesFeature {

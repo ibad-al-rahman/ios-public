@@ -55,10 +55,16 @@ struct WeeklyPrayerTimesView: View {
                 HStack {
                     Text("timings")
                     Spacer()
-                    ShareLink(item: "") {
-                        Label("share", systemImage: "square.and.arrow.up")
+                    if !store.week.isEmpty {
+                        let image = BrandedWeeklyPrayerTimesView(week: store.week).snapshot()
+                        ShareLink(
+                            item: ShareableImage(image: image),
+                            preview: SharePreview("Image", image: Image(uiImage: image))
+                        ) {
+                            Label("share", systemImage: "square.and.arrow.up")
+                        }
+                        .textCase(nil)
                     }
-                    .textCase(nil)
                 }
             }
         }

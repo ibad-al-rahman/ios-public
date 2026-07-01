@@ -21,6 +21,10 @@ struct DayInfo: Equatable, Identifiable {
     var ishaa: Date
 
     var hijri: String
+    var hijriDay: Int
+    var hijriMonth: Int
+    var hijriYear: Int
+    var hijriMonthName: String?
     var gregorian: Date
     var islamicEvents: [IslamicEvent]
 }
@@ -37,6 +41,10 @@ extension DayInfo {
         self.maghrib = miqatData.maghrib
         self.ishaa = miqatData.ishaa
         self.hijri = miqatData.hijriDate.formatted ?? ""
+        self.hijriDay = miqatData.hijriDate.day
+        self.hijriMonth = miqatData.hijriDate.month
+        self.hijriYear = miqatData.hijriDate.year
+        self.hijriMonthName = miqatData.hijriDate.localeMonth
         self.gregorian = miqatData.gregorian
         self.islamicEvents = miqatData.islamicEvents
     }

@@ -469,6 +469,26 @@
         }
       }
     },
+    "hour_short" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ساعة"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hr"
+          }
+        }
+      }
+    },
+    "Image" : {
+
+    },
     "imsak" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -598,6 +618,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Maghrib"
+          }
+        }
+      }
+    },
+    "minute_short" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "د"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Min"
           }
         }
       }
@@ -962,6 +999,23 @@
         }
       }
     },
+    "summer_timing_title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "مواقيت الصلاة حسب التوقيت الصيفي"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Prayer Times (Summer Time)"
+          }
+        }
+      }
+    },
     "sunrise" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1109,6 +1163,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Weekly"
+          }
+        }
+      }
+    },
+    "winter_timing_title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "مواقيت الصلاة حسب التوقيت الشتوي"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Prayer Times (Winter Time)"
           }
         }
       }
