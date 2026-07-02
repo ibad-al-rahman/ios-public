@@ -88,8 +88,8 @@ struct BrandedWeeklyPrayerTimesView: View {
                 .frame(width: 40, height: 40)
             if let weekNumber {
                 Text(weekNumber.localizedNumber(locale: locale))
-                    .font(.headline)
                     .foregroundStyle(Color(.systemBackground))
+                    .font(Font.custom("ZarBold", size: 24))
             }
         }
     }
@@ -155,7 +155,7 @@ struct BrandedWeeklyPrayerTimesView: View {
             VStack(spacing: 0) {
                 headerCell(height: headerHeight / 3, width: blockWidth) {
                     Text(verbatim: yearLabel)
-                        .font(.headline)
+                        .font(Font.custom("ZarBold", size: 24))
                         .minimumScaleFactor(0.5)
                         .lineLimit(1)
                 }
@@ -172,6 +172,7 @@ struct BrandedWeeklyPrayerTimesView: View {
                                 Text(verbatim: monthNumber(group.representativeIndex)
                                     .localizedNumber(locale: locale))
                                     .font(.subheadline)
+                                    .font(Font.custom("ZarBold", size: 24))
                             }
                         }
                         if group.id != groups.last?.id {
@@ -187,7 +188,7 @@ struct BrandedWeeklyPrayerTimesView: View {
             ForEach(Array(week.enumerated()), id: \.element.id) { index, _ in
                 dayCell(width: blockWidth) {
                     Text(verbatim: dayNumber(index).localizedNumber(locale: locale))
-                        .font(.title3.bold())
+                        .font(Font.custom("ZarBold", size: 32))
                 }
             }
         }
@@ -283,9 +284,13 @@ struct BrandedWeeklyPrayerTimesView: View {
                 .foregroundStyle(Color(.systemBackground))
                 .frame(width: timeColumnWidth, height: rowHeight)
                 .background(Color("AccentColor"))
+                .font(Font.custom("ZarBold", size: 32))
+                .bold()
             divider(height: rowHeight)
             Text(verbatim: components?.minute?.localizedNumber(locale: locale, minimumDigits: 2) ?? "-")
                 .frame(width: timeColumnWidth, height: rowHeight)
+                .font(Font.custom("ZarBold", size: 24))
+                .bold()
         }
         .font(.title3.bold())
         .environment(\.layoutDirection, .leftToRight)
