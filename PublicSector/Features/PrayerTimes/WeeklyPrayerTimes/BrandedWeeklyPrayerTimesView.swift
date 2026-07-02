@@ -14,7 +14,6 @@ struct BrandedWeeklyPrayerTimesView: View {
     @Environment(\.locale) private var locale
 
     // MARK: Layout constants
-
     private let headerHeight: CGFloat = 96
     private let rowHeight: CGFloat = 44
     private let weekColumnWidth: CGFloat = 96
@@ -48,13 +47,13 @@ struct BrandedWeeklyPrayerTimesView: View {
             border
             eventsColumn
         }
+        .dynamicTypeSize(.large)
         .fixedSize()
         .background(Color(.systemBackground))
         .border(gridLine, width: borderWidth)
     }
 
     // MARK: - Week column
-
     private var weekColumn: some View {
         VStack(spacing: 0) {
             headerCell(height: headerHeight, width: weekColumnWidth) {
@@ -89,13 +88,12 @@ struct BrandedWeeklyPrayerTimesView: View {
             if let weekNumber {
                 Text(weekNumber.localizedNumber(locale: locale))
                     .foregroundStyle(Color(.systemBackground))
-                    .font(Font.custom("ZarBold", size: 24))
+                    .font(numberFont(size: 24))
             }
         }
     }
 
     // MARK: - Hijri columns
-
     private var hijriColumns: some View {
         let groups = monthGroups(
             keys: week.map { MonthKey(year: $0.hijriYear, month: $0.hijriMonth) }
@@ -113,7 +111,6 @@ struct BrandedWeeklyPrayerTimesView: View {
     }
 
     // MARK: - Gregorian columns
-
     private var gregorianColumns: some View {
         let calendar = Calendar.current
         let keys = week.map { day -> MonthKey in
@@ -155,7 +152,7 @@ struct BrandedWeeklyPrayerTimesView: View {
             VStack(spacing: 0) {
                 headerCell(height: headerHeight / 3, width: blockWidth) {
                     Text(verbatim: yearLabel)
-                        .font(Font.custom("ZarBold", size: 24))
+                        .font(numberFont(size: 24))
                         .minimumScaleFactor(0.5)
                         .lineLimit(1)
                 }
@@ -171,8 +168,7 @@ struct BrandedWeeklyPrayerTimesView: View {
                                     .multilineTextAlignment(.center)
                                 Text(verbatim: monthNumber(group.representativeIndex)
                                     .localizedNumber(locale: locale))
-                                    .font(.subheadline)
-                                    .font(Font.custom("ZarBold", size: 24))
+                                    .font(numberFont(size: groups.count > 1 ? 12 : 24))
                             }
                         }
                         if group.id != groups.last?.id {
@@ -188,7 +184,7 @@ struct BrandedWeeklyPrayerTimesView: View {
             ForEach(Array(week.enumerated()), id: \.element.id) { index, _ in
                 dayCell(width: blockWidth) {
                     Text(verbatim: dayNumber(index).localizedNumber(locale: locale))
-                        .font(Font.custom("ZarBold", size: 32))
+                        .font(numberFont(size: 32))
                 }
             }
         }
@@ -284,12 +280,12 @@ struct BrandedWeeklyPrayerTimesView: View {
                 .foregroundStyle(Color(.systemBackground))
                 .frame(width: timeColumnWidth, height: rowHeight)
                 .background(Color("AccentColor"))
-                .font(Font.custom("ZarBold", size: 32))
+                .font(numberFont(size: 32))
                 .bold()
             divider(height: rowHeight)
             Text(verbatim: components?.minute?.localizedNumber(locale: locale, minimumDigits: 2) ?? "-")
                 .frame(width: timeColumnWidth, height: rowHeight)
-                .font(Font.custom("ZarBold", size: 24))
+                .font(numberFont(size: 24))
                 .bold()
         }
         .font(.title3.bold())
@@ -313,8 +309,17 @@ struct BrandedWeeklyPrayerTimesView: View {
             .trimmingCharacters(in: .whitespaces)
     }
 
-    // MARK: - Events column
+    /// The number font: the custom ZarBold face under Arabic, otherwise the
+    /// system font (bold) at the same size.
+    private func numberFont(size: CGFloat) -> Font {
+        if locale.language.languageCode == .arabic {
+            Font.custom("ZarBold", size: size)
+        } else {
+            Font.system(size: size)
+        }
+    }
 
+    // MARK: - Events column
     private var eventsColumn: some View {
         VStack(spacing: 0) {
             headerCell(height: headerHeight, width: eventsColumnWidth) {
@@ -334,7 +339,6 @@ struct BrandedWeeklyPrayerTimesView: View {
     }
 
     // MARK: - Cell primitives
-
     private let borderWidth: CGFloat = 2
 
     private var headerBackground: Color { Color(.systemBackground) }
@@ -398,7 +402,6 @@ struct BrandedWeeklyPrayerTimesView: View {
 }
 
 // MARK: - Month grouping
-
 private struct MonthKey: Equatable {
     let year: Int
     let month: Int
