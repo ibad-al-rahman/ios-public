@@ -33,6 +33,7 @@ struct BrandedWeeklyPrayerTimesView: View {
     private let dateColumnWidth: CGFloat = 48
     private let timeColumnWidth: CGFloat = 40
     private let eventsColumnWidth: CGFloat = 150
+    private let cornerRadius: CGFloat = 26
 
     private var hasImsak: Bool { week.contains { $0.imsak != nil } }
 
@@ -65,7 +66,26 @@ struct BrandedWeeklyPrayerTimesView: View {
         .dynamicTypeSize(.large)
         .fixedSize()
         .background(Color(.systemBackground))
-        .border(gridLine, width: borderWidth)
+        .clipShape(containerShape)
+        .overlay(containerShape.stroke(gridLine, lineWidth: borderWidth))
+    }
+
+    /// The rounded outline of this slice. The days column and body are drawn as
+    /// two adjacent views, so each rounds only its outer corners; together they
+    /// read as one rounded rectangle. `.full` rounds all four.
+    private var containerShape: UnevenRoundedRectangle {
+        let r = cornerRadius
+        switch mode {
+        case .full:
+            return UnevenRoundedRectangle(
+                topLeadingRadius: r, bottomLeadingRadius: r,
+                bottomTrailingRadius: r, topTrailingRadius: r
+            )
+        case .pinnedDaysColumn:
+            return UnevenRoundedRectangle(topLeadingRadius: r, bottomLeadingRadius: r)
+        case .body:
+            return UnevenRoundedRectangle(bottomTrailingRadius: r, topTrailingRadius: r)
+        }
     }
 
     /// Every column except the days column.
