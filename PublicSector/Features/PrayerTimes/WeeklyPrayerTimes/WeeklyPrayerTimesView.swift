@@ -27,6 +27,8 @@ struct WeeklyPrayerTimesView: View {
                 displayedComponents: [.date]
             )
             .datePickerStyle(.compact)
+            /* A hack to force closing the date picker on picking a date */
+            .id(store.date.timeIntervalSince1970)
         }
     }
 
