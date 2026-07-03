@@ -147,6 +147,7 @@ struct BrandedWeeklyPrayerTimesView: View {
         return dateBlock(
             firstYear: week.first?.hijriYear,
             lastYear: week.last?.hijriYear,
+            era: "era_hijri",
             groups: groups,
             monthName: { week[$0].hijriMonthName ?? "\(week[$0].hijriMonth)" },
             monthNumber: { week[$0].hijriMonth },
@@ -165,6 +166,7 @@ struct BrandedWeeklyPrayerTimesView: View {
         return dateBlock(
             firstYear: keys.first?.year,
             lastYear: keys.last?.year,
+            era: "era_gregorian",
             groups: groups,
             monthName: { week[$0].gregorian.formatted(.dateTime.month(.wide).locale(locale)) },
             monthNumber: { calendar.component(.month, from: week[$0].gregorian) },
@@ -177,7 +179,19 @@ struct BrandedWeeklyPrayerTimesView: View {
     /// digits (e.g. `2026-27`). The range is laid out as separate views pinned
     /// LTR so the full year stays leading and the suffix trailing — Arabic-Indic
     /// digits are strong RTL and a single string would flip around the dash.
-    @ViewBuilder private func yearBand(first: Int?, last: Int?) -> some View {
+    /// The year band: the year (single or range) with its era marker. The era
+    /// follows the year in reading order, so it lands on the right under English
+    /// and on the left under Arabic — driven by the ambient layout direction.
+    @ViewBuilder private func yearBand(first: Int?, last: Int?, era: LocalizedStringKey) -> some View {
+        HStack(spacing: 2) {
+            year(first: first, last: last)
+            Text(era)
+                .font(.caption2)
+                .minimumScaleFactor(0.5)
+        }
+    }
+
+    @ViewBuilder private func year(first: Int?, last: Int?) -> some View {
         if let first, let last, last != first {
             let firstText = first.localizedNumber(locale: locale)
             let suffixText = (last % 100).localizedNumber(locale: locale, minimumDigits: 2)
@@ -218,6 +232,7 @@ struct BrandedWeeklyPrayerTimesView: View {
     private func dateBlock(
         firstYear: Int?,
         lastYear: Int?,
+        era: LocalizedStringKey,
         groups: [MonthGroup],
         monthName: @escaping (Int) -> String,
         monthNumber: @escaping (Int) -> Int,
@@ -230,7 +245,7 @@ struct BrandedWeeklyPrayerTimesView: View {
             // Header: year band on top, then the month label(s) stacked.
             VStack(spacing: 0) {
                 headerCell(height: headerHeight / 3, width: blockWidth) {
-                    yearBand(first: firstYear, last: lastYear)
+                    yearBand(first: firstYear, last: lastYear, era: era)
                         .lineLimit(1)
                 }
                 horizontalRule(width: blockWidth)
