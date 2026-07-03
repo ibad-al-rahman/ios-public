@@ -32,12 +32,16 @@ struct WeeklyPrayerTimesView: View {
 
     private var weekPrayerTimes: some View {
         Section {
-            ScrollView(.horizontal) {
-                if !store.week.isEmpty {
-                    BrandedWeeklyPrayerTimesView(week: store.week)
+            if !store.week.isEmpty {
+                HStack(spacing: 0) {
+                    // Pinned days column — stays put while the rest scrolls.
+                    BrandedWeeklyPrayerTimesView(week: store.week, mode: .pinnedDaysColumn)
+                    ScrollView(.horizontal) {
+                        BrandedWeeklyPrayerTimesView(week: store.week, mode: .body)
+                    }
+                    .scrollIndicators(.hidden)
                 }
             }
-            .scrollIndicators(.hidden)
         } header: {
             HStack {
                 Text("timings")

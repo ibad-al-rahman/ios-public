@@ -9,7 +9,20 @@ import Dependencies
 import SwiftUI
 
 struct BrandedWeeklyPrayerTimesView: View {
+    /// Which slice of the table to render. Splitting the table lets a container
+    /// pin the days column while the rest scrolls horizontally, without reading
+    /// a `some View` property outside a view body (which detaches `@Environment`).
+    enum Mode {
+        /// The whole table, days column included (used for the shared snapshot).
+        case full
+        /// Only the days column, with a trailing border to butt against `.body`.
+        case pinnedDaysColumn
+        /// Everything except the days column.
+        case body
+    }
+
     let week: [DayInfo]
+    var mode: Mode = .full
 
     @Environment(\.locale) private var locale
 
@@ -37,20 +50,33 @@ struct BrandedWeeklyPrayerTimesView: View {
 
     var body: some View {
         HStack(spacing: 0) {
-            weekColumn
-            border
-            hijriColumns
-            border
-            gregorianColumns
-            border
-            prayerBlock
-            border
-            eventsColumn
+            switch mode {
+            case .full:
+                weekColumn
+                border
+                scrollingColumns
+            case .pinnedDaysColumn:
+                weekColumn
+                border
+            case .body:
+                scrollingColumns
+            }
         }
         .dynamicTypeSize(.large)
         .fixedSize()
         .background(Color(.systemBackground))
         .border(gridLine, width: borderWidth)
+    }
+
+    /// Every column except the days column.
+    @ViewBuilder private var scrollingColumns: some View {
+        hijriColumns
+        border
+        gregorianColumns
+        border
+        prayerBlock
+        border
+        eventsColumn
     }
 
     // MARK: - Week column
