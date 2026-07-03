@@ -16,17 +16,19 @@ struct WeeklyPrayerTimesFeature {
 
     @ObservableState
     struct State: Equatable {
+        var date: Date = .now
         var week: [DayInfo] = []
 
         var hasImsak: Bool { week.contains(where: { $0.imsak != nil }) }
         var isLoading: Bool { week.isEmpty }
     }
 
-    enum Action: BaseAction {
+    enum Action: BaseAction, BindableAction {
         case view(ViewAction)
         case reducer(ReducerAction)
         case dependent(DependentAction)
         case delegate(DelegateAction)
+        case binding(BindingAction<State>)
 
         enum ViewAction {
             case onAppear
@@ -43,6 +45,7 @@ struct WeeklyPrayerTimesFeature {
     }
 
     var body: some ReducerOf<Self> {
+        BindingReducer()
         Reduce { state, action in
             switch action {
             case .view(.onAppear):
