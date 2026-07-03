@@ -40,6 +40,8 @@ struct DailyPrayerTimesView: View {
                 displayedComponents: [.date]
             )
             .datePickerStyle(.compact)
+            /* A hack to force closing the date picker on picking a date */
+            .id(store.date.timeIntervalSince1970)
         } header: {
             HStack {
                 Spacer()
