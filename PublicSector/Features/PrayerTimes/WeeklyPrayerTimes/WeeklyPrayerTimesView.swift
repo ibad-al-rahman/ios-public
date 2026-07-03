@@ -41,6 +41,8 @@ struct WeeklyPrayerTimesView: View {
                     }
                     .scrollIndicators(.hidden)
                 }
+                .listRowInsets(EdgeInsets())
+                .listRowBackground(Color.clear)
             }
         } header: {
             HStack {
