@@ -145,7 +145,8 @@ struct BrandedWeeklyPrayerTimesView: View {
             keys: week.map { MonthKey(year: $0.hijriYear, month: $0.hijriMonth) }
         )
         return dateBlock(
-            yearLabel: yearLabel(first: week.first?.hijriYear, last: week.last?.hijriYear),
+            firstYear: week.first?.hijriYear,
+            lastYear: week.last?.hijriYear,
             groups: groups,
             monthName: { week[$0].hijriMonthName ?? "\(week[$0].hijriMonth)" },
             monthNumber: { week[$0].hijriMonth },
@@ -162,7 +163,8 @@ struct BrandedWeeklyPrayerTimesView: View {
         }
         let groups = monthGroups(keys: keys)
         return dateBlock(
-            yearLabel: yearLabel(first: keys.first?.year, last: keys.last?.year),
+            firstYear: keys.first?.year,
+            lastYear: keys.last?.year,
             groups: groups,
             monthName: { week[$0].gregorian.formatted(.dateTime.month(.wide).locale(locale)) },
             monthNumber: { calendar.component(.month, from: week[$0].gregorian) },
@@ -170,14 +172,42 @@ struct BrandedWeeklyPrayerTimesView: View {
         )
     }
 
-    /// The year band's label. When the week stays within one year it shows that
-    /// year in full; when it crosses into a new year it shows the first year in
-    /// full and the second year's last two digits (e.g. `2026-27`).
-    private func yearLabel(first: Int?, last: Int?) -> String {
-        guard let first else { return "-" }
-        guard let last, last != first else { return first.localizedNumber(locale: locale) }
-        let suffix = (last % 100).localizedNumber(locale: locale, minimumDigits: 2)
-        return "\(first.localizedNumber(locale: locale))-\(suffix)"
+    /// The year band. Within one year it shows that year in full; across a year
+    /// boundary it shows the first year in full then the second year's last two
+    /// digits (e.g. `2026-27`). The range is laid out as separate views pinned
+    /// LTR so the full year stays leading and the suffix trailing — Arabic-Indic
+    /// digits are strong RTL and a single string would flip around the dash.
+    @ViewBuilder private func yearBand(first: Int?, last: Int?) -> some View {
+        if let first, let last, last != first {
+            let firstText = first.localizedNumber(locale: locale)
+            let suffixText = (last % 100).localizedNumber(locale: locale, minimumDigits: 2)
+            // Separate views pinned LTR keep the full year leading and the suffix
+            // trailing — a single/concatenated Text runs bidi and flips the runs
+            // around the dash for Arabic-Indic digits. `ViewThatFits` picks the
+            // largest fixed size that fits so both numbers always scale together.
+            ViewThatFits(in: .horizontal) {
+                yearRange(firstText, suffixText, size: 24)
+                yearRange(firstText, suffixText, size: 18)
+                yearRange(firstText, suffixText, size: 14)
+                yearRange(firstText, suffixText, size: 11)
+                yearRange(firstText, suffixText, size: 9)
+            }
+            .environment(\.layoutDirection, .leftToRight)
+        } else {
+            Text(verbatim: first?.localizedNumber(locale: locale) ?? "-")
+                .font(numberFont(size: 24))
+                .minimumScaleFactor(0.3)
+        }
+    }
+
+    private func yearRange(_ first: String, _ suffix: String, size: CGFloat) -> some View {
+        HStack(spacing: 0) {
+            Text(verbatim: first)
+            Text(verbatim: "-")
+            Text(verbatim: suffix)
+        }
+        .font(numberFont(size: size))
+        .fixedSize()
     }
 
     /// Shared single-column date block for Hijri and Gregorian calendars.
@@ -186,7 +216,8 @@ struct BrandedWeeklyPrayerTimesView: View {
     /// the month labels are stacked vertically (earlier month on top, per the
     /// chronological order of `groups`), and all day numbers share one column.
     private func dateBlock(
-        yearLabel: String,
+        firstYear: Int?,
+        lastYear: Int?,
         groups: [MonthGroup],
         monthName: @escaping (Int) -> String,
         monthNumber: @escaping (Int) -> Int,
@@ -199,9 +230,7 @@ struct BrandedWeeklyPrayerTimesView: View {
             // Header: year band on top, then the month label(s) stacked.
             VStack(spacing: 0) {
                 headerCell(height: headerHeight / 3, width: blockWidth) {
-                    Text(verbatim: yearLabel)
-                        .font(numberFont(size: 24))
-                        .minimumScaleFactor(0.3)
+                    yearBand(first: firstYear, last: lastYear)
                         .lineLimit(1)
                 }
                 horizontalRule(width: blockWidth)
