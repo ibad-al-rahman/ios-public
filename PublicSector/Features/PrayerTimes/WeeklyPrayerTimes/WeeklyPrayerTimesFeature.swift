@@ -52,6 +52,10 @@ struct WeeklyPrayerTimesFeature {
                 fillWeek(state: &state)
                 return .none
 
+            case .binding(\.date):
+                fillWeek(state: &state)
+                return .none
+
             default:
                 return .none
             }
@@ -60,10 +64,10 @@ struct WeeklyPrayerTimesFeature {
 
     private func fillWeek(state: inout State) {
         let calendar = Calendar.current
-        let now = Date.now
-        let weekday = calendar.component(.weekday, from: now) // 1=Sun…7=Sat
+        let date = state.date
+        let weekday = calendar.component(.weekday, from: date) // 1=Sun…7=Sat
         let daysBack = weekday % 7 // Sat→0, Sun→1, …, Fri→6
-        guard let saturday = calendar.date(byAdding: .day, value: -daysBack, to: now) else { return }
+        guard let saturday = calendar.date(byAdding: .day, value: -daysBack, to: date) else { return }
 
         let tzOffset = TimeZone.current.secondsFromGMT()
 
