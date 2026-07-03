@@ -201,7 +201,7 @@ struct BrandedWeeklyPrayerTimesView: View {
                 headerCell(height: headerHeight / 3, width: blockWidth) {
                     Text(verbatim: yearLabel)
                         .font(numberFont(size: 24))
-                        .minimumScaleFactor(0.5)
+                        .minimumScaleFactor(0.3)
                         .lineLimit(1)
                 }
                 horizontalRule(width: blockWidth)
@@ -211,7 +211,7 @@ struct BrandedWeeklyPrayerTimesView: View {
                             VStack(spacing: Spacing.extraExtraSmall.rawValue) {
                                 Text(verbatim: monthName(group.representativeIndex))
                                     .font(.subheadline.bold())
-                                    .minimumScaleFactor(0.5)
+                                    .minimumScaleFactor(0.3)
                                     .lineLimit(1)
                                     .multilineTextAlignment(.center)
                                 Text(verbatim: monthNumber(group.representativeIndex)
