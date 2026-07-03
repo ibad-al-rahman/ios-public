@@ -18,6 +18,8 @@ struct WeeklyPrayerTimesFeature {
     struct State: Equatable {
         var date: Date = .now
         var week: [DayInfo] = []
+        var isRenderingShareImage = false
+        var shareImage: ShareableImage?
 
         var hasImsak: Bool { week.contains(where: { $0.imsak != nil }) }
         var isLoading: Bool { week.isEmpty }
@@ -32,10 +34,16 @@ struct WeeklyPrayerTimesFeature {
 
         enum ViewAction {
             case onAppear
+            /// The user tapped share. `render` builds the snapshot on the main
+            /// actor; it is invoked from an effect so the tap returns immediately
+            /// and the render happens on a later run-loop turn.
+            case shareTapped(render: @MainActor @Sendable () -> UIImage)
         }
 
         @CasePathable
-        enum ReducerAction { }
+        enum ReducerAction {
+            case shareImageRendered(UIImage)
+        }
 
         @CasePathable
         enum DelegateAction { }
@@ -50,6 +58,23 @@ struct WeeklyPrayerTimesFeature {
             switch action {
             case .view(.onAppear):
                 fillWeek(state: &state)
+                return .none
+
+            case let .view(.shareTapped(render)):
+                guard !state.isRenderingShareImage else { return .none }
+                state.isRenderingShareImage = true
+                return .run { send in
+                    // Hop off the current run-loop turn so the tap is not blocked
+                    // by rendering, then rasterize on the main actor as
+                    // `ImageRenderer` requires.
+                    await Task.yield()
+                    let image = await MainActor.run { render() }
+                    await send(.reducer(.shareImageRendered(image)))
+                }
+
+            case let .reducer(.shareImageRendered(image)):
+                state.isRenderingShareImage = false
+                state.shareImage = ShareableImage(image: image)
                 return .none
 
             case .binding(\.date):
