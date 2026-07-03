@@ -144,11 +144,8 @@ struct BrandedWeeklyPrayerTimesView: View {
         let groups = monthGroups(
             keys: week.map { MonthKey(year: $0.hijriYear, month: $0.hijriMonth) }
         )
-        let yearChanges = week.first?.hijriYear != week.last?.hijriYear
         return dateBlock(
-            yearLabel: yearChanges ? "-" : (week.first?.hijriYear).map {
-                $0.localizedNumber(locale: locale)
-            } ?? "-",
+            yearLabel: yearLabel(first: week.first?.hijriYear, last: week.last?.hijriYear),
             groups: groups,
             monthName: { week[$0].hijriMonthName ?? "\(week[$0].hijriMonth)" },
             monthNumber: { week[$0].hijriMonth },
@@ -164,18 +161,23 @@ struct BrandedWeeklyPrayerTimesView: View {
             return MonthKey(year: comps.year ?? 0, month: comps.month ?? 0)
         }
         let groups = monthGroups(keys: keys)
-        let firstYear = keys.first?.year
-        let lastYear = keys.last?.year
-        let yearChanges = firstYear != lastYear
         return dateBlock(
-            yearLabel: yearChanges ? "-" : firstYear.map {
-                $0.localizedNumber(locale: locale)
-            } ?? "-",
+            yearLabel: yearLabel(first: keys.first?.year, last: keys.last?.year),
             groups: groups,
             monthName: { week[$0].gregorian.formatted(.dateTime.month(.wide).locale(locale)) },
             monthNumber: { calendar.component(.month, from: week[$0].gregorian) },
             dayNumber: { calendar.component(.day, from: week[$0].gregorian) }
         )
+    }
+
+    /// The year band's label. When the week stays within one year it shows that
+    /// year in full; when it crosses into a new year it shows the first year in
+    /// full and the second year's last two digits (e.g. `2026-27`).
+    private func yearLabel(first: Int?, last: Int?) -> String {
+        guard let first else { return "-" }
+        guard let last, last != first else { return first.localizedNumber(locale: locale) }
+        let suffix = (last % 100).localizedNumber(locale: locale, minimumDigits: 2)
+        return "\(first.localizedNumber(locale: locale))-\(suffix)"
     }
 
     /// Shared single-column date block for Hijri and Gregorian calendars.
