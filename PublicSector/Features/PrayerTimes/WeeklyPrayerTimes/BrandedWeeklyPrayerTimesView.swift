@@ -194,7 +194,12 @@ struct BrandedWeeklyPrayerTimesView: View {
 
     private var prayerBlock: some View {
         let columns = prayers
-        let blockWidth = timeColumnWidth * 2 * CGFloat(columns.count)
+        // Every prayer column is two `timeColumnWidth` sub-columns plus the 1pt
+        // divider between them, and adjacent columns are separated by another
+        // 1pt divider. The block width must account for all of those dividers so
+        // that every header row and day row lines up on the same grid.
+        let columnWidth = timeColumnWidth * 2 + 1
+        let blockWidth = columnWidth * CGFloat(columns.count) + CGFloat(columns.count - 1)
         return VStack(spacing: 0) {
             VStack(spacing: 0) {
                 // Row 1: title spanning the whole block.
@@ -205,12 +210,14 @@ struct BrandedWeeklyPrayerTimesView: View {
                         .lineLimit(1)
                 }
                 horizontalRule(width: blockWidth)
-                // Row 2: prayer names, each over its two sub-columns.
+                // Row 2: prayer names. Each name spans its column's two
+                // sub-columns; a divider is overlaid at the midpoint so the
+                // split aligns with the hour/minute divider in the rows below.
                 HStack(spacing: 0) {
                     ForEach(Array(columns.enumerated()), id: \.offset) { index, entry in
                         headerCell(
                             height: headerHeight / 3,
-                            width: timeColumnWidth * 2,
+                            width: columnWidth,
                             background: Color("AccentColor")
                         ) {
                             Text(entry.prayer.localizedStringKey)
@@ -218,6 +225,9 @@ struct BrandedWeeklyPrayerTimesView: View {
                                 .foregroundStyle(Color(.systemBackground))
                                 .minimumScaleFactor(0.5)
                                 .lineLimit(1)
+                        }
+                        .overlay(alignment: .center) {
+                            divider(height: headerHeight / 3)
                         }
                         if index != columns.count - 1 {
                             divider(height: headerHeight / 3)
