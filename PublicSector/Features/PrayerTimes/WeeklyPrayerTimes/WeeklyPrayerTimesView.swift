@@ -17,6 +17,9 @@ struct WeeklyPrayerTimesView: View {
             weekPrayerTimes
         }
         .onAppear { store.send(.onAppear) }
+        .sheet(item: $store.shareImage) { shareable in
+            ActivityView(activityItems: [shareable.image])
+        }
     }
 
     private var datePicker: some View {
@@ -51,17 +54,30 @@ struct WeeklyPrayerTimesView: View {
                 Text("timings")
                 Spacer()
                 if !store.week.isEmpty {
-                    let image = BrandedWeeklyPrayerTimesView(week: store.week).snapshot()
-                    ShareLink(
-                        item: ShareableImage(image: image),
-                        preview: SharePreview("Image", image: Image(uiImage: image))
-                    ) {
-                        Label("share", systemImage: "square.and.arrow.up")
-                    }
-                    .textCase(nil)
+                    shareButton
                 }
             }
         }
+    }
+
+    private var shareButton: some View {
+        // The snapshot is built lazily inside the render closure, so tapping —
+        // not every header redraw — is what triggers the (main-actor) render.
+        // The reducer runs it off the current run-loop turn to keep the tap snappy.
+        let week = store.week
+        return Button {
+            store.send(.shareTapped(render: {
+                BrandedWeeklyPrayerTimesView(week: week).snapshot()
+            }))
+        } label: {
+            if store.isRenderingShareImage {
+                ProgressView()
+            } else {
+                Label("share", systemImage: "square.and.arrow.up")
+            }
+        }
+        .disabled(store.isRenderingShareImage)
+        .textCase(nil)
     }
 
     private func dateText(date: Date?) -> some View {
