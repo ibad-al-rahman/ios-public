@@ -113,7 +113,7 @@ struct BrandedWeeklyPrayerTimesView: View {
                 dayCell(width: weekColumnWidth, background: Color("AccentColor")) {
                     Text(day.gregorian, format: .dateTime.weekday(.wide))
                         .font(.headline)
-                        .foregroundStyle(Color(.systemBackground))
+                        .foregroundStyle(onAccent)
                         .lineLimit(1)
                         .minimumScaleFactor(0.7)
                 }
@@ -133,7 +133,7 @@ struct BrandedWeeklyPrayerTimesView: View {
                 .frame(width: 40, height: 40)
             if let weekNumber {
                 Text(weekNumber.localizedNumber(locale: locale))
-                    .foregroundStyle(Color(.systemBackground))
+                    .foregroundStyle(onAccent)
                     .font(numberFont(size: 24))
             }
         }
@@ -314,7 +314,7 @@ struct BrandedWeeklyPrayerTimesView: View {
                         ) {
                             Text(entry.prayer.localizedStringKey)
                                 .font(.subheadline.bold())
-                                .foregroundStyle(Color(.systemBackground))
+                                .foregroundStyle(onAccent)
                                 .minimumScaleFactor(0.5)
                                 .lineLimit(1)
                         }
@@ -379,7 +379,7 @@ struct BrandedWeeklyPrayerTimesView: View {
         // column on the right in every locale.
         return HStack(spacing: 0) {
             Text(verbatim: hourString(from: date))
-                .foregroundStyle(Color(.systemBackground))
+                .foregroundStyle(onAccent)
                 .frame(width: timeColumnWidth, height: rowHeight)
                 .background(Color("AccentColor"))
                 .font(numberFont(size: 32))
@@ -444,6 +444,10 @@ struct BrandedWeeklyPrayerTimesView: View {
     private let borderWidth: CGFloat = 2
 
     private var headerBackground: Color { Color(.systemBackground) }
+
+    /// Foreground for text sitting on the accent color. Fixed white so it stays
+    /// legible in dark mode too (unlike `systemBackground`, which flips to black).
+    private var onAccent: Color { .white }
 
     private func headerCell<Content: View>(
         height: CGFloat,
