@@ -9,71 +9,51 @@ import ComposableArchitecture
 import SwiftUI
 
 struct WeeklyPrayerTimesView: View {
-    let store: StoreOf<WeeklyPrayerTimesFeature>
+    @Bindable var store: StoreOf<WeeklyPrayerTimesFeature>
 
     var body: some View {
-//        Form {
-//            Section {
-//                ScrollView(.horizontal) {
-//                    Grid(horizontalSpacing: .zero, verticalSpacing: .zero) {
-//                        GridRow {
-//                            Text("week")
-//                            if store.hasImsak {
-//                                Text(Prayer.imsak.localizedStringKey)
-//                            }
-//                            Text(Prayer.fajr.localizedStringKey)
-//                            Text(Prayer.sunrise.localizedStringKey)
-//                            Text(Prayer.dhuhr.localizedStringKey)
-//                            Text(Prayer.asr.localizedStringKey)
-//                            Text(Prayer.maghrib.localizedStringKey)
-//                            Text(Prayer.ishaa.localizedStringKey)
-//                        }
-//                        .bold()
-//                        .padding(.small)
-//
-//                        ForEach(store.week) { day in
-//                            Divider()
-//
-//                            GridRow {
-//                                Text(day.gregorian, format: .dateTime.weekday())
-//                                if store.hasImsak {
-//                                    dateText(date: day.imsak)
-//                                }
-//                                dateText(date: day.fajr)
-//                                dateText(date: day.sunrise)
-//                                dateText(date: day.dhuhr)
-//                                dateText(date: day.asr)
-//                                dateText(date: day.maghrib)
-//                                dateText(date: day.ishaa)
-//                            }
-//                            .padding(.small)
-//                        }
-//                    }
-//                }
-//                .scrollIndicators(.hidden)
-//            } header: {
-//                HStack {
-//                    Text("timings")
-//                    Spacer()
-//                    if !store.week.isEmpty {
-//                        let image = BrandedWeeklyPrayerTimesView(week: store.week).snapshot()
-//                        ShareLink(
-//                            item: ShareableImage(image: image),
-//                            preview: SharePreview("Image", image: Image(uiImage: image))
-//                        ) {
-//                            Label("share", systemImage: "square.and.arrow.up")
-//                        }
-//                        .textCase(nil)
-//                    }
-//                }
-//            }
-//        }
-        ScrollView(.horizontal) {
-            if !store.week.isEmpty {
-                BrandedWeeklyPrayerTimesView(week: store.week)
-            }
+        List {
+            datePicker
+            weekPrayerTimes
         }
         .onAppear { store.send(.onAppear) }
+    }
+
+    private var datePicker: some View {
+        Section {
+            DatePicker(
+                "date",
+                selection: $store.date,
+                displayedComponents: [.date]
+            )
+            .datePickerStyle(.compact)
+        }
+    }
+
+    private var weekPrayerTimes: some View {
+        Section {
+            ScrollView(.horizontal) {
+                if !store.week.isEmpty {
+                    BrandedWeeklyPrayerTimesView(week: store.week)
+                }
+            }
+            .scrollIndicators(.hidden)
+        } header: {
+            HStack {
+                Text("timings")
+                Spacer()
+                if !store.week.isEmpty {
+                    let image = BrandedWeeklyPrayerTimesView(week: store.week).snapshot()
+                    ShareLink(
+                        item: ShareableImage(image: image),
+                        preview: SharePreview("Image", image: Image(uiImage: image))
+                    ) {
+                        Label("share", systemImage: "square.and.arrow.up")
+                    }
+                    .textCase(nil)
+                }
+            }
+        }
     }
 
     private func dateText(date: Date?) -> some View {

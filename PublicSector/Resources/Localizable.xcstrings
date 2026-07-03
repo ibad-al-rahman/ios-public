@@ -486,6 +486,9 @@
         }
       }
     },
+    "Image" : {
+
+    },
     "imsak" : {
       "extractionState" : "manual",
       "localizations" : {
