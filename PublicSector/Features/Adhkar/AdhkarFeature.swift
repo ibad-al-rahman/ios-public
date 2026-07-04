@@ -10,7 +10,9 @@ import ComposableArchitecture
 @Reducer
 struct AdhkarFeature {
     @ObservableState
-    struct State: Equatable { }
+    struct State: Equatable {
+        @Presents var destination: Destination.State?
+    }
 
     enum Action: BaseAction {
         case view(ViewAction)
@@ -18,7 +20,10 @@ struct AdhkarFeature {
         case delegate(DelegateAction)
         case dependent(DependentAction)
 
-        enum ViewAction { }
+        enum ViewAction {
+            case morningTapped
+            case eveningTapped
+        }
 
         @CasePathable
         enum ReducerAction { }
@@ -27,10 +32,28 @@ struct AdhkarFeature {
         enum DelegateAction { }
 
         @CasePathable
-        enum DependentAction { }
+        enum DependentAction {
+            case destination(PresentationAction<Destination.Action>)
+        }
     }
 
     var body: some ReducerOf<Self> {
-        EmptyReducer()
+        Reduce { state, action in
+            switch action {
+            case .view(.morningTapped):
+                state.destination = .tour(AdhkarTourFeature.State(adhkar: Adhkar.morning))
+                return .none
+
+            case .view(.eveningTapped):
+                state.destination = .tour(AdhkarTourFeature.State(adhkar: Adhkar.evening))
+                return .none
+
+            default:
+                return .none
+            }
+        }
+        .ifLet(\.$destination, action: \.dependent.destination) {
+            Destination()
+        }
     }
 }
