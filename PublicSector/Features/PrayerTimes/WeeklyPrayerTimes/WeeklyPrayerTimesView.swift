@@ -67,7 +67,7 @@ struct WeeklyPrayerTimesView: View {
         let week = store.week
         return Button {
             store.send(.shareTapped(render: {
-                BrandedWeeklyPrayerTimesView(week: week).snapshot()
+                BrandedWeeklyPrayerTimesView(week: week, rounded: false).snapshot()
             }))
         } label: {
             if store.isRenderingShareImage {

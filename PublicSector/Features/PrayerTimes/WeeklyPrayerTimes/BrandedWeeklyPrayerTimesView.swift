@@ -23,6 +23,9 @@ struct BrandedWeeklyPrayerTimesView: View {
 
     let week: [DayInfo]
     var mode: Mode = .full
+    /// Whether the outer corners are rounded. The on-screen table is rounded;
+    /// the shared snapshot renders square so nothing is clipped off the edges.
+    var rounded = true
 
     @Environment(\.locale) private var locale
 
@@ -74,7 +77,7 @@ struct BrandedWeeklyPrayerTimesView: View {
     /// two adjacent views, so each rounds only its outer corners; together they
     /// read as one rounded rectangle. `.full` rounds all four.
     private var containerShape: UnevenRoundedRectangle {
-        let r = cornerRadius
+        let r = rounded ? cornerRadius : 0
         switch mode {
         case .full:
             return UnevenRoundedRectangle(
@@ -283,7 +286,6 @@ struct BrandedWeeklyPrayerTimesView: View {
     }
 
     // MARK: - Prayer block
-
     private var prayerBlock: some View {
         let columns = prayers
         // Every prayer column is two `timeColumnWidth` sub-columns plus the 1pt
