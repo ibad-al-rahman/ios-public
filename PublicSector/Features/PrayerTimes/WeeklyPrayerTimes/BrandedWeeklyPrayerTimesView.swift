@@ -59,9 +59,11 @@ struct BrandedWeeklyPrayerTimesView: View {
                 weekColumn
                 border
                 scrollingColumns
+
             case .pinnedDaysColumn:
                 weekColumn
                 border
+
             case .body:
                 scrollingColumns
             }
@@ -84,8 +86,10 @@ struct BrandedWeeklyPrayerTimesView: View {
                 topLeadingRadius: r, bottomLeadingRadius: r,
                 bottomTrailingRadius: r, topTrailingRadius: r
             )
+
         case .pinnedDaysColumn:
             return UnevenRoundedRectangle(topLeadingRadius: r, bottomLeadingRadius: r)
+
         case .body:
             return UnevenRoundedRectangle(bottomTrailingRadius: r, topTrailingRadius: r)
         }
