@@ -13,7 +13,7 @@ struct Dhikr: Equatable, Identifiable, Sendable {
     let id: UUID
     let arabicText: String
     let target: Int
-    var isVerse: Bool
+    var isVerse: Bool = false
 }
 
 /// Static adhkar collections. Hardcoded for now — trivially movable to a bundled

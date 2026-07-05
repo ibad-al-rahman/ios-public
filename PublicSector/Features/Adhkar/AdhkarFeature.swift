@@ -41,11 +41,15 @@ struct AdhkarFeature {
         Reduce { state, action in
             switch action {
             case .view(.morningTapped):
-                state.destination = .tour(AdhkarTourFeature.State(adhkar: Adhkar.morning))
+                state.destination = .tour(AdhkarTourFeature.State(title: "morning_adhkar", adhkar: Adhkar.morning))
                 return .none
 
             case .view(.eveningTapped):
-                state.destination = .tour(AdhkarTourFeature.State(adhkar: Adhkar.evening))
+                state.destination = .tour(AdhkarTourFeature.State(title: "evening_adhkar", adhkar: Adhkar.evening))
+                return .none
+
+            case .dependent(.destination(.presented(.tour(.delegate(.finished))))):
+                state.destination = nil
                 return .none
 
             default:

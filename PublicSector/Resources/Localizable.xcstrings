@@ -17,6 +17,22 @@
         }
       }
     },
+    "adhkar_completed" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "تمّت %@"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ complete"
+          }
+        }
+      }
+    },
     "android" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -373,6 +389,70 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Please enable notifications in Settings to receive prayer time alerts."
+          }
+        }
+      }
+    },
+    "dhikr_count_hint" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "انقر للعدّ · اسحب للانتقال"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tap to count · Swipe to move"
+          }
+        }
+      }
+    },
+    "dhikr_done" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "تمّ"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Done"
+          }
+        }
+      }
+    },
+    "dhikr_next_hint" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "اسحب أو انقر للتالي"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Swipe or tap for next"
+          }
+        }
+      }
+    },
+    "dhikr_times" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "مرّة"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "times"
           }
         }
       }
