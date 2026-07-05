@@ -13,6 +13,7 @@ struct Dhikr: Equatable, Identifiable, Sendable {
     let id: UUID
     let arabicText: String
     let target: Int
+    var isVerse: Bool
 }
 
 /// Static adhkar collections. Hardcoded for now — trivially movable to a bundled
@@ -22,7 +23,8 @@ enum Adhkar {
         Dhikr(
             id: UUID(uuidString: "00000000-0000-0000-0000-000000000001")!,
             arabicText: "أَعُوذُ بِاللَّهِ مِنَ الشَّيْطَانِ الرَّجِيمِ. اللَّهُ لَا إِلَهَ إِلَّا هُوَ الْحَيُّ الْقَيُّومُ",
-            target: 1
+            target: 1,
+            isVerse: true
         ),
         Dhikr(
             id: UUID(uuidString: "00000000-0000-0000-0000-000000000002")!,
@@ -45,7 +47,8 @@ enum Adhkar {
         Dhikr(
             id: UUID(uuidString: "10000000-0000-0000-0000-000000000001")!,
             arabicText: "أَعُوذُ بِاللَّهِ مِنَ الشَّيْطَانِ الرَّجِيمِ. اللَّهُ لَا إِلَهَ إِلَّا هُوَ الْحَيُّ الْقَيُّومُ",
-            target: 1
+            target: 1,
+            isVerse: true
         ),
         Dhikr(
             id: UUID(uuidString: "10000000-0000-0000-0000-000000000002")!,
