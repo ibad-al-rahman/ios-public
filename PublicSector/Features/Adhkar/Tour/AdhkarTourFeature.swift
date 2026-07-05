@@ -17,11 +17,15 @@ import ComposableArchitecture
 struct AdhkarTourFeature {
     @ObservableState
     struct State: Equatable {
-        /// Localized string key for the collection name (e.g. `"morning_adhkar"`),
-        /// stored as a raw key so it can be both rendered and interpolated.
-        let title: String
+        /// The collection being toured — its slug identifies it (deep-link ready)
+        /// and it derives both the title and the adhkar list.
+        let collection: AdhkarCollection
         var dhikrStates: IdentifiedArrayOf<DhikrFeature.State>
         var activeID: DhikrFeature.State.ID?
+
+        /// Localized-string key for the collection name, rendered by the view and
+        /// interpolated into the completion text.
+        var title: String { collection.titleKey }
 
         var isFinished: Bool { activeID == nil }
         var total: Int { dhikrStates.count }
@@ -34,9 +38,9 @@ struct AdhkarTourFeature {
             return index + 1
         }
 
-        init(title: String, adhkar: [Dhikr]) {
-            self.title = title
-            dhikrStates = IdentifiedArray(uniqueElements: adhkar.map { DhikrFeature.State(dhikr: $0) })
+        init(collection: AdhkarCollection) {
+            self.collection = collection
+            dhikrStates = IdentifiedArray(uniqueElements: collection.adhkar.map { DhikrFeature.State(dhikr: $0) })
             activeID = dhikrStates.first?.id
         }
     }

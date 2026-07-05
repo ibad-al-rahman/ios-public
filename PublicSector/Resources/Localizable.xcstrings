@@ -263,6 +263,70 @@
         }
       }
     },
+    "dhikr_count_hint" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "انقر للعدّ · اسحب للانتقال"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tap to count · Swipe to move"
+          }
+        }
+      }
+    },
+    "dhikr_done" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "تمّ"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Done"
+          }
+        }
+      }
+    },
+    "dhikr_next_hint" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "اسحب أو انقر للتالي"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Swipe or tap for next"
+          }
+        }
+      }
+    },
+    "dhikr_times" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "مرّة"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "times"
+          }
+        }
+      }
+    },
     "dhuhr" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -393,70 +457,6 @@
         }
       }
     },
-    "dhikr_count_hint" : {
-      "localizations" : {
-        "ar" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "انقر للعدّ · اسحب للانتقال"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Tap to count · Swipe to move"
-          }
-        }
-      }
-    },
-    "dhikr_done" : {
-      "localizations" : {
-        "ar" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "تمّ"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Done"
-          }
-        }
-      }
-    },
-    "dhikr_next_hint" : {
-      "localizations" : {
-        "ar" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "اسحب أو انقر للتالي"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Swipe or tap for next"
-          }
-        }
-      }
-    },
-    "dhikr_times" : {
-      "localizations" : {
-        "ar" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "مرّة"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "times"
-          }
-        }
-      }
-    },
     "era_gregorian" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -492,6 +492,7 @@
       }
     },
     "evening_adhkar" : {
+      "extractionState" : "stale",
       "localizations" : {
         "ar" : {
           "stringUnit" : {
@@ -751,6 +752,7 @@
       }
     },
     "morning_adhkar" : {
+      "extractionState" : "stale",
       "localizations" : {
         "ar" : {
           "stringUnit" : {

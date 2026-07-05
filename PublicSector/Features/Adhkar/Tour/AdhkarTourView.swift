@@ -111,14 +111,14 @@ struct AdhkarTourView: View {
 
 #Preview {
     AdhkarTourView(store: Store(
-        initialState: AdhkarTourFeature.State(title: "morning_adhkar", adhkar: Adhkar.morning),
+        initialState: AdhkarTourFeature.State(collection: .morning),
         reducer: AdhkarTourFeature.init
     ))
 }
 
 #Preview {
     AdhkarTourView(store: Store(
-        initialState: AdhkarTourFeature.State(title: "morning_adhkar", adhkar: Adhkar.morning),
+        initialState: AdhkarTourFeature.State(collection: .morning),
         reducer: AdhkarTourFeature.init
     ))
     .arabicEnvironment()

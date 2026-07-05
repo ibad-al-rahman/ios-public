@@ -16,10 +16,40 @@ struct Dhikr: Equatable, Identifiable, Sendable {
     var isVerse: Bool = false
 }
 
-/// Static adhkar collections. Hardcoded for now — trivially movable to a bundled
-/// JSON resource or remote source later without touching the features that consume it.
-enum Adhkar {
-    static let morning: [Dhikr] = [
+/// A named, addressable set of adhkar. The raw value is the stable slug used for
+/// identification (and, later, deep links like `app://adhkar/morning`). Contents are
+/// hardcoded for now — trivially movable to a bundled JSON resource or remote source
+/// later without touching the features that consume it.
+enum AdhkarCollection: String, CaseIterable, Identifiable, Sendable {
+    case morning
+    case evening
+
+    var id: String { rawValue }
+
+    /// Localized-string key for the collection's display name.
+    var titleKey: String {
+        switch self {
+        case .morning: "morning_adhkar"
+        case .evening: "evening_adhkar"
+        }
+    }
+
+    /// SF Symbol shown in the list row.
+    var systemImage: String {
+        switch self {
+        case .morning: "sun.horizon"
+        case .evening: "moon.stars"
+        }
+    }
+
+    var adhkar: [Dhikr] {
+        switch self {
+        case .morning: Self.morningAdhkar
+        case .evening: Self.eveningAdhkar
+        }
+    }
+
+    private static let morningAdhkar: [Dhikr] = [
         Dhikr(
             id: UUID(uuidString: "00000000-0000-0000-0000-000000000001")!,
             arabicText: "أَعُوذُ بِاللَّهِ مِنَ الشَّيْطَانِ الرَّجِيمِ. اللَّهُ لَا إِلَهَ إِلَّا هُوَ الْحَيُّ الْقَيُّومُ",
@@ -43,7 +73,7 @@ enum Adhkar {
         ),
     ]
 
-    static let evening: [Dhikr] = [
+    private static let eveningAdhkar: [Dhikr] = [
         Dhikr(
             id: UUID(uuidString: "10000000-0000-0000-0000-000000000001")!,
             arabicText: "أَعُوذُ بِاللَّهِ مِنَ الشَّيْطَانِ الرَّجِيمِ. اللَّهُ لَا إِلَهَ إِلَّا هُوَ الْحَيُّ الْقَيُّومُ",
