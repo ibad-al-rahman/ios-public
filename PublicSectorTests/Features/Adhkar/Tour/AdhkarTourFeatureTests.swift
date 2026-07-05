@@ -33,9 +33,18 @@ struct AdhkarTourFeatureTests {
     private static let adhkar = [first, second]
     private static let trio = [first, second, third]
 
+    /// Builds tour state around bespoke fixtures. The navigation logic under test is
+    /// collection-agnostic, so we seed a real collection then swap in the fixtures.
+    private static func state(_ adhkar: [Dhikr]) -> AdhkarTourFeature.State {
+        var state = AdhkarTourFeature.State(collection: .morning)
+        state.dhikrStates = IdentifiedArray(uniqueElements: adhkar.map { DhikrFeature.State(dhikr: $0) })
+        state.activeID = state.dhikrStates.first?.id
+        return state
+    }
+
     @Test
     func initSeedsChildrenAndActivatesFirst() {
-        let state = AdhkarTourFeature.State(title: "morning_adhkar", adhkar: Self.adhkar)
+        let state = Self.state(Self.adhkar)
 
         #expect(state.dhikrStates.count == 2)
         #expect(state.activeID == Self.first.id)
@@ -47,7 +56,7 @@ struct AdhkarTourFeatureTests {
 
     @Test
     func completingActiveDhikrDoesNotAdvance() async {
-        let store = TestStore(initialState: AdhkarTourFeature.State(title: "morning_adhkar", adhkar: Self.adhkar)) {
+        let store = TestStore(initialState: Self.state(Self.adhkar)) {
             AdhkarTourFeature()
         }
 
@@ -67,7 +76,7 @@ struct AdhkarTourFeatureTests {
 
     @Test
     func nextTappedAtLastDhikrFinishesTour() async {
-        var initialState = AdhkarTourFeature.State(title: "morning_adhkar", adhkar: Self.adhkar)
+        var initialState = Self.state(Self.adhkar)
         // Both dhikr complete, sitting on the last one.
         initialState.dhikrStates[id: Self.first.id]?.count = Self.first.target
         initialState.dhikrStates[id: Self.second.id]?.count = Self.second.target
@@ -87,7 +96,7 @@ struct AdhkarTourFeatureTests {
 
     @Test
     func finishTappedDelegatesFinished() async {
-        var initialState = AdhkarTourFeature.State(title: "morning_adhkar", adhkar: Self.adhkar)
+        var initialState = Self.state(Self.adhkar)
         initialState.activeID = nil
 
         let store = TestStore(initialState: initialState) {
@@ -100,7 +109,7 @@ struct AdhkarTourFeatureTests {
 
     @Test
     func swipeNavigatesForwardAndBackward() async {
-        let store = TestStore(initialState: AdhkarTourFeature.State(title: "morning_adhkar", adhkar: Self.trio)) {
+        let store = TestStore(initialState: Self.state(Self.trio)) {
             AdhkarTourFeature()
         }
 
@@ -117,7 +126,7 @@ struct AdhkarTourFeatureTests {
 
     @Test
     func previousAtFirstDhikrIsNoOp() async {
-        let store = TestStore(initialState: AdhkarTourFeature.State(title: "morning_adhkar", adhkar: Self.trio)) {
+        let store = TestStore(initialState: Self.state(Self.trio)) {
             AdhkarTourFeature()
         }
 
@@ -127,7 +136,7 @@ struct AdhkarTourFeatureTests {
 
     @Test
     func nextAtLastDhikrFinishesTour() async {
-        var initialState = AdhkarTourFeature.State(title: "morning_adhkar", adhkar: Self.trio)
+        var initialState = Self.state(Self.trio)
         initialState.activeID = Self.third.id
 
         let store = TestStore(initialState: initialState) {

@@ -21,8 +21,7 @@ struct AdhkarFeature {
         case dependent(DependentAction)
 
         enum ViewAction {
-            case morningTapped
-            case eveningTapped
+            case collectionTapped(AdhkarCollection)
         }
 
         @CasePathable
@@ -40,12 +39,8 @@ struct AdhkarFeature {
     var body: some ReducerOf<Self> {
         Reduce { state, action in
             switch action {
-            case .view(.morningTapped):
-                state.destination = .tour(AdhkarTourFeature.State(title: "morning_adhkar", adhkar: Adhkar.morning))
-                return .none
-
-            case .view(.eveningTapped):
-                state.destination = .tour(AdhkarTourFeature.State(title: "evening_adhkar", adhkar: Adhkar.evening))
+            case let .view(.collectionTapped(collection)):
+                state.destination = .tour(AdhkarTourFeature.State(collection: collection))
                 return .none
 
             case .dependent(.destination(.presented(.tour(.delegate(.finished))))):

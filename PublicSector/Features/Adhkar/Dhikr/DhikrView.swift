@@ -94,7 +94,7 @@ struct DhikrView: View {
 #Preview {
     DhikrView(
         store: Store(
-            initialState: DhikrFeature.State(dhikr: Adhkar.morning[0]),
+            initialState: DhikrFeature.State(dhikr: AdhkarCollection.morning.adhkar[0]),
             reducer: DhikrFeature.init
         ),
         onAdvance: {}
@@ -104,7 +104,7 @@ struct DhikrView: View {
 #Preview {
     DhikrView(
         store: Store(
-            initialState: DhikrFeature.State(dhikr: Adhkar.morning[0]),
+            initialState: DhikrFeature.State(dhikr: AdhkarCollection.morning.adhkar[0]),
             reducer: DhikrFeature.init
         ),
         onAdvance: {}

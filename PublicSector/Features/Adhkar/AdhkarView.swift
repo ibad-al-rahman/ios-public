@@ -15,19 +15,17 @@ struct AdhkarView: View {
         NavigationStack {
             Form {
                 Section {
-                    Button {
-                        store.send(.view(.morningTapped))
-                    } label: {
-                        NavigationRowView("morning_adhkar", systemName: "sun.horizon")
+                    ForEach(AdhkarCollection.allCases) { collection in
+                        Button {
+                            store.send(.view(.collectionTapped(collection)))
+                        } label: {
+                            NavigationRowView(
+                                LocalizedStringKey(collection.titleKey),
+                                systemName: collection.systemImage
+                            )
+                        }
+                        .foregroundStyle(.primary)
                     }
-                    .foregroundStyle(.primary)
-
-                    Button {
-                        store.send(.view(.eveningTapped))
-                    } label: {
-                        NavigationRowView("evening_adhkar", systemName: "moon.stars")
-                    }
-                    .foregroundStyle(.primary)
                 } header: {
                     Spacer(minLength: Spacing.small)
                 }
