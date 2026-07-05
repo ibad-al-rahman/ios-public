@@ -7,8 +7,9 @@
 
 import ComposableArchitecture
 
-/// A single dhikr in the tour. Owns its own repetition counter and signals its
-/// parent, via `delegate(.completed)`, once the target count is reached.
+/// A single dhikr in the tour. Owns its own repetition counter. A tap increments
+/// while counting; once the target is reached the next tap signals the parent, via
+/// `delegate(.completed)`, to advance the tour.
 @Reducer
 struct DhikrFeature {
     @ObservableState
@@ -27,7 +28,7 @@ struct DhikrFeature {
         case dependent(DependentAction)
 
         enum ViewAction {
-            case incrementTapped
+            case tapped
         }
 
         @CasePathable
@@ -35,6 +36,8 @@ struct DhikrFeature {
 
         @CasePathable
         enum DelegateAction {
+            /// Sent when the user taps an already-complete dhikr, asking the tour to
+            /// advance to the next one.
             case completed
         }
 
@@ -45,10 +48,13 @@ struct DhikrFeature {
     var body: some ReducerOf<Self> {
         Reduce { state, action in
             switch action {
-            case .view(.incrementTapped):
-                guard !state.isComplete else { return .none }
+            case .view(.tapped):
+                guard !state.isComplete else {
+                    // Already done — the tap asks the tour to move on.
+                    return .send(.delegate(.completed))
+                }
                 state.count += 1
-                return state.isComplete ? .send(.delegate(.completed)) : .none
+                return .none
 
             default:
                 return .none

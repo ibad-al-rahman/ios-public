@@ -85,6 +85,11 @@ struct AdhkarTourFeature {
             case .view(.finishTapped):
                 return .send(.delegate(.finished))
 
+            case .dependent(.dhikr(.element(id: _, action: .delegate(.completed)))):
+                // The active dhikr is done and the user tapped to move on.
+                state.advance()
+                return .none
+
             default:
                 return .none
             }

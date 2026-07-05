@@ -60,18 +60,35 @@ struct AdhkarTourFeatureTests {
             AdhkarTourFeature()
         }
 
-        await store.send(.dependent(.dhikr(.element(id: Self.first.id, action: .view(.incrementTapped))))) {
+        // Tapping up to the target completes the dhikr but the tour stays put —
+        // the completing tap does not delegate.
+        await store.send(.dependent(.dhikr(.element(id: Self.first.id, action: .view(.tapped))))) {
             $0.dhikrStates[id: Self.first.id]?.count = 1
         }
-        await store.send(.dependent(.dhikr(.element(id: Self.first.id, action: .view(.incrementTapped))))) {
+        await store.send(.dependent(.dhikr(.element(id: Self.first.id, action: .view(.tapped))))) {
             $0.dhikrStates[id: Self.first.id]?.count = 2
         }
-        // Completing the dhikr delegates `.completed` but the tour stays put —
-        // the user taps or swipes to advance.
-        await store.receive(\.dependent.dhikr[id: Self.first.id].delegate.completed)
 
         #expect(store.state.activeID == Self.first.id)
         #expect(!store.state.isFinished)
+    }
+
+    @Test
+    func tappingCompletedDhikrAdvances() async {
+        var initialState = Self.state(Self.adhkar)
+        // First dhikr already complete, active.
+        initialState.dhikrStates[id: Self.first.id]?.count = Self.first.target
+
+        let store = TestStore(initialState: initialState) {
+            AdhkarTourFeature()
+        }
+
+        // Tapping the already-complete dhikr delegates `.completed`, and the tour
+        // advances to the next one.
+        await store.send(.dependent(.dhikr(.element(id: Self.first.id, action: .view(.tapped)))))
+        await store.receive(\.dependent.dhikr[id: Self.first.id].delegate.completed) {
+            $0.activeID = Self.second.id
+        }
     }
 
     @Test
