@@ -20,38 +20,40 @@ struct DhikrFeatureTests {
     )
 
     @Test
-    func incrementBelowTargetDoesNotComplete() async {
+    func tapBelowTargetIncrements() async {
         let store = TestStore(initialState: DhikrFeature.State(dhikr: Self.dhikr)) {
             DhikrFeature()
         }
 
-        await store.send(.view(.incrementTapped)) {
+        await store.send(.view(.tapped)) {
             $0.count = 1
         }
-        await store.send(.view(.incrementTapped)) {
+        await store.send(.view(.tapped)) {
             $0.count = 2
         }
     }
 
     @Test
-    func incrementReachingTargetCompletes() async {
+    func tapReachingTargetCompletesWithoutAdvancing() async {
         let store = TestStore(initialState: DhikrFeature.State(dhikr: Self.dhikr, count: 2)) {
             DhikrFeature()
         }
 
-        await store.send(.view(.incrementTapped)) {
+        // The completing tap fills the count and stops — it does not delegate,
+        // so the tour stays on the done state.
+        await store.send(.view(.tapped)) {
             $0.count = 3
         }
-        await store.receive(\.delegate.completed)
     }
 
     @Test
-    func incrementPastTargetIsNoOp() async {
+    func tapWhenCompleteRequestsAdvance() async {
         let store = TestStore(initialState: DhikrFeature.State(dhikr: Self.dhikr, count: 3)) {
             DhikrFeature()
         }
 
-        // Already complete — tapping again must not change count or re-fire delegate.
-        await store.send(DhikrFeature.Action.view(.incrementTapped))
+        // Already complete — the tap asks the tour to advance, count unchanged.
+        await store.send(.view(.tapped))
+        await store.receive(\.delegate.completed)
     }
 }

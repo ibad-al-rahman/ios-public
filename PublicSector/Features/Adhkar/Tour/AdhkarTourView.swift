@@ -60,14 +60,11 @@ struct AdhkarTourView: View {
                state: \.dhikrStates[id: id],
                action: \.dependent.dhikr[id: id]
            ) {
-            DhikrView(
-                store: childStore,
-                onAdvance: { store.send(.view(.nextTapped), animation: .snappy) }
-            )
-            .id(id)
-            .transition(.opacity)
-            .contentShape(Rectangle())
-            .gesture(swipeGesture)
+            DhikrView(store: childStore)
+                .id(id)
+                .transition(.opacity)
+                .contentShape(Rectangle())
+                .gesture(swipeGesture)
         } else {
             completionScreen
         }

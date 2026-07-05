@@ -10,12 +10,10 @@ import SwiftUI
 
 /// A single dhikr: its Arabic text centered on screen, with a repetition counter
 /// below that flips to a done state once the target is reached. Tapping increments
-/// the count while counting, or advances the tour (via `onAdvance`) once done; the
-/// hosting tour owns navigation between adhkar.
+/// the count while counting, or (once done) asks the tour to advance; the child
+/// reducer decides which, and the hosting tour owns navigation between adhkar.
 struct DhikrView: View {
     let store: StoreOf<DhikrFeature>
-    /// Called on tap once the dhikr is complete, to advance the tour.
-    let onAdvance: () -> Void
 
     var body: some View {
         VStack(spacing: Spacing.none) {
@@ -36,13 +34,7 @@ struct DhikrView: View {
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .contentShape(Rectangle())
-        .onTapGesture {
-            if store.isComplete {
-                onAdvance()
-            } else {
-                store.send(.view(.incrementTapped), animation: .snappy)
-            }
-        }
+        .onTapGesture { store.send(.view(.tapped), animation: .snappy) }
     }
 
     @ViewBuilder
@@ -92,22 +84,16 @@ struct DhikrView: View {
 }
 
 #Preview {
-    DhikrView(
-        store: Store(
-            initialState: DhikrFeature.State(dhikr: AdhkarCollection.morning.adhkar[0]),
-            reducer: DhikrFeature.init
-        ),
-        onAdvance: {}
-    )
+    DhikrView(store: Store(
+        initialState: DhikrFeature.State(dhikr: AdhkarCollection.morning.adhkar[0]),
+        reducer: DhikrFeature.init
+    ))
 }
 
 #Preview {
-    DhikrView(
-        store: Store(
-            initialState: DhikrFeature.State(dhikr: AdhkarCollection.morning.adhkar[0]),
-            reducer: DhikrFeature.init
-        ),
-        onAdvance: {}
-    )
+    DhikrView(store: Store(
+        initialState: DhikrFeature.State(dhikr: AdhkarCollection.morning.adhkar[0]),
+        reducer: DhikrFeature.init
+    ))
     .arabicEnvironment()
 }
