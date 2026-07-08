@@ -68,12 +68,9 @@ struct DhikrView: View {
                 .foregroundStyle(.primary)
                 .contentTransition(.numericText())
 
-            HStack(spacing: Spacing.extraSmall) {
-                Text(verbatim: "\(store.dhikr.target)")
-                Text("dhikr_times")
-            }
-            .font(.headline)
-            .foregroundStyle(.secondary)
+            Text(verbatim: "/ \(store.dhikr.target)")
+                .font(.headline)
+                .foregroundStyle(.secondary)
 
             Text("dhikr_count_hint")
                 .font(.footnote)
