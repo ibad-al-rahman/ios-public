@@ -4,7 +4,8 @@
 <dict>
 	<key>UIAppFonts</key>
 	<array>
-		<string>ZarBold.ttf</string>
+		<string>KFGQPC-Uthman-Taha-Naskh-Regular.ttf</string>
+		<string>KFGQPC-Uthman-Taha-Naskh-Bold.ttf</string>
 	</array>
 	<key>BGTaskSchedulerPermittedIdentifiers</key>
 	<array>
