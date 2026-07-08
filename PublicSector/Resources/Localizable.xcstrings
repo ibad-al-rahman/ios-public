@@ -312,6 +312,7 @@
       }
     },
     "dhikr_times" : {
+      "extractionState" : "stale",
       "localizations" : {
         "ar" : {
           "stringUnit" : {
