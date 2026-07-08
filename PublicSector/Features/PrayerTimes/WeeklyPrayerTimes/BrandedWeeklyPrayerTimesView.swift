@@ -421,7 +421,7 @@ struct BrandedWeeklyPrayerTimesView: View {
     /// system font (bold) at the same size.
     private func numberFont(size: CGFloat) -> Font {
         if locale.language.languageCode == .arabic {
-            Font.custom("ZarBold", size: size)
+            Font.custom("KFGQPC-Uthman-Taha-Naskh-Bold", size: size)
         } else {
             Font.system(size: size)
         }
