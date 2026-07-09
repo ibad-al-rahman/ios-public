@@ -38,17 +38,21 @@ struct DhikrView: View {
         .onTapGesture { store.send(.view(.tapped), animation: .snappy) }
     }
 
-    /// The verse text. For Quranic passages, each ayah is followed by its
-    /// Mushaf-style ornate verse marker (﴾١﴿); the Basmalah and Āyat al-Kursī's
-    /// isti'ādhah carry no number. Plain adhkar render their text as-is.
+    /// The verse text. For Quranic passages, each numbered ayah is followed by
+    /// its Mushaf-style ornate verse marker (﴾١﴿) and flows inline; the
+    /// un-numbered opening lines (the Basmalah and Āyat al-Kursī's isti'ādhah)
+    /// sit on their own line above the verse body. Plain adhkar render as-is.
     private var verseText: Text {
         let dhikr = store.dhikr
         guard !dhikr.ayat.isEmpty else {
             return Text(verbatim: dhikr.arabicText)
         }
         return dhikr.ayat.reduce(Text(verbatim: "")) { result, ayah in
-            let marker = ayah.number.map { " \(AyahNumber.formatted($0)) " } ?? " "
-            return result + Text(verbatim: ayah.text) + Text(verbatim: marker)
+            guard let number = ayah.number else {
+                // Un-numbered opening line: place it on its own line.
+                return result + Text(verbatim: ayah.text) + Text(verbatim: "\n")
+            }
+            return result + Text(verbatim: ayah.text) + Text(verbatim: " \(AyahNumber.formatted(number)) ")
         }
     }
 
