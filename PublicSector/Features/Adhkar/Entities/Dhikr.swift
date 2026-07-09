@@ -7,13 +7,51 @@
 
 import Foundation
 
+/// A single ayah of a Quranic passage: its text and, when it carries one, its
+/// number within the surah. `number` is `nil` for the Basmalah, which precedes
+/// a surah's numbered ayat and is not itself numbered here.
+struct Ayah: Equatable, Sendable {
+    let number: Int?
+    let text: String
+
+    init(_ number: Int?, _ text: String) {
+        self.number = number
+        self.text = text
+    }
+}
+
 /// A single dhikr in a tour: its Arabic text (verbatim, not localized) and the
 /// number of times it should be repeated.
+///
+/// For Quranic passages, `ayat` holds the individual verses (each with its
+/// number) so the UI can render Mushaf-style verse markers. For plain adhkar it
+/// is empty and `arabicText` is the sole source of text.
 struct Dhikr: Equatable, Identifiable, Sendable {
     let id: UUID
     let arabicText: String
     let target: Int
     var isVerse: Bool = false
+    var ayat: [Ayah] = []
+
+    /// Builds a verse dhikr from its individual ayat. `arabicText` is derived by
+    /// joining the ayah texts, so non-verse consumers (and accessibility) still
+    /// see the full passage.
+    init(id: UUID, ayat: [Ayah], target: Int) {
+        self.id = id
+        self.ayat = ayat
+        self.target = target
+        self.isVerse = true
+        self.arabicText = ayat.map(\.text).joined(separator: " ")
+    }
+
+    /// Builds a plain (non-verse) dhikr from a single block of text.
+    init(id: UUID, arabicText: String, target: Int) {
+        self.id = id
+        self.arabicText = arabicText
+        self.target = target
+        self.isVerse = false
+        self.ayat = []
+    }
 }
 
 /// A named, addressable set of adhkar. The raw value is the stable slug used for
@@ -53,30 +91,50 @@ enum AdhkarCollection: String, CaseIterable, Identifiable, Sendable {
         // Āyat al-Kursī (al-Baqarah 2:255) — recited once in the morning.
         Dhikr(
             id: UUID(uuidString: "00000000-0000-0000-0000-000000000001")!,
-            arabicText: "أَعُوذُ بِاللَّهِ مِنَ الشَّيْطَانِ الرَّجِيمِ. اللَّهُ لَا إِلَهَ إِلَّا هُوَ الْحَيُّ الْقَيُّومُ، لَا تَأْخُذُهُ سِنَةٌ وَلَا نَوْمٌ، لَهُ مَا فِي السَّمَاوَاتِ وَمَا فِي الْأَرْضِ، مَنْ ذَا الَّذِي يَشْفَعُ عِنْدَهُ إِلَّا بِإِذْنِهِ، يَعْلَمُ مَا بَيْنَ أَيْدِيهِمْ وَمَا خَلْفَهُمْ، وَلَا يُحِيطُونَ بِشَيْءٍ مِنْ عِلْمِهِ إِلَّا بِمَا شَاءَ، وَسِعَ كُرْسِيُّهُ السَّمَاوَاتِ وَالْأَرْضَ، وَلَا يَؤُودُهُ حِفْظُهُمَا، وَهُوَ الْعَلِيُّ الْعَظِيمُ",
-            target: 1,
-            isVerse: true
+            ayat: [
+                Ayah(nil, "أَعُوذُ بِاللَّهِ مِنَ الشَّيْطَانِ الرَّجِيمِ"),
+                Ayah(255, "اللَّهُ لَا إِلَهَ إِلَّا هُوَ الْحَيُّ الْقَيُّومُ، لَا تَأْخُذُهُ سِنَةٌ وَلَا نَوْمٌ، لَهُ مَا فِي السَّمَاوَاتِ وَمَا فِي الْأَرْضِ، مَنْ ذَا الَّذِي يَشْفَعُ عِنْدَهُ إِلَّا بِإِذْنِهِ، يَعْلَمُ مَا بَيْنَ أَيْدِيهِمْ وَمَا خَلْفَهُمْ، وَلَا يُحِيطُونَ بِشَيْءٍ مِنْ عِلْمِهِ إِلَّا بِمَا شَاءَ، وَسِعَ كُرْسِيُّهُ السَّمَاوَاتِ وَالْأَرْضَ، وَلَا يَؤُودُهُ حِفْظُهُمَا، وَهُوَ الْعَلِيُّ الْعَظِيمُ"),
+            ],
+            target: 1
         ),
         // Sūrat al-Ikhlāṣ — recited three times.
         Dhikr(
             id: UUID(uuidString: "00000000-0000-0000-0000-000000000002")!,
-            arabicText: "بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ. قُلْ هُوَ اللَّهُ أَحَدٌ. اللَّهُ الصَّمَدُ. لَمْ يَلِدْ وَلَمْ يُولَدْ. وَلَمْ يَكُنْ لَهُ كُفُوًا أَحَدٌ",
-            target: 3,
-            isVerse: true
+            ayat: [
+                Ayah(nil, "بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ"),
+                Ayah(1, "قُلْ هُوَ اللَّهُ أَحَدٌ"),
+                Ayah(2, "اللَّهُ الصَّمَدُ"),
+                Ayah(3, "لَمْ يَلِدْ وَلَمْ يُولَدْ"),
+                Ayah(4, "وَلَمْ يَكُنْ لَهُ كُفُوًا أَحَدٌ"),
+            ],
+            target: 3
         ),
         // Sūrat al-Falaq — recited three times.
         Dhikr(
             id: UUID(uuidString: "00000000-0000-0000-0000-000000000003")!,
-            arabicText: "بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ. قُلْ أَعُوذُ بِرَبِّ الْفَلَقِ. مِنْ شَرِّ مَا خَلَقَ. وَمِنْ شَرِّ غَاسِقٍ إِذَا وَقَبَ. وَمِنْ شَرِّ النَّفَّاثَاتِ فِي الْعُقَدِ. وَمِنْ شَرِّ حَاسِدٍ إِذَا حَسَدَ",
-            target: 3,
-            isVerse: true
+            ayat: [
+                Ayah(nil, "بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ"),
+                Ayah(1, "قُلْ أَعُوذُ بِرَبِّ الْفَلَقِ"),
+                Ayah(2, "مِنْ شَرِّ مَا خَلَقَ"),
+                Ayah(3, "وَمِنْ شَرِّ غَاسِقٍ إِذَا وَقَبَ"),
+                Ayah(4, "وَمِنْ شَرِّ النَّفَّاثَاتِ فِي الْعُقَدِ"),
+                Ayah(5, "وَمِنْ شَرِّ حَاسِدٍ إِذَا حَسَدَ"),
+            ],
+            target: 3
         ),
         // Sūrat al-Nās — recited three times.
         Dhikr(
             id: UUID(uuidString: "00000000-0000-0000-0000-000000000004")!,
-            arabicText: "بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ. قُلْ أَعُوذُ بِرَبِّ النَّاسِ. مَلِكِ النَّاسِ. إِلَهِ النَّاسِ. مِنْ شَرِّ الْوَسْوَاسِ الْخَنَّاسِ. الَّذِي يُوَسْوِسُ فِي صُدُورِ النَّاسِ. مِنَ الْجِنَّةِ وَالنَّاسِ",
-            target: 3,
-            isVerse: true
+            ayat: [
+                Ayah(nil, "بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ"),
+                Ayah(1, "قُلْ أَعُوذُ بِرَبِّ النَّاسِ"),
+                Ayah(2, "مَلِكِ النَّاسِ"),
+                Ayah(3, "إِلَهِ النَّاسِ"),
+                Ayah(4, "مِنْ شَرِّ الْوَسْوَاسِ الْخَنَّاسِ"),
+                Ayah(5, "الَّذِي يُوَسْوِسُ فِي صُدُورِ النَّاسِ"),
+                Ayah(6, "مِنَ الْجِنَّةِ وَالنَّاسِ"),
+            ],
+            target: 3
         ),
         // Sayyid al-Istighfār — the master of seeking forgiveness.
         Dhikr(
@@ -147,30 +205,50 @@ enum AdhkarCollection: String, CaseIterable, Identifiable, Sendable {
         // Āyat al-Kursī (al-Baqarah 2:255) — recited once in the evening.
         Dhikr(
             id: UUID(uuidString: "10000000-0000-0000-0000-000000000001")!,
-            arabicText: "أَعُوذُ بِاللَّهِ مِنَ الشَّيْطَانِ الرَّجِيمِ. اللَّهُ لَا إِلَهَ إِلَّا هُوَ الْحَيُّ الْقَيُّومُ، لَا تَأْخُذُهُ سِنَةٌ وَلَا نَوْمٌ، لَهُ مَا فِي السَّمَاوَاتِ وَمَا فِي الْأَرْضِ، مَنْ ذَا الَّذِي يَشْفَعُ عِنْدَهُ إِلَّا بِإِذْنِهِ، يَعْلَمُ مَا بَيْنَ أَيْدِيهِمْ وَمَا خَلْفَهُمْ، وَلَا يُحِيطُونَ بِشَيْءٍ مِنْ عِلْمِهِ إِلَّا بِمَا شَاءَ، وَسِعَ كُرْسِيُّهُ السَّمَاوَاتِ وَالْأَرْضَ، وَلَا يَؤُودُهُ حِفْظُهُمَا، وَهُوَ الْعَلِيُّ الْعَظِيمُ",
-            target: 1,
-            isVerse: true
+            ayat: [
+                Ayah(nil, "أَعُوذُ بِاللَّهِ مِنَ الشَّيْطَانِ الرَّجِيمِ"),
+                Ayah(255, "اللَّهُ لَا إِلَهَ إِلَّا هُوَ الْحَيُّ الْقَيُّومُ، لَا تَأْخُذُهُ سِنَةٌ وَلَا نَوْمٌ، لَهُ مَا فِي السَّمَاوَاتِ وَمَا فِي الْأَرْضِ، مَنْ ذَا الَّذِي يَشْفَعُ عِنْدَهُ إِلَّا بِإِذْنِهِ، يَعْلَمُ مَا بَيْنَ أَيْدِيهِمْ وَمَا خَلْفَهُمْ، وَلَا يُحِيطُونَ بِشَيْءٍ مِنْ عِلْمِهِ إِلَّا بِمَا شَاءَ، وَسِعَ كُرْسِيُّهُ السَّمَاوَاتِ وَالْأَرْضَ، وَلَا يَؤُودُهُ حِفْظُهُمَا، وَهُوَ الْعَلِيُّ الْعَظِيمُ"),
+            ],
+            target: 1
         ),
         // Sūrat al-Ikhlāṣ — recited three times.
         Dhikr(
             id: UUID(uuidString: "10000000-0000-0000-0000-000000000002")!,
-            arabicText: "بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ. قُلْ هُوَ اللَّهُ أَحَدٌ. اللَّهُ الصَّمَدُ. لَمْ يَلِدْ وَلَمْ يُولَدْ. وَلَمْ يَكُنْ لَهُ كُفُوًا أَحَدٌ",
-            target: 3,
-            isVerse: true
+            ayat: [
+                Ayah(nil, "بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ"),
+                Ayah(1, "قُلْ هُوَ اللَّهُ أَحَدٌ"),
+                Ayah(2, "اللَّهُ الصَّمَدُ"),
+                Ayah(3, "لَمْ يَلِدْ وَلَمْ يُولَدْ"),
+                Ayah(4, "وَلَمْ يَكُنْ لَهُ كُفُوًا أَحَدٌ"),
+            ],
+            target: 3
         ),
         // Sūrat al-Falaq — recited three times.
         Dhikr(
             id: UUID(uuidString: "10000000-0000-0000-0000-000000000003")!,
-            arabicText: "بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ. قُلْ أَعُوذُ بِرَبِّ الْفَلَقِ. مِنْ شَرِّ مَا خَلَقَ. وَمِنْ شَرِّ غَاسِقٍ إِذَا وَقَبَ. وَمِنْ شَرِّ النَّفَّاثَاتِ فِي الْعُقَدِ. وَمِنْ شَرِّ حَاسِدٍ إِذَا حَسَدَ",
-            target: 3,
-            isVerse: true
+            ayat: [
+                Ayah(nil, "بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ"),
+                Ayah(1, "قُلْ أَعُوذُ بِرَبِّ الْفَلَقِ"),
+                Ayah(2, "مِنْ شَرِّ مَا خَلَقَ"),
+                Ayah(3, "وَمِنْ شَرِّ غَاسِقٍ إِذَا وَقَبَ"),
+                Ayah(4, "وَمِنْ شَرِّ النَّفَّاثَاتِ فِي الْعُقَدِ"),
+                Ayah(5, "وَمِنْ شَرِّ حَاسِدٍ إِذَا حَسَدَ"),
+            ],
+            target: 3
         ),
         // Sūrat al-Nās — recited three times.
         Dhikr(
             id: UUID(uuidString: "10000000-0000-0000-0000-000000000004")!,
-            arabicText: "بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ. قُلْ أَعُوذُ بِرَبِّ النَّاسِ. مَلِكِ النَّاسِ. إِلَهِ النَّاسِ. مِنْ شَرِّ الْوَسْوَاسِ الْخَنَّاسِ. الَّذِي يُوَسْوِسُ فِي صُدُورِ النَّاسِ. مِنَ الْجِنَّةِ وَالنَّاسِ",
-            target: 3,
-            isVerse: true
+            ayat: [
+                Ayah(nil, "بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ"),
+                Ayah(1, "قُلْ أَعُوذُ بِرَبِّ النَّاسِ"),
+                Ayah(2, "مَلِكِ النَّاسِ"),
+                Ayah(3, "إِلَهِ النَّاسِ"),
+                Ayah(4, "مِنْ شَرِّ الْوَسْوَاسِ الْخَنَّاسِ"),
+                Ayah(5, "الَّذِي يُوَسْوِسُ فِي صُدُورِ النَّاسِ"),
+                Ayah(6, "مِنَ الْجِنَّةِ وَالنَّاسِ"),
+            ],
+            target: 3
         ),
         // Sayyid al-Istighfār — the master of seeking forgiveness.
         Dhikr(
