@@ -23,6 +23,7 @@
 		D9EAEF582D27199100C8D1F4 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9EAEF572D27199100C8D1F4 /* SwiftUI.framework */; };
 		D9EAEF632D27199200C8D1F4 /* PublicSectorWidgetBundle.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = D9EAEF532D27199100C8D1F4 /* PublicSectorWidgetBundle.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		D9EAEF7D2D29469800C8D1F4 /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = D9EAEF7C2D29469800C8D1F4 /* ComposableArchitecture */; };
+		DE51600100000000000000A1 /* IbadDesign in Frameworks */ = {isa = PBXBuildFile; productRef = DE51600100000000000000B1 /* IbadDesign */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -111,6 +112,7 @@
 				D91BF12A2D3FDB9800BEB410 /* FirebaseCrashlytics in Frameworks */,
 				D91BF13C2D4019B500BEB410 /* IbadAnalytics in Frameworks */,
 				B3A843082F60D0B300506D4C /* MiqatKit in Frameworks */,
+				DE51600100000000000000A1 /* IbadDesign in Frameworks */,
 				D91BF1262D3FDB9800BEB410 /* FirebaseAnalytics in Frameworks */,
 				719899D22F59F76500BC65FB /* SwiftUINavigation in Frameworks */,
 				D9A6E1BD2CEC71FE006123D1 /* ComposableArchitecture in Frameworks */,
@@ -215,6 +217,7 @@
 				719899D12F59F76500BC65FB /* SwiftUINavigation */,
 				B3A843072F60D0B300506D4C /* MiqatKit */,
 				B3BFBDA62F6AED5500945455 /* IbadEnvironment */,
+				DE51600100000000000000B1 /* IbadDesign */,
 			);
 			productName = PublicSector;
 			productReference = D9A70DB62C850B78002F6583 /* PublicSector.app */;
@@ -330,6 +333,7 @@
 				719899CE2F59F76500BC65FB /* XCRemoteSwiftPackageReference "swift-navigation" */,
 				B3A843062F60D0B300506D4C /* XCLocalSwiftPackageReference "Modules/MiqatKit" */,
 				B3BFBDA52F6AED5500945455 /* XCLocalSwiftPackageReference "Modules/IbadEnvironment" */,
+				DE51600100000000000000C1 /* XCLocalSwiftPackageReference "Modules/IbadDesign" */,
 			);
 			productRefGroup = D9A70DB72C850B78002F6583 /* Products */;
 			projectDirPath = "";
@@ -908,6 +912,10 @@
 			isa = XCLocalSwiftPackageReference;
 			relativePath = Modules/IbadRemoteConfig;
 		};
+		DE51600100000000000000C1 /* XCLocalSwiftPackageReference "Modules/IbadDesign" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = Modules/IbadDesign;
+		};
 /* End XCLocalSwiftPackageReference section */
 
 /* Begin XCRemoteSwiftPackageReference section */
@@ -997,6 +1005,10 @@
 			isa = XCSwiftPackageProductDependency;
 			package = D9A6E1BB2CEC71FE006123D1 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */;
 			productName = ComposableArchitecture;
+		};
+		DE51600100000000000000B1 /* IbadDesign */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = IbadDesign;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

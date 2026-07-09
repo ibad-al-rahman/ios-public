@@ -6,6 +6,7 @@
 //
 
 import ComposableArchitecture
+import IbadDesign
 import SwiftUI
 
 /// A single dhikr: its Arabic text centered on screen, with a repetition counter
@@ -20,10 +21,10 @@ struct DhikrView: View {
             Spacer(minLength: Spacing.large)
 
             Text(verbatim: store.dhikr.arabicText)
-                .font(.system(.title2, design: .serif))
+                .font(.quranic(.verse))
                 .multilineTextAlignment(.center)
                 .lineSpacing(Spacing.small)
-                .foregroundStyle(.primary)
+                .foregroundStyle(Color.Ibad.textPrimary)
                 .padding(.horizontal, Spacing.large)
                 .frame(maxWidth: .infinity)
 
@@ -52,29 +53,29 @@ struct DhikrView: View {
 
             Text("dhikr_done")
                 .font(.headline)
-                .foregroundStyle(.secondary)
+                .foregroundStyle(Color.Ibad.textSecondary)
 
             Text("dhikr_next_hint")
                 .font(.footnote)
-                .foregroundStyle(.tertiary)
+                .foregroundStyle(Color.Ibad.textTertiary)
         }
     }
 
     private var countBlock: some View {
         VStack(spacing: Spacing.extraSmall) {
             Text(verbatim: "\(store.count)")
-                .font(.system(size: 72, weight: .bold, design: .rounded))
+                .font(.ibad(.system, .counter, weight: .bold, design: .rounded))
                 .monospacedDigit()
-                .foregroundStyle(.primary)
+                .foregroundStyle(Color.Ibad.textPrimary)
                 .contentTransition(.numericText())
 
             Text(verbatim: "/ \(store.dhikr.target)")
                 .font(.headline)
-                .foregroundStyle(.secondary)
+                .foregroundStyle(Color.Ibad.textSecondary)
 
             Text("dhikr_count_hint")
                 .font(.footnote)
-                .foregroundStyle(.tertiary)
+                .foregroundStyle(Color.Ibad.textTertiary)
                 .padding(.top, Spacing.small)
         }
     }

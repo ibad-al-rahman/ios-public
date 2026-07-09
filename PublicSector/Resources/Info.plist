@@ -2,11 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>UIAppFonts</key>
-	<array>
-		<string>KFGQPC-Uthman-Taha-Naskh-Regular.ttf</string>
-		<string>KFGQPC-Uthman-Taha-Naskh-Bold.ttf</string>
-	</array>
 	<key>BGTaskSchedulerPermittedIdentifiers</key>
 	<array>
 		<string>com.ibadalrahman.PublicSector.azan_notification_scheduler</string>
