@@ -6,6 +6,7 @@
 //
 
 import Dependencies
+import IbadDesign
 import SwiftUI
 
 struct BrandedWeeklyPrayerTimesView: View {
@@ -417,13 +418,13 @@ struct BrandedWeeklyPrayerTimesView: View {
             .trimmingCharacters(in: .whitespaces)
     }
 
-    /// The number font: the custom ZarBold face under Arabic, otherwise the
-    /// system font (bold) at the same size.
+    /// The number font: the custom KFGQPC (Uthman Taha Naskh) bold face under
+    /// Arabic, otherwise the system font (regular) at the same size.
     private func numberFont(size: CGFloat) -> Font {
         if locale.language.languageCode == .arabic {
-            Font.custom("KFGQPC-Uthman-Taha-Naskh-Bold", size: size)
+            .ibad(.quranic, size: size, weight: .bold)
         } else {
-            Font.system(size: size)
+            .ibad(.system, size: size)
         }
     }
 
