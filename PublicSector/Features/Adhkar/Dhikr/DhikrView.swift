@@ -20,7 +20,7 @@ struct DhikrView: View {
         VStack(spacing: Spacing.none) {
             Spacer(minLength: Spacing.large)
 
-            Text(verbatim: store.dhikr.arabicText)
+            verseText
                 .font(verseFont)
                 .multilineTextAlignment(.center)
                 .lineSpacing(Spacing.small)
@@ -36,6 +36,20 @@ struct DhikrView: View {
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .contentShape(Rectangle())
         .onTapGesture { store.send(.view(.tapped), animation: .snappy) }
+    }
+
+    /// The verse text. For Quranic passages, each ayah is followed by its
+    /// Mushaf-style ornate verse marker (﴾١﴿); the Basmalah and Āyat al-Kursī's
+    /// isti'ādhah carry no number. Plain adhkar render their text as-is.
+    private var verseText: Text {
+        let dhikr = store.dhikr
+        guard !dhikr.ayat.isEmpty else {
+            return Text(verbatim: dhikr.arabicText)
+        }
+        return dhikr.ayat.reduce(Text(verbatim: "")) { result, ayah in
+            let marker = ayah.number.map { " \(AyahNumber.formatted($0)) " } ?? " "
+            return result + Text(verbatim: ayah.text) + Text(verbatim: marker)
+        }
     }
 
     /// The Quranic (KFGQPC) face for verses; the serif system font for
