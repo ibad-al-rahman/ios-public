@@ -21,7 +21,7 @@ struct DhikrView: View {
             Spacer(minLength: Spacing.large)
 
             Text(verbatim: store.dhikr.arabicText)
-                .font(.quranic(.verse))
+                .font(verseFont)
                 .multilineTextAlignment(.center)
                 .lineSpacing(Spacing.small)
                 .foregroundStyle(Color.Ibad.textPrimary)
@@ -36,6 +36,16 @@ struct DhikrView: View {
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .contentShape(Rectangle())
         .onTapGesture { store.send(.view(.tapped), animation: .snappy) }
+    }
+
+    /// The Quranic (KFGQPC) face for verses; the serif system font for
+    /// non-verse adhkar.
+    private var verseFont: Font {
+        if store.dhikr.isVerse {
+            .quranic(.verse)
+        } else {
+            .system(.title2, design: .serif)
+        }
     }
 
     @ViewBuilder
