@@ -6,23 +6,34 @@
 //
 
 import Dependencies
-import IbadEnvironment
+import FirebaseRemoteConfig
 import Foundation
-import Pmff
 import Sharing
 
-struct RemoteConfigManager {
-    @Dependency(\.appDetails) private var appDetails
+/// `@unchecked Sendable`: the only non-Sendable stored property is Firebase's
+/// `RemoteConfig`, whose shared instance is documented as safe for concurrent access.
+struct RemoteConfigManager: @unchecked Sendable {
     @Shared(.featureFlags) private var featureFlags = .default
-    private let pmffClient: RemoteFeatureFlagClient
+    private let remoteConfig: FirebaseRemoteConfig.RemoteConfig
 
     init() {
-        self.pmffClient = RemoteFeatureFlagClient(
-            url: URL(string: "https://ibad-al-rahman.github.io/remote-config/flags.json")!,
-            refreshInterval: 60
-        )
-        self.pmffClient.set("appName", value: "ios-public-sector")
-        self.pmffClient.set("appVersion", value: appDetails.versionString)
+        self.remoteConfig = FirebaseRemoteConfig.RemoteConfig.remoteConfig()
+
+        let settings = RemoteConfigSettings()
+        settings.minimumFetchInterval = 60
+        self.remoteConfig.configSettings = settings
+
+        let defaults = FeatureFlagKey.allCases.reduce(into: [String: NSObject]()) { defaults, key in
+            let value = FeatureFlagDict.default[key] ?? false
+            defaults[key.rawValue] = value as NSObject
+        }
+        self.remoteConfig.setDefaults(defaults)
+
+        self.remoteConfig.fetchAndActivate { _, error in
+            if let error {
+                print("Failed to fetch remote config: \(error)")
+            }
+        }
     }
 
     func isFlagEnabled(key: FeatureFlagKey) -> Bool {
@@ -31,11 +42,11 @@ struct RemoteConfigManager {
             return enablement
         }
 #endif
-        return self.pmffClient.isEnabled(key.rawValue)
+        return self.remoteConfig[key.rawValue].boolValue
     }
 
     func setFlag(key: FeatureFlagKey, newValue: Bool) {
-        if newValue == self.pmffClient.isEnabled(key.rawValue) {
+        if newValue == self.remoteConfig[key.rawValue].boolValue {
             $featureFlags.withLock { $0[key] = FeatureFlagDict.default[key] }
         } else {
             $featureFlags.withLock { $0[key] = newValue }

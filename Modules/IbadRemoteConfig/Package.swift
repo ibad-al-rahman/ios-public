@@ -11,8 +11,8 @@ let package = Package(
     ],
     dependencies: [
         .package(
-            url: "https://github.com/ibad-al-rahman/swift-pmff",
-            .upToNextMajor(from: "0.5.1")
+            url: "https://github.com/firebase/firebase-ios-sdk",
+            .upToNextMajor(from: "11.7.0")
         ),
         .package(
             url: "https://github.com/pointfreeco/swift-dependencies",
@@ -28,7 +28,7 @@ let package = Package(
         .target(
             name: "IbadRemoteConfig",
             dependencies: [
-                .product(name: "Pmff", package: "swift-pmff"),
+                .product(name: "FirebaseRemoteConfig", package: "firebase-ios-sdk"),
                 .product(name: "Dependencies", package: "swift-dependencies"),
                 .product(name: "DependenciesMacros", package: "swift-dependencies"),
                 .product(name: "Sharing", package: "swift-sharing"),
