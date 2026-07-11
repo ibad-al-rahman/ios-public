@@ -43,7 +43,9 @@ struct AppFeature {
             case onAppear
         }
         @CasePathable
-        enum ReducerAction { }
+        enum ReducerAction {
+            case deepLink(RootRoute)
+        }
         @CasePathable
         enum DelegateAction { }
 
@@ -75,6 +77,11 @@ struct AppFeature {
                     await scheduleNotifications()
                     await scheduleAdhkarNotifications()
                 }
+
+            case let .reducer(.deepLink(.adhkar(.collection(collection)))):
+                state.selectedTab = .adhkar
+                state.adhkar.destination = .tour(AdhkarTourFeature.State(collection: collection))
+                return .none
 
             default:
                 return .none

@@ -25,6 +25,7 @@
 		D9EAEF632D27199200C8D1F4 /* PublicSectorWidgetBundle.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = D9EAEF532D27199100C8D1F4 /* PublicSectorWidgetBundle.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		D9EAEF7D2D29469800C8D1F4 /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = D9EAEF7C2D29469800C8D1F4 /* ComposableArchitecture */; };
 		DE51600100000000000000A1 /* IbadDesign in Frameworks */ = {isa = PBXBuildFile; productRef = DE51600100000000000000B1 /* IbadDesign */; };
+		DE51700100000000000000A1 /* URLRouting in Frameworks */ = {isa = PBXBuildFile; productRef = DE51700100000000000000B1 /* URLRouting */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -118,6 +119,7 @@
 				D91BF1262D3FDB9800BEB410 /* FirebaseAnalytics in Frameworks */,
 				719899D22F59F76500BC65FB /* SwiftUINavigation in Frameworks */,
 				D9A6E1BD2CEC71FE006123D1 /* ComposableArchitecture in Frameworks */,
+				DE51700100000000000000A1 /* URLRouting in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -221,6 +223,7 @@
 				B3A843072F60D0B300506D4C /* MiqatKit */,
 				B3BFBDA62F6AED5500945455 /* IbadEnvironment */,
 				DE51600100000000000000B1 /* IbadDesign */,
+				DE51700100000000000000B1 /* URLRouting */,
 			);
 			productName = PublicSector;
 			productReference = D9A70DB62C850B78002F6583 /* PublicSector.app */;
@@ -337,6 +340,7 @@
 				B3A843062F60D0B300506D4C /* XCLocalSwiftPackageReference "Modules/MiqatKit" */,
 				B3BFBDA52F6AED5500945455 /* XCLocalSwiftPackageReference "Modules/IbadEnvironment" */,
 				DE51600100000000000000C1 /* XCLocalSwiftPackageReference "Modules/IbadDesign" */,
+				DE51700100000000000000C1 /* XCRemoteSwiftPackageReference "swift-url-routing" */,
 			);
 			productRefGroup = D9A70DB72C850B78002F6583 /* Products */;
 			projectDirPath = "";
@@ -946,6 +950,14 @@
 				minimumVersion = 1.17.1;
 			};
 		};
+		DE51700100000000000000C1 /* XCRemoteSwiftPackageReference "swift-url-routing" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/pointfreeco/swift-url-routing";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.6.2;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1017,6 +1029,11 @@
 		DE51600100000000000000B1 /* IbadDesign */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = IbadDesign;
+		};
+		DE51700100000000000000B1 /* URLRouting */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DE51700100000000000000C1 /* XCRemoteSwiftPackageReference "swift-url-routing" */;
+			productName = URLRouting;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

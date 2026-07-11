@@ -66,6 +66,19 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
     ) {
         completionHandler([.banner, .sound])
     }
+
+    nonisolated func userNotificationCenter(
+        _ center: UNUserNotificationCenter,
+        didReceive response: UNNotificationResponse,
+        withCompletionHandler completionHandler: @escaping () -> Void
+    ) {
+        let identifier = response.notification.request.identifier
+        if let collection = AdhkarCollection(notificationIdentifier: identifier) {
+            @Dependency(\.deepLinkBus) var deepLinkBus
+            deepLinkBus.send(.adhkar(.collection(collection)))
+        }
+        completionHandler()
+    }
 }
 
 extension AppDelegate: MessagingDelegate {

@@ -1,5 +1,5 @@
 {
-  "originHash" : "196908da6d98a645b7e193281c61f03b3e0aacdfdb35de8ab721251b91ffacb1",
+  "originHash" : "08c8bbe0b06e4bf3561a835aeac1b50e910c86e8fd719be30a46141937ccfd26",
   "pins" : [
     {
       "identity" : "abseil-cpp-binary",
@@ -209,6 +209,15 @@
       }
     },
     {
+      "identity" : "swift-parsing",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/pointfreeco/swift-parsing",
+      "state" : {
+        "revision" : "42161b785368386648af8bc595d51aed9d316320",
+        "version" : "0.15.0"
+      }
+    },
+    {
       "identity" : "swift-perception",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/pointfreeco/swift-perception",
@@ -242,6 +251,15 @@
       "state" : {
         "revision" : "0687f71944021d616d34d922343dcef086855920",
         "version" : "600.0.1"
+      }
+    },
+    {
+      "identity" : "swift-url-routing",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/pointfreeco/swift-url-routing",
+      "state" : {
+        "revision" : "1cfd564259ecb1d324bb718a8f03e513dab738d2",
+        "version" : "0.6.2"
       }
     },
     {
