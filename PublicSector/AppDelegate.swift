@@ -49,8 +49,10 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void
     ) {
         @Dependency(\.prayerTimesNotificationScheduler) var scheduler
+        @Dependency(\.adhkarNotificationScheduler) var adhkarScheduler
         Task {
             await scheduler.scheduleNotifications()
+            await adhkarScheduler.scheduleNotifications()
             completionHandler(.newData)
         }
     }

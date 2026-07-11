@@ -25,6 +25,12 @@ extension SharedKey where Self == FileStorageKey<Settings.PrayerTimesNotificatio
     }
 }
 
+extension SharedKey where Self == FileStorageKey<Settings.AdhkarNotifications> {
+    static var adhkarNotifications: Self {
+        fileStorage(.documentsDirectory.appending(path: "adhkarNotifications.json"))
+    }
+}
+
 extension SharedKey where Self == FileStorageKey<Settings.SelectedLocation?> {
     static var selectedLocation: Self {
         fileStorage(.documentsDirectory.appending(path: "selectedLocation.json"))

@@ -19,6 +19,7 @@ struct NotificationsFeatureTests {
         } withDependencies: {
             $0.permissions.getPushNotificationPermissionStatus = { .authorized }
             $0.prayerTimesNotificationScheduler.scheduleNotifications = {}
+            $0.adhkarNotificationScheduler.scheduleNotifications = {}
         }
 
         await store.send(.binding(.set(\.notificationsEnabled, true))) {
@@ -34,6 +35,7 @@ struct NotificationsFeatureTests {
             $0.permissions.getPushNotificationPermissionStatus = { .notDetermined }
             $0.permissions.requestPushNotificationPermission = { true }
             $0.prayerTimesNotificationScheduler.scheduleNotifications = {}
+            $0.adhkarNotificationScheduler.scheduleNotifications = {}
         }
 
         await store.send(.binding(.set(\.notificationsEnabled, true))) {
@@ -49,6 +51,7 @@ struct NotificationsFeatureTests {
         } withDependencies: {
             $0.permissions.getPushNotificationPermissionStatus = { .denied }
             $0.prayerTimesNotificationScheduler.scheduleNotifications = {}
+            $0.adhkarNotificationScheduler.scheduleNotifications = {}
         }
 
         await store.send(.binding(.set(\.notificationsEnabled, true))) {
@@ -70,6 +73,7 @@ struct NotificationsFeatureTests {
             $0.permissions.getPushNotificationPermissionStatus = { .notDetermined }
             $0.permissions.requestPushNotificationPermission = { throw PermissionError() }
             $0.prayerTimesNotificationScheduler.scheduleNotifications = {}
+            $0.adhkarNotificationScheduler.scheduleNotifications = {}
         }
 
         await store.send(.binding(.set(\.notificationsEnabled, true))) {
@@ -90,6 +94,9 @@ struct NotificationsFeatureTests {
         } withDependencies: {
             $0.prayerTimesNotificationScheduler.scheduleNotifications = {
                 Issue.record("scheduleNotifications should not be called when toggling off")
+            }
+            $0.adhkarNotificationScheduler.scheduleNotifications = {
+                Issue.record("scheduleAdhkarNotifications should not be called when toggling off")
             }
         }
 
@@ -156,5 +163,51 @@ struct NotificationsFeatureTests {
         }
 
         #expect(scheduleCallCount.value == 1)
+    }
+
+    @Test
+    func adhkarNotificationsBindingSchedules() async {
+        let state = NotificationsFeature.State()
+        state.$notificationsEnabled.withLock { $0 = true }
+
+        let scheduleCallCount = LockIsolated(0)
+        let store = TestStore(initialState: state) {
+            NotificationsFeature()
+        } withDependencies: {
+            $0.adhkarNotificationScheduler.scheduleNotifications = {
+                scheduleCallCount.withValue { val in val += 1 }
+            }
+        }
+
+        await store.send(.binding(.set(\.adhkarNotifications, Settings.AdhkarNotifications(morningEnabled: true)))) {
+            $0.$adhkarNotifications.withLock { $0 = Settings.AdhkarNotifications(morningEnabled: true) }
+        }
+
+        #expect(scheduleCallCount.value == 1)
+    }
+
+    @Test
+    func toggleOnSchedulesBothPrayerAndAdhkar() async {
+        let prayerScheduled = LockIsolated(false)
+        let adhkarScheduled = LockIsolated(false)
+
+        let store = TestStore(initialState: NotificationsFeature.State()) {
+            NotificationsFeature()
+        } withDependencies: {
+            $0.permissions.getPushNotificationPermissionStatus = { .authorized }
+            $0.prayerTimesNotificationScheduler.scheduleNotifications = {
+                prayerScheduled.withValue { $0 = true }
+            }
+            $0.adhkarNotificationScheduler.scheduleNotifications = {
+                adhkarScheduled.withValue { $0 = true }
+            }
+        }
+
+        await store.send(.binding(.set(\.notificationsEnabled, true))) {
+            $0.$notificationsEnabled.withLock { $0 = true }
+        }
+
+        #expect(prayerScheduled.value)
+        #expect(adhkarScheduled.value)
     }
 }

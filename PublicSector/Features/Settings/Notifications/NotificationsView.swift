@@ -29,6 +29,36 @@ struct NotificationsView: View {
             } header: {
                 Text("prayer_notifications")
             }
+
+            Section {
+                Group {
+                    Toggle("morning_adhkar", isOn: $store.adhkarNotifications.morningEnabled)
+                    DatePicker(
+                        "time",
+                        selection: $store.adhkarNotifications.morningTime.date,
+                        displayedComponents: [.hourAndMinute]
+                    )
+                    .disabled(!store.adhkarNotifications.morningEnabled)
+                }
+                .disabled(store.notificationsDisabled)
+            } header: {
+                Text("morning_adhkar_notification")
+            }
+
+            Section {
+                Group {
+                    Toggle("evening_adhkar", isOn: $store.adhkarNotifications.eveningEnabled)
+                    DatePicker(
+                        "time",
+                        selection: $store.adhkarNotifications.eveningTime.date,
+                        displayedComponents: [.hourAndMinute]
+                    )
+                    .disabled(!store.adhkarNotifications.eveningEnabled)
+                }
+                .disabled(store.notificationsDisabled)
+            } header: {
+                Text("evening_adhkar_notification")
+            }
         }
         .navigationTitle("notifications")
         .onAppear {
