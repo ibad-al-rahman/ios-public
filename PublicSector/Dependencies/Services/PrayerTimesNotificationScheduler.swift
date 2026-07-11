@@ -156,4 +156,3 @@ extension DependencyValues {
         set { self[PrayerTimesNotificationScheduler.self] = newValue }
     }
 }
-

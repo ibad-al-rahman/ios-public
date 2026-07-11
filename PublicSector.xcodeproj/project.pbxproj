@@ -17,6 +17,7 @@
 		D91BF12A2D3FDB9800BEB410 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = D91BF1292D3FDB9800BEB410 /* FirebaseCrashlytics */; };
 		D91BF12C2D3FDB9800BEB410 /* FirebaseRemoteConfig in Frameworks */ = {isa = PBXBuildFile; productRef = D91BF12B2D3FDB9800BEB410 /* FirebaseRemoteConfig */; };
 		D91BF13C2D4019B500BEB410 /* IbadAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = D91BF13B2D4019B500BEB410 /* IbadAnalytics */; };
+		D91BF1F02D3FDB9800BEB410 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = D91BF1F12D3FDB9800BEB410 /* FirebaseMessaging */; };
 		D9A6E1BD2CEC71FE006123D1 /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = D9A6E1BC2CEC71FE006123D1 /* ComposableArchitecture */; };
 		D9DA3AAE2D161431001AB599 /* IbadRemoteConfig in Frameworks */ = {isa = PBXBuildFile; productRef = D9DA3AAD2D161431001AB599 /* IbadRemoteConfig */; };
 		D9EAEF562D27199100C8D1F4 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9EAEF552D27199100C8D1F4 /* WidgetKit.framework */; };
@@ -108,6 +109,7 @@
 				D9DA3AAE2D161431001AB599 /* IbadRemoteConfig in Frameworks */,
 				D91BF1282D3FDB9800BEB410 /* FirebaseCore in Frameworks */,
 				D91BF12C2D3FDB9800BEB410 /* FirebaseRemoteConfig in Frameworks */,
+				D91BF1F02D3FDB9800BEB410 /* FirebaseMessaging in Frameworks */,
 				B3BFBDA72F6AED5500945455 /* IbadEnvironment in Frameworks */,
 				D91BF12A2D3FDB9800BEB410 /* FirebaseCrashlytics in Frameworks */,
 				D91BF13C2D4019B500BEB410 /* IbadAnalytics in Frameworks */,
@@ -212,6 +214,7 @@
 				D91BF1272D3FDB9800BEB410 /* FirebaseCore */,
 				D91BF1292D3FDB9800BEB410 /* FirebaseCrashlytics */,
 				D91BF12B2D3FDB9800BEB410 /* FirebaseRemoteConfig */,
+				D91BF1F12D3FDB9800BEB410 /* FirebaseMessaging */,
 				D91BF13B2D4019B500BEB410 /* IbadAnalytics */,
 				719899CF2F59F76500BC65FB /* SwiftNavigation */,
 				719899D12F59F76500BC65FB /* SwiftUINavigation */,
@@ -991,6 +994,11 @@
 		D91BF13B2D4019B500BEB410 /* IbadAnalytics */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = IbadAnalytics;
+		};
+		D91BF1F12D3FDB9800BEB410 /* FirebaseMessaging */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D91BF1242D3FDB9800BEB410 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseMessaging;
 		};
 		D9A6E1BC2CEC71FE006123D1 /* ComposableArchitecture */ = {
 			isa = XCSwiftPackageProductDependency;
