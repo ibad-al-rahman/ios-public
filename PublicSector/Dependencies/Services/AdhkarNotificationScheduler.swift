@@ -31,14 +31,14 @@ struct AdhkarNotificationService {
 
         let reminders: [(identifier: String, title: String, body: String, time: DateComponents, enabled: Bool)] = [
             (
-                "adhkar-morning",
+                AdhkarCollection.morning.notificationIdentifier,
                 String(localized: "morning_adhkar"),
                 String(localized: "notification_body_morning_adhkar"),
                 adhkar.morningTime,
                 adhkar.morningEnabled
             ),
             (
-                "adhkar-evening",
+                AdhkarCollection.evening.notificationIdentifier,
                 String(localized: "evening_adhkar"),
                 String(localized: "notification_body_evening_adhkar"),
                 adhkar.eveningTime,

@@ -80,6 +80,20 @@ enum AdhkarCollection: String, CaseIterable, Identifiable, Sendable {
         }
     }
 
+    /// Identifier of the scheduled local notification for this collection. The
+    /// single source of truth for the `adhkar-` prefixed identifiers, shared by the
+    /// notification scheduler and the deep-link resolver that maps a tapped
+    /// notification back to its collection.
+    var notificationIdentifier: String { "adhkar-\(rawValue)" }
+
+    /// The collection a tapped notification refers to, or `nil` if the identifier is
+    /// not one of ours.
+    init?(notificationIdentifier: String) {
+        let match = AdhkarCollection.allCases.first { $0.notificationIdentifier == notificationIdentifier }
+        guard let match else { return nil }
+        self = match
+    }
+
     var adhkar: [Dhikr] {
         switch self {
         case .morning: Self.morningAdhkar

@@ -21,6 +21,7 @@ struct AppEntryFeature {
 
     enum Action {
         case onAppear
+        case deepLink(RootRoute)
 
         case app(AppFeature.Action)
         case startup(StartupFeature.Action)
@@ -37,6 +38,17 @@ struct AppEntryFeature {
                     state = .app(AppFeature.State())
                 }
                 return .none
+
+            case let .deepLink(route):
+                // A forced update takes precedence over any deep link.
+                guard !remoteConfig.isFlagEnabled(key: .forceUpdate) else { return .none }
+
+                // Make sure we're in the app before routing; a link can arrive while
+                // still on the startup screen.
+                if case .app = state {} else {
+                    state = .app(AppFeature.State())
+                }
+                return .send(.app(.reducer(.deepLink(route))))
 
             default:
                 return .none
