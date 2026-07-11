@@ -12,7 +12,7 @@ public extension FeatureFlagDict {
 #if RELEASE
         [:]
 #else
-        [.forceUpdate: false]
+        [:]
 #endif
     }
 }
