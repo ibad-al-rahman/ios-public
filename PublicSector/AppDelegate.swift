@@ -73,9 +73,9 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         withCompletionHandler completionHandler: @escaping () -> Void
     ) {
         let identifier = response.notification.request.identifier
-        if let collection = AdhkarCollection(notificationIdentifier: identifier) {
+        if let route = RootRoute(notificationIdentifier: identifier) {
             @Dependency(\.deepLinkBus) var deepLinkBus
-            deepLinkBus.send(.adhkar(.collection(collection)))
+            deepLinkBus.send(route)
         }
         completionHandler()
     }

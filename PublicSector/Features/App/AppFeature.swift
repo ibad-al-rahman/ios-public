@@ -83,6 +83,10 @@ struct AppFeature {
                 state.adhkar.destination = .tour(AdhkarTourFeature.State(collection: collection))
                 return .none
 
+            case .reducer(.deepLink(.prayerTimes)):
+                state.selectedTab = .prayerTimes
+                return .none
+
             default:
                 return .none
             }
