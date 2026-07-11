@@ -8,16 +8,23 @@
 import CasePaths
 import URLRouting
 
-/// Top of the deep-link route tree. Adhkar is the only surface today; new surfaces
-/// slot in as sibling cases with their own sub-router.
+/// Top of the deep-link route tree. New surfaces slot in as sibling cases with their
+/// own sub-router.
 @CasePathable
 enum RootRoute: Equatable {
     case adhkar(AdhkarRoute)
+    /// Opens the prayer times tab. Parameterless — the screen already shows the full
+    /// day, so which prayer/day fired the notification doesn't change navigation.
+    case prayerTimes
 
     static var router: some ParserPrinter<URLRequestData, RootRoute> {
         OneOf {
             Route(.case(RootRoute.adhkar)) {
                 AdhkarRoute.router
+            }
+
+            Route(.case(RootRoute.prayerTimes)) {
+                Host("prayer-times")
             }
         }
     }

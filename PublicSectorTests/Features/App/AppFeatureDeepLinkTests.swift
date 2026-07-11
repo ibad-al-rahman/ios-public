@@ -24,4 +24,16 @@ struct AppFeatureDeepLinkTests {
             $0.adhkar.destination = .tour(AdhkarTourFeature.State(collection: .evening))
         }
     }
+
+    @Test
+    func deepLinkSelectsPrayerTimesTab() async {
+        let store = TestStore(initialState: AppFeature.State(selectedTab: .settings)) {
+            AppFeature()
+        }
+        store.exhaustivity = .off
+
+        await store.send(.reducer(.deepLink(.prayerTimes))) {
+            $0.selectedTab = .prayerTimes
+        }
+    }
 }
