@@ -14,11 +14,13 @@ struct NotificationsFeature {
     @Dependency(\.permissions) var permissions
     @Dependency(\.externalDeepLinks) var externalDeepLinks
     @Dependency(\.prayerTimesNotificationScheduler.scheduleNotifications) private var scheduleNotifications
+    @Dependency(\.adhkarNotificationScheduler.scheduleNotifications) private var scheduleAdhkarNotifications
 
     @ObservableState
     struct State: Equatable {
         @Shared(.notificationsEnabled) var notificationsEnabled = false
         @Shared(.prayerTimesNotifications) var prayerTimesNotifications = Settings.PrayerTimesNotifications()
+        @Shared(.adhkarNotifications) var adhkarNotifications = Settings.AdhkarNotifications()
 
         @Presents var destination: Destination.State?
 
@@ -106,11 +108,15 @@ struct NotificationsFeature {
                             return
                         }
                     },
-                    .run { _ in await scheduleNotifications() }
+                    .run { _ in await scheduleNotifications() },
+                    .run { _ in await scheduleAdhkarNotifications() }
                 )
 
             case .binding(\.prayerTimesNotifications):
                 return .run { _ in await scheduleNotifications() }
+
+            case .binding(\.adhkarNotifications):
+                return .run { _ in await scheduleAdhkarNotifications() }
 
             default:
                 return .none

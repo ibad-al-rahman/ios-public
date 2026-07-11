@@ -12,6 +12,7 @@ import WidgetKit
 @Reducer
 struct AppFeature {
     @Dependency(\.prayerTimesNotificationScheduler.scheduleNotifications) private var scheduleNotifications
+    @Dependency(\.adhkarNotificationScheduler.scheduleNotifications) private var scheduleAdhkarNotifications
 
     enum Tab {
         case prayerTimes
@@ -72,6 +73,7 @@ struct AppFeature {
                 WidgetCenter.shared.reloadAllTimelines()
                 return .run { _ in
                     await scheduleNotifications()
+                    await scheduleAdhkarNotifications()
                 }
 
             default:

@@ -493,7 +493,6 @@
       }
     },
     "evening_adhkar" : {
-      "extractionState" : "stale",
       "localizations" : {
         "ar" : {
           "stringUnit" : {
@@ -505,6 +504,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Evening adhkar"
+          }
+        }
+      }
+    },
+    "evening_adhkar_notification" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "أذكار المساء"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Evening Adhkar"
           }
         }
       }
@@ -753,7 +768,6 @@
       }
     },
     "morning_adhkar" : {
-      "extractionState" : "stale",
       "localizations" : {
         "ar" : {
           "stringUnit" : {
@@ -765,6 +779,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Morning adhkar"
+          }
+        }
+      }
+    },
+    "morning_adhkar_notification" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "أذكار الصباح"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Morning Adhkar"
           }
         }
       }
@@ -835,6 +865,23 @@
         }
       }
     },
+    "notification_body_evening_adhkar" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "حان الآن وقت أذكار المساء"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "It's time for your evening adhkar"
+          }
+        }
+      }
+    },
     "notification_body_fajr" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -882,6 +929,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "It's time for Maghrib prayer"
+          }
+        }
+      }
+    },
+    "notification_body_morning_adhkar" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "حان الآن وقت أذكار الصباح"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "It's time for your morning adhkar"
           }
         }
       }
@@ -1177,6 +1241,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Theme"
+          }
+        }
+      }
+    },
+    "time" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "الوقت"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Time"
           }
         }
       }
