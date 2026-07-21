@@ -11,6 +11,8 @@ import MiqatKit
 @Reducer
 struct PrayerTimesCalculationMethodFeature {
     @Dependency(\.miqatService) private var miqatService
+    @Dependency(\.prayerTimesNotificationScheduler.scheduleNotifications) private var scheduleNotifications
+    @Dependency(\.widgetReloader.reloadAll) private var reloadWidgets
 
     enum CalculationMethod: Equatable, CaseIterable, Identifiable {
         case astronomical
@@ -77,13 +79,11 @@ struct PrayerTimesCalculationMethodFeature {
                 return .none
 
             case .binding(\.calculationMethod), .binding(\.astronomicalMethod):
-                persist(state: state)
-                return .none
+                return persist(state: state)
 
             case let .dependent(.destination(.presented(.locationSearch(.delegate(.didSelectLocation(location)))))):
                 state.$selectedLocation.withLock { $0 = location }
-                persist(state: state)
-                return .none
+                return persist(state: state)
 
             default:
                 return .none
@@ -109,6 +109,7 @@ struct PrayerTimesCalculationMethodFeature {
     /// Builds a `MiqatPrayerTimesCalculationMethod` from the UI state and persists it through
     /// the service. Astronomical requires a location; without one we fall back to precomputed.
     private func persist(state: State) {
+    private func persist(state: State) -> Effect<Action> {
         let method: MiqatPrayerTimesCalculationMethod
         switch state.calculationMethod {
         case .astronomical:
@@ -124,5 +125,9 @@ struct PrayerTimesCalculationMethodFeature {
             method = .precomputed(.darElFatwa(.beirut))
         }
         miqatService.setCalculationMethod(method)
+        return .run { _ in
+            await scheduleNotifications()
+            reloadWidgets()
+        }
     }
 }

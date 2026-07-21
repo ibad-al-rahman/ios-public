@@ -5,7 +5,6 @@
 //  Created by Hamza Jadid on 29/09/2024.
 //
 
-import MiqatKit
 import Sharing
 
 extension SharedKey where Self == AppStorageKey<Settings.Appearance> {
@@ -36,6 +35,6 @@ extension SharedKey where Self == FileStorageKey<Settings.SelectedLocation?> {
     // Stored in the shared App Group container (not `.documentsDirectory`) so the widget can
     // read the same location and compute identical astronomical prayer times as the app.
     static var selectedLocation: Self {
-        fileStorage(.miqatAppGroup("selectedLocation.json"))
+        fileStorage(.documentsDirectory.appending(path: "selectedLocation.json"))
     }
 }
