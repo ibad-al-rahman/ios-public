@@ -7,12 +7,12 @@
 
 import ComposableArchitecture
 import IbadAnalytics
-import WidgetKit
 
 @Reducer
 struct AppFeature {
     @Dependency(\.prayerTimesNotificationScheduler.scheduleNotifications) private var scheduleNotifications
     @Dependency(\.adhkarNotificationScheduler.scheduleNotifications) private var scheduleAdhkarNotifications
+    @Dependency(\.widgetReloader.reloadAll) private var reloadWidgets
 
     enum Tab {
         case prayerTimes
@@ -72,7 +72,7 @@ struct AppFeature {
         Reduce { state, action in
             switch action {
             case .view(.onAppear):
-                WidgetCenter.shared.reloadAllTimelines()
+                reloadWidgets()
                 return .run { _ in
                     await scheduleNotifications()
                     await scheduleAdhkarNotifications()
