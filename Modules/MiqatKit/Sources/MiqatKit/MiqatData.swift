@@ -25,17 +25,23 @@ public struct MiqatData: Sendable, Equatable, Identifiable {
 
     public let islamicEvents: [IslamicEvent]
 
-    init(timestampSecs: TimeInterval, provider: Provider) {
+    init(timestampSecs: TimeInterval, method: MiqatPrayerTimesCalculationMethod) {
         let date = Date(timeIntervalSince1970: timestampSecs)
         self.gregorian = date
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyyMMdd"
         self.id = formatter.string(from: date)
 
-        let prayerTimes = Miqat.PrayerTimes.fromPrecomputed(
-            dateUtcTimestampSecs: Int64(timestampSecs),
-            provider: .darElFatwa(.beirut)
-        )
+        let prayerTimes: Miqat.PrayerTimes = switch method {
+        case let .precomputed(provider):
+            .fromPrecomputed(dateUtcTimestampSecs: Int64(timestampSecs), provider: provider)
+        case let .astronomical(astronomicalMethod, coordinates):
+            .fromMethod(
+                dateUtcTimestampSecs: Int64(timestampSecs),
+                coordinates: coordinates,
+                method: astronomicalMethod
+            )
+        }
 
         self.fajr = Date(timeIntervalSince1970: TimeInterval(prayerTimes.fajr()))
         self.sunrise = Date(timeIntervalSince1970: TimeInterval(prayerTimes.sunrise()))

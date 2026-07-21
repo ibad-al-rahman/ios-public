@@ -23,13 +23,13 @@ struct WidgetFeature {
             let tzOffset = TimeZone.current.secondsFromGMT()
             let timestamp = date.timeIntervalSince1970 + TimeInterval(tzOffset)
 
-            let data = miqatService.getMiqatData(timestampSecs: timestamp, provider: .darElFatwa(.beirut))
+            let data = miqatService.getMiqatData(timestampSecs: timestamp)
             let prayerTimes = DayPrayerTimes(from: data)
             self.prayerTimes = prayerTimes
 
             let tomorrowDate = Calendar.current.startOfDay(for: date.addingTimeInterval(86400))
             let tomorrowTimestamp = tomorrowDate.timeIntervalSince1970 + TimeInterval(tzOffset)
-            let tomorrowData = miqatService.getMiqatData(timestampSecs: tomorrowTimestamp, provider: .darElFatwa(.beirut))
+            let tomorrowData = miqatService.getMiqatData(timestampSecs: tomorrowTimestamp)
             let tomorrowPrayerTimes = DayPrayerTimes(from: tomorrowData)
 
             if date < prayerTimes.fajr {

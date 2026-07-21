@@ -15,12 +15,17 @@ let package = Package(
             url: "https://github.com/pointfreeco/swift-dependencies",
             .upToNextMajor(from: "1.6.1")
         ),
+        .package(
+            url: "https://github.com/pointfreeco/swift-sharing",
+            .upToNextMajor(from: "2.1.0")
+        ),
     ],
     targets: [
         .target(name: "MiqatKit", dependencies: [
             .product(name: "Miqat", package: "miqat"),
             .product(name: "Dependencies", package: "swift-dependencies"),
             .product(name: "DependenciesMacros", package: "swift-dependencies"),
+            .product(name: "Sharing", package: "swift-sharing"),
         ]),
     ]
 )

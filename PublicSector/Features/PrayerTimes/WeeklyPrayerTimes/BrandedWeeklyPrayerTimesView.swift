@@ -557,7 +557,7 @@ extension BrandedWeeklyPrayerTimesView {
         return (0..<7).compactMap { i in
             guard let dayDate = calendar.date(byAdding: .day, value: i, to: saturday) else { return nil }
             let ts = dayDate.timeIntervalSince1970 + TimeInterval(tzOffset)
-            return DayInfo(from: miqatService.getMiqatData(ts, .darElFatwa(.beirut)))
+            return DayInfo(from: miqatService.getMiqatData(ts))
         }
     }
 }

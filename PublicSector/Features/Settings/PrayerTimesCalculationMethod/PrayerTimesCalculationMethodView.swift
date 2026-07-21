@@ -25,6 +25,7 @@ struct PrayerTimesCalculationMethodView: View {
             }
         }
         .navigationTitle("prayer_times_calculation_method")
+        .onAppear { store.send(.view(.onAppear)) }
         .sheet(item: $store.scope(
             state: \.destination?.locationSearch,
             action: \.dependent.destination.locationSearch
@@ -50,18 +51,42 @@ struct PrayerTimesCalculationMethodView: View {
         Group {
             if let location = store.selectedLocation?.name {
                 NavigationRowView("location", badge: location, systemName: "location")
-                    .onTapGesture { store.send(.locationSearchTapped) }
+                    .onTapGesture { store.send(.view(.locationSearchTapped)) }
             } else {
                 NavigationRowView("location", systemName: "location")
-                    .onTapGesture { store.send(.locationSearchTapped) }
+                    .onTapGesture { store.send(.view(.locationSearchTapped)) }
             }
 
-            Text(verbatim: "Astronomical")
+            Picker(selection: $store.astronomicalMethod) {
+                ForEach(Miqat.Method.allCases, id: \.self) {
+                    Text($0.string).tag($0)
+                }
+            } label: {
+                Spacer(minLength: Spacing.small)
+            }
+            .pickerStyle(.inline)
         }
     }
 
     private var precomputedMethodPicker: some View {
-        Text(verbatim: "Precomputed")
+        Text("dar_el_fatwa_beirut")
+    }
+}
+
+extension Miqat.Method: @retroactive CaseIterable {
+    public static var allCases: [Miqat.Method] {
+        [.muslimWorldLeague, .egyptian, .ummAlQura, .moonsightingCommittee, .northAmerica, .singapore]
+    }
+
+    var string: String {
+        switch self {
+        case .muslimWorldLeague: String(localized: "method_muslim_world_league")
+        case .egyptian: String(localized: "method_egyptian")
+        case .ummAlQura: String(localized: "method_umm_al_qura")
+        case .moonsightingCommittee: String(localized: "method_moonsighting_committee")
+        case .northAmerica: String(localized: "method_north_america")
+        case .singapore: String(localized: "method_singapore")
+        }
     }
 }
 

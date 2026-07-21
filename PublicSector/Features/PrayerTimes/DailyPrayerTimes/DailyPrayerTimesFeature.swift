@@ -118,9 +118,7 @@ struct DailyPrayerTimesFeature {
     private func fillPrayerTimes(state: inout State) {
         let tzOffset = TimeZone.current.secondsFromGMT()
         let timestamp = state.date.timeIntervalSince1970 + TimeInterval(tzOffset)
-        let miqatData = miqatService.getMiqatData(
-            timestampSecs: timestamp, provider: .darElFatwa(.beirut)
-        )
+        let miqatData = miqatService.getMiqatData(timestampSecs: timestamp)
         state.dayInfo = DayInfo(from: miqatData)
     }
 }
