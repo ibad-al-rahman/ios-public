@@ -99,7 +99,7 @@ struct WeeklyPrayerTimesFeature {
         state.week = (0..<7).compactMap { i in
             guard let dayDate = calendar.date(byAdding: .day, value: i, to: saturday) else { return nil }
             let timestamp = dayDate.timeIntervalSince1970 + TimeInterval(tzOffset)
-            let miqatData = miqatService.getMiqatData(timestampSecs: timestamp, provider: .darElFatwa(.beirut))
+            let miqatData = miqatService.getMiqatData(timestampSecs: timestamp)
             return DayInfo(from: miqatData)
         }
     }

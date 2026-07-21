@@ -10,6 +10,8 @@ import MiqatKit
 
 @Reducer
 struct PrayerTimesCalculationMethodFeature {
+    @Dependency(\.miqatService) private var miqatService
+
     enum CalculationMethod: Equatable, CaseIterable, Identifiable {
         case astronomical
         case precomputed
@@ -32,6 +34,7 @@ struct PrayerTimesCalculationMethodFeature {
     @ObservableState
     struct State: Equatable {
         var calculationMethod: CalculationMethod = .astronomical
+        var astronomicalMethod: Miqat.Method = .muslimWorldLeague
         @Shared(.selectedLocation) var selectedLocation: Settings.SelectedLocation? = nil
 
         @Presents var destination: Destination.State?
@@ -45,6 +48,7 @@ struct PrayerTimesCalculationMethodFeature {
         case binding(BindingAction<State>)
 
         enum ViewAction {
+            case onAppear
             case locationSearchTapped
         }
 
@@ -64,12 +68,21 @@ struct PrayerTimesCalculationMethodFeature {
         BindingReducer()
         Reduce { state, action in
             switch action {
+            case .view(.onAppear):
+                hydrate(state: &state)
+                return .none
+
             case .view(.locationSearchTapped):
                 state.destination = .locationSearch(LocationSearchFeature.State())
                 return .none
 
+            case .binding(\.calculationMethod), .binding(\.astronomicalMethod):
+                persist(state: state)
+                return .none
+
             case let .dependent(.destination(.presented(.locationSearch(.delegate(.didSelectLocation(location)))))):
                 state.$selectedLocation.withLock { $0 = location }
+                persist(state: state)
                 return .none
 
             default:
@@ -79,5 +92,37 @@ struct PrayerTimesCalculationMethodFeature {
         .ifLet(\.$destination, action: \.dependent.destination) {
             Destination()
         }
+    }
+
+    /// Populates the UI from the persisted calculation method so the screen reflects the
+    /// current selection when it opens.
+    private func hydrate(state: inout State) {
+        switch miqatService.getCalculationMethod() {
+        case let .astronomical(method, _):
+            state.calculationMethod = .astronomical
+            state.astronomicalMethod = method
+        case .precomputed:
+            state.calculationMethod = .precomputed
+        }
+    }
+
+    /// Builds a `MiqatPrayerTimesCalculationMethod` from the UI state and persists it through
+    /// the service. Astronomical requires a location; without one we fall back to precomputed.
+    private func persist(state: State) {
+        let method: MiqatPrayerTimesCalculationMethod
+        switch state.calculationMethod {
+        case .astronomical:
+            if let location = state.selectedLocation {
+                method = .astronomical(
+                    state.astronomicalMethod,
+                    Miqat.Coordinates(latitude: location.latitude, longitude: location.longitude)
+                )
+            } else {
+                method = .default
+            }
+        case .precomputed:
+            method = .precomputed(.darElFatwa(.beirut))
+        }
+        miqatService.setCalculationMethod(method)
     }
 }

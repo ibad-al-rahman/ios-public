@@ -36,7 +36,7 @@ struct HijriDateTimelineProvider: TimelineProvider {
         let tzOffset = TimeZone.current.secondsFromGMT()
         let todayTimestamp = now.timeIntervalSince1970 + TimeInterval(tzOffset)
 
-        let todayData = miqatService.getMiqatData(timestampSecs: todayTimestamp, provider: .darElFatwa(.beirut))
+        let todayData = miqatService.getMiqatData(timestampSecs: todayTimestamp)
         let prayerTimes = DayPrayerTimes(from: todayData)
 
         let tomorrowMidnight = Calendar.current.startOfDay(for: now.addingTimeInterval(86400))

@@ -69,7 +69,7 @@ struct PrayerTimesNotificationService {
         for dayOffset in 0 ..< 7 {
             guard let date = calendar.date(byAdding: .day, value: dayOffset, to: today) else { continue }
             let timestamp = date.timeIntervalSince1970 + TimeInterval(tzOffset)
-            let miqatData = miqatService.getMiqatData(timestampSecs: timestamp, provider: .darElFatwa(.beirut))
+            let miqatData = miqatService.getMiqatData(timestampSecs: timestamp)
 
             let prayers: [(name: String, title: String, body: String, date: Date, enabled: Bool)] = [
                 (
