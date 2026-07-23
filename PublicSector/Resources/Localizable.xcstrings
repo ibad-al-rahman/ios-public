@@ -1351,6 +1351,22 @@
         }
       }
     },
+    "prayer_times_calculation_note": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "محسوبة باستخدام %1$@ · %2$@"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Calculated using %1$@ · %2$@"
+          }
+        }
+      }
+    },
     "precomputed_method": {
       "localizations": {
         "ar": {
