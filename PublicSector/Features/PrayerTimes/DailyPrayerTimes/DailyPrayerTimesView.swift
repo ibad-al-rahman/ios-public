@@ -119,6 +119,10 @@ struct DailyPrayerTimesView: View {
                 }
                 .textCase(nil)
             }
+        } footer: {
+            if let note = store.calculationNote {
+                Text(note)
+            }
         }
     }
 
