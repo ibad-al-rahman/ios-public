@@ -16,6 +16,8 @@ struct LocationSearchDependency {
 extension LocationSearchDependency: DependencyKey {
     static let liveValue: Self = {
         let completer = MKLocalSearchCompleter()
+        completer.resultTypes = .address
+        completer.pointOfInterestFilter = .excludingAll
         let delegate = CompleterDelegate()
 
         return Self(
@@ -39,7 +41,12 @@ extension LocationSearchDependency: DependencyKey {
                 let request = MKLocalSearch.Request(completion: completion)
                 let search = MKLocalSearch(request: request)
                 let response = try? await search.start()
-                return response?.mapItems.first?.placemark.coordinate
+                guard let placemark = response?.mapItems.first?.placemark,
+                      placemark.locality != nil || placemark.country != nil,
+                      placemark.thoroughfare == nil, // reject street addresses
+                      placemark.subThoroughfare == nil // reject house numbers
+                else { return nil }
+                return placemark.coordinate
             }
         )
     }()
@@ -56,6 +63,16 @@ final class CompleterDelegate: NSObject, MKLocalSearchCompleterDelegate, @unchec
     var continuation: AsyncStream<[MKLocalSearchCompletion]>.Continuation?
 
     func completerDidUpdateResults(_ completer: MKLocalSearchCompleter) {
-        continuation?.yield(completer.results)
+        continuation?.yield(completer.results.filter(Self.isCityOrCountry))
+    }
+
+    /// Keeps only city / country completions, dropping street-level addresses.
+    /// A street address begins with a house number (e.g. "10 Downing Street"),
+    /// so any completion whose title starts with a digit is rejected. The
+    /// `resolve` step re-validates against structured placemark data.
+    private static func isCityOrCountry(_ completion: MKLocalSearchCompletion) -> Bool {
+        let title = completion.title.trimmingCharacters(in: .whitespaces)
+        guard let first = title.first else { return false }
+        return !first.isNumber
     }
 }
