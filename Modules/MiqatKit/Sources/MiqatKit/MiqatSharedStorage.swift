@@ -40,3 +40,15 @@ extension SharedKey where Self == FileStorageKey<MiqatPrayerTimesCalculationMeth
         ]
     }
 }
+
+extension SharedKey where Self == FileStorageKey<AstronomicalConfig?>.Default {
+    /// The last astronomical configuration the user set, retained even while the active method is
+    /// precomputed. Lets the settings screen restore the previous astronomical selection when the
+    /// user toggles back to it, instead of reconfiguring from scratch. `nil` until first configured.
+    public static var retainedAstronomicalConfig: Self {
+        Self[
+            .fileStorage(.miqatAppGroup("miqatRetainedAstronomicalConfig.json")),
+            default: nil
+        ]
+    }
+}

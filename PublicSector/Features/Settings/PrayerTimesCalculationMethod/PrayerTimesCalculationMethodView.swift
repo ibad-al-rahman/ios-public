@@ -6,7 +6,6 @@
 //
 
 import ComposableArchitecture
-import MiqatKit
 import SwiftUI
 
 struct PrayerTimesCalculationMethodView: View {
@@ -18,22 +17,35 @@ struct PrayerTimesCalculationMethodView: View {
 
             switch store.calculationMethod {
             case .astronomical:
-                astronomicalMethodPicker
-
+                astronomicalRows
             case .precomputed:
                 precomputedMethodPicker
             }
         }
         .navigationTitle("prayer_times_calculation_method")
         .onAppear { store.send(.view(.onAppear)) }
-        .sheet(item: $store.scope(
-            state: \.destination?.locationSearch,
-            action: \.dependent.destination.locationSearch
-        )) { store in
-            NavigationStack {
-                LocationSearchView(store: store)
-            }
-        }
+        .navigationDestination(
+            item: $store.scope(
+                state: \.destination?.calculationMethodSelection,
+                action: \.dependent
+                    .destination.calculationMethodSelection
+            ),
+            destination: { CalculationMethodSelectionView(store: $0) }
+        )
+        .navigationDestination(
+            item: $store.scope(
+                state: \.destination?.asrMethod,
+                action: \.dependent.destination.asrMethod
+            ),
+            destination: { AsrMethodView(store: $0) }
+        )
+        .navigationDestination(
+            item: $store.scope(
+                state: \.destination?.timeAdjustments,
+                action: \.dependent.destination.timeAdjustments
+            ),
+            destination: { TimeAdjustmentsView(store: $0) }
+        )
     }
 
     private var calculationMethodPicker: some View {
@@ -47,24 +59,25 @@ struct PrayerTimesCalculationMethodView: View {
         .pickerStyle(.inline)
     }
 
-    private var astronomicalMethodPicker: some View {
-        Group {
-            if let location = store.selectedLocation?.name {
-                NavigationRowView("location", badge: location, systemName: "location")
-                    .onTapGesture { store.send(.view(.locationSearchTapped)) }
-            } else {
-                NavigationRowView("location", systemName: "location")
-                    .onTapGesture { store.send(.view(.locationSearchTapped)) }
-            }
+    @ViewBuilder
+    private var astronomicalRows: some View {
+        Section {
+            NavigationRowView(
+                "astronomical_method",
+                badge: store.methodBadge.isEmpty ? nil : store.methodBadge,
+                systemName: "slider.horizontal.3"
+            )
+            .onTapGesture { store.send(.view(.methodTapped)) }
 
-            Picker(selection: $store.astronomicalMethod) {
-                ForEach(Miqat.Method.allCases, id: \.self) {
-                    Text($0.string).tag($0)
-                }
-            } label: {
-                Spacer(minLength: Spacing.small)
-            }
-            .pickerStyle(.inline)
+            NavigationRowView(
+                "asr_method",
+                badge: store.madhabBadge.isEmpty ? nil : store.madhabBadge,
+                systemName: "sun.max"
+            )
+            .onTapGesture { store.send(.view(.asrMethodTapped)) }
+
+            NavigationRowView("time_adjustments", systemName: "clock.arrow.2.circlepath")
+                .onTapGesture { store.send(.view(.timeAdjustmentsTapped)) }
         }
     }
 
@@ -73,34 +86,21 @@ struct PrayerTimesCalculationMethodView: View {
     }
 }
 
-extension Miqat.Method: @retroactive CaseIterable {
-    public static var allCases: [Miqat.Method] {
-        [.muslimWorldLeague, .egyptian, .ummAlQura, .moonsightingCommittee, .northAmerica, .singapore]
-    }
-
-    var string: String {
-        switch self {
-        case .muslimWorldLeague: String(localized: "method_muslim_world_league")
-        case .egyptian: String(localized: "method_egyptian")
-        case .ummAlQura: String(localized: "method_umm_al_qura")
-        case .moonsightingCommittee: String(localized: "method_moonsighting_committee")
-        case .northAmerica: String(localized: "method_north_america")
-        case .singapore: String(localized: "method_singapore")
-        }
+#Preview {
+    NavigationStack {
+        PrayerTimesCalculationMethodView(store: Store(
+            initialState: PrayerTimesCalculationMethodFeature.State(),
+            reducer: PrayerTimesCalculationMethodFeature.init
+        ))
     }
 }
 
 #Preview {
-    PrayerTimesCalculationMethodView(store: Store(
-        initialState: PrayerTimesCalculationMethodFeature.State(),
-        reducer: PrayerTimesCalculationMethodFeature.init
-    ))
-}
-
-#Preview {
-    PrayerTimesCalculationMethodView(store: Store(
-        initialState: PrayerTimesCalculationMethodFeature.State(),
-        reducer: PrayerTimesCalculationMethodFeature.init
-    ))
+    NavigationStack {
+        PrayerTimesCalculationMethodView(store: Store(
+            initialState: PrayerTimesCalculationMethodFeature.State(),
+            reducer: PrayerTimesCalculationMethodFeature.init
+        ))
+    }
     .arabicEnvironment()
 }

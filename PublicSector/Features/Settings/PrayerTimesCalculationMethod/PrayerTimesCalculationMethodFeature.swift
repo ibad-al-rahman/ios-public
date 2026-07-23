@@ -27,7 +27,7 @@ struct PrayerTimesCalculationMethodFeature {
 
         var string: String {
             switch self {
-            case .astronomical: String(localized: "astronomical_method")
+            case .astronomical: String(localized: "astronomical_mode")
             case .precomputed: String(localized: "precomputed_method")
             }
         }
@@ -35,11 +35,15 @@ struct PrayerTimesCalculationMethodFeature {
 
     @ObservableState
     struct State: Equatable {
-        var calculationMethod: CalculationMethod = .astronomical
-        var astronomicalMethod: Miqat.Method = .muslimWorldLeague
-        @Shared(.selectedLocation) var selectedLocation: Settings.SelectedLocation? = nil
+        var calculationMethod: CalculationMethod = .precomputed
+        /// Summary badges shown on the menu rows.
+        var methodBadge: String = ""
+        var madhabBadge: String = ""
 
         @Presents var destination: Destination.State?
+
+        /// Astronomical options rows only apply to the astronomical path.
+        var isAstronomical: Bool { calculationMethod == .astronomical }
     }
 
     enum Action: BaseAction, BindableAction {
@@ -51,7 +55,9 @@ struct PrayerTimesCalculationMethodFeature {
 
         enum ViewAction {
             case onAppear
-            case locationSearchTapped
+            case methodTapped
+            case asrMethodTapped
+            case timeAdjustmentsTapped
         }
 
         @CasePathable
@@ -74,16 +80,25 @@ struct PrayerTimesCalculationMethodFeature {
                 hydrate(state: &state)
                 return .none
 
-            case .view(.locationSearchTapped):
-                state.destination = .locationSearch(LocationSearchFeature.State())
+            case .binding(\.calculationMethod):
+                return persistMethodKind(state: &state)
+
+            case .view(.methodTapped):
+                state.destination = .calculationMethodSelection(CalculationMethodSelectionFeature.State())
                 return .none
 
-            case .binding(\.calculationMethod), .binding(\.astronomicalMethod):
-                return persist(state: state)
+            case .view(.asrMethodTapped):
+                state.destination = .asrMethod(AsrMethodFeature.State())
+                return .none
 
-            case let .dependent(.destination(.presented(.locationSearch(.delegate(.didSelectLocation(location)))))):
-                state.$selectedLocation.withLock { $0 = location }
-                return persist(state: state)
+            case .view(.timeAdjustmentsTapped):
+                state.destination = .timeAdjustments(TimeAdjustmentsFeature.State())
+                return .none
+
+            case .dependent(.destination(.dismiss)):
+                // Refresh badges after returning from a sub-screen.
+                hydrate(state: &state)
+                return .none
 
             default:
                 return .none
@@ -94,37 +109,43 @@ struct PrayerTimesCalculationMethodFeature {
         }
     }
 
-    /// Populates the UI from the persisted calculation method so the screen reflects the
-    /// current selection when it opens.
+    /// Refreshes the toggle and menu row badges from the persisted method. Runs on every appearance
+    /// so the menu reflects edits made in the pushed sub-screens after popping back.
     private func hydrate(state: inout State) {
         switch miqatService.getCalculationMethod() {
-        case let .astronomical(method, _):
+        case let .astronomical(config):
             state.calculationMethod = .astronomical
-            state.astronomicalMethod = method
+            state.methodBadge = switch config.method {
+            case let .preset(method): method.string
+            case .custom: String(localized: "method_custom")
+            }
+            state.madhabBadge = config.mazhab.string
         case .precomputed:
             state.calculationMethod = .precomputed
+            state.methodBadge = ""
+            state.madhabBadge = ""
         }
     }
 
-    /// Builds a `MiqatPrayerTimesCalculationMethod` from the UI state and persists it through
-    /// the service. Astronomical requires a location; without one we fall back to precomputed.
-    private func persist(state: State) {
-    private func persist(state: State) -> Effect<Action> {
+    /// Persists a change to the astronomical/precomputed kind. Switching to astronomical restores the
+    /// previously-retained astronomical config (location, method, madhab, offsets) so nothing has to
+    /// be reconfigured; only when the user has never configured one do we push the options screen so a
+    /// location can be picked.
+    private func persistMethodKind(state: inout State) -> Effect<Action> {
         let method: MiqatPrayerTimesCalculationMethod
         switch state.calculationMethod {
         case .astronomical:
-            if let location = state.selectedLocation {
-                method = .astronomical(
-                    state.astronomicalMethod,
-                    Miqat.Coordinates(latitude: location.latitude, longitude: location.longitude)
-                )
-            } else {
-                method = .default
+            guard let config = miqatService.getRetainedAstronomicalConfig() else {
+                // Never configured astronomical — push the options screen to complete it (needs a location).
+                state.destination = .calculationMethodSelection(CalculationMethodSelectionFeature.State())
+                return .none
             }
+            method = .astronomical(config)
         case .precomputed:
             method = .precomputed(.darElFatwa(.beirut))
         }
         miqatService.setCalculationMethod(method)
+        hydrate(state: &state)
         return .run { _ in
             await scheduleNotifications()
             reloadWidgets()

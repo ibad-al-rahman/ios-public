@@ -12,18 +12,27 @@ extension PrayerTimesCalculationMethodFeature {
     struct Destination {
         @ObservableState
         enum State: Equatable {
-            case locationSearch(LocationSearchFeature.State)
+            case calculationMethodSelection(CalculationMethodSelectionFeature.State)
+            case asrMethod(AsrMethodFeature.State)
+            case timeAdjustments(TimeAdjustmentsFeature.State)
         }
 
         enum Action {
-            case locationSearch(LocationSearchFeature.Action)
+            case calculationMethodSelection(CalculationMethodSelectionFeature.Action)
+            case asrMethod(AsrMethodFeature.Action)
+            case timeAdjustments(TimeAdjustmentsFeature.Action)
         }
 
         var body: some ReducerOf<Self> {
-            Scope(state: \.locationSearch, action: \.locationSearch) {
-                LocationSearchFeature()
+            Scope(state: \.calculationMethodSelection, action: \.calculationMethodSelection) {
+                CalculationMethodSelectionFeature()
+            }
+            Scope(state: \.asrMethod, action: \.asrMethod) {
+                AsrMethodFeature()
+            }
+            Scope(state: \.timeAdjustments, action: \.timeAdjustments) {
+                TimeAdjustmentsFeature()
             }
         }
     }
 }
-
