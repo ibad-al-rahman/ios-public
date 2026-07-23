@@ -21,6 +21,10 @@ struct WeeklyPrayerTimesFeature {
         var isRenderingShareImage = false
         var shareImage: ShareableImage?
 
+        /// A note describing the active non-default calculation method (method · mazhab),
+        /// or `nil` when the default precomputed provider is used and nothing should be shown.
+        var calculationNote: String?
+
         var hasImsak: Bool { week.contains(where: { $0.imsak != nil }) }
         var isLoading: Bool { week.isEmpty }
     }
@@ -101,6 +105,26 @@ struct WeeklyPrayerTimesFeature {
             let timestamp = dayDate.timeIntervalSince1970 + TimeInterval(tzOffset)
             let miqatData = miqatService.getMiqatData(timestampSecs: timestamp)
             return DayInfo(from: miqatData)
+        }
+        state.calculationNote = calculationNote()
+    }
+
+    /// Builds the note for the active method. Only astronomical methods produce a note;
+    /// the default precomputed provider (Dar El Fatwa Beirut) returns `nil`.
+    private func calculationNote() -> String? {
+        switch miqatService.getCalculationMethod() {
+        case .precomputed:
+            return nil
+        case let .astronomical(config):
+            let methodName = switch config.method {
+            case let .preset(method): method.string
+            case .custom: String(localized: "method_custom")
+            }
+            return String(
+                format: String(localized: "prayer_times_calculation_note"),
+                methodName,
+                config.mazhab.string
+            )
         }
     }
 }
