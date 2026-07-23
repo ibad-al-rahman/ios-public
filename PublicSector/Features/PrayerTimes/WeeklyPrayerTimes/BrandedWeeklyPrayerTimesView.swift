@@ -24,6 +24,10 @@ struct BrandedWeeklyPrayerTimesView: View {
 
     let week: [DayInfo]
     var mode: Mode = .full
+    /// A note describing the active non-default calculation method, rendered as a full-width row
+    /// at the bottom of the `.full` table. `nil` (the default) omits the row — the on-screen split
+    /// slices leave it `nil` and surface the note via the list's Section footer instead.
+    var calculationNote: String? = nil
     /// Whether the outer corners are rounded. The on-screen table is rounded;
     /// the shared snapshot renders square so nothing is clipped off the edges.
     var rounded = true
@@ -54,19 +58,24 @@ struct BrandedWeeklyPrayerTimesView: View {
     }
 
     var body: some View {
-        HStack(spacing: 0) {
-            switch mode {
-            case .full:
-                weekColumn
-                border
-                scrollingColumns
+        VStack(spacing: 0) {
+            HStack(spacing: 0) {
+                switch mode {
+                case .full:
+                    weekColumn
+                    border
+                    scrollingColumns
 
-            case .pinnedDaysColumn:
-                weekColumn
-                border
+                case .pinnedDaysColumn:
+                    weekColumn
+                    border
 
-            case .body:
-                scrollingColumns
+                case .body:
+                    scrollingColumns
+                }
+            }
+            if mode == .full, let calculationNote {
+                noteRow(calculationNote)
             }
         }
         .dynamicTypeSize(.large)
@@ -74,6 +83,33 @@ struct BrandedWeeklyPrayerTimesView: View {
         .background(Color(.systemBackground))
         .clipShape(containerShape)
         .overlay(containerShape.stroke(gridLine, lineWidth: borderWidth))
+    }
+
+    /// The full-width calculation-method note, rendered as the table's bottom row in `.full` mode.
+    /// A leading horizontal rule gives it the same top grid line as every other row; a concrete
+    /// `fullTableWidth` is required because the table uses `.fixedSize()`.
+    private func noteRow(_ note: String) -> some View {
+        VStack(spacing: 0) {
+            horizontalRule
+            Text(note)
+                .font(.caption)
+                .foregroundStyle(.secondary)
+                .multilineTextAlignment(.center)
+                .frame(width: fullTableWidth, alignment: .center)
+                .padding(.vertical, Spacing.extraSmall.rawValue)
+                .background(Color(.systemBackground))
+        }
+    }
+
+    /// Total width of the `.full` table: every column plus the heavy borders between the groups.
+    private var fullTableWidth: CGFloat {
+        let prayerColumnWidth = timeColumnWidth * 2 + 1
+        let prayerBlockWidth = prayerColumnWidth * CGFloat(prayers.count) + CGFloat(prayers.count - 1)
+        return weekColumnWidth + borderWidth
+            + dateColumnWidth + borderWidth
+            + dateColumnWidth + borderWidth
+            + prayerBlockWidth + borderWidth
+            + eventsColumnWidth
     }
 
     /// The rounded outline of this slice. The days column and body are drawn as
@@ -563,10 +599,16 @@ extension BrandedWeeklyPrayerTimesView {
 }
 
 #Preview {
-    BrandedWeeklyPrayerTimesView(week: BrandedWeeklyPrayerTimesView.previewWeek())
+    BrandedWeeklyPrayerTimesView(
+        week: BrandedWeeklyPrayerTimesView.previewWeek(),
+        calculationNote: "Calculated using Muslim World League · Shafi"
+    )
 }
 
 #Preview {
-    BrandedWeeklyPrayerTimesView(week: BrandedWeeklyPrayerTimesView.previewWeek())
-        .arabicEnvironment()
+    BrandedWeeklyPrayerTimesView(
+        week: BrandedWeeklyPrayerTimesView.previewWeek(),
+        calculationNote: "محسوبة باستخدام رابطة العالم الإسلامي · شافعي"
+    )
+    .arabicEnvironment()
 }

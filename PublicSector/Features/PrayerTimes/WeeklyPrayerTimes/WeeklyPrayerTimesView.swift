@@ -57,6 +57,10 @@ struct WeeklyPrayerTimesView: View {
                     shareButton
                 }
             }
+        } footer: {
+            if let note = store.calculationNote {
+                Text(note)
+            }
         }
     }
 
@@ -65,9 +69,10 @@ struct WeeklyPrayerTimesView: View {
         // not every header redraw — is what triggers the (main-actor) render.
         // The reducer runs it off the current run-loop turn to keep the tap snappy.
         let week = store.week
+        let note = store.calculationNote
         return Button {
             store.send(.shareTapped(render: {
-                BrandedWeeklyPrayerTimesView(week: week, rounded: false).snapshot()
+                BrandedWeeklyPrayerTimesView(week: week, calculationNote: note, rounded: false).snapshot()
             }))
         } label: {
             if store.isRenderingShareImage {
