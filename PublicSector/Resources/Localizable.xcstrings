@@ -117,7 +117,39 @@
         }
       }
     },
+    "asr_method": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ضبط العصر"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Adjust Asr"
+          }
+        }
+      }
+    },
     "astronomical_method": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ضبط الفجر والعشاء"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Adjust Fajr and Ishaa"
+          }
+        }
+      }
+    },
+    "astronomical_mode": {
       "localizations": {
         "ar": {
           "stringUnit": {
@@ -181,6 +213,54 @@
         }
       }
     },
+    "caption_fajr": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الفجر"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fajr"
+          }
+        }
+      }
+    },
+    "caption_interval": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "بفاصل زمني"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "interval"
+          }
+        }
+      }
+    },
+    "caption_ishaa": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "العشاء"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Isha"
+          }
+        }
+      }
+    },
     "contact_us": {
       "localizations": {
         "ar": {
@@ -193,6 +273,54 @@
           "stringUnit": {
             "state": "translated",
             "value": "Contact us"
+          }
+        }
+      }
+    },
+    "custom_fajr_angle": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "زاوية الفجر"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fajr Angle"
+          }
+        }
+      }
+    },
+    "custom_ishaa_angle": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "زاوية العشاء"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Isha Angle"
+          }
+        }
+      }
+    },
+    "custom_provider": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "مزود مخصص"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Custom Provider"
           }
         }
       }
@@ -749,6 +877,38 @@
         }
       }
     },
+    "madhab_hanafi": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "حنفي"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hanafi"
+          }
+        }
+      }
+    },
+    "madhab_shafi": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "شافعي"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Shafi"
+          }
+        }
+      }
+    },
     "maghrib": {
       "extractionState": "manual",
       "localizations": {
@@ -762,6 +922,22 @@
           "stringUnit": {
             "state": "translated",
             "value": "Maghrib"
+          }
+        }
+      }
+    },
+    "method_custom": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "مخصص"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Custom"
           }
         }
       }
@@ -875,6 +1051,22 @@
           "stringUnit": {
             "state": "translated",
             "value": "Min"
+          }
+        }
+      }
+    },
+    "minutes_short": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "د"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "min"
           }
         }
       }
@@ -1175,6 +1367,22 @@
         }
       }
     },
+    "preview": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "معاينة"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Preview"
+          }
+        }
+      }
+    },
     "rate_us": {
       "localizations": {
         "ar": {
@@ -1251,6 +1459,22 @@
           "stringUnit": {
             "state": "translated",
             "value": "%lld results"
+          }
+        }
+      }
+    },
+    "select_location_first": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "اختر موقعًا لضبط الحساب الفلكي."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Select a location to configure astronomical calculation."
           }
         }
       }
@@ -1369,6 +1593,22 @@
           "stringUnit": {
             "state": "translated",
             "value": "Time"
+          }
+        }
+      }
+    },
+    "time_adjustments": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تعديلات الوقت"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Time Adjustments"
           }
         }
       }
