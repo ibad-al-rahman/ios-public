@@ -1,0 +1,186 @@
+name: ci
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  XCODE_PROJECT: PublicSector.xcodeproj
+  XCODE_SCHEME: PublicSector
+
+jobs:
+  workflow-lint:
+    name: workflow lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7.0.1
+      - uses: actions/setup-go@v7.0.0
+        with:
+          go-version: stable
+          cache: false
+      - name: actionlint
+        run: |
+          go install github.com/rhysd/actionlint/cmd/actionlint@latest
+          "$(go env GOPATH)/bin/actionlint"
+
+  swiftlint:
+    name: swiftlint
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          fetch-depth: 0
+      - name: Install SwiftLint
+        run: brew install swiftlint
+      - name: Collect changed Swift files
+        id: swift-files
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            git fetch --no-tags --prune --depth=1 origin "${{ github.base_ref }}"
+            files="$(git diff --name-only --diff-filter=ACMRT "origin/${{ github.base_ref }}" HEAD -- '*.swift')"
+          else
+            before="${{ github.event.before }}"
+            if [ -z "$before" ] || [[ "$before" =~ ^0+$ ]]; then
+              files="$(git ls-files '*.swift')"
+            else
+              files="$(git diff --name-only --diff-filter=ACMRT "$before" "${{ github.sha }}" -- '*.swift')"
+            fi
+          fi
+
+          if [ -z "$files" ]; then
+            echo "has_files=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          printf '%s\n' "$files" > /tmp/swiftlint-files.txt
+          echo "has_files=true" >> "$GITHUB_OUTPUT"
+      - name: Lint Swift sources
+        if: steps.swift-files.outputs.has_files == 'true'
+        run: |
+          status=0
+          while IFS= read -r file; do
+            swiftlint lint --path "$file" || status=$?
+          done < /tmp/swiftlint-files.txt
+          exit "$status"
+
+  xcode-changes:
+    name: detect xcode changes
+    runs-on: ubuntu-latest
+    outputs:
+      has_files: ${{ steps.xcode-files.outputs.has_files }}
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          fetch-depth: 0
+      - name: Detect Xcode-relevant changes
+        id: xcode-files
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "has_files=true" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            git fetch --no-tags --prune --depth=50 origin "${{ github.base_ref }}"
+            base="$(git merge-base HEAD "origin/${{ github.base_ref }}")"
+            head="HEAD"
+          else
+            before="${{ github.event.before }}"
+            if [ -z "$before" ] || [[ "$before" =~ ^0+$ ]]; then
+              echo "has_files=true" >> "$GITHUB_OUTPUT"
+              exit 0
+            fi
+            base="$before"
+            head="${{ github.sha }}"
+          fi
+
+          changed="$(git diff --name-only --diff-filter=ACMRT "$base" "$head")"
+          printf '%s\n' "$changed"
+
+          xcode_pattern='(^|/)(Package\.swift|Package\.resolved)$|\.swift$|\.xcodeproj/|\.xcworkspace/|\.xcassets/|\.(xcconfig|plist|entitlements|storyboard|xib|strings|stringsdict)$|^(PublicSector|PublicSectorTests|PublicSectorUITests|PublicSectorWidgetBundle|Scripts)/'
+          if [ -n "$changed" ] && printf '%s\n' "$changed" | grep -Eq "$xcode_pattern"; then
+            echo "has_files=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "has_files=false" >> "$GITHUB_OUTPUT"
+          fi
+
+  test-ios:
+    name: test-ios
+    needs: xcode-changes
+    if: needs.xcode-changes.outputs.has_files == 'true'
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v7.0.1
+      - name: Xcode version
+        run: xcodebuild -version
+      - name: Select iOS simulator
+        id: simulator
+        run: |
+          set -euo pipefail
+          udid="$(xcrun simctl list devices available | awk -F '[()]' '/iPhone/ && $2 ~ /^[0-9A-F-]+$/ { print $2; exit }')"
+          if [ -z "$udid" ]; then
+            xcrun simctl list devices available
+            exit 1
+          fi
+          echo "destination=platform=iOS Simulator,id=$udid" >> "$GITHUB_OUTPUT"
+      - name: Resolve Swift packages
+        run: |
+          xcodebuild \
+            -resolvePackageDependencies \
+            -project "$XCODE_PROJECT" \
+            -scheme "$XCODE_SCHEME"
+      - name: Run app tests
+        run: |
+          set -o pipefail
+          mkdir -p TestResults
+          xcodebuild test \
+            -project "$XCODE_PROJECT" \
+            -scheme "$XCODE_SCHEME" \
+            -destination "${{ steps.simulator.outputs.destination }}" \
+            -resultBundlePath TestResults/PublicSector.xcresult \
+            -skipPackagePluginValidation \
+            -skipMacroValidation \
+            CODE_SIGNING_ALLOWED=NO \
+            ONLY_ACTIVE_ARCH=YES
+      - name: Upload test result bundle
+        if: failure() && hashFiles('TestResults/**/*.xcresult') != ''
+        uses: actions/upload-artifact@v7.0.1
+        with:
+          name: test-results
+          path: TestResults/**/*.xcresult
+          if-no-files-found: ignore
+
+  analyze:
+    name: xcode analyze
+    needs: xcode-changes
+    if: needs.xcode-changes.outputs.has_files == 'true'
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v7.0.1
+      - name: Xcode version
+        run: xcodebuild -version
+      - name: Static analyzer
+        run: |
+          xcodebuild analyze \
+            -project "$XCODE_PROJECT" \
+            -scheme "$XCODE_SCHEME" \
+            -destination 'generic/platform=iOS Simulator' \
+            -skipPackagePluginValidation \
+            -skipMacroValidation \
+            CODE_SIGNING_ALLOWED=NO \
+            ONLY_ACTIVE_ARCH=YES

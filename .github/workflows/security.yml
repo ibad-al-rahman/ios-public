@@ -1,0 +1,251 @@
+name: security
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+  schedule:
+    - cron: '17 2 * * 1'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  XCODE_PROJECT: PublicSector.xcodeproj
+  XCODE_SCHEME: PublicSector
+
+jobs:
+  dependency-review:
+    name: dependency review
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: read
+    steps:
+      - uses: actions/checkout@v7.0.1
+      - uses: actions/dependency-review-action@v5.0.0
+        with:
+          fail-on-severity: moderate
+
+  dependency-scanning:
+    name: dependency scanning
+    if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      issues: write
+      security-events: read
+    steps:
+      - name: Count open Dependabot alerts
+        id: dependabot_alerts
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set +e
+          count="$(gh api -X GET "repos/${GITHUB_REPOSITORY}/dependabot/alerts" \
+            -f state=open \
+            -F per_page=100 \
+            --jq 'length' 2>/dev/null)"
+          status=$?
+          if [ "$status" -ne 0 ] || [ -z "$count" ]; then
+            count=0
+          fi
+          echo "count=$count" >> "$GITHUB_OUTPUT"
+      - name: Report scheduled dependency findings
+        if: steps.dependabot_alerts.outputs.count != '0'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TITLE: 'Security scan: dependency findings'
+          BODY: |
+            The scheduled dependency scan found open Dependabot alerts that need review.
+            Run: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+            Alerts: ${{ github.server_url }}/${{ github.repository }}/security/dependabot?query=is%3Aopen
+            The issue intentionally contains no vulnerability details beyond the scan category. Review the security alert before publishing any remediation detail.
+        run: |
+          set -euo pipefail
+          gh label create security --color d73a4a --description "Security follow-up" 2>/dev/null || true
+          existing="$(gh issue list --state open --search "\"$TITLE\" in:title" --json number --jq '.[0].number // empty')"
+          if [ -n "$existing" ]; then
+            gh issue comment "$existing" --body "$BODY"
+          else
+            gh issue create --title "$TITLE" --label security --body "$BODY"
+          fi
+      - name: Fail on dependency findings
+        if: steps.dependabot_alerts.outputs.count != '0'
+        run: exit 1
+
+  codeql-changes:
+    name: detect codeql changes
+    runs-on: ubuntu-latest
+    outputs:
+      has_files: ${{ steps.xcode-files.outputs.has_files }}
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          fetch-depth: 0
+      - name: Detect Xcode-relevant changes
+        id: xcode-files
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          if [ "${{ github.event_name }}" = "schedule" ] || [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "has_files=true" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            git fetch --no-tags --prune --depth=50 origin "${{ github.base_ref }}"
+            base="$(git merge-base HEAD "origin/${{ github.base_ref }}")"
+            head="HEAD"
+          else
+            before="${{ github.event.before }}"
+            if [ -z "$before" ] || [[ "$before" =~ ^0+$ ]]; then
+              echo "has_files=true" >> "$GITHUB_OUTPUT"
+              exit 0
+            fi
+            base="$before"
+            head="${{ github.sha }}"
+          fi
+
+          changed="$(git diff --name-only --diff-filter=ACMRT "$base" "$head")"
+          printf '%s\n' "$changed"
+
+          xcode_pattern='(^|/)(Package\.swift|Package\.resolved)$|\.swift$|\.xcodeproj/|\.xcworkspace/|\.xcassets/|\.(xcconfig|plist|entitlements|storyboard|xib|strings|stringsdict)$|^(PublicSector|PublicSectorTests|PublicSectorUITests|PublicSectorWidgetBundle|Scripts)/'
+          if [ -n "$changed" ] && printf '%s\n' "$changed" | grep -Eq "$xcode_pattern"; then
+            echo "has_files=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "has_files=false" >> "$GITHUB_OUTPUT"
+          fi
+
+  sast:
+    name: sast
+    needs: codeql-changes
+    if: needs.codeql-changes.outputs.has_files == 'true'
+    runs-on: macos-latest
+    permissions:
+      actions: read
+      contents: read
+      issues: write
+      security-events: write
+    steps:
+      - uses: actions/checkout@v7.0.1
+      - uses: github/codeql-action/init@v4.37.4
+        with:
+          languages: swift
+          queries: security-extended,security-and-quality
+          build-mode: manual
+      - name: Build for CodeQL
+        run: |
+          xcodebuild build \
+            -project "$XCODE_PROJECT" \
+            -scheme "$XCODE_SCHEME" \
+            -destination 'generic/platform=iOS Simulator' \
+            -skipPackagePluginValidation \
+            -skipMacroValidation \
+            CODE_SIGNING_ALLOWED=NO \
+            ONLY_ACTIVE_ARCH=YES
+      - uses: github/codeql-action/analyze@v4.37.4
+        with:
+          category: codeql-swift
+      - name: Count scheduled CodeQL alerts
+        if: github.event_name == 'schedule'
+        id: codeql_alerts
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set +e
+          count="$(gh api -X GET "repos/${GITHUB_REPOSITORY}/code-scanning/alerts" \
+            -f state=open \
+            -f tool_name=CodeQL \
+            -f ref=refs/heads/master \
+            -F per_page=100 \
+            --jq 'length' 2>/dev/null)"
+          status=$?
+          if [ "$status" -ne 0 ] || [ -z "$count" ]; then
+            count=0
+          fi
+          echo "count=$count" >> "$GITHUB_OUTPUT"
+      - name: Report scheduled SAST findings
+        if: github.event_name == 'schedule' && steps.codeql_alerts.outputs.count != '0'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TITLE: 'Security scan: SAST findings'
+          BODY: |
+            The scheduled SAST scan has open CodeQL alerts that need review.
+            Run: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+            Alerts: ${{ github.server_url }}/${{ github.repository }}/security/code-scanning?query=tool%3ACodeQL+is%3Aopen
+            The issue intentionally contains no alert details beyond the scan category. Review the security alert before publishing remediation detail.
+        run: |
+          set -euo pipefail
+          gh label create security --color d73a4a --description "Security follow-up" 2>/dev/null || true
+          existing="$(gh issue list --state open --search "\"$TITLE\" in:title" --json number --jq '.[0].number // empty')"
+          if [ -n "$existing" ]; then
+            gh issue comment "$existing" --body "$BODY"
+          else
+            gh issue create --title "$TITLE" --label security --body "$BODY"
+          fi
+      - name: Fail on scheduled SAST findings
+        if: github.event_name == 'schedule' && steps.codeql_alerts.outputs.count != '0'
+        run: exit 1
+
+  secret-detection:
+    name: secret detection
+    runs-on: ubuntu-latest
+    permissions:
+      actions: read
+      contents: read
+      issues: write
+      security-events: write
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-go@v7.0.0
+        with:
+          go-version: stable
+          cache: false
+      - name: gitleaks
+        id: gitleaks
+        shell: bash
+        run: |
+          set +e
+          go install github.com/zricethezav/gitleaks/v8@v8.30.1
+          "$(go env GOPATH)/bin/gitleaks" detect --source . --redact --exit-code 1 --report-format sarif --report-path gitleaks.sarif 2>&1 | tee gitleaks.txt
+          status=${PIPESTATUS[0]}
+          echo "status=$status" >> "$GITHUB_OUTPUT"
+          exit 0
+      - name: Upload secret-detection SARIF
+        if: always() && hashFiles('gitleaks.sarif') != ''
+        uses: github/codeql-action/upload-sarif@v4.37.4
+        with:
+          sarif_file: gitleaks.sarif
+          category: gitleaks
+      - name: Report scheduled secret-detection findings
+        if: github.event_name == 'schedule' && steps.gitleaks.outputs.status != '0'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TITLE: 'Security scan: secret-detection findings'
+          BODY: |
+            The scheduled secret-detection scan found findings that need review.
+            Run: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+            Alerts: ${{ github.server_url }}/${{ github.repository }}/security/code-scanning?query=tool%3Agitleaks+is%3Aopen
+            The issue intentionally contains no secret values or locations. Review the security alert before publishing any remediation detail.
+        run: |
+          set -euo pipefail
+          gh label create security --color d73a4a --description "Security follow-up" 2>/dev/null || true
+          existing="$(gh issue list --state open --search "\"$TITLE\" in:title" --json number --jq '.[0].number // empty')"
+          if [ -n "$existing" ]; then
+            gh issue comment "$existing" --body "$BODY"
+          else
+            gh issue create --title "$TITLE" --label security --body "$BODY"
+          fi
+      - name: Fail on secret-detection findings
+        if: steps.gitleaks.outputs.status != '0'
+        run: exit 1
