@@ -40,7 +40,7 @@ struct EventsView: View {
             Button {
                 store.year -= 1
             } label: {
-                Image(systemName: "chevron.left")
+                Image(systemName: "chevron.backward")
             }
             .disabled(!store.canDecrementYear)
 
@@ -55,7 +55,7 @@ struct EventsView: View {
             Button {
                 store.year += 1
             } label: {
-                Image(systemName: "chevron.right")
+                Image(systemName: "chevron.forward")
             }
             .disabled(!store.canIncrementYear)
         }
