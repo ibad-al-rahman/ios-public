@@ -59,6 +59,13 @@ struct NotificationsView: View {
             } header: {
                 Text("evening_adhkar_notification")
             }
+
+            Section {
+                Button("send_test_notification") {
+                    store.send(.view(.sendTestNotificationTapped))
+                }
+                .disabled(store.notificationsDisabled)
+            }
         }
         .navigationTitle("notifications")
         .onAppear {

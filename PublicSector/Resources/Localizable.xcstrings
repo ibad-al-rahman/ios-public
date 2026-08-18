@@ -1511,6 +1511,22 @@
         }
       }
     },
+    "send_test_notification": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "إرسال إشعار تجريبي"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Send Test Notification"
+          }
+        }
+      }
+    },
     "settings": {
       "extractionState": "manual",
       "localizations": {
@@ -1592,6 +1608,38 @@
           "stringUnit": {
             "state": "translated",
             "value": "System"
+          }
+        }
+      }
+    },
+    "test_notification_body": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الإشعارات تعمل بشكل صحيح"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Notifications are working correctly"
+          }
+        }
+      }
+    },
+    "test_notification_title": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "إشعار تجريبي"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Test Notification"
           }
         }
       }

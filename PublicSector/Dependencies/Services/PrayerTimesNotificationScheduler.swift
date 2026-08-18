@@ -45,6 +45,25 @@ struct PrayerTimesNotificationService {
         try? BGTaskScheduler.shared.submit(request)
     }
 
+    /// Fires an immediate mock Fajr notification so the user can confirm the
+    /// banner appears and the azan sound plays with their current configuration.
+    /// Uses a `nil` trigger for instant delivery; `AppDelegate`'s `willPresent`
+    /// already surfaces the banner and sound while the app is foregrounded.
+    func sendTestNotification() async {
+        let content = UNMutableNotificationContent()
+        content.title = String(localized: "test_notification_title")
+        content.body = String(localized: "test_notification_body")
+        content.sound = UNNotificationSound(named: UNNotificationSoundName("azan.caf"))
+
+        let request = UNNotificationRequest(
+            identifier: "test-notification",
+            content: content,
+            trigger: nil
+        )
+
+        try? await UNUserNotificationCenter.current().add(request)
+    }
+
     func scheduleNotifications() async {
         @Shared(.notificationsEnabled) var notificationsEnabled = false
         @Shared(.prayerTimesNotifications) var prayerTimes = Settings.PrayerTimesNotifications()
@@ -134,6 +153,7 @@ struct PrayerTimesNotificationService {
 struct PrayerTimesNotificationScheduler: Sendable {
     var scheduleNotifications: @Sendable () async -> Void
     var registerBackgroundTask: @Sendable () -> Void
+    var sendTestNotification: @Sendable () async -> Void
 }
 
 extension PrayerTimesNotificationScheduler: DependencyKey {
@@ -141,7 +161,8 @@ extension PrayerTimesNotificationScheduler: DependencyKey {
         let service = PrayerTimesNotificationService()
         return PrayerTimesNotificationScheduler(
             scheduleNotifications: { await service.scheduleNotifications() },
-            registerBackgroundTask: { service.registerBackgroundTask() }
+            registerBackgroundTask: { service.registerBackgroundTask() },
+            sendTestNotification: { await service.sendTestNotification() }
         )
     }()
 }
