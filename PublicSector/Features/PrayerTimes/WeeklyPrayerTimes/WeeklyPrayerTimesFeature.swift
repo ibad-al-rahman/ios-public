@@ -27,6 +27,12 @@ struct WeeklyPrayerTimesFeature {
 
         var hasImsak: Bool { week.contains(where: { $0.imsak != nil }) }
         var isLoading: Bool { week.isEmpty }
+
+        /// `true` when the displayed week does not contain today, so the user can
+        /// jump back to the current week.
+        var canResetDate: Bool {
+            !week.contains { Calendar.current.isDateInToday($0.gregorian) }
+        }
     }
 
     enum Action: BaseAction, BindableAction {

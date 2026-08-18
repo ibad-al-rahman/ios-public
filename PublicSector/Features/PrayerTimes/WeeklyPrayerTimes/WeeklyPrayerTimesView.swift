@@ -32,6 +32,20 @@ struct WeeklyPrayerTimesView: View {
             .datePickerStyle(.compact)
             /* A hack to force closing the date picker on picking a date */
             .id(store.date.timeIntervalSince1970)
+        } header: {
+            HStack {
+                Spacer()
+
+                if store.canResetDate {
+                    Button(action: { store.date = .now }) {
+                        Label(
+                            "back_to_this_week",
+                            systemImage: "clock.arrow.trianglehead.counterclockwise.rotate.90"
+                        )
+                    }
+                    .textCase(nil)
+                }
+            }
         }
     }
 
