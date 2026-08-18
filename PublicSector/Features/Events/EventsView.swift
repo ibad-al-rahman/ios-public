@@ -25,13 +25,41 @@ struct EventsView: View {
 
     @ViewBuilder
     private var content: some View {
-        if store.filteredEvents.isEmpty {
-            emptyState
-        } else {
-            List {
+        List {
+            yearPicker
+            if store.filteredEvents.isEmpty {
+                emptyState
+            } else {
                 eventRows
             }
         }
+    }
+
+    private var yearPicker: some View {
+        HStack {
+            Button {
+                store.year -= 1
+            } label: {
+                Image(systemName: "chevron.left")
+            }
+            .disabled(!store.canDecrementYear)
+
+            Spacer()
+
+            Text(store.year, format: .number.grouping(.never))
+                .font(.headline)
+                .monospacedDigit()
+
+            Spacer()
+
+            Button {
+                store.year += 1
+            } label: {
+                Image(systemName: "chevron.right")
+            }
+            .disabled(!store.canIncrementYear)
+        }
+        .buttonStyle(.borderless)
     }
 
     private var eventRows: some View {
@@ -60,15 +88,20 @@ struct EventsView: View {
 
     @ViewBuilder
     private var emptyState: some View {
-        if store.query.trimmingCharacters(in: .whitespaces).isEmpty {
-            ContentUnavailableView(
-                "no_events",
-                systemImage: "calendar.badge.exclamationmark",
-                description: Text("no_events_for_year")
-            )
-        } else {
-            ContentUnavailableView.search(text: store.query)
+        Group {
+            if store.query.trimmingCharacters(in: .whitespaces).isEmpty {
+                ContentUnavailableView(
+                    "no_events",
+                    systemImage: "calendar.badge.exclamationmark",
+                    description: Text("no_events_for_year")
+                )
+            } else {
+                ContentUnavailableView.search(text: store.query)
+            }
         }
+        .listRowSeparator(.hidden)
+        .listRowBackground(Color.clear)
+        .frame(maxWidth: .infinity)
     }
 }
 
