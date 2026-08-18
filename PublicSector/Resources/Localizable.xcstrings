@@ -165,6 +165,22 @@
         }
       }
     },
+    "back_to_this_week": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الانتقال إلى هذا الأسبوع"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Back to this week"
+          }
+        }
+      }
+    },
     "back_to_today": {
       "localizations": {
         "ar": {
