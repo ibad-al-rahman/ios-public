@@ -14,6 +14,7 @@ struct NotificationsFeature {
     @Dependency(\.permissions) var permissions
     @Dependency(\.externalDeepLinks) var externalDeepLinks
     @Dependency(\.prayerTimesNotificationScheduler.scheduleNotifications) private var scheduleNotifications
+    @Dependency(\.prayerTimesNotificationScheduler.sendTestNotification) private var sendTestNotification
     @Dependency(\.adhkarNotificationScheduler.scheduleNotifications) private var scheduleAdhkarNotifications
 
     @ObservableState
@@ -36,6 +37,7 @@ struct NotificationsFeature {
 
         enum ViewAction {
             case onAppear
+            case sendTestNotificationTapped
         }
 
         @CasePathable
@@ -64,6 +66,9 @@ struct NotificationsFeature {
         BindingReducer()
         Reduce { state, action in
             switch action {
+            case .view(.sendTestNotificationTapped):
+                return .run { _ in await sendTestNotification() }
+
             case let .reducer(.permissionResponse(.success(granted))):
                 if !granted {
                     state.$notificationsEnabled.withLock { $0 = false }

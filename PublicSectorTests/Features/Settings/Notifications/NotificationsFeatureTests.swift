@@ -187,6 +187,22 @@ struct NotificationsFeatureTests {
     }
 
     @Test
+    func sendTestNotificationTappedFiresTestNotification() async {
+        let sendTestCallCount = LockIsolated(0)
+        let store = TestStore(initialState: NotificationsFeature.State()) {
+            NotificationsFeature()
+        } withDependencies: {
+            $0.prayerTimesNotificationScheduler.sendTestNotification = {
+                sendTestCallCount.withValue { $0 += 1 }
+            }
+        }
+
+        await store.send(.view(.sendTestNotificationTapped))
+
+        #expect(sendTestCallCount.value == 1)
+    }
+
+    @Test
     func toggleOnSchedulesBothPrayerAndAdhkar() async {
         let prayerScheduled = LockIsolated(false)
         let adhkarScheduled = LockIsolated(false)
