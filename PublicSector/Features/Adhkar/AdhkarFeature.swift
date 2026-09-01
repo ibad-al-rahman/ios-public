@@ -22,6 +22,7 @@ struct AdhkarFeature {
 
         enum ViewAction {
             case collectionTapped(AdhkarCollection)
+            case istikharaTapped
         }
 
         @CasePathable
@@ -43,7 +44,15 @@ struct AdhkarFeature {
                 state.destination = .tour(AdhkarTourFeature.State(collection: collection))
                 return .none
 
+            case .view(.istikharaTapped):
+                state.destination = .istikhara(IstikharaFeature.State())
+                return .none
+
             case .dependent(.destination(.presented(.tour(.delegate(.finished))))):
+                state.destination = nil
+                return .none
+
+            case .dependent(.destination(.presented(.istikhara(.delegate(.finished))))):
                 state.destination = nil
                 return .none
 

@@ -293,6 +293,22 @@
         }
       }
     },
+    "continue": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "متابعة"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Continue"
+          }
+        }
+      }
+    },
     "custom_fajr_angle": {
       "localizations": {
         "ar": {
@@ -840,6 +856,86 @@
           "stringUnit": {
             "state": "translated",
             "value": "Ishaa"
+          }
+        }
+      }
+    },
+    "istikhara": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الاستخارة"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Istikhara"
+          }
+        }
+      }
+    },
+    "istikhara_edit_decision": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تعديل الأمر"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Edit the matter"
+          }
+        }
+      }
+    },
+    "istikhara_prompt_message": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "اكتب الأمر الذي تستخير فيه"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Enter the matter you seek guidance on"
+          }
+        }
+      }
+    },
+    "istikhara_prompt_placeholder": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الأمر"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The matter"
+          }
+        }
+      }
+    },
+    "istikhara_prompt_title": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الاستخارة"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Istikhara"
           }
         }
       }
