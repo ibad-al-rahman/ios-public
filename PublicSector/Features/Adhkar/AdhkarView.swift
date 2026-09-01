@@ -29,6 +29,18 @@ struct AdhkarView: View {
                 } header: {
                     Spacer(minLength: Spacing.small)
                 }
+
+                Section {
+                    Button {
+                        store.send(.view(.istikharaTapped))
+                    } label: {
+                        NavigationRowView(
+                            "istikhara",
+                            systemName: "signpost.right.and.left"
+                        )
+                    }
+                    .foregroundStyle(.primary)
+                }
             }
             .navigationTitle("adhkar")
             .navigationDestination(
@@ -37,6 +49,13 @@ struct AdhkarView: View {
                     action: \.dependent.destination.tour
                 ),
                 destination: { AdhkarTourView(store: $0) }
+            )
+            .navigationDestination(
+                item: $store.scope(
+                    state: \.destination?.istikhara,
+                    action: \.dependent.destination.istikhara
+                ),
+                destination: { IstikharaView(store: $0) }
             )
         }
     }
