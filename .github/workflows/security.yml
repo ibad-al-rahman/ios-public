@@ -1,0 +1,24 @@
+name: security
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+  schedule:
+    - cron: '17 2 * * 1'
+  workflow_dispatch:
+
+permissions:
+  actions: read
+  contents: read
+  issues: write
+  pull-requests: read
+  security-events: write
+
+jobs:
+  ios-security:
+    uses: ibad-al-rahman/.github/.github/workflows/ios-security.yml@master
+    with:
+      xcode_project: PublicSector.xcodeproj
+      xcode_scheme: PublicSector
+      default_branch: master

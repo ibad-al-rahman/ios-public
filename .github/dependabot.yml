@@ -1,0 +1,39 @@
+version: 2
+
+updates:
+  - package-ecosystem: swift
+    directories:
+      - /
+      - /Modules/IbadAnalytics
+      - /Modules/IbadEnvironment
+      - /Modules/IbadRemoteConfig
+      - /Modules/MiqatKit
+    schedule:
+      interval: weekly
+      day: monday
+      time: '04:00'
+      timezone: Europe/Paris
+    open-pull-requests-limit: 10
+    commit-message:
+      prefix: deps
+      include: scope
+    groups:
+      swift-packages:
+        patterns:
+          - '*'
+
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+      time: '04:30'
+      timezone: Europe/Paris
+    open-pull-requests-limit: 10
+    commit-message:
+      prefix: deps
+      include: scope
+    groups:
+      actions:
+        patterns:
+          - '*'
