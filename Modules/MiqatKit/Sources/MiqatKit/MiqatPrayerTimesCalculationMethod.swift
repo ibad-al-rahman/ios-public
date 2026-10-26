@@ -181,7 +181,8 @@ extension Miqat.Coordinates: @retroactive Codable {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.init(
             latitude: try container.decode(Double.self, forKey: .latitude),
-            longitude: try container.decode(Double.self, forKey: .longitude)
+            longitude: try container.decode(Double.self, forKey: .longitude),
+            elevation: 0
         )
     }
 }
