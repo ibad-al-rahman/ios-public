@@ -152,7 +152,8 @@ struct CalculationMethodSelectionFeature {
         return .astronomical(AstronomicalConfig(
             coordinates: Miqat.Coordinates(
                 latitude: location.latitude,
-                longitude: location.longitude
+                longitude: location.longitude,
+                elevation: 0
             ),
             method: astronomicalMethod,
             mazhab: existing?.mazhab ?? .shafi,
